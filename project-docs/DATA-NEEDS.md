@@ -70,8 +70,8 @@ pii_removed: yes
 
 | ID | What | Where | Capture exactly | Owner | Needed by | Status |
 |---|---|---|---|---|---|---|
-| D6 | HCD letter to Dana Point, 2023-04-17 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf) | The city limits HCD quotes (800 sq ft, one story, one bedroom on lot splits), HCD's finding, and each statute cited. | Ivy | 1:15 | todo |
-| D7 | HCD letter to the City of Orange, 2026-05-05 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf) | What the city refused (an application filed 2025-10-08), HCD's finding, and each statute cited. | Ivy | 1:15 | todo |
+| D6 | HCD letter to Dana Point, 2023-04-17 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf) | The city limits HCD quotes (800 sq ft, one story, one bedroom on lot splits), HCD's finding, and each statute cited. | Sources agent (Giuseppi's session) | 1:15 | in progress |
+| D7 | HCD letter to the City of Orange, 2026-05-05 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf) | What the city refused (an application filed 2025-10-08), HCD's finding, and each statute cited. | Sources agent (Giuseppi's session) | 1:15 | in progress |
 | D8 | SB 9 statutes, confirmed in a browser | leginfo: Gov 65852.21 and 66411.7 | The subsections that HCD's Dana Point and Orange letters rely on. | Ivy | 1:30 | todo |
 | D9 | Habitat for Humanity of Orange County | Their public website, and conversations at the event | What they build (for-sale homes? ADUs? where?), and any permitting pain they state publicly. Also anything Habitat staff tell you today about permits or delays. Write down what was said, never who said it. | Ivy | 1:30 | todo |
 | D10 | "34 cities in Orange County" | A current official source (County of Orange, or OCCOG, the Orange County Council of Governments) | The count and its URL. | Ivy | 1:45 | todo |
