@@ -1,54 +1,223 @@
 {
-  "version": "0.2",
+  "version": "0.3",
   "about": "ADU rules. Every rule cites entries in data/sources/index.json; the loader rejects a rule whose source is missing. Patterns are case-insensitive regular expressions. Written by Giuseppi's session from the excerpts in data/sources/ (D1, D2).",
   "rules": [
     {
       "id": "adu-deed-restriction",
       "status": "CONFLICTS",
       "match": {
-        "allOf": ["deed restriction|covenant", "\\badu|accessory dwelling"],
-        "noneOf": ["affordab", "resale", "income", "\\bjadu|junior"]
+        "allOf": [
+          "deed restriction|covenant",
+          "\\badu|accessory dwelling"
+        ],
+        "noneOf": [
+          "affordab",
+          "resale",
+          "income",
+          "\\bjadu|junior"
+        ]
       },
       "why": "HCD found the City of Irvine \"misapplied State ADU Law in the processing of ADU applications by requiring deed restrictions\". Gov Code 66315 says \"No additional standards, other than those provided in Section 66314, shall be used or imposed\", and HCD found that \"a deed restriction is an additional standard\". Using it to call an application incomplete is \"inconsistent with section 66317, subdivision (c)\".",
       "note": "Covers a deed restriction or covenant a city requires as a condition of an ADU permit. Affordability, resale and junior ADU covenants are excluded and stay UNKNOWN: state law requires a deed restriction for a JADU (Handbook p. 21).",
       "cites": [
-        { "sourceId": "gov-66315", "label": "Gov Code 66315", "section": "66315" },
-        { "sourceId": "gov-66317", "label": "Gov Code 66317(c)", "section": "66317(c)" },
-        { "sourceId": "hcd-irvine-2025-03-27", "label": "HCD letter to the City of Irvine, 2025-03-27", "page": "1, 3" },
-        { "sourceId": "adu-handbook-2026-03", "label": "HCD ADU Handbook, March 2026", "page": "21" }
+        {
+          "sourceId": "gov-66315",
+          "label": "Gov Code 66315",
+          "section": "66315"
+        },
+        {
+          "sourceId": "gov-66317",
+          "label": "Gov Code 66317(c)",
+          "section": "66317(c)"
+        },
+        {
+          "sourceId": "hcd-irvine-2025-03-27",
+          "label": "HCD letter to the City of Irvine, 2025-03-27",
+          "page": "1, 3"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "page": "21"
+        }
       ]
     },
     {
       "id": "jadu-detached-townhouse",
       "status": "CONFLICTS",
       "match": {
-        "allOf": ["\\bjadu|junior", "townho", "detached"],
-        "noneOf": ["townhouse complex", "planned community"]
+        "allOf": [
+          "\\bjadu|junior",
+          "townho",
+          "detached"
+        ],
+        "noneOf": [
+          "townhouse complex",
+          "planned community"
+        ],
+        "anyOf": [
+          "not (allowed|permitted|eligible)|ineligible|prohibit|disallow|den(y|ied|ies)|multi-?family|may not|cannot"
+        ]
       },
       "why": "Gov Code 66333(a) limits JADUs to one \"per residential lot zoned for single-family residences with a single-family residence built, or proposed to be built, on the lot\". HCD found \"a detached townhouse on its own lot is a single-family primary dwelling and would therefore be eligible for a JADU\".",
       "note": "Only a detached townhouse on its own lot. HCD says an HOA or other elements might make a home part of a planned community or \"townhouse complex\"; this tool does not decide that.",
       "cites": [
-        { "sourceId": "gov-66333", "label": "Gov Code 66333(a)", "section": "66333(a)" },
-        { "sourceId": "hcd-irvine-2025-03-27", "label": "HCD letter to the City of Irvine, 2025-03-27", "page": "3" },
-        { "sourceId": "adu-handbook-2026-03", "label": "HCD ADU Handbook, March 2026 (definition of single-family dwelling)", "page": "9" }
+        {
+          "sourceId": "gov-66333",
+          "label": "Gov Code 66333(a)",
+          "section": "66333(a)"
+        },
+        {
+          "sourceId": "hcd-irvine-2025-03-27",
+          "label": "HCD letter to the City of Irvine, 2025-03-27",
+          "page": "3"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (definition of single-family dwelling)",
+          "page": "9"
+        }
+      ]
+    },
+    {
+      "id": "adu-owner-occupancy",
+      "status": "CONFLICTS",
+      "match": {
+        "allOf": [
+          "owner[- ]?occup",
+          "\\badus?\\b|accessory dwelling"
+        ],
+        "anyOf": [
+          "must|shall|requir|affidavit|declaration|proof|certif|reside"
+        ],
+        "noneOf": [
+          "\\bjadu|junior",
+          "66341|sold separately|separate(ly)? (sale|conve)|qualified buyer",
+          "\\bno owner|not (be )?required|need not|does not|waive|exempt"
+        ]
+      },
+      "why": "Gov Code 66315 bars \"an owner-occupant requirement\". The Handbook: \"Only ADUs which are sold separately to a qualified buyer under Government Code section 66341, subdivision (c)(3), can require owner-occupancy. Otherwise, a local agency cannot impose an owner-occupancy requirement on any other ADU\".",
+      "note": "JADUs are excluded: state law allows owner-occupancy for a JADU with shared sanitation (Handbook pp. 32-33).",
+      "cites": [
+        {
+          "sourceId": "gov-66315",
+          "label": "Gov Code 66315",
+          "section": "66315"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "page": "32"
+        }
+      ]
+    },
+    {
+      "id": "adu-rental-30-days",
+      "status": "OK",
+      "match": {
+        "allOf": [
+          "\\brent|\\blease",
+          "\\b(30|thirty)[- ]?(calendar |consecutive )?days?"
+        ],
+        "anyOf": [
+          "longer|or more|at least|minimum|shorter than|less than|fewer than"
+        ],
+        "noneOf": [
+          "\\b(?:3[1-9]|[4-9]\\d|\\d{3,})[- ]?(calendar |consecutive )?days?",
+          "month|year",
+          "prohibit|\\bban\\b|no rentals?\\b"
+        ]
+      },
+      "why": "Gov Code 66315 lets a city \"require that the property may be used for rentals of terms 30 days or longer\" (quoted in the Handbook, p. 21).",
+      "note": "Only a 30-day minimum is marked OK. Longer minimums and outright rental bans stay UNKNOWN.",
+      "cites": [
+        {
+          "sourceId": "gov-66315",
+          "label": "Gov Code 66315",
+          "section": "66315"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "page": "21"
+        }
+      ]
+    },
+    {
+      "id": "adu-guest-parking",
+      "status": "CONFLICTS",
+      "match": {
+        "allOf": [
+          "guest parking",
+          "\\badus?\\b|accessory dwelling"
+        ],
+        "noneOf": [
+          "not (be )?required|no guest|need not|waive|exempt|primary (dwelling|residence|home)|main (house|home)"
+        ]
+      },
+      "why": "The Handbook: \"Guest parking spaces shall not be required for ADUs under any circumstances.\"",
+      "cites": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "page": "33"
+        }
+      ]
+    },
+    {
+      "id": "adu-replacement-parking",
+      "status": "CONFLICTS",
+      "match": {
+        "allOf": [
+          "replac",
+          "parking",
+          "\\badus?\\b|accessory dwelling"
+        ],
+        "noneOf": [
+          "not (be )?required|no replacement|need not|waive|exempt"
+        ]
+      },
+      "why": "The Handbook: a local agency \"may not require off-street parking spaces to be replaced when a garage, carport, covered parking structure, or uncovered parking space is demolished in conjunction with the construction of an ADU or converted to an ADU\".",
+      "cites": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "page": "33"
+        }
       ]
     },
     {
       "id": "cite-65852-2",
       "status": "OUTDATED_CITATION",
-      "citation": { "old": "65852.2", "now": "66310 to 66342", "exactSection": null },
+      "citation": {
+        "old": "65852.2",
+        "now": "66310 to 66342",
+        "exactSection": null
+      },
       "why": "SB 477 (2024) renumbered the ADU law from Gov Code 65852.2 to sections 66310 through 66342. The Handbook maps it subsection by subsection, so there is no single replacement section.",
       "cites": [
-        { "sourceId": "adu-handbook-2026-03", "label": "HCD ADU Handbook, March 2026 (renumbering)", "page": "13, 49" }
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
+          "page": "13, 49"
+        }
       ]
     },
     {
       "id": "cite-65852-22",
       "status": "OUTDATED_CITATION",
-      "citation": { "old": "65852.22", "now": "66333 to 66339", "exactSection": null },
+      "citation": {
+        "old": "65852.22",
+        "now": "66333 to 66339",
+        "exactSection": null
+      },
       "why": "SB 477 (2024) renumbered the junior ADU law from Gov Code 65852.22 to sections 66333 through 66339. The Handbook maps it subsection by subsection, so there is no single replacement section.",
       "cites": [
-        { "sourceId": "adu-handbook-2026-03", "label": "HCD ADU Handbook, March 2026 (renumbering)", "page": "13, 49" }
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
+          "page": "13, 49"
+        }
       ]
     }
   ]
