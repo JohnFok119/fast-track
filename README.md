@@ -72,10 +72,9 @@ UNKNOWN
 
 (Output shortened. Run the command to see all items and every link.)
 
-**Screenshot:** TODO(freeze): add the final screenshot of the app here.
+![Step 3 for a backyard home to rent in Irvine: two of the city's four lines are ones the state says no to, one cites an old law number, and one is not checked](project-docs/screenshot-irvine.png)
 
-**Demo video:** TODO(freeze): paste the video link, or write "uploaded on the hub".
-**Live demo:** TODO(freeze): paste the live demo URL, or delete this line if there is none.
+**Live demo:** none hosted. It runs on a laptop with the steps in [Try it](#try-it).
 
 ## How Claude is used
 
@@ -121,11 +120,13 @@ All dates checked: 2026-11-07. The source list lives in `data/sources/index.json
 | HCD letter to the City of Orange (2026-05-05, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf | 2026-11-07 |
 | City of Irvine ADU page (submittal list, paraphrased) | https://cityofirvine.gov/node/69676 | 2026-11-07 |
 | "A new affordable home takes about four years" | ASSUMPTION: the event brief's baseline. We did not measure it | n/a |
+| Typical path phases: rezoning about 1 year, entitlements and hearings about 1 year | ASSUMPTION: the event brief's typical estimates (starter repo, `lanes/2-clear-it/data/timeline.json`). We did not measure them | n/a |
 | Plans take 6 to 12 months; building takes about 1 year | ASSUMPTION: the event brief's typical estimates (starter repo, `lanes/2-clear-it/data/timeline.json`). We did not measure them. Shown as "Estimate" on the timeline | n/a |
 | Review clocks: 15 business days to check completeness, 60 days to decide | HCD ADU Handbook p. 34 and p. 11, citing Gov Code 66317(a) | 2026-11-07 |
+| "About 21 months shorter (estimate)" for an ADU; "About 24 months shorter (estimate) plus an unknown review time" for SB 9 | ASSUMPTION, computed: the typical path (about 45 months) minus the fast track (plans 9 months, the middle of 6 to 12; build 12 months; for an ADU, plus the two legal clocks, about 2.7 months). Every input except the legal clocks is an event brief estimate | n/a |
 | City contacts (office and role, no names) | Irvine's ADU page and Anaheim's checklist; for Dana Point and Orange, the office HCD's letter was addressed to. Listed in `data/cities/` | 2026-11-07 |
 
-Every number we did not take from a source is labelled ASSUMPTION here and in the tool: the four-year baseline and the plans and build estimates. Fast Track does not claim time saved against them. A whole project is not the same as an ADU on land the owner already has. We have no sourced review deadline for an SB 9 lot split, so the timeline shows it as UNKNOWN.
+Every number we did not take from a source is labelled ASSUMPTION here and in the tool: the four-year baseline, its phases, and the plans and build estimates. The months saved in step 4 and the summary are computed from those estimates, so the screen labels them "estimate" and says they are not measured. A whole project is not the same as an ADU on land the owner already has. We have no sourced review deadline for an SB 9 lot split, so the timeline shows it as UNKNOWN.
 
 ## What is real and what is mocked
 
@@ -176,4 +177,4 @@ This project uses only public or provided data. It contains no personal informat
 
 ## License
 
-TODO(freeze): the team picks a license (the event template suggests MIT). No LICENSE file is in the repo yet.
+MIT, see the [LICENSE](LICENSE) file in this repo.
