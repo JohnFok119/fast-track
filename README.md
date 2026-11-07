@@ -104,6 +104,9 @@ All dates checked: 2026-11-07. The source list lives in `data/sources/index.json
 | Gov Code 66317 (review clocks) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Gov Code 66333 (JADU rules) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Anaheim ADU checklist, November 2025 | https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist (wording is a placeholder, see below) | 2026-11-07 |
+| HCD letter to the City of Dana Point (2023-04-17, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf | 2026-11-07 |
+| HCD letter to the City of Orange (2026-05-05, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf | 2026-11-07 |
+| City of Irvine ADU page (submittal list, paraphrased) | https://cityofirvine.gov/node/69676 | 2026-11-07 |
 | "A new affordable home takes about four years" | ASSUMPTION: the event brief's baseline. We did not measure it | n/a |
 | Review clocks: 15 business days to check completeness, 60 days to decide | HCD ADU Handbook p. 34 and p. 11, citing Gov Code 66317(a) | 2026-11-07 |
 
@@ -121,14 +124,14 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 | "Deemed approved" if a city misses the 60 days | Unconfirmed: the Handbook disagrees with itself (p. 21 and p. 51). Shown as UNCONFIRMED, never as fact |
 | Draft response letter | Draft text only. There is no send path |
 | Paste-text scanner and clocks panel | TODO(freeze): set to working, partly working or not built |
-| SB 9 checks | In progress. Not in this version |
+| SB 9 checks (Dana Point, Orange) | Working. Each check is a finding from HCD's letter to that city, so it applies only to that city. Requirements are as HCD quoted or described them |
 
 ## Where it gets things wrong
 
 - **Wording match.** It matches on wording, so it can miss a requirement phrased in a new way, or match one it should not.
-- **Small coverage.** Two cities and ADUs only so far. SB 9 is in progress.
+- **Small coverage.** Four cities, from one HCD letter or one checklist each. The SB 9 checks come from HCD's letters to Dana Point and Orange and apply only to those two cities.
 - **Irvine's "the 60-day clock stops" claim stays UNKNOWN.** HCD's letter does not analyze it, and the Handbook points both ways (p. 36).
-- **Old evidence.** Our Irvine evidence is from early 2025. The city may have changed its practice. We do not claim it still requires the covenant today.
+- **Old evidence.** Our Irvine evidence is from early 2025 and our Dana Point evidence from 2023. The cities may have changed their rules since. Irvine's current ADU page still lists a covenant (checked 2026-11-07), but we have not seen its text, so we do not claim it is the requirement HCD objected to.
 - **Untested with real users.** The personas are researched, not interviewed.
 - **Not legal advice.** Do not rely on a flag or a letter without a professional.
 - **Dependency audit.** `npm audit` shows 10 moderate findings. All are in dev-only lint tooling (minimatch, via eslint). The shipped app has 0 (`npm audit --omit=dev`).
@@ -136,7 +139,7 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 ## Next steps
 
 **Next month, for a nonprofit or city:**
-- Finish SB 9, using HCD's letters to Dana Point and Orange.
+- Add SB 9 checks that apply in every city, once the SB 9 statutes (Gov Code 65852.21 and 66411.7) are checked on leginfo.
 - Check the statute text on leginfo and save the real Anaheim checklist.
 - Test with a permit tech and a project manager.
 

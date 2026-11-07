@@ -14,20 +14,20 @@ TODO(freeze): confirm the click path below against the final UI, and fix any tab
 | 1:10-1:50 | Click the deed-restriction line. Read the detail: the statute, the HCD letter of 2025-03-27, the checked date. | "HCD, the state housing agency, told Irvine this covenant is 'an additional standard' that Gov Code 66315 bars. Every flag shows its source, a section and the date we checked it." |
 | 1:50-2:10 | Click the old-citation line, then the "60-day clock stops" line. | "Old section 65852.2 was renumbered. And this claim, that the clock stops, is UNKNOWN. We do not guess. A confident wrong answer is the worst outcome." |
 | 2:10-2:30 | Open the draft response letter. Point at the citations and the Copy button. | "It drafts a response with every citation. The applicant sends it. Fast Track never sends anything." |
-| 2:30-2:50 | Click the Anaheim tab. Point at the placeholder or SAMPLE label. | "Anaheim shows old citations. Its wording is a labelled placeholder until we save the real checklist. Adding a city is a data file, not new code." |
+| 2:30-2:50 | Click the Dana Point tab. Point at the 800 square foot line and the one-bedroom line. | "For a builder like Habitat, SB 9 lets one single-family lot hold two homes. HCD told Dana Point its 800 square foot cap and one-bedroom limit break state law: 'The City must remove these requirements.' Adding a city is a data file, not new code." |
 | 2:50-3:00 | Back to the home screen. | "Fast Track: the state's letters, next to the city's checklist, for the people who have to fill it out." |
 
 ## The 3 strongest points, by judging criterion
 
 - **Works (live, on real data, sources on screen).** The Irvine flags come from a real HCD letter. Every flag shows its URL, section and date. Unknown stays unknown. It runs from a clean clone with `npm install` and no API key.
 - **Impact and Innovation (the gap nobody fills).** Other tools check a plan against the city's code, or check an address. Fast Track checks the city's own checklist line by line against state law and HCD's letters to that city, then drafts the response. A nonprofit or permit tech can try it on a real checklist next month.
-- **Scale (one city is one data file).** The same state law applies in every California city. A new city needs its saved requirements and HCD letters, not new code. SB 9 is next, using HCD's letters to Dana Point and Orange.
+- **Scale (one city is one data file).** The same state law applies in every California city. A new city needs its saved requirements and HCD letters, not new code. SB 9 already works for Dana Point and Orange, from HCD's letter to each.
 
 ## Likely questions
 
 - **"Does it use AI?"** Claude helped us research, plan and write the code, tests and docs. The app itself is deterministic today, so it cannot invent a law.
 - **"How much time does it save?"** We do not claim a number. The four-year timeline is the event brief's ASSUMPTION.
-- **"Is Irvine still doing this?"** Our evidence is from early 2025. We do not claim it is current.
+- **"Is Irvine still doing this?"** Our evidence is from early 2025. Irvine's current ADU page still lists a covenant, but we have not seen its text, so we do not claim it is the same requirement.
 - **"Is the law text verified?"** Statute text was read on a mirror site. The output labels it "not yet checked on leginfo".
 
 ## If the UI fails
@@ -38,4 +38,4 @@ Switch to the terminal and run:
 npm run check irvine
 ```
 
-Say: "Same engine, same flags, same sources, in the terminal." Walk through the CONFLICTS item (deed restriction, Gov Code 66315, HCD letter 2025-03-27), the OUTDATED_CITATION item, and the UNKNOWN item. `npm run check anaheim` shows the Anaheim run. `npm test` shows the 26 passing tests if asked.
+Say: "Same engine, same flags, same sources, in the terminal." Walk through the CONFLICTS item (deed restriction, Gov Code 66315, HCD letter 2025-03-27), the OUTDATED_CITATION item, and the UNKNOWN item. `npm run check dana-point` shows the SB 9 flags. `npm test` shows the passing tests if asked.

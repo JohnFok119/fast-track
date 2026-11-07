@@ -102,5 +102,18 @@
     "pii_removed": "yes",
     "mirror": false,
     "file": "data/sources/hcd-orange-2026-05-05.md"
+  },
+  {
+    "id": "irvine-adu-current",
+    "title": "City of Irvine web page: Project: Constructing an Accessory Dwelling Unit (ADU)",
+    "publisher": "City of Irvine",
+    "url": "https://cityofirvine.gov/node/69676",
+    "published": "UNKNOWN",
+    "checked": "2026-11-07",
+    "captured_by": "Ivy",
+    "how": "official city web page, paraphrased inventory (not exact wording)",
+    "pii_removed": "yes",
+    "mirror": false,
+    "file": "data/sources/irvine-adu-current.md"
   }
 ]

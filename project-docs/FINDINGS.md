@@ -5,6 +5,32 @@ Kept by Giuseppi's session.
 
 ## 2026-11-07
 
+### SB 9 rules (D6, D7: `data/rules/sb9.json`)
+
+- **Rules are scoped to the city HCD wrote to.** HCD judged Dana Point's limits against Dana Point's own zoning,
+  under the Housing Crisis Act (Gov 66300(b)(1)(A)), so the same words in another city are not checked. Rules cite
+  only the HCD letters and name each statute as HCD cites it. Pasted text has no city, so it never gets them.
+- **Dana Point (letter of 2023-04-17): 4 rules, CONFLICTS.** Two-unit cap on an unsplit duplex lot (p. 2, "would
+  violate State ADU Law"); one-story limit (pp. 3-4, "must remove this reference or amend it", conditional on lost
+  floor area); 800 and 1,600 sq ft caps (p. 4, "The City must remove these requirements"); one-bedroom limit (p. 4,
+  "must revise"). Each rule's note says the letter is from 2023 and the Ordinance may have changed.
+- **Dana Point items left UNKNOWN on purpose:** dp-02, attached units only (HCD says "should revise"); dp-03,
+  affordability deed restriction (HCD says it "raises concerns" and "should remove"); dp-09, penalties (no statute).
+- **Orange (letter of 2026-05-05): 1 rule, CONFLICTS.** No pathway to convert an ADU into a primary dwelling for an
+  urban lot split (p. 2, "the City must provide the applicant with a regulatory pathway").
+- **or-01 left UNKNOWN on purpose.** The City refused a split that would leave a parcel with only an ADU. HCD itself
+  calls that parcel "not permissible under ADU law" (p. 1, citing Gov 66313(a)). The conflict HCD found is the missing
+  pathway, which or-02 carries.
+- **Not yet read:** the text of Gov 65852.21 and 66411.7 (D8). No statewide SB 9 rule until it is.
+
+### Partial (D4: Irvine's current ADU page, `data/sources/irvine-adu-current.md`, Ivy)
+
+- The page's submittal list still includes a "Covenant obtained from Planning, notarized and recorded". The capture
+  is a paraphrased list, not exact wording, so no rule runs on it.
+- UNKNOWN: whether this covenant is the deed restriction HCD objected to in 2025. The covenant form's text is still
+  needed. Until then the demo and README say only that the current page lists a covenant.
+- The page says the City checks a submission's completeness in "approximately two business days" (paraphrased).
+
 ### Verified (D1: HCD letter to Irvine, 2025-03-27, `data/sources/hcd-irvine-2025-03-27.md`)
 
 - HCD found the City "misapplied State ADU Law ... by requiring deed restrictions and disallowing JADUs in townhomes"
@@ -59,9 +85,8 @@ Kept by Giuseppi's session.
 
 ### Open leads
 
-- The starter's notes say **Irvine's current "Constructing an ADU" page lists a "covenant"** in its submittal list.
-  Ivy is checking what it requires (D4). If it is the same deed restriction, the demo can point to the city's live
-  page.
+- **Irvine's current ADU page lists a covenant** (confirmed by Ivy, D4 above). What the covenant form requires is
+  still open. If it is the same deed restriction, the demo can point to the city's live page.
 
 ### Dead ends
 

@@ -49,8 +49,9 @@ against the same shapes.
   `status`, and render UNCONFIRMED clocks as unconfirmed.
 - `CityRun.sample` is true for the sample runs: show a small SAMPLE label when it is.
 - **City tabs: render them from `CITIES` in `src/contract/types.ts`, never a hard-coded list.** Dana Point and Orange
-  (SB 9 lot splits, for the Habitat OC pitch) are being added around 1:15. `runCheck(city)` covers every city in
-  `CITIES`, and the city's display name is in `CityRun.sourceLabel` until a `name` field lands.
+  (SB 9 lot splits, for the Habitat OC pitch) are in `CITIES` now. `runCheck(city)` covers every city in `CITIES`.
+  Use `CityRun.name` for the tab label and heading ("Dana Point"), never the id. SB 9 flags apply only to the city
+  HCD wrote to, so the scanner (pasted text, no city) never returns them.
 - Import only from `src/contract/api.ts` and `src/contract/types.ts`. The engine swaps in behind `api.ts` at CP1
   without changing any signature.
 

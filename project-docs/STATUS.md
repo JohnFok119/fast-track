@@ -10,6 +10,7 @@ Updated at each checkpoint by Giuseppi's session. Due at 2:30 PM, 2026-11-07.
 | Rules v0.2 | 12:40 | Done (`8f167b8`): four sourced rules, confirmed clocks |
 | CP1: engine + screen merged | 12:45 | Engine side done (`60c9cf2`): `npm run check irvine` and `anaheim` give the expected flags. Waiting on Johnny's `feat/ui` and `feat/letter` |
 | Acceptance test 5 (fresh clone, no key) | 1:15 | Passes: clone, `npm ci`, verify (26 tests) and build all clean at 12:21 |
+| Rules v0.3 and SB 9 | 1:15 | Done (`79c4e3f`, `fc803d0`): four more Handbook ADU rules; five SB 9 rules for Dana Point and Orange, each scoped to its city. D4 (Irvine's current page) is in, paraphrased |
 | CP2: all Musts | 1:15 | Not started |
 | CP3: feature complete | 1:45 | Not started |
 | Freeze | 2:00 | |
