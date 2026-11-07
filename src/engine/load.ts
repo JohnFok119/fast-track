@@ -1,4 +1,5 @@
 // Validates the JSON data files. Browser-safe: JSON arrives as `unknown`, nothing here reads the disk.
+import { CITIES } from '../contract/types';
 import type { CitationMapping, Status } from '../contract/types';
 import type { Cite, CityInput, CityItem, Rule, Source } from './types';
 
@@ -93,6 +94,19 @@ function loadMapping(o: Obj, where: string): CitationMapping {
   return { old: str(c, 'old', where), now: str(c, 'now', where), exactSection: exact };
 }
 
+/** Optional city scope: a finding HCD made in a letter to one city applies only to that city. */
+function loadCityScope(o: Obj, where: string): string[] | undefined {
+  if (o.cities === undefined) return undefined;
+  const list = arr(o, 'cities', where);
+  if (list.length === 0) fail(where, '"cities" must not be empty when present');
+  return list.map((c, i) => {
+    if (typeof c !== 'string' || !(CITIES as readonly string[]).includes(c)) {
+      fail(where, `"cities[${i}]" must be one of ${CITIES.join(', ')}`);
+    }
+    return c;
+  });
+}
+
 function escapeRegex(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -109,6 +123,7 @@ function loadRule(entry: unknown, i: number, sources: Map<string, Source>): Rule
     why: str(o, 'why', where),
     note: optStr(o, 'note', where),
     cites: loadCites(o, where, sources),
+    cities: loadCityScope(o, where),
   };
   if (o.citation !== undefined) {
     const mapping = loadMapping(o, where);
@@ -144,6 +159,7 @@ export function loadCity(raw: unknown): CityInput {
   });
   return {
     city: str(o, 'city', 'city file'),
+    name: str(o, 'name', 'city file'),
     sourceLabel: str(o, 'sourceLabel', 'city file'),
     sourceUrl: str(o, 'sourceUrl', 'city file'),
     saved: dateStr(o, 'saved', 'city file'),

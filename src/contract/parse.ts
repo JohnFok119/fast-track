@@ -101,6 +101,7 @@ export function parseCityRun(raw: unknown): CityRun {
   if (typeof o.sample !== 'boolean') fail(where, '"sample" must be true or false');
   return {
     city,
+    name: str(o, 'name', where),
     sourceLabel: str(o, 'sourceLabel', where),
     sourceUrl: str(o, 'sourceUrl', where),
     saved: date(o, 'saved', where),

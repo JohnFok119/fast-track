@@ -1,0 +1,34 @@
+{
+  "city": "orange",
+  "name": "Orange",
+  "sourceLabel": "SAMPLE. City of Orange actions on an SB 9 urban lot split application filed 2025-10-08, as described in HCD's letter to the City of Orange (2026-05-05), pp. 1-2. HCD quotes no city code; these are HCD's descriptions. Not the city's current form.",
+  "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
+  "saved": "2026-11-07",
+  "sample": true,
+  "flags": [
+    {
+      "itemId": "or-01",
+      "itemText": "The City declined to accept and process an SB 9 urban lot split application submitted on 2025-10-08, because it would create a parcel with only an ADU and no primary dwelling (as described by HCD).",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "or-02",
+      "itemText": "The City indicated that converting the ADU into a primary dwelling \"cannot be done because the City code does not currently provide a process for approving such a conversion\" (as described by HCD).",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-orange-conversion-pathway",
+      "why": "HCD found that an existing ADU \"does not provide a basis for ineligibility\" for an urban lot split, saw \"no technical or policy outcome-based reason to prohibit the proposed conversion\", and concluded: \"the City must provide the applicant with a regulatory pathway to convert the ADU to a primary dwelling in order to process the urban lot split application.\"",
+      "citations": [
+        {
+          "sourceId": "hcd-orange-2026-05-05",
+          "label": "HCD letter to the City of Orange, 2026-05-05 (citing Gov 66411.7)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
+          "page": "1, 2",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "HCD's condition: the conversion is fine \"provided the project meets local and statutory requirements\". HCD asked the City to respond in writing by 2026-06-05."
+    }
+  ]
+}

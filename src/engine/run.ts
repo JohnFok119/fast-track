@@ -29,8 +29,13 @@ function toFlag(item: CityItem, rule: Rule, sources: Map<string, Source>): Flag 
   };
 }
 
-export function checkItem(item: CityItem, rules: Rule[], sources: Map<string, Source>): Flag[] {
-  const hits = rules.filter((rule) => matchesRule(item.text, rule));
+/** A city-scoped rule applies only to its cities; with no city (pasted text), scoped rules never apply. */
+function inScope(rule: Rule, city: string | undefined): boolean {
+  return rule.cities === undefined || (city !== undefined && rule.cities.includes(city));
+}
+
+export function checkItem(item: CityItem, rules: Rule[], sources: Map<string, Source>, city?: string): Flag[] {
+  const hits = rules.filter((rule) => inScope(rule, city) && matchesRule(item.text, rule));
   if (hits.length === 0) {
     return [{ itemId: item.itemId, itemText: item.text, status: 'UNKNOWN', ruleId: null, citations: [] }];
   }
@@ -42,11 +47,12 @@ export function runCity(city: CityInput, rules: Rule[], sources: Map<string, Sou
   if (!(CITIES as readonly string[]).includes(city.city)) throw new Error(`Unknown city "${city.city}"`);
   const run = {
     city: city.city as City,
+    name: city.name,
     sourceLabel: city.sourceLabel,
     sourceUrl: city.sourceUrl,
     saved: city.saved,
     sample: false,
-    flags: city.items.flatMap((item) => checkItem(item, rules, sources)),
+    flags: city.items.flatMap((item) => checkItem(item, rules, sources, city.city)),
   };
   return parseCityRun(run);
 }

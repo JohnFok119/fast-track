@@ -1,0 +1,140 @@
+{
+  "city": "dana-point",
+  "name": "Dana Point",
+  "sourceLabel": "SAMPLE. Requirements of Dana Point Ordinance 22-01 (its SB 9 ordinance) as quoted in HCD's letter to the City of Dana Point (2023-04-17), pp. 2-4. Not the city's current form.",
+  "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+  "saved": "2026-11-07",
+  "sample": true,
+  "flags": [
+    {
+      "itemId": "dp-01",
+      "itemText": "\"No more than two residential units (whether primary, accessory, or single family residential duplex) shall be allowed per parcel.\" (Sec 9.72.004 (C) and (E))",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-two-unit-cap",
+      "why": "HCD found this \"imposes a two-unit cap on all single-family residential duplexes, even in instances when a lot split has not occurred. Imposing a two-unit cap on unsplit lots with a duplex would violate State ADU Law.\" A duplex lot that has not been split can still get an ADU or JADU.",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 65852.2(a) and (e), the ADU law before renumbering)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "2",
+          "checked": "2026-11-07"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "49",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "HCD says a two-unit cap is fine for a duplex on a split lot, so text that mentions a split stays UNKNOWN. HCD cited Gov 65852.2(a) and (e), which have since been renumbered into 66310 to 66342 (ADU Handbook p. 49). This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-02",
+      "itemText": "\"The Residential Units located on the property must be attached or connected via a permanent wall, ceiling or floor.\" (Sec 9.72.004 (C))",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "dp-03",
+      "itemText": "\"the Single Family Residential Duplex shall be occupied by very-low to low-income households in perpetuity....\" A similar requirement applies to all split lots, by deed restriction (Sec 9.72.004 (E); Sec 9.72.004 (J)(10); Sec 7.37.004 (D)) (as described by HCD).",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "dp-04",
+      "itemText": "\"The Single Family Residential Duplex shall be subject to a height limitation of twelve feet for a roof pitch of less and 3/12, or fourteen (14) feet for a roof pitch between 3/12 and 6/12 or sixteen (16) feet for a roof pitch of 6/12 and greater, and shall be limited to one story.\" The same text applies to units on lot splits (Sec. 9.72.004 (G); Sec 7.37.004 (I)).",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-one-story",
+      "why": "HCD found this \"is a height restriction far below standard single-family development standards in Dana Point\" (28 feet and two stories) and, to the extent it prevents equivalent floor area, \"reduces the intensity of land use\" under the Housing Crisis Act. \"Therefore, the City must remove this reference or amend it\" so these homes may be as tall as the zone allows for single-family homes.",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "3, 4",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "HCD's finding is conditional (\"to the extent it prevents development of equivalent floor area\") and relative to Dana Point's own zoning. This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-05",
+      "itemText": "\"For all Single Family Residential Duplexes, the Total Floor Area shall not exceed 800 square feet.... In no event shall the two Residential Units located upon the parcel exceed 1600 square feet.\" (Sec. 9.72.004 (I); Sec 7.37.004 (K))",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-floor-area-cap",
+      "why": "HCD found that \"both the 1,600 square-foot parcel maximum and the 800 square-foot unit maximum represent a dramatic reduction in development potential and, therefore, violate the HCA. The City must remove these requirements.\"",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "4",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "HCD's finding rests on the Housing Crisis Act and Dana Point's existing zone standards. This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-06",
+      "itemText": "\"For all residential units constructed upon parcel(s) subject to or created by an Urban Lot Split, the Total Floor Area shall not exceed 800 square feet....\" (Sec 7.37.004 (K))",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-floor-area-cap",
+      "why": "HCD found that \"both the 1,600 square-foot parcel maximum and the 800 square-foot unit maximum represent a dramatic reduction in development potential and, therefore, violate the HCA. The City must remove these requirements.\"",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "4",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "HCD's finding rests on the Housing Crisis Act and Dana Point's existing zone standards. This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-07",
+      "itemText": "\"For all Single Family Residential Duplexes... [each unit] shall not exceed... 1 bedroom.\" (Sec. 9.72.004 (I); Sec 7.37.004 (K))",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-one-bedroom",
+      "why": "HCD found that limiting bedrooms \"may constrain housing choice and result in discriminatory effects on families with children, people with disabilities, and other protected groups\", and that reducing how many people may live in a home is a reduction in the intensity of land use under the Housing Crisis Act. \"Therefore, the City must revise this section to avoid limiting the occupancy of housing units based on familial status or other protected characteristics.\"",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 65008(a)(1)(A) and (b)(1)(B)(i), and Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "4",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-08",
+      "itemText": "\"For all residential units constructed upon parcel(s) subject to or created by an Urban Lot Split, the Total Floor Area shall not exceed... one bedroom.\" (Sec 7.37.004 (K))",
+      "status": "CONFLICTS",
+      "ruleId": "sb9-dana-point-one-bedroom",
+      "why": "HCD found that limiting bedrooms \"may constrain housing choice and result in discriminatory effects on families with children, people with disabilities, and other protected groups\", and that reducing how many people may live in a home is a reduction in the intensity of land use under the Housing Crisis Act. \"Therefore, the City must revise this section to avoid limiting the occupancy of housing units based on familial status or other protected characteristics.\"",
+      "citations": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 65008(a)(1)(A) and (b)(1)(B)(i), and Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+          "page": "4",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here."
+    },
+    {
+      "itemId": "dp-09",
+      "itemText": "Section 9.72.006 makes \"[a]ny person responsible for violating\" the Ordinance \"guilty or an infraction or a misdemeanor\", and Section 7.37.005 provides for additional civil penalties (as described by HCD).",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    }
+  ]
+}

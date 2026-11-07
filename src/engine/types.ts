@@ -23,6 +23,8 @@ interface RuleBase {
   why: string;
   note?: string;
   cites: Cite[];
+  /** When set, the rule applies only to these city ids (a finding from HCD's letter to that city). */
+  cities?: string[];
 }
 
 export interface MatchRule extends RuleBase {
@@ -49,6 +51,8 @@ export interface CityItem {
 
 export interface CityInput {
   city: string;
+  /** Display name, e.g. "Dana Point". */
+  name: string;
   sourceLabel: string;
   sourceUrl: string;
   saved: string;

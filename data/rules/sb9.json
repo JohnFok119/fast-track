@@ -1,0 +1,107 @@
+{
+  "version": "0.1",
+  "about": "SB 9 rules (duplexes and urban lot splits). Each rule is a finding HCD made in a letter to one city, so each is scoped to that city with \"cities\": HCD judged Dana Point's limits against Dana Point's own zoning, so the same words elsewhere are not checked. Rules cite only the HCD letters in data/sources/; statutes are named as HCD cites them. Written by Giuseppi's session from the excerpts for D6 and D7.",
+  "rules": [
+    {
+      "id": "sb9-dana-point-two-unit-cap",
+      "status": "CONFLICTS",
+      "cities": ["dana-point"],
+      "match": {
+        "allOf": [
+          "\\b(no|not) more than (two|2)\\b|\\bmaximum of (two|2)\\b|\\b(two|2)[- ]unit (cap|max|limit)",
+          "duplex"
+        ],
+        "noneOf": ["split"]
+      },
+      "why": "HCD found this \"imposes a two-unit cap on all single-family residential duplexes, even in instances when a lot split has not occurred. Imposing a two-unit cap on unsplit lots with a duplex would violate State ADU Law.\" A duplex lot that has not been split can still get an ADU or JADU.",
+      "note": "HCD says a two-unit cap is fine for a duplex on a split lot, so text that mentions a split stays UNKNOWN. HCD cited Gov 65852.2(a) and (e), which have since been renumbered into 66310 to 66342 (ADU Handbook p. 49). This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here.",
+      "cites": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 65852.2(a) and (e), the ADU law before renumbering)",
+          "page": "2"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
+          "page": "49"
+        }
+      ]
+    },
+    {
+      "id": "sb9-dana-point-one-story",
+      "status": "CONFLICTS",
+      "cities": ["dana-point"],
+      "match": {
+        "allOf": ["\\b(one|single)[- ]story", "duplex|lot split|split lot"]
+      },
+      "why": "HCD found this \"is a height restriction far below standard single-family development standards in Dana Point\" (28 feet and two stories) and, to the extent it prevents equivalent floor area, \"reduces the intensity of land use\" under the Housing Crisis Act. \"Therefore, the City must remove this reference or amend it\" so these homes may be as tall as the zone allows for single-family homes.",
+      "note": "HCD's finding is conditional (\"to the extent it prevents development of equivalent floor area\") and relative to Dana Point's own zoning. This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here.",
+      "cites": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "page": "3, 4"
+        }
+      ]
+    },
+    {
+      "id": "sb9-dana-point-floor-area-cap",
+      "status": "CONFLICTS",
+      "cities": ["dana-point"],
+      "match": {
+        "allOf": ["\\b800 square|\\b1,?600 square", "duplex|lot split|split lot"]
+      },
+      "why": "HCD found that \"both the 1,600 square-foot parcel maximum and the 800 square-foot unit maximum represent a dramatic reduction in development potential and, therefore, violate the HCA. The City must remove these requirements.\"",
+      "note": "HCD's finding rests on the Housing Crisis Act and Dana Point's existing zone standards. This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here.",
+      "cites": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "page": "4"
+        }
+      ]
+    },
+    {
+      "id": "sb9-dana-point-one-bedroom",
+      "status": "CONFLICTS",
+      "cities": ["dana-point"],
+      "match": {
+        "allOf": ["\\b(1|one)[- ]bedroom", "duplex|lot split|split lot"]
+      },
+      "why": "HCD found that limiting bedrooms \"may constrain housing choice and result in discriminatory effects on families with children, people with disabilities, and other protected groups\", and that reducing how many people may live in a home is a reduction in the intensity of land use under the Housing Crisis Act. \"Therefore, the City must revise this section to avoid limiting the occupancy of housing units based on familial status or other protected characteristics.\"",
+      "note": "This is HCD's 2023 letter: whether Dana Point has amended the Ordinance since is not checked here.",
+      "cites": [
+        {
+          "sourceId": "hcd-dana-point-2023-04-17",
+          "label": "HCD letter to the City of Dana Point, 2023-04-17 (citing Gov 65008(a)(1)(A) and (b)(1)(B)(i), and Gov 66300(b)(1)(A), the Housing Crisis Act)",
+          "page": "4"
+        }
+      ]
+    },
+    {
+      "id": "sb9-orange-conversion-pathway",
+      "status": "CONFLICTS",
+      "cities": ["orange"],
+      "match": {
+        "allOf": ["conver", "primary (dwelling|unit|residence)", "\\badu\\b|accessory dwelling"],
+        "anyOf": [
+          "no (regulatory )?(process|pathway)",
+          "not currently provide",
+          "cannot be done",
+          "(not|never) (allowed|permitted)",
+          "does not (allow|permit)"
+        ]
+      },
+      "why": "HCD found that an existing ADU \"does not provide a basis for ineligibility\" for an urban lot split, saw \"no technical or policy outcome-based reason to prohibit the proposed conversion\", and concluded: \"the City must provide the applicant with a regulatory pathway to convert the ADU to a primary dwelling in order to process the urban lot split application.\"",
+      "note": "HCD's condition: the conversion is fine \"provided the project meets local and statutory requirements\". HCD asked the City to respond in writing by 2026-06-05.",
+      "cites": [
+        {
+          "sourceId": "hcd-orange-2026-05-05",
+          "label": "HCD letter to the City of Orange, 2026-05-05 (citing Gov 66411.7)",
+          "page": "1, 2"
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 export const STATUSES = ['OK', 'CONFLICTS', 'OUTDATED_CITATION', 'UNKNOWN'] as const;
 export type Status = (typeof STATUSES)[number];
 
-export const CITIES = ['irvine', 'anaheim'] as const;
+export const CITIES = ['irvine', 'anaheim', 'dana-point', 'orange'] as const;
 export type City = (typeof CITIES)[number];
 
 /** One source behind a flag. Every non-UNKNOWN flag carries at least one. */
@@ -46,6 +46,8 @@ export interface Flag {
 /** The result of checking one city's saved requirements. */
 export interface CityRun {
   city: City;
+  /** Display name for tabs and headings, e.g. "Dana Point". */
+  name: string;
   sourceLabel: string;
   sourceUrl: string;
   /** Date the city's requirements were saved, YYYY-MM-DD. */

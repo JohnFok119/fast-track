@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import anaheimSample from '../data/samples/anaheim-run.json';
+import danaPointSample from '../data/samples/dana-point-run.json';
 import irvineSample from '../data/samples/irvine-run.json';
+import orangeSample from '../data/samples/orange-run.json';
 import { getClocks, runCheck, scan } from '../src/contract/api';
 import { parseCityRun, parseFlag } from '../src/contract/parse';
 import { CITIES } from '../src/contract/types';
 
 describe('sample files', () => {
-  it('both parse and are labelled as samples', () => {
-    for (const raw of [irvineSample, anaheimSample]) {
+  it('all parse and are labelled as samples', () => {
+    for (const raw of [irvineSample, anaheimSample, danaPointSample, orangeSample]) {
       const run = parseCityRun(raw);
       expect(run.sample).toBe(true);
       expect(run.sourceLabel.startsWith('SAMPLE.')).toBe(true);
