@@ -10,18 +10,18 @@
       "itemText": "JADU deed restriction required, citing Gov Code 65852.22.",
       "status": "OUTDATED_CITATION",
       "ruleId": "cite-65852-22",
-      "why": "SB 477 (2024) renumbered the junior ADU law from 65852.22 to 66333.",
+      "why": "SB 477 (2024) renumbered the junior ADU law from 65852.22 to sections 66333 through 66339, subsection by subsection.",
       "citations": [
         {
           "sourceId": "adu-handbook-2026-03",
           "label": "HCD ADU Handbook, March 2026",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
-          "page": "13",
+          "page": "13, 49",
           "checked": "2026-11-07"
         }
       ],
-      "mapping": { "old": "65852.22", "now": "66333", "exactSection": "66333" },
-      "note": "Only the citation is flagged. Whether the covenant itself is allowed is a separate rule that is not yet encoded. Sample mapping, to be confirmed against the Handbook (D2)."
+      "mapping": { "old": "65852.22", "now": "66333 to 66339", "exactSection": null },
+      "note": "Only the citation is flagged. Whether the covenant itself is allowed is a separate rule that is not yet encoded."
     },
     {
       "itemId": "ana-02",
@@ -34,7 +34,7 @@
           "sourceId": "adu-handbook-2026-03",
           "label": "HCD ADU Handbook, March 2026",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
-          "page": "13",
+          "page": "13, 49",
           "checked": "2026-11-07"
         }
       ],

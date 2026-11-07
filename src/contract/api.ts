@@ -1,8 +1,8 @@
-// The functions the UI calls. Until the engine lands (about 12:45 PM), runCheck and getClocks return the labelled
-// SAMPLE data in data/samples/, and scan finds the old section numbers that appear in the samples. The signatures
-// are fixed: the engine replaces the bodies, not the shapes.
+// The functions the UI calls. Until the engine lands, runCheck returns the labelled SAMPLE runs in data/samples/,
+// and scan finds the old section numbers that appear in them. getClocks reads data/rules/clocks.json. The
+// signatures are fixed: the engine replaces the bodies, not the shapes.
 import anaheimRaw from '../../data/samples/anaheim-run.json';
-import clocksRaw from '../../data/samples/clocks.json';
+import clocksRaw from '../../data/rules/clocks.json';
 import irvineRaw from '../../data/samples/irvine-run.json';
 import { parseCityRun, parseClocks } from './parse';
 import type { City, CityRun, Clock, Flag } from './types';

@@ -1,0 +1,13 @@
+{
+  "city": "anaheim",
+  "sourceLabel": "Anaheim ADU Submittal Requirements Checklist, November 2025. PLACEHOLDER wording, paraphrased from the starter's notes until the checklist is saved (D3).",
+  "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
+  "saved": "2026-11-07",
+  "items": [
+    { "itemId": "ana-01", "text": "JADU deed restriction required, citing Gov Code 65852.22." },
+    { "itemId": "ana-02", "text": "ADU standards cited as Gov Code 65852.2." },
+    { "itemId": "ana-03", "text": "Sewer verification for the ADU." },
+    { "itemId": "ana-04", "text": "Water meter location shown on the site plan." },
+    { "itemId": "ana-05", "text": "New address assigned for the ADU." }
+  ]
+}

@@ -24,5 +24,57 @@
     "pii_removed": "yes",
     "mirror": false,
     "file": "data/sources/adu-handbook-2026-03.md"
+  },
+  {
+    "captured_by": "Giuseppi session (metadata only)",
+    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "pii_removed": "yes",
+    "id": "gov-66315",
+    "title": "California Government Code section 66315",
+    "publisher": "California Legislature (leginfo)",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66315",
+    "published": null,
+    "checked": "2026-11-07",
+    "mirror": true,
+    "file": null
+  },
+  {
+    "captured_by": "Giuseppi session (metadata only)",
+    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "pii_removed": "yes",
+    "id": "gov-66317",
+    "title": "California Government Code section 66317",
+    "publisher": "California Legislature (leginfo)",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317",
+    "published": null,
+    "checked": "2026-11-07",
+    "mirror": true,
+    "file": null
+  },
+  {
+    "captured_by": "Giuseppi session (metadata only)",
+    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "pii_removed": "yes",
+    "id": "gov-66333",
+    "title": "California Government Code section 66333",
+    "publisher": "California Legislature (leginfo)",
+    "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333",
+    "published": null,
+    "checked": "2026-11-07",
+    "mirror": true,
+    "file": null
+  },
+  {
+    "captured_by": "Giuseppi session (metadata only)",
+    "how": "metadata only; excerpt pending",
+    "pii_removed": "yes",
+    "id": "anaheim-adu-checklist-2025-11",
+    "title": "Anaheim ADU Submittal Requirements Checklist (November 2025)",
+    "publisher": "City of Anaheim",
+    "url": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
+    "published": "2025-11",
+    "checked": "2026-11-07",
+    "mirror": false,
+    "file": null
   }
 ]

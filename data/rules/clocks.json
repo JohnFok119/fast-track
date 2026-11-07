@@ -1,0 +1,35 @@
+{
+  "about": "Legal review deadlines for ADU applications, from the HCD ADU Handbook (March 2026). Statute text confirmation on leginfo is pending (D5).",
+  "clocks": [
+    {
+      "id": "adu-completeness",
+      "label": "Completeness check, in writing",
+      "value": "15 business days",
+      "section": "66317(a)(2)(A)",
+      "sourceId": "adu-handbook-2026-03",
+      "status": "CONFIRMED",
+      "checked": "2026-11-07",
+      "note": "Handbook p. 34. With no timely determination, the application is deemed complete (66317(a)(2)(F), p. 35)."
+    },
+    {
+      "id": "adu-decision",
+      "label": "Approve or deny after a complete application",
+      "value": "60 days",
+      "section": "66317(a)(3)",
+      "sourceId": "adu-handbook-2026-03",
+      "status": "CONFIRMED",
+      "checked": "2026-11-07",
+      "note": "Handbook p. 11. Tolled only for a delay the applicant requests (p. 35)."
+    },
+    {
+      "id": "adu-deemed-approved",
+      "label": "\"Deemed approved\" if the city misses the 60 days",
+      "value": "UNKNOWN",
+      "section": null,
+      "sourceId": null,
+      "status": "UNCONFIRMED",
+      "checked": "2026-11-07",
+      "note": "The Handbook disagrees with itself: p. 21 states it only for coastal permits (66329(b)(5)), while p. 51 (AB 3182 summary) says an application is deemed approved after 60 days, citing 66317(a). Unconfirmed until the statute text is read (D5)."
+    }
+  ]
+}
