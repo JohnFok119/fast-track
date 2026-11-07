@@ -1,0 +1,65 @@
+{
+  "city": "anaheim",
+  "sourceLabel": "SAMPLE. Anaheim ADU Submittal Requirements Checklist, November 2025. Item wording is paraphrased until the checklist is saved (D3).",
+  "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
+  "saved": "2026-11-07",
+  "sample": true,
+  "flags": [
+    {
+      "itemId": "ana-01",
+      "itemText": "JADU deed restriction required, citing Gov Code 65852.22.",
+      "status": "OUTDATED_CITATION",
+      "ruleId": "cite-65852-22",
+      "why": "SB 477 (2024) renumbered the junior ADU law from 65852.22 to 66333.",
+      "citations": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "13",
+          "checked": "2026-11-07"
+        }
+      ],
+      "mapping": { "old": "65852.22", "now": "66333", "exactSection": "66333" },
+      "note": "Only the citation is flagged. Whether the covenant itself is allowed is a separate rule that is not yet encoded. Sample mapping, to be confirmed against the Handbook (D2)."
+    },
+    {
+      "itemId": "ana-02",
+      "itemText": "ADU standards cited as Gov Code 65852.2.",
+      "status": "OUTDATED_CITATION",
+      "ruleId": "cite-65852-2",
+      "why": "SB 477 (2024) renumbered the ADU law from 65852.2 to sections 66310 through 66342.",
+      "citations": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "13",
+          "checked": "2026-11-07"
+        }
+      ],
+      "mapping": { "old": "65852.2", "now": "66310 to 66342", "exactSection": null }
+    },
+    {
+      "itemId": "ana-03",
+      "itemText": "Sewer verification for the ADU.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "ana-04",
+      "itemText": "Water meter location shown on the site plan.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "ana-05",
+      "itemText": "New address assigned for the ADU.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    }
+  ]
+}

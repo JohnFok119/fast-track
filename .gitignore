@@ -16,3 +16,6 @@ CLAUDE.local.md
 
 # Raw source PDFs: may contain personal information, never committed (excerpts live in data/sources/)
 data/raw/
+
+# Agent worktrees
+.claude/worktrees/

@@ -5,7 +5,7 @@ import globals from 'globals';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'coverage', 'data/raw', '.lavish', 'project-docs'],
+    ignores: ['dist', 'node_modules', 'coverage', 'data/raw', '.lavish', 'project-docs', '.claude/worktrees'],
   },
   js.configs.recommended,
   tseslint.configs.recommended,
