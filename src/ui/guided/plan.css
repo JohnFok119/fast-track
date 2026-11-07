@@ -38,3 +38,7 @@
 @media (prefers-reduced-motion: reduce) {
   .pl-time .tl .fill, .pl-time .tl-notes, .pl-time .legend, .pl-next .steps li { animation: none; }
 }
+
+/* The letter call to action sits on a dark panel: make it the brand color so it reads first. */
+.pl-letter .btn.solid { background: var(--brand) !important; color: var(--ink) !important; border-color: var(--brand) !important; }
+.pl-letter .btn.solid:hover { background: #ff8533 !important; }

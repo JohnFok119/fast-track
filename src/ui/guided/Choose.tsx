@@ -87,7 +87,6 @@ export function PickCity({ runs, pathway, city, onPick, onNext, onBack }: CityPr
               {fits && r.city === city ? <Check /> : null}
               <span className="ch-label">{r.name}</span>
               <span className="ch-sub">{fits ? `${items.length} lines · ${no} the state says no to` : missing}</span>
-              {fits ? <span className={`cnt ch-cnt${no === 0 ? ' zero' : ''}`} aria-hidden="true">{no}</span> : null}
             </button>
           );
         })}
