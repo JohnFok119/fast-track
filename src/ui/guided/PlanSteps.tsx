@@ -95,7 +95,7 @@ function ContactItem({ contact, escalation }: { contact: Contact; escalation?: b
         {escalation ? <div className="ct-tag">If the city won&apos;t fix it</div> : null}
         <div className="ct-office">{contact.office}</div>
         <div className="ct-handles">{contact.handles}</div>
-        <a className="ct-link" href={contact.citation.url} target="_blank" rel="noopener noreferrer" title={contact.citation.label}>Open their page</a>
+        <a className="ct-link" href={contact.citation.url} target="_blank" rel="noopener noreferrer" title={contact.citation.label}>Open the source</a>
       </div>
     </li>
   );
