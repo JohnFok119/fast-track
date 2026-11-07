@@ -39,6 +39,18 @@ against the same shapes.
   - `npm run verify` before every push (it runs the type-check, lint and tests).
 - **No backend, no database, no API key.** All data is local JSON imported at build time.
 
+## Contract as pushed (12:20): what differs from the sketch below
+
+- `mapping` is `{ old, now, exactSection: string | null }`. `null` means the Handbook gives no single replacement
+  section, so show it as "UNKNOWN: no single replacement" (true for both 65852.2 and 65852.22).
+- **One requirement can produce more than one flag**, for example a covenant item that also cites 65852.2. The pair
+  `(itemId, ruleId)` is unique, so use it as the React key and group flags by `itemId` in the list.
+- `getClocks(): Clock[]` comes from `src/contract/api.ts` (data in `data/rules/clocks.json`). Show the `note` and the
+  `status`, and render UNCONFIRMED clocks as unconfirmed.
+- `CityRun.sample` is true for the sample runs: show a small SAMPLE label when it is.
+- Import only from `src/contract/api.ts` and `src/contract/types.ts`. The engine swaps in behind `api.ts` at CP1
+  without changing any signature.
+
 ## The contract (lands at 12:15; the pushed `src/contract/types.ts` is the source of truth)
 
 The shapes below are a sketch. Use the pushed file.
