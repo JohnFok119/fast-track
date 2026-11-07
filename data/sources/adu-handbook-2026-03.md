@@ -113,6 +113,12 @@ Printed headings: "New Government Code Sections" and "Previous Government Code S
 
 - Used for: owner-occupancy rules for ADUs (barred) and JADUs (only with shared sanitation).
 
+### Parking: guest spaces and replacement spaces (Gov 66314(d)(10), (d)(11)) (p. 33)
+
+> No. Parking requirements for ADUs shall not exceed one parking space per unit or bedroom, whichever is less (Gov. Code, § 66314, subd. (d)(10)(A)). These spaces may be provided as tandem parking on a driveway (Gov. Code, § 66314, subd. (d)(10)(B)). Guest parking spaces shall not be required for ADUs under any circumstances. In addition, a local agency may not require off-street parking spaces to be replaced when a garage, carport, covered parking structure, or uncovered parking space is demolished in conjunction with the construction of an ADU or converted to an ADU (Gov. Code, § 66314, subd. (d)(11)). (p. 33)
+
+- Used for: the guest-parking and replacement-parking rules (both CONFLICTS). Copied from the PDF text layer on 2026-11-07.
+
 ### Review clocks (Gov 66317): 15 business days, 60 days (pp. 11, 34-36)
 
 > A permitting agency must determine whether an application for an ADU or JADU is complete and provide written notice of the determination not later than 15 business days after the permitting agency received the application (Gov. Code, §§ 66317, subd. (a)(2)(A); 66335, subd. (a)(2)(A)). (p. 34)

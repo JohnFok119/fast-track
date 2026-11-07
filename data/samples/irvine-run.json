@@ -83,13 +83,14 @@
       "itemText": "JADUs are not allowed in townhomes: the City treats a detached townhouse on its own lot as ineligible (as described by HCD).",
       "status": "CONFLICTS",
       "ruleId": "jadu-detached-townhouse",
-      "why": "Gov Code 66333(a) limits JADUs to one \"per residential lot zoned for single-family residences with a single-family residence built, or proposed to be built, on the lot\". HCD found \"a detached townhouse on its own lot is a single-family primary dwelling and would therefore be eligible for a JADU\".",
+      "why": "HCD's letter quotes Gov Code 66333(a): one JADU \"per residential lot zoned for single-family residences with a single-family residence built, or proposed to be built, on the lot\". HCD found \"a detached townhouse on its own lot is a single-family primary dwelling and would therefore be eligible for a JADU\".",
       "citations": [
         {
-          "sourceId": "gov-66333",
-          "label": "Gov Code 66333(a) (not yet checked on leginfo)",
-          "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333",
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (JADU eligibility, Gov Code 66333(a))",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
           "section": "66333(a)",
+          "page": "28",
           "checked": "2026-11-07"
         },
         {

@@ -22,7 +22,7 @@
       "id": "sb9",
       "label": "Duplex or lot split (SB 9)",
       "pathway": "SB9",
-      "fact": "The city must approve an urban lot split parcel map ministerially (no hearing) if it meets SB 9's criteria.",
+      "fact": "If an urban lot split meets SB 9's eligibility criteria and standards, the city must approve the parcel map ministerially.",
       "sourceId": "hcd-orange-2026-05-05",
       "page": "1, 2"
     }
@@ -63,7 +63,7 @@
         "value": "60 days",
         "kind": "LAW",
         "drawMonths": 2,
-        "note": "After 60 days the application is deemed approved (statute text read on a mirror, not yet on leginfo).",
+        "note": "Applies if a home already exists on the lot. After 60 days the application is deemed approved (statute text read on a mirror, not yet on leginfo).",
         "sourceId": "adu-handbook-2026-03",
         "section": "66317(a)(3)",
         "page": "11"
@@ -124,7 +124,7 @@
         "page": "34"
       },
       {
-        "text": "Expect approval or denial within 60 days of a complete application, with no hearing.",
+        "text": "If a home already exists on the lot, expect approval or denial within 60 days of a complete application.",
         "kind": "LAW",
         "sourceId": "adu-handbook-2026-03",
         "section": "66317(a)(3)",
