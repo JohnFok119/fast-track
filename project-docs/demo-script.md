@@ -29,6 +29,7 @@ Before going on stage: `npm run dev` is running at http://localhost:5173 with th
 - **"Is Irvine still doing this?"** Our evidence is from early 2025. Irvine's current ADU page still lists a covenant, but we have not seen its text, so we do not claim it is the same requirement.
 - **"Is the law text verified?"** Statute text was read on a mirror site. The screen labels it "not yet checked on leginfo".
 - **"Why does Anaheim show no 'State says no'?"** Its checklist cites two renumbered sections, which we flag. Whether its JADU owner-occupancy covenant is allowed depends on facts our sources do not settle, so we do not call it.
+- **"Where does this go next?"** (Not built yet.) For a Habitat OC project manager who reports to leadership: a portfolio view of which projects are waiting on a city past the legal deadline or blocked by a requirement HCD objected to; a "Before you submit" list per city; and each city's observed timelines from the state's Annual Progress Report data, next to the legal deadlines. We will not predict move-in dates without data behind them.
 - **"Where does this sit between finding land and building?"** It starts once you own the lot: what you can build, what stands in the way, and the clocks. Finding land and funding are not included.
 
 ## If the UI fails

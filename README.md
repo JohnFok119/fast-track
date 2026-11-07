@@ -152,14 +152,20 @@ Every number we did not take from a source is labelled ASSUMPTION here and in th
 
 ## Next steps
 
-**Next month, for a nonprofit or city:**
-- Add SB 9 checks that apply in every city, once the SB 9 statutes (Gov Code 65852.21 and 66411.7) are checked on leginfo.
-- Check the statute text on leginfo.
-- Test with a permit tech and a project manager.
+None of this is built yet. It is written for the user we would build toward next: a Habitat for Humanity of Orange County project manager who reports to leadership.
 
 **With one more week:**
+- A "Before you submit" list per city, from the submittal lists already saved (Irvine's ADU page, Anaheim's form Z412).
+- Ask what is on the lot now, as well as what you will build, so the tool can point to the fastest path that needs no rezoning or hearing. The 60-day clock already depends on whether a home exists on the lot, and HCD's Orange letter turned on an ADU that was already there.
 - Add more cities. Each one is a data file with its saved requirements and HCD letters, not new code. The same state law applies in every California city. The next two leads are HCD's ADU letters to Aliso Viejo (2024-06-25) and San Juan Capistrano (2024-12-06), which, by our one-line summaries, also flag ADU deed restrictions (`data/sources/hcd-other-oc-adu-letters.md`; not yet excerpted).
-- Show the legal deadlines next to observed timelines from state permit data.
+- Check the statute text on leginfo, then add SB 9 checks that apply in every city (Gov Code 65852.21 and 66411.7).
+
+**With one more month:**
+- A portfolio view across an organization's projects, for reporting to leadership: which ones are waiting on a city past the legal deadline, and which are blocked by a requirement HCD has objected to.
+- Typical timelines observed in each city, from the state's housing element Annual Progress Report data (Table A2), shown next to the legal deadlines.
+- Test with a permit tech and a project manager.
+
+**What we will not build:** predicted permit or move-in dates with no data behind them (they would be invented numbers); volunteer or subcontractor scheduling (a separate product, and volunteer names are personal information); rezoning or use-permit workflows (the slow path this tool exists to avoid).
 
 ## Data and privacy
 
