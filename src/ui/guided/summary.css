@@ -1,6 +1,6 @@
 /* Step 6 summary. Tokens from src/index.css; motion is sm- prefixed and off under reduced motion. */
 .sm-done { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 14px; border-radius: 99px; background: var(--ok-bg); color: var(--ok-fg); animation: sm-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-.sm-tiles { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.sm-tiles { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(136px, 1fr)); gap: 10px; }
 @media (max-width: 480px) { .sm-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sm-tile { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 14px; border: 1px solid var(--line); background: var(--paper); animation: sm-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .sm-ico { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 99px; }
