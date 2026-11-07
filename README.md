@@ -3,7 +3,7 @@
 > Fast Track checks a California city's backyard-home (ADU) requirements against state law, line by line, so an applicant blocked by a rule the city cannot impose can see it, with the source, and send a response.
 
 **Team:** Fast Track
-**Members:** Giuseppi, Johnny, Ivy
+**Members:** Giuseppi, Johnny, Ivy, Joy
 **Lane:** 2 Clear it
 **Built at:** Claude Impact Lab: UCI × SoCal Affordable Housing, November 7, 2026
 
