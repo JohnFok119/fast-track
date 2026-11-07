@@ -37,7 +37,7 @@ Fast Track compares a city's actual ADU requirements with state law and with HCD
 
 | Flag | Meaning |
 |---|---|
-| OK | Nothing found against it |
+| OK | State law allows the city to require this. The source is cited |
 | CONFLICTS | The state says the city cannot require this. The statute and letter are cited |
 | OUTDATED_CITATION | The city cites an old law section. The renumbering is shown |
 | UNKNOWN | Our rules do not cover it. We say so and do not guess |
@@ -85,7 +85,7 @@ npm install              # versions are pinned in package.json
 npm run dev              # opens at http://localhost:5173
 npm run check irvine     # same check in the terminal, with sources
 npm run check anaheim
-npm test                 # 26 tests
+npm test                 # runs the test suite
 ```
 
 - `.env.example` lists one optional variable, `ANTHROPIC_API_KEY`. The demo does not use it. Leave it empty.
@@ -115,8 +115,8 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 |---|---|
 | HCD letter to Irvine and the HCD ADU Handbook (excerpts, names and addresses removed) | Real, working |
 | Irvine's requirements, as quoted in HCD's letter | Real, working |
-| Rule engine, flags, citations, CLI | Working. Deterministic, 26 tests |
-| Anaheim's requirement wording | Placeholder: paraphrased from our notes until the checklist is saved from a browser. The flags on it are labelled SAMPLE |
+| Rule engine, flags, citations, CLI | Working. Deterministic, covered by automated tests that run on every push |
+| Anaheim's requirement wording | Placeholder: paraphrased from our notes until the checklist is saved from a browser. The source line on the Anaheim tab says so |
 | Gov Code text for 66315, 66317 and 66333 | Read on a mirror site. Not yet checked on leginfo, and labelled so in the output |
 | "Deemed approved" if a city misses the 60 days | Unconfirmed: the Handbook disagrees with itself (p. 21 and p. 51). Shown as UNCONFIRMED, never as fact |
 | Draft response letter | Draft text only. There is no send path |
@@ -150,4 +150,4 @@ This project uses only public or provided data. It contains no personal informat
 
 ## License
 
-TODO(freeze): add a LICENSE file (we intend MIT) and confirm here. No LICENSE file is in the repo yet.
+TODO(freeze): the team picks a license (the event template suggests MIT). No LICENSE file is in the repo yet.
