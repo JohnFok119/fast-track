@@ -1,0 +1,18 @@
+{
+  "city": "orange",
+  "sourceLabel": "City of Orange actions on an SB 9 urban lot split application filed 2025-10-08, as described in HCD's letter to the City of Orange (2026-05-05), pp. 1-2. HCD quotes no city code; these are HCD's descriptions. Not the city's current form.",
+  "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
+  "saved": "2026-11-07",
+  "items": [
+    {
+      "itemId": "or-01",
+      "text": "The City declined to accept and process an SB 9 urban lot split application submitted on 2025-10-08, because it would create a parcel with only an ADU and no primary dwelling (as described by HCD).",
+      "page": "1"
+    },
+    {
+      "itemId": "or-02",
+      "text": "The City indicated that converting the ADU into a primary dwelling \"cannot be done because the City code does not currently provide a process for approving such a conversion\" (as described by HCD).",
+      "page": "1"
+    }
+  ]
+}

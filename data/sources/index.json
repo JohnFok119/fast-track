@@ -76,5 +76,31 @@
     "checked": "2026-11-07",
     "mirror": false,
     "file": null
+  },
+  {
+    "id": "hcd-dana-point-2023-04-17",
+    "title": "HCD letter to the City of Dana Point (SB 9 ordinance, technical assistance)",
+    "publisher": "California Department of Housing and Community Development (HCD)",
+    "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+    "published": "2023-04-17",
+    "checked": "2026-11-07",
+    "captured_by": "sources agent",
+    "how": "curl download + pdftotext",
+    "pii_removed": "yes",
+    "mirror": false,
+    "file": "data/sources/hcd-dana-point-2023-04-17.md"
+  },
+  {
+    "id": "hcd-orange-2026-05-05",
+    "title": "HCD letter to the City of Orange (SB 9 urban lot split, ADU converted to a primary dwelling)",
+    "publisher": "California Department of Housing and Community Development (HCD)",
+    "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
+    "published": "2026-05-05",
+    "checked": "2026-11-07",
+    "captured_by": "sources agent",
+    "how": "curl download + pdftotext",
+    "pii_removed": "yes",
+    "mirror": false,
+    "file": "data/sources/hcd-orange-2026-05-05.md"
   }
 ]

@@ -1,0 +1,53 @@
+{
+  "city": "dana-point",
+  "sourceLabel": "Requirements of Dana Point Ordinance 22-01 (its SB 9 ordinance) as quoted in HCD's letter to the City of Dana Point (2023-04-17), pp. 2-4. Not the city's current form.",
+  "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+  "saved": "2026-11-07",
+  "items": [
+    {
+      "itemId": "dp-01",
+      "text": "\"No more than two residential units (whether primary, accessory, or single family residential duplex) shall be allowed per parcel.\" (Sec 9.72.004 (C) and (E))",
+      "page": "2"
+    },
+    {
+      "itemId": "dp-02",
+      "text": "\"The Residential Units located on the property must be attached or connected via a permanent wall, ceiling or floor.\" (Sec 9.72.004 (C))",
+      "page": "3"
+    },
+    {
+      "itemId": "dp-03",
+      "text": "\"the Single Family Residential Duplex shall be occupied by very-low to low-income households in perpetuity....\" A similar requirement applies to all split lots, by deed restriction (Sec 9.72.004 (E); Sec 9.72.004 (J)(10); Sec 7.37.004 (D)) (as described by HCD).",
+      "page": "3"
+    },
+    {
+      "itemId": "dp-04",
+      "text": "\"The Single Family Residential Duplex shall be subject to a height limitation of twelve feet for a roof pitch of less and 3/12, or fourteen (14) feet for a roof pitch between 3/12 and 6/12 or sixteen (16) feet for a roof pitch of 6/12 and greater, and shall be limited to one story.\" The same text applies to units on lot splits (Sec. 9.72.004 (G); Sec 7.37.004 (I)).",
+      "page": "3"
+    },
+    {
+      "itemId": "dp-05",
+      "text": "\"For all Single Family Residential Duplexes, the Total Floor Area shall not exceed 800 square feet.... In no event shall the two Residential Units located upon the parcel exceed 1600 square feet.\" (Sec. 9.72.004 (I); Sec 7.37.004 (K))",
+      "page": "4"
+    },
+    {
+      "itemId": "dp-06",
+      "text": "\"For all residential units constructed upon parcel(s) subject to or created by an Urban Lot Split, the Total Floor Area shall not exceed 800 square feet....\" (Sec 7.37.004 (K))",
+      "page": "4"
+    },
+    {
+      "itemId": "dp-07",
+      "text": "\"For all Single Family Residential Duplexes... [each unit] shall not exceed... 1 bedroom.\" (Sec. 9.72.004 (I); Sec 7.37.004 (K))",
+      "page": "4"
+    },
+    {
+      "itemId": "dp-08",
+      "text": "\"For all residential units constructed upon parcel(s) subject to or created by an Urban Lot Split, the Total Floor Area shall not exceed... one bedroom.\" (Sec 7.37.004 (K))",
+      "page": "4"
+    },
+    {
+      "itemId": "dp-09",
+      "text": "Section 9.72.006 makes \"[a]ny person responsible for violating\" the Ordinance \"guilty or an infraction or a misdemeanor\", and Section 7.37.005 provides for additional civil penalties (as described by HCD).",
+      "page": "4"
+    }
+  ]
+}
