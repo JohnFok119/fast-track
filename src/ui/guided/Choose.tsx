@@ -86,8 +86,8 @@ export function PickCity({ runs, pathway, city, onPick, onNext, onBack }: CityPr
             <button key={`${r.city}-${r.pathway}`} type="button" className="ch-card ch-rise" style={at(i)} aria-pressed={fits && r.city === city} disabled={!fits} onClick={() => onPick(r.city)}>
               {fits && r.city === city ? <Check /> : null}
               <span className="ch-label">{r.name}</span>
-              <span className="ch-sub">{fits ? `${items.length} lines checked` : missing}</span>
-              {fits ? <span className={`cnt ch-cnt${no === 0 ? ' zero' : ''}`}>{no} state says no</span> : null}
+              <span className="ch-sub">{fits ? `${items.length} lines · ${no} the state says no to` : missing}</span>
+              {fits ? <span className={`cnt ch-cnt${no === 0 ? ' zero' : ''}`} aria-hidden="true">{no}</span> : null}
             </button>
           );
         })}

@@ -57,7 +57,7 @@ export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
       </header>
       <div className="gd-wrap">
         {step > 0 ? <Stepper step={step} reachable={reachable} answers={[path?.label ?? null, run?.name ?? null]} onGo={go} /> : null}
-        <main className={`gd-card enter-${dir}`} key={`${step}-${city ?? ''}`}>{body}</main>
+        <main className={`gd-card enter-${dir}`} key={step}>{body}</main>
       </div>
       {letterOpen && run ? <LetterSheet run={run} escalation={ESCALATION} onClose={closeLetter} /> : null}
     </div>
