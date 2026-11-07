@@ -1,0 +1,52 @@
+/* Step 3: checking reveal, summary, one line at a time. Tokens from src/index.css; keyframes prefixed rs-. */
+.rs-bar { height: 3px; background: var(--line); margin-top: 18px; overflow: hidden; }
+.rs-bar i { display: block; height: 100%; background: var(--brand); transition: width 0.26s cubic-bezier(0.16, 1, 0.3, 1); }
+.rs-list { list-style: none; margin: 14px 0 0; padding: 0; max-height: min(50vh, 420px); overflow-y: auto; display: flex; flex-direction: column; }
+.rs-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "t p" "i p"; column-gap: 12px; align-items: center; padding: 10px 2px; border-bottom: 1px solid var(--line); animation: rs-rise 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-row.done { animation: rs-settle 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-text { grid-area: t; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 0.93rem; color: var(--ink-2); min-width: 0; }
+.rs-id { grid-area: i; font-size: 0.72rem; color: var(--ink-muted); }
+.rs-row .pill, .rs-ph { grid-area: p; }
+.rs-ph { width: 110px; height: 22px; border-radius: 99px; background: linear-gradient(90deg, var(--paper-alt) 25%, var(--paper) 50%, var(--paper-alt) 75%); background-size: 200% 100%; animation: rs-shimmer 1.1s linear infinite; }
+.rs-pop { animation: rs-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-skip { margin-top: 14px; font-size: 0.85rem; color: var(--ink-muted); text-decoration: underline; text-underline-offset: 3px; }
+
+.rs-sum .gd-q { margin-top: 6px; }
+.rs-num { font-variant-numeric: tabular-nums; }
+.rs-stack { display: flex; height: 18px; gap: 2px; margin-top: 24px; }
+.rs-stack i { flex-basis: 0; min-width: 0; transform-origin: left; animation: rs-grow 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 18px; margin: 14px 0 0; padding: 0; }
+.rs-legend li { display: flex; align-items: center; gap: 6px; }
+.rs-src { margin: 20px 0 0; font-size: 0.9rem; color: var(--ink-muted); overflow-wrap: anywhere; }
+.rs-src a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.rs-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.rs-sum > * { animation: rs-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-sum > :nth-child(2) { animation-delay: 55ms; }
+.rs-sum > :nth-child(3) { animation-delay: 110ms; }
+.rs-sum > :nth-child(4) { animation-delay: 165ms; }
+.rs-sum > :nth-child(5) { animation-delay: 220ms; }
+
+.rs-walk-head { margin-top: 6px; font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+.rs-cells { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 12px; }
+.rs-cell { width: 18px; height: 18px; padding: 0; border: 0; cursor: pointer; transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+.rs-cell:hover { transform: translateY(-2px); }
+.rs-cell[aria-pressed="true"] { outline: 2px solid var(--ink); outline-offset: 2px; transform: scale(1.15); }
+.rs-detail { margin-top: 18px; min-width: 0; }
+.rs-detail .card.detail { border: 0; padding: 0; box-shadow: none; background: transparent; }
+.rs-slide-fwd { animation: rs-in-fwd 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-slide-back { animation: rs-in-back 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rs-walk-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.rs-walk-nav .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+@keyframes rs-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes rs-settle { from { transform: translateY(8px); } to { transform: none; } }
+@keyframes rs-pop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: none; } }
+@keyframes rs-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes rs-grow { from { transform: scaleX(0); } to { transform: none; } }
+@keyframes rs-in-fwd { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes rs-in-back { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-row, .rs-row.done, .rs-ph, .rs-pop, .rs-stack i, .rs-sum > *, .rs-slide-fwd, .rs-slide-back { animation: none; }
+  .rs-bar i, .rs-cell { transition: none; }
+}
