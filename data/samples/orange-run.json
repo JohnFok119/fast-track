@@ -1,6 +1,19 @@
 {
   "city": "orange",
   "name": "Orange",
+  "pathway": "SB9",
+  "contacts": [
+    {
+      "office": "Community Development Department (Assistant Community Development Director)",
+      "handles": "SB 9 urban lot split applications (the office HCD wrote to)",
+      "citation": {
+        "sourceId": "hcd-orange-2026-05-05",
+        "label": "HCD letter to the City of Orange (SB 9 urban lot split, ADU converted to a primary dwelling)",
+        "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
+        "checked": "2026-11-07"
+      }
+    }
+  ],
   "sourceLabel": "SAMPLE. City of Orange actions on an SB 9 urban lot split application filed 2025-10-08, as described in HCD's letter to the City of Orange (2026-05-05), pp. 1-2. HCD quotes no city code; these are HCD's descriptions. Not the city's current form.",
   "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf",
   "saved": "2026-11-07",

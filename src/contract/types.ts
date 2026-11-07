@@ -43,11 +43,59 @@ export interface Flag {
   note?: string;
 }
 
+/** The state law path a city's saved requirements belong to. */
+export const PATHWAYS = ['ADU', 'SB9'] as const;
+export type Pathway = (typeof PATHWAYS)[number];
+
+/** Who handles something, by role or office, from the city's own document or HCD's letter. Never a person's name. */
+export interface Contact {
+  office: string;
+  handles: string;
+  citation: Citation;
+}
+
+/** One thing the applicant can choose to build, with one sourced fact about it. */
+export interface BuildPath {
+  id: string;
+  label: string;
+  pathway: Pathway;
+  fact: string;
+  citation: Citation;
+}
+
+/** LAW: a legal deadline. ASSUMPTION: the event brief's typical estimate. SKIPPED: not needed on this path. */
+export const PHASE_KINDS = ['LAW', 'ASSUMPTION', 'SKIPPED', 'UNKNOWN'] as const;
+export type PhaseKind = (typeof PHASE_KINDS)[number];
+
+/** One bar of the idea-to-move-in timeline. */
+export interface Phase {
+  id: string;
+  label: string;
+  /** As the source states it, e.g. "60 days", or "UNKNOWN". */
+  value: string;
+  kind: PhaseKind;
+  /** Approximate length in months, for drawing the bar only. Null when unknown or skipped. */
+  drawMonths: number | null;
+  note?: string;
+  /** Present for LAW and SKIPPED phases. */
+  citation?: Citation;
+}
+
+/** A recommended next step. LAW steps carry a citation; ADVICE comes from the event brief's fast path. */
+export interface Step {
+  text: string;
+  kind: 'LAW' | 'ADVICE';
+  citation?: Citation;
+}
+
 /** The result of checking one city's saved requirements. */
 export interface CityRun {
   city: City;
   /** Display name for tabs and headings, e.g. "Dana Point". */
   name: string;
+  pathway: Pathway;
+  /** Who handles these requirements, by role, from sources. */
+  contacts: Contact[];
   sourceLabel: string;
   sourceUrl: string;
   /** Date the city's requirements were saved, YYYY-MM-DD. */

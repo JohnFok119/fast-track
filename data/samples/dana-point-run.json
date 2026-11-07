@@ -1,6 +1,19 @@
 {
   "city": "dana-point",
   "name": "Dana Point",
+  "pathway": "SB9",
+  "contacts": [
+    {
+      "office": "Community Development Department (Principal Planner)",
+      "handles": "The SB 9 ordinance HCD reviewed (the office HCD wrote to)",
+      "citation": {
+        "sourceId": "hcd-dana-point-2023-04-17",
+        "label": "HCD letter to the City of Dana Point (SB 9 ordinance, technical assistance)",
+        "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
+        "checked": "2026-11-07"
+      }
+    }
+  ],
   "sourceLabel": "SAMPLE. Requirements of Dana Point Ordinance 22-01 (its SB 9 ordinance) as quoted in HCD's letter to the City of Dana Point (2023-04-17), pp. 2-4. Not the city's current form.",
   "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf",
   "saved": "2026-11-07",

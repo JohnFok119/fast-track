@@ -1,6 +1,7 @@
 import { parseCityRun } from '../contract/parse';
 import { CITIES } from '../contract/types';
 import type { Citation, City, CityRun, Flag, Status } from '../contract/types';
+import { citeSource } from './cite';
 import { matchesRule } from './match';
 import type { CityInput, CityItem, Rule, Source } from './types';
 
@@ -48,6 +49,8 @@ export function runCity(city: CityInput, rules: Rule[], sources: Map<string, Sou
   const run = {
     city: city.city as City,
     name: city.name,
+    pathway: city.pathway,
+    contacts: city.contacts.map((c) => ({ office: c.office, handles: c.handles, citation: citeSource(sources, c.ref) })),
     sourceLabel: city.sourceLabel,
     sourceUrl: city.sourceUrl,
     saved: city.saved,

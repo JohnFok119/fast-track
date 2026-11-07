@@ -1,7 +1,7 @@
 // Runtime checks for data crossing the contract. Every JSON file (samples, rules output) passes through here,
 // so a flag without a source, or an UNKNOWN that claims a rule, fails loudly instead of reaching the screen.
-import { CITIES, STATUSES } from './types';
-import type { Citation, CitationMapping, CityRun, Clock, Flag } from './types';
+import { CITIES, PATHWAYS, PHASE_KINDS, STATUSES } from './types';
+import type { BuildPath, Citation, CitationMapping, CityRun, Clock, Contact, Flag, Phase, Step } from './types';
 
 type Obj = Record<string, unknown>;
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
@@ -94,6 +94,40 @@ export function parseFlag(raw: unknown, where: string): Flag {
   };
 }
 
+export function parseContact(raw: unknown, where: string): Contact {
+  const o = obj(raw, where);
+  return { office: str(o, 'office', where), handles: str(o, 'handles', where), citation: parseCitation(o.citation, `${where} citation`) };
+}
+
+export function parseBuildPath(raw: unknown, where: string): BuildPath {
+  const o = obj(raw, where);
+  return {
+    id: str(o, 'id', where),
+    label: str(o, 'label', where),
+    pathway: oneOf(o, 'pathway', PATHWAYS, where),
+    fact: str(o, 'fact', where),
+    citation: parseCitation(o.citation, `${where} citation`),
+  };
+}
+
+export function parsePhase(raw: unknown, where: string): Phase {
+  const o = obj(raw, where);
+  const kind = oneOf(o, 'kind', PHASE_KINDS, where);
+  const citation = o.citation === undefined ? undefined : parseCitation(o.citation, `${where} citation`);
+  if ((kind === 'LAW' || kind === 'SKIPPED') && citation === undefined) fail(where, `a ${kind} phase needs a citation`);
+  const drawMonths = o.drawMonths;
+  if (drawMonths !== null && (typeof drawMonths !== 'number' || drawMonths <= 0)) fail(where, '"drawMonths" must be a positive number or null');
+  return { id: str(o, 'id', where), label: str(o, 'label', where), value: str(o, 'value', where), kind, drawMonths, note: optStr(o, 'note', where), citation };
+}
+
+export function parseStep(raw: unknown, where: string): Step {
+  const o = obj(raw, where);
+  const kind = oneOf(o, 'kind', ['LAW', 'ADVICE'] as const, where);
+  const citation = o.citation === undefined ? undefined : parseCitation(o.citation, `${where} citation`);
+  if (kind === 'LAW' && citation === undefined) fail(where, 'a LAW step needs a citation');
+  return { text: str(o, 'text', where), kind, citation };
+}
+
 export function parseCityRun(raw: unknown): CityRun {
   const o = obj(raw, 'city run');
   const city = oneOf(o, 'city', CITIES, 'city run');
@@ -102,6 +136,8 @@ export function parseCityRun(raw: unknown): CityRun {
   return {
     city,
     name: str(o, 'name', where),
+    pathway: oneOf(o, 'pathway', PATHWAYS, where),
+    contacts: list(o, 'contacts', where).map((c, i) => parseContact(c, `${where} contact ${i}`)),
     sourceLabel: str(o, 'sourceLabel', where),
     sourceUrl: str(o, 'sourceUrl', where),
     saved: date(o, 'saved', where),

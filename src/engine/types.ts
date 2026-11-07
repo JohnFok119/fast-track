@@ -1,5 +1,6 @@
 // Engine-internal shapes. The shared contract lives in src/contract/types.ts.
 import type { CitationMapping, Status } from '../contract/types';
+import type { SourceRef } from './cite';
 
 export interface Source {
   id: string;
@@ -53,6 +54,9 @@ export interface CityInput {
   city: string;
   /** Display name, e.g. "Dana Point". */
   name: string;
+  /** Checked against PATHWAYS by parseCityRun. */
+  pathway: string;
+  contacts: { office: string; handles: string; ref: SourceRef }[];
   sourceLabel: string;
   sourceUrl: string;
   saved: string;

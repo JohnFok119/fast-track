@@ -1,6 +1,19 @@
 {
   "city": "irvine",
   "name": "Irvine",
+  "pathway": "ADU",
+  "contacts": [
+    {
+      "office": "Planning (the City's Planning Team)",
+      "handles": "The ADU Verification Form and the covenant on the current submittal list",
+      "citation": {
+        "sourceId": "irvine-adu-current",
+        "label": "City of Irvine web page: Project: Constructing an Accessory Dwelling Unit (ADU)",
+        "url": "https://cityofirvine.gov/node/69676",
+        "checked": "2026-11-07"
+      }
+    }
+  ],
   "sourceLabel": "SAMPLE. Requirements quoted in HCD's letter to the City of Irvine (2025-03-27): a city email of 2025-02-18 (p. 2) and HCD's description of the City's position (pp. 1, 3). Not the city's current form.",
   "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf",
   "saved": "2026-11-07",

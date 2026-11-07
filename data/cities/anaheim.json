@@ -1,6 +1,27 @@
 {
   "city": "anaheim",
   "name": "Anaheim",
+  "pathway": "ADU",
+  "contacts": [
+    {
+      "office": "Your assigned project Planner, Planning Services Division",
+      "handles": "Planning review and the JADU covenant documents",
+      "sourceId": "anaheim-adu-checklist-2025-11",
+      "page": "1"
+    },
+    {
+      "office": "Public Works Department",
+      "handles": "Sewer capacity verification",
+      "sourceId": "anaheim-adu-checklist-2025-11",
+      "page": "1"
+    },
+    {
+      "office": "City Attorney's office",
+      "handles": "Drafts the JADU owner occupancy covenant",
+      "sourceId": "anaheim-adu-checklist-2025-11",
+      "page": "1"
+    }
+  ],
   "sourceLabel": "Anaheim ADU Submittal Requirements Checklist (form Z412, NOV 2025), p. 1, quoted word for word. Contact details are removed and the form's own typos are kept.",
   "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
   "saved": "2026-11-07",

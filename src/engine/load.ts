@@ -157,9 +157,17 @@ export function loadCity(raw: unknown): CityInput {
     const item = obj(entry, where);
     return { itemId: str(item, 'itemId', where), text: str(item, 'text', where), page: optStr(item, 'page', where) };
   });
+  const contacts = arr(o, 'contacts', 'city file').map((entry, i) => {
+    const where = `city contact ${i}`;
+    const c = obj(entry, where);
+    const ref = { sourceId: str(c, 'sourceId', where), section: optStr(c, 'section', where), page: optStr(c, 'page', where) };
+    return { office: str(c, 'office', where), handles: str(c, 'handles', where), ref };
+  });
   return {
     city: str(o, 'city', 'city file'),
     name: str(o, 'name', 'city file'),
+    pathway: str(o, 'pathway', 'city file'),
+    contacts,
     sourceLabel: str(o, 'sourceLabel', 'city file'),
     sourceUrl: str(o, 'sourceUrl', 'city file'),
     saved: dateStr(o, 'saved', 'city file'),
