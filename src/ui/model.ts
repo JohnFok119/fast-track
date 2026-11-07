@@ -1,5 +1,5 @@
 // View helpers over the contract. No law lives here: verdict words come from src/letter/verdict.ts, flags from the engine.
-import type { Citation, CityRun, Flag, Status } from '../contract/types';
+import type { Citation, CityRun, Flag, Phase, Status } from '../contract/types';
 
 export interface Item {
   itemId: string;
@@ -45,4 +45,9 @@ export function citeMeta(c: Citation): string {
   return [c.page ? `Page ${c.page}` : null, c.section ? `Section ${c.section}` : null, `Checked ${day(c.checked)}`]
     .filter(Boolean)
     .join(' · ');
+}
+
+/** Months a timeline draws: the sum of drawMonths. SKIPPED and UNKNOWN phases have none, so they add nothing. */
+export function totalMonths(phases: Phase[]): number {
+  return phases.reduce((sum, p) => sum + (p.drawMonths ?? 0), 0);
 }
