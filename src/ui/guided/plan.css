@@ -1,0 +1,40 @@
+/* Guided steps 4-5: bars that grow, next steps that stagger in, contact cards, the letter panel. Tokens from src/index.css. */
+.pl-time { margin-top: 22px; }
+.pl-time .tl .fill { transform-origin: left; animation: pl-grow 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 140ms + 150ms); }
+@keyframes pl-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.pl-time .tl-notes, .pl-time .legend { animation: ft-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.9s both; }
+
+.pl-h { font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 12px; }
+.pl-more { margin-top: 22px; }
+.pl-next { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.pl-next .steps li { animation: pl-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.pl-next .steps li:nth-child(2) { animation-delay: 70ms; }
+.pl-next .steps li:nth-child(3) { animation-delay: 140ms; }
+.pl-next .steps li:nth-child(4) { animation-delay: 210ms; }
+.pl-next .steps li:nth-child(5) { animation-delay: 280ms; }
+.pl-next .steps li:nth-child(n+6) { animation-delay: 350ms; }
+@keyframes pl-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.pl-cards { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px; }
+.pl-c { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 14px; background: var(--paper); border: 1px solid var(--line); min-width: 0; }
+.pl-c.esc { background: var(--out-bg); border-color: var(--out-dot); grid-column: 1 / -1; }
+.pl-c .ic { width: 34px; height: 34px; border-radius: 99px; background: var(--card); display: grid; place-items: center; }
+.pl-c div { display: flex; flex-direction: column; gap: 3px; min-width: 0; overflow-wrap: anywhere; }
+.pl-c b { font-weight: 600; }
+.pl-handles { font-size: 0.88rem; color: var(--ink-2); }
+.pl-c a { font-size: 0.8rem; color: var(--ink-muted); }
+.pl-tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--out-fg); }
+
+.pl-letter { margin-top: 20px; padding: 20px; background: var(--ink); color: var(--paper); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.pl-letter .pl-h { font-size: 1.3rem; margin: 0; }
+.pl-letter p { margin: 0 0 12px; color: var(--paper-alt); line-height: 1.45; }
+.pl-letter .btn.solid { background: var(--brand); color: var(--ink); border-color: var(--brand); }
+
+.pl-check { margin-top: 20px; border-top: 1px solid var(--line); padding-top: 14px; }
+.pl-check summary { cursor: pointer; font-weight: 500; }
+.pl-check .card { border: 0; box-shadow: none; padding: 12px 0 0; background: transparent; }
+.pl-check .card .h { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-time .tl .fill, .pl-time .tl-notes, .pl-time .legend, .pl-next .steps li { animation: none; }
+}
