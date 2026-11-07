@@ -10,26 +10,37 @@ import type { Plugin, ViteDevServer } from 'vite';
 import type { CityRun } from '../src/contract/types';
 import { CITIES } from '../src/contract/types';
 import { buildPrompt, parseCliEnvelope, parseModelJson, ruleIdsFor, SYSTEM_PROMPT, validate } from '../src/assist/core';
-import { EXPLAIN_PATH, type ExplainRequest, type ExplainResponse } from '../src/assist/types';
+import { buildPlanPrompt, contactsFor, PLAN_SYSTEM_PROMPT, validatePlan, type PlanInput } from '../src/assist/plan-core';
+import {
+  EXPLAIN_PATH,
+  PLAN_PATH,
+  type ExplainRequest,
+  type ExplainResponse,
+  type PlanResponse,
+} from '../src/assist/types';
+import type { City, Contact, Phase, Step } from '../src/contract/types';
 
 const TIMEOUT_MS = 30_000;
+const PLAN_TIMEOUT_MS = 120_000;
 const MAX_BODY = 1_000;
 const ITEM_ID = /^[a-z0-9-]{1,40}$/;
 const FALLBACK: ExplainResponse = { fallback: true };
 
-const CLAUDE_ARGS = [
-  '-p',
-  '--output-format', 'json',
-  '--tools', '',
-  '--safe-mode',
-  '--no-session-persistence',
-  '--model', 'sonnet',
-  '--system-prompt', SYSTEM_PROMPT,
-];
+function claudeArgs(systemPrompt: string): string[] {
+  return [
+    '-p',
+    '--output-format', 'json',
+    '--tools', '',
+    '--safe-mode',
+    '--no-session-persistence',
+    '--model', 'sonnet',
+    '--system-prompt', systemPrompt,
+  ];
+}
 
-export function runClaude(prompt: string, timeoutMs = TIMEOUT_MS): Promise<string> {
+export function runClaude(prompt: string, systemPrompt = SYSTEM_PROMPT, timeoutMs = TIMEOUT_MS): Promise<string> {
   return new Promise((resolve, reject) => {
-    const child = spawn('claude', CLAUDE_ARGS, { stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
+    const child = spawn('claude', claudeArgs(systemPrompt), { stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });
     let out = '';
     let err = '';
     const timer = setTimeout(() => {
@@ -104,25 +115,101 @@ async function explainItem(server: ViteDevServer, req: ExplainRequest): Promise<
   return validate(parseModelJson(text), req.itemId, allowed);
 }
 
-function send(res: ServerResponse, body: ExplainResponse): void {
+interface AssistApi {
+  runCheck: (c: City) => CityRun;
+  getSteps: (p: CityRun['pathway']) => Step[];
+  getTimeline: (p: CityRun['pathway']) => Phase[];
+  getEscalation: () => Contact;
+}
+
+async function planCity(server: ViteDevServer, city: City): Promise<PlanResponse> {
+  const api = (await server.ssrLoadModule('/src/contract/api.ts')) as AssistApi;
+  const run = api.runCheck(city);
+  const base = { run, steps: api.getSteps(run.pathway), timeline: api.getTimeline(run.pathway), escalation: api.getEscalation() };
+  const cites = [
+    ...run.flags.flatMap((f) => f.citations),
+    ...contactsFor(base).map((c) => c.citation),
+    ...base.steps.flatMap((s) => (s.citation ? [s.citation] : [])),
+    ...base.timeline.flatMap((t) => (t.citation ? [t.citation] : [])),
+  ];
+  const excerpts = await loadExcerpts(server.config.root, [...new Set(cites.map((c) => c.sourceId))]);
+  const input: PlanInput = { ...base, excerpts };
+  const text = parseCliEnvelope(await runClaude(buildPlanPrompt(input), PLAN_SYSTEM_PROMPT, PLAN_TIMEOUT_MS));
+  if (text === null) throw new Error('claude returned an error result');
+  return validatePlan(parseModelJson(text), input);
+}
+
+function parseCity(body: string): City | null {
+  try {
+    const { city } = JSON.parse(body) as { city?: unknown };
+    return CITIES.includes(city as City) ? (city as City) : null;
+  } catch {
+    return null;
+  }
+}
+
+function send(res: ServerResponse, body: ExplainResponse | PlanResponse): void {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   res.end(JSON.stringify(body));
 }
 
+function postOnly(req: IncomingMessage, res: ServerResponse): boolean {
+  if (req.method === 'POST') return true;
+  res.statusCode = 405;
+  res.end();
+  return false;
+}
+
 export function claudeRoute(): Plugin {
   const cache = new Map<string, ExplainResponse>();
+  const plans = new Map<City, Promise<PlanResponse>>();
+
+  function plan(server: ViteDevServer, city: City): Promise<PlanResponse> {
+    const hit = plans.get(city);
+    if (hit) return hit;
+    const p = planCity(server, city)
+      .catch((err: unknown) => {
+        console.warn(`[plan] ${city}: falling back to the plain data`, err);
+        return { fallback: true } as const;
+      })
+      .then((r) => {
+        if (r.fallback) {
+          plans.delete(city);
+          console.warn(`[plan] ${city}: no valid plan from Claude, falling back`);
+        }
+        return r;
+      });
+    plans.set(city, p);
+    return p;
+  }
+
   return {
     name: 'fast-track-claude-route',
     apply: 'serve',
     configureServer(server) {
       const enabled = process.env.FT_CLAUDE === '1';
+      if (enabled) {
+        // Warm every city's plan at start so the live demo never waits.
+        server.httpServer?.once('listening', () => {
+          for (const city of CITIES) void plan(server, city);
+        });
+      }
+      server.middlewares.use(PLAN_PATH, (req, res) => {
+        if (!postOnly(req, res)) return;
+        void (async () => {
+          try {
+            if (!enabled) return send(res, FALLBACK);
+            const city = parseCity(await readBody(req));
+            send(res, city ? await plan(server, city) : FALLBACK);
+          } catch (err) {
+            console.warn('[plan] request failed, falling back', err);
+            send(res, FALLBACK);
+          }
+        })();
+      });
       server.middlewares.use(EXPLAIN_PATH, (req, res) => {
-        if (req.method !== 'POST') {
-          res.statusCode = 405;
-          res.end();
-          return;
-        }
+        if (!postOnly(req, res)) return;
         void (async () => {
           let key = 'unparsed';
           try {
