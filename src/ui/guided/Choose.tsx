@@ -1,8 +1,7 @@
 // The welcome card, step 1 (what you build) and step 2 (where). Every legal fact shown comes from props.
 import type { CSSProperties } from 'react';
 import type { BuildPath, City, CityRun, Pathway } from '../../contract/types';
-import { PATH_ICONS } from '../icons';
-import { countBy, day, groupItems } from '../model';
+import { BuildingIcon, PATH_ICONS } from '../icons';
 import './choose.css';
 
 const CHIPS = ['Every line checked against state law', 'Your legal clocks', 'A draft reply you send yourself'];
@@ -38,10 +37,9 @@ function Check() {
 interface PathProps { paths: BuildPath[]; pathId: string | null; onPick: (id: string) => void }
 
 export function PickPath({ paths, pathId, onPick }: PathProps) {
-  const sel = paths.find((p) => p.id === pathId);
   return (
     <div>
-      <div className="gd-kicker">Step 1 of 5</div>
+      <div className="gd-kicker">Step 1 of 6</div>
       <h1 className="gd-q">What do you want to build?</h1>
       <div className="ch-grid">
         {paths.map((p, i) => {
@@ -57,12 +55,6 @@ export function PickPath({ paths, pathId, onPick }: PathProps) {
           );
         })}
       </div>
-      {sel ? (
-        <div className="ch-reveal ch-fact" key={sel.id}>
-          <p>{sel.fact}</p>
-          <a href={sel.citation.url} target="_blank" rel="noopener noreferrer">{sel.citation.label}</a>
-        </div>
-      ) : null}
     </div>
   );
 }
@@ -70,37 +62,29 @@ export function PickPath({ paths, pathId, onPick }: PathProps) {
 interface CityProps { runs: CityRun[]; pathway: Pathway; city: City | null; onPick: (c: City) => void }
 
 export function PickCity({ runs, pathway, city, onPick }: CityProps) {
-  const sel = runs.find((r) => r.city === city && r.pathway === pathway);
   const missing = `No saved ${pathway === 'SB9' ? 'SB 9' : 'ADU'} list yet`;
   return (
     <div>
-      <div className="gd-kicker">Step 2 of 5</div>
+      <div className="gd-kicker">Step 2 of 6</div>
       <h1 className="gd-q">Where is the lot?</h1>
       <div className="ch-grid">
         {runs.map((r, i) => {
           const fits = r.pathway === pathway;
-          const items = fits ? groupItems(r) : [];
-          const no = countBy(items, 'CONFLICTS');
           return (
             <button key={`${r.city}-${r.pathway}`} type="button" className="ch-card ch-rise" style={at(i)} aria-pressed={fits && r.city === city} disabled={!fits} onClick={() => onPick(r.city)}>
               {fits && r.city === city ? <Check /> : null}
+              <span className="ch-icon"><BuildingIcon /></span>
               <span className="ch-label">{r.name}</span>
-              <span className="ch-sub">{fits ? `${items.length} lines · ${no} the state says no to` : missing}</span>
+              {fits ? null : <span className="ch-sub">{missing}</span>}
             </button>
           );
         })}
         <button type="button" className="ch-card ch-rise" style={at(runs.length)} disabled>
+          <span className="ch-icon"><BuildingIcon /></span>
           <span className="ch-label">Unincorporated county</span>
           <span className="ch-sub">Not covered yet</span>
         </button>
       </div>
-      {sel ? (
-        <div className="ch-reveal ch-fact" key={sel.city}>
-          <p>From: {sel.sourceLabel}</p>
-          <p className="muted">Saved {day(sel.saved)}</p>
-          <a href={sel.sourceUrl} target="_blank" rel="noopener noreferrer">Open the source</a>
-        </div>
-      ) : null}
     </div>
   );
 }
