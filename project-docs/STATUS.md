@@ -11,8 +11,8 @@ Updated at each checkpoint by Giuseppi's session. Due at 2:30 PM, 2026-11-07.
 | CP1: engine + screen merged | 12:45 | Engine side done (`60c9cf2`): `npm run check irvine` and `anaheim` give the expected flags. Waiting on Johnny's `feat/ui` and `feat/letter` |
 | Acceptance test 5 (fresh clone, no key) | 1:15 | Passes: clone, `npm ci`, verify (26 tests) and build all clean at 12:21 |
 | Rules v0.3 and SB 9 | 1:15 | Done (`79c4e3f`, `fc803d0`): four more Handbook ADU rules; five SB 9 rules for Dana Point and Orange, each scoped to its city. D4 (Irvine's current page) is in, paraphrased |
-| CP2: all Musts | 1:15 | Not started |
-| CP3: feature complete | 1:45 | Not started |
+| CP2: all Musts | 1:15 | Done (`5c335ec`): the five-step dashboard (what you build, where, what stands in the way, timeline and next steps, who to contact), letter drafts to the city and to HCD, paste check. Screen and letter moved to Giuseppi's session at 1:20 |
+| CP3: feature complete | 1:45 | Done (`d5119bf`, `b64a2e7`): fixes from two fresh-eyes reviews (every rule quote backed by its source file, mirror labels and rule limits on screen, headline counts only "state says no", HCD letter covers conflicts only) |
 | Freeze | 2:00 | |
 | Push gate, public | 2:15 | Needs an explicit yes |
 
@@ -20,7 +20,7 @@ Updated at each checkpoint by Giuseppi's session. Due at 2:30 PM, 2026-11-07.
 
 ```bash
 npm install
-npm run dev      # placeholder screen at localhost:5173 (the real screen comes with Johnny's merge)
+npm run dev      # the dashboard at localhost:5173
 npm run check irvine   # the engine's flags, with sources, in the terminal
 npm run verify   # type-check, lint, tests
 ```

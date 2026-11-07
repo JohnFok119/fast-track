@@ -1,18 +1,18 @@
 # Fast Track: 30-second demo video script
 
-One user, one problem, the tool working, the result. About 70 words of narration (69 below).
+One user, one problem, the tool working, the result. About 70 words of narration.
 
 | Time | On screen | Narration |
 |---|---|---|
-| 0:00-0:05 | Title card "Fast Track", then the Irvine tab. | "A homeowner in Irvine wants to build a backyard home." |
-| 0:05-0:11 | The requirement list, with the deed-restriction line highlighted. | "The city's checklist asks for a deed restriction. Is that allowed?" |
-| 0:11-0:20 | Click the line. The CONFLICTS pill. The detail shows Gov Code 66315, HCD's letter of 2025-03-27 and the checked date. | "Fast Track checks every line against state law. This one conflicts: the state told Irvine it is an extra standard the city cannot add. Source and date, right here." |
-| 0:20-0:26 | Open the draft response letter. Cursor on the Copy button. | "It drafts a response with the citations. She sends it herself." |
-| 0:26-0:30 | The "Prototype, not legal advice" notice. | "Fast Track sends nothing. Prototype, not legal advice." |
+| 0:00-0:05 | Title card "Fast Track", then the page: "Backyard home to rent", Irvine. | "You own a lot in Irvine and want to build a backyard home." |
+| 0:05-0:11 | The headline "2 of 4 lines the state says no to" and the four count cards. | "Fast Track checks every line of the city's requirements against state law." |
+| 0:11-0:19 | Click the deed-restriction line. The "State says no" box, Gov Code 66315, HCD's letter of 2025-03-27, the checked dates. | "The city wants a deed restriction. The state told Irvine it can't require one. Source and date, right here." |
+| 0:19-0:25 | Scroll to the timeline: black Law bars, striped Assumption bars. | "Your legal clocks: 60 days for the city to decide." |
+| 0:25-0:30 | Click "Write the letter", cursor on "Copy the text". Then the ribbon "Prototype. Not legal advice." | "A draft reply with every citation. You send it. Prototype, not legal advice." |
 
 ## Notes
 
-- TODO(freeze): confirm each shot against the final UI. Tab and button names may differ.
-- Show the "Prototype, not legal advice" notice on screen.
+- Record after the UI freeze (about 1:50) so the labels match.
+- Keep the "Prototype. Not legal advice." ribbon on screen.
 - Use only the made-up persona. Never show real names or addresses.
 - Backup footage: also record `npm run check irvine` in a terminal, in case a UI shot fails.

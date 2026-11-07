@@ -1,34 +1,35 @@
 # Fast Track: 3-minute live demo (finalists)
 
-Before going on stage: `npm run dev` is running at http://localhost:5173, the Irvine tab is open, and a terminal with `npm run check irvine` is ready in another window.
-
-TODO(freeze): confirm the click path below against the final UI, and fix any tab or button names.
+Before going on stage: `npm run dev` is running at http://localhost:5173 with the page freshly loaded (Backyard home to rent, Irvine), and a terminal with `npm run check irvine` is ready in another window.
 
 ## Click path and what to say
 
 | Time | Click | Say |
 |---|---|---|
-| 0:00-0:20 | Show the home screen. Point at the "Prototype, not legal advice" notice. | "Teachers and nurses cannot afford to live in Orange County. California has fast paths for small homes where a city must say yes if you follow the written rules. But each city writes its own checklist, and some do not match state law." |
-| 0:20-0:40 | Stay on the home screen. | "Our user is an applicant blocked by a rule the state says the city cannot impose: a homeowner, a small builder, or a nonprofit like Habitat for Humanity. Second, the city permit tech who wants to answer correctly. Our personas are made up from public research." |
-| 0:40-1:10 | Irvine tab. Scroll the requirement list. Point at the pills: CONFLICTS, OUTDATED_CITATION, UNKNOWN. | "This is Irvine's wording, as quoted in a state letter. Fast Track marks each line." |
-| 1:10-1:50 | Click the deed-restriction line. Read the detail: the statute, the HCD letter of 2025-03-27, the checked date. | "HCD, the state housing agency, told Irvine this covenant is 'an additional standard' that Gov Code 66315 bars. Every flag shows its source, a section and the date we checked it." |
-| 1:50-2:10 | Click the old-citation line, then the "60-day clock stops" line. | "Old section 65852.2 was renumbered. And this claim, that the clock stops, is UNKNOWN. We do not guess. A confident wrong answer is the worst outcome." |
-| 2:10-2:30 | Open the draft response letter. Point at the citations and the Copy button. | "It drafts a response with every citation. The applicant sends it. Fast Track never sends anything." |
-| 2:30-2:50 | Click the Dana Point tab. Point at the 800 square foot line and the one-bedroom line. | "For a builder like Habitat, SB 9 lets one single-family lot hold two homes. HCD told Dana Point its 800 square foot cap and one-bedroom limit break state law: 'The City must remove these requirements.' Adding a city is a data file, not new code." |
-| 2:50-3:00 | Back to the home screen. | "Fast Track: the state's letters, next to the city's checklist, for the people who have to fill it out." |
+| 0:00-0:20 | The home screen. Point at the black ribbon: "Prototype. Not legal advice." | "Teachers and nurses cannot afford to live in Orange County. California has fast paths for small homes: if you follow the written rules, the city must say yes. But each city writes its own checklist, and some do not match state law." |
+| 0:20-0:35 | Step 1, "What are you building?" Point at "Backyard home to rent" and its sourced fact. | "Our user owns the lot: a homeowner, a small builder, or a nonprofit like Habitat that already has the land. Step one: what are you building. Every fact carries its source." |
+| 0:35-0:50 | Step 2, "Where?" Irvine is picked. Point at the headline "2 of 4 lines the state says no to" and the four count cards. | "Step two: where. Irvine. Four lines from the city, checked against state law and HCD's letter to Irvine. Two the state says no to, one old law number, one we could not check." |
+| 0:50-1:20 | Click the first red line (irv-01, the deed restriction). Read the detail: "State says no", what the city wrote, Why, the two sources with checked dates. | "Irvine asked for a deed restriction on an ADU. HCD, the state housing agency, told Irvine that is 'an additional standard' Gov Code 66315 bars. Every verdict shows its source, a page or section, and the date we checked it." |
+| 1:20-1:35 | Click the grey line (irv-04, "Not checked"). | "This one claims the 60-day clock stops. We do not have a source that settles it, so it says Not checked. We never guess. A confident wrong answer is the worst outcome." |
+| 1:35-1:55 | Scroll to step 4, "Your timeline, plans to move-in". Point at the black Law bars, then a striped Assumption bar. | "Step four: your timeline. Black bars are legal deadlines with their source: 15 business days to say complete, 60 days to decide. Striped bars are estimates from the event brief, labelled as assumptions." |
+| 1:55-2:20 | Step 5, "Who to contact". Then click "Write the letter". Show "To the city", then the tab "If the city won't fix it: to HCD". Point at "Copy the text". | "Step five: who handles it, by office, and a draft letter with every citation. If the city won't fix it, a draft request to HCD's Housing Accountability Unit. The applicant sends it. Fast Track never sends anything." |
+| 2:20-2:45 | Close the letter. Step 1: click "Duplex or lot split (SB 9)". Dana Point opens. Click the 800 square foot line. | "For a builder like Habitat, SB 9 lets one single-family lot hold two homes. In 2023, HCD told Dana Point it must remove its 800 square foot cap and revise its one-bedroom limit. Adding a city is a data file, not new code." |
+| 2:45-3:00 | Scroll to "Check any city's text" at the bottom. | "And you can paste any city's wording to check it. Fast Track: the state's letters, next to the city's checklist, for the people who have to fill it out." |
 
 ## The 3 strongest points, by judging criterion
 
-- **Works (live, on real data, sources on screen).** The Irvine flags come from a real HCD letter. Every flag shows its URL, section and date. Unknown stays unknown. It runs from a clean clone with `npm install` and no API key.
-- **Impact and Innovation (the gap nobody fills).** Other tools check a plan against the city's code, or check an address. Fast Track checks the city's own checklist line by line against state law and HCD's letters to that city, then drafts the response. A nonprofit or permit tech can try it on a real checklist next month.
+- **Works (live, on real data, sources on screen).** The Irvine flags come from a real HCD letter, Anaheim's from the city's real November 2025 checklist. Every verdict shows its URL, page or section, and date. Unknown stays unknown. It runs from a clean clone with `npm install` and no API key.
+- **Impact and Innovation (the gap nobody fills).** Other tools check a plan against the city's code, or check an address. Fast Track checks the city's own checklist line by line against state law and HCD's letters to that city, lays out the legal clocks, names the office, and drafts the response. A nonprofit or permit tech can try it on a real checklist next month.
 - **Scale (one city is one data file).** The same state law applies in every California city. A new city needs its saved requirements and HCD letters, not new code. SB 9 already works for Dana Point and Orange, from HCD's letter to each.
 
 ## Likely questions
 
 - **"Does it use AI?"** Claude helped us research, plan and write the code, tests and docs. The app itself is deterministic today, so it cannot invent a law.
-- **"How much time does it save?"** We do not claim a number. The four-year timeline is the event brief's ASSUMPTION.
+- **"How much time does it save?"** We do not claim a number. The timeline shows the legal deadlines with sources, and the plans and build times are the event brief's estimates, labelled ASSUMPTION.
 - **"Is Irvine still doing this?"** Our evidence is from early 2025. Irvine's current ADU page still lists a covenant, but we have not seen its text, so we do not claim it is the same requirement.
-- **"Is the law text verified?"** Statute text was read on a mirror site. The output labels it "not yet checked on leginfo".
+- **"Is the law text verified?"** Statute text was read on a mirror site. The screen labels it "not yet checked on leginfo".
+- **"Why does Anaheim show no 'State says no'?"** Its checklist cites two renumbered sections, which we flag. Whether its JADU owner-occupancy covenant is allowed depends on facts our sources do not settle, so we do not call it.
+- **"Where does this sit between finding land and building?"** It starts once you own the lot: what you can build, what stands in the way, and the clocks. Finding land and funding are not included.
 
 ## If the UI fails
 
