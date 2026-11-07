@@ -1,5 +1,5 @@
 // Shapes shared by the explain route (vite-plugins/claude-route.ts) and the browser client.
-import type { Citation, City, Contact, Phase } from '../contract/types';
+import type { Citation, City, Contact, Phase } from '../contract/types.ts';
 
 export interface ExplainRequest {
   city: City;

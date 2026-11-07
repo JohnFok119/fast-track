@@ -7,18 +7,18 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin, ViteDevServer } from 'vite';
-import type { CityRun } from '../src/contract/types';
-import { CITIES } from '../src/contract/types';
-import { buildPrompt, parseCliEnvelope, parseModelJson, ruleIdsFor, SYSTEM_PROMPT, validate } from '../src/assist/core';
-import { buildPlanPrompt, contactsFor, PLAN_SYSTEM_PROMPT, validatePlan, type PlanInput } from '../src/assist/plan-core';
+import type { CityRun } from '../src/contract/types.ts';
+import { CITIES } from '../src/contract/types.ts';
+import { buildPrompt, numbersIn, parseCliEnvelope, parseModelJson, ruleIdsFor, SYSTEM_PROMPT, validate } from '../src/assist/core.ts';
+import { buildPlanPrompt, contactsFor, PLAN_SYSTEM_PROMPT, validatePlan, type PlanInput } from '../src/assist/plan-core.ts';
 import {
   EXPLAIN_PATH,
   PLAN_PATH,
   type ExplainRequest,
   type ExplainResponse,
   type PlanResponse,
-} from '../src/assist/types';
-import type { City, Contact, Phase, Step } from '../src/contract/types';
+} from '../src/assist/types.ts';
+import type { City, Contact, Phase, Step } from '../src/contract/types.ts';
 
 const TIMEOUT_MS = 30_000;
 const PLAN_TIMEOUT_MS = 120_000;
@@ -112,7 +112,7 @@ async function explainItem(server: ViteDevServer, req: ExplainRequest): Promise<
   const prompt = buildPrompt({ cityName: run.name, itemId: req.itemId, flags, excerpts });
   const text = parseCliEnvelope(await runClaude(prompt));
   if (text === null) throw new Error('claude returned an error result');
-  return validate(parseModelJson(text), req.itemId, allowed);
+  return validate(parseModelJson(text), req.itemId, allowed, new Set(numbersIn(JSON.stringify(flags))));
 }
 
 interface AssistApi {

@@ -78,7 +78,9 @@ UNKNOWN
 
 **To build it.** Claude helped us research the problem and the competitors, plan the build, write the code and the tests, and draft these docs. People on the team reviewed and merged the work.
 
-**Inside the tool.** Today the app makes no Claude calls. The engine is deterministic: it matches each requirement's wording against a hand-written rule set in `data/rules/`, and every rule points to a source. That is on purpose, so the tool cannot invent a law. No API key is needed to run it.
+**Inside the tool.** The engine is deterministic: it matches each requirement's wording against a hand-written rule set in `data/rules/`, and every rule points to a source. That is on purpose, so the tool cannot invent a law. No API key is needed to run it, and by default the app makes no Claude calls.
+
+**Optional, off by default.** Started with `FT_CLAUDE=1 npm run dev` on a machine logged in to Claude Code, the dev server adds two routes (`vite-plugins/claude-route.ts`, `src/assist/`) that run `claude -p` with no tools: one explains a flagged line in plain words, one orders the city's results into a plan. Claude never decides a flag and never writes a citation. Each point must name a rule the engine already matched for that line; text with a section number, a code name or a link is dropped; text with a number that is not already in the engine's data is dropped; and the citations shown always come from the engine. Anything that fails these checks falls back to the engine's own text. These routes are not shown on the main screen yet.
 
 **What a person checks.** The team read each rule against the HCD letter and Handbook text. The applicant should check the draft letter, and a professional should check anything they act on.
 

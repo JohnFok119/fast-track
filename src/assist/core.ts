@@ -1,8 +1,8 @@
 // Pure logic for the "Explain in plain words" feature: build the prompt, parse Claude's reply and validate it.
 // The rules engine decides every flag. Claude only explains, and every point it makes must hang on a rule ID the
 // engine already matched for that item. Claude never writes a citation; the UI shows the engine's citations.
-import type { Flag } from '../contract/types';
-import type { ExplainPoint, ExplainResponse } from './types';
+import type { Flag } from '../contract/types.ts';
+import type { ExplainPoint, ExplainResponse } from './types.ts';
 
 /** Longest excerpt, in characters, sent to Claude per source. */
 export const MAX_EXCERPT_CHARS = 16_000;
@@ -12,6 +12,11 @@ const CITATION_PATTERN = /\b\d{5}(?:\.\d+)?\b|\b65852\.\d+|gov(?:ernment)?\.?\s*
 
 export function containsCitation(text: string): boolean {
   return CITATION_PATTERN.test(text);
+}
+
+/** Every number written in the text, commas removed. */
+export function numbersIn(text: string): string[] {
+  return (text.match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((n) => n.replace(/,/g, ''));
 }
 
 /** Rule IDs the engine matched for one item. Empty when every flag on the item is UNKNOWN. */
@@ -88,8 +93,14 @@ export function parseModelJson(text: string): unknown {
   }
 }
 
-/** Keeps only points tied to an engine rule ID for this item and free of citations. */
-export function validate(raw: unknown, itemId: string, allowedRuleIds: string[]): ExplainResponse {
+/** Keeps only points tied to an engine rule ID for this item, free of citations, and with no number that is not
+ * already in the engine's data for the item. With no known numbers given, any point with a number is dropped. */
+export function validate(
+  raw: unknown,
+  itemId: string,
+  allowedRuleIds: string[],
+  knownNumbers: Set<string> = new Set(),
+): ExplainResponse {
   if (typeof raw !== 'object' || raw === null) return { fallback: true };
   const obj = raw as { itemId?: unknown; points?: unknown };
   if (obj.itemId !== itemId || !Array.isArray(obj.points)) return { fallback: true };
@@ -101,6 +112,7 @@ export function validate(raw: unknown, itemId: string, allowedRuleIds: string[])
     if (typeof ruleId !== 'string' || typeof text !== 'string') continue;
     const trimmed = text.trim();
     if (!allowed.has(ruleId) || trimmed === '' || containsCitation(trimmed)) continue;
+    if (!numbersIn(trimmed).every((n) => knownNumbers.has(n))) continue;
     points.push({ ruleId, text: trimmed });
   }
   return points.length > 0 ? { fallback: false, itemId, points } : { fallback: true };

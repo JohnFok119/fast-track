@@ -2,9 +2,9 @@
 // an ordered action plan, who to ask about each unchecked line, and the time the legal clocks protect.
 // Claude only orders and explains. Every entry must point at something the engine already produced, every citation
 // shown comes from the engine, and any number Claude writes must already appear in the data it was given.
-import type { Citation, CityRun, Contact, Phase, Step } from '../contract/types';
-import { containsCitation, MAX_EXCERPT_CHARS } from './core';
-import type { PlanAction, PlanGap, PlanResponse, PlanTime } from './types';
+import type { Citation, CityRun, Contact, Phase, Step } from '../contract/types.ts';
+import { containsCitation, MAX_EXCERPT_CHARS, numbersIn } from './core.ts';
+import type { PlanAction, PlanGap, PlanResponse, PlanTime } from './types.ts';
 
 export interface PlanInput {
   run: CityRun;
@@ -77,16 +77,14 @@ export function buildPlanPrompt(input: PlanInput): string {
 
 /** Every number written anywhere in the data Claude was given. */
 export function knownNumbers(input: PlanInput): Set<string> {
-  const text = JSON.stringify([input.run, input.steps, input.timeline, input.escalation]);
-  return new Set((text.match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((n) => n.replace(/,/g, '')));
+  return new Set(numbersIn(JSON.stringify([input.run, input.steps, input.timeline, input.escalation])));
 }
 
 function cleanText(raw: unknown, numbers: Set<string>): string | null {
   if (typeof raw !== 'string') return null;
   const text = raw.trim();
   if (text === '' || containsCitation(text)) return null;
-  const nums = (text.match(/\d[\d,]*(?:\.\d+)?/g) ?? []).map((n) => n.replace(/,/g, ''));
-  return nums.every((n) => numbers.has(n)) ? text : null;
+  return numbersIn(text).every((n) => numbers.has(n)) ? text : null;
 }
 
 function resolveRef(ref: string, input: PlanInput, contacts: Contact[]): Citation[] | null {

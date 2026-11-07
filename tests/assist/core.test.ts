@@ -50,6 +50,18 @@ describe('validate', () => {
     );
     expect(res).toEqual({ fallback: false, itemId, points: [{ ruleId: rule, text: 'Bring a site plan.' }] });
   });
+  it('drops points with a number that is not in the engine data for the item', () => {
+    const points = [
+      { ruleId: rule, text: 'The fee is about 500 dollars.' },
+      { ruleId: rule, text: 'Rentals of 30 days or longer are fine.' },
+    ];
+    expect(validate({ itemId, points }, itemId, allowed, new Set(['30']))).toEqual({
+      fallback: false,
+      itemId,
+      points: [{ ruleId: rule, text: 'Rentals of 30 days or longer are fine.' }],
+    });
+    expect(validate({ itemId, points }, itemId, allowed)).toEqual({ fallback: true });
+  });
   it('falls back when nothing valid is left, the item is wrong, or the shape is wrong', () => {
     expect(validate({ itemId, points: [{ ruleId: 'x', text: 'y' }] }, itemId, allowed)).toEqual({ fallback: true });
     expect(validate({ itemId: 'other', points: [{ ruleId: rule, text: 'ok' }] }, itemId, allowed)).toEqual({ fallback: true });
