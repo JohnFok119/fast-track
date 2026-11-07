@@ -56,7 +56,7 @@ Each item is flagged OK, conflicts with state law (with statute and letter), out
 
 - Whether any OC city has a published SB 684 application process. We could not verify this, so it is not claimed.
 - The 60-day ADU decision clock: done. Sourced to HCD ADU Handbook p. 11 (and p. 34 for the 15-business-day completeness check), Gov Code 66317(a). It applies when a home already exists on the lot. "Deemed approved" stays UNCONFIRMED until read on leginfo.
-- The "34 cities" count for Orange County: confirm against a current source.
+- The "34 cities" count for Orange County: done. The County of Orange homepage, its FY 2025-26 budget and OCCOG all say 34 incorporated cities (`data/sources/orange-county-34-cities.md`, checked 2026-11-07).
 - Whether the Irvine deed restriction is still being required today. Our evidence is the Feb 18, 2025 city email, so it may have changed.
 - Competitor features may have changed since 2026-11-07. Re-check the public pages before the pitch.
 - That nonprofit project managers and city permit techs would use the checker. This is untested with real users.

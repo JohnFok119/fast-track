@@ -158,7 +158,7 @@ Every number we did not take from a source is labelled ASSUMPTION here and in th
 - Test with a permit tech and a project manager.
 
 **With one more week:**
-- Add more cities. Each one is a data file with its saved requirements and HCD letters, not new code. The same state law applies in every California city.
+- Add more cities. Each one is a data file with its saved requirements and HCD letters, not new code. The same state law applies in every California city. The next two leads are HCD's ADU letters to Aliso Viejo (2024-06-25) and San Juan Capistrano (2024-12-06), which, by our one-line summaries, also flag ADU deed restrictions (`data/sources/hcd-other-oc-adu-letters.md`; not yet excerpted).
 - Show the legal deadlines next to observed timelines from state permit data.
 
 ## Data and privacy

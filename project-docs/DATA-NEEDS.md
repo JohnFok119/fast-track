@@ -72,16 +72,16 @@ pii_removed: yes
 |---|---|---|---|---|---|---|
 | D6 | HCD letter to Dana Point, 2023-04-17 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf) | The city limits HCD quotes (800 sq ft, one story, one bedroom on lot splits), HCD's finding, and each statute cited. | Sources agent (Giuseppi's session) | 1:15 | done: data/sources/ (see FINDINGS.md) |
 | D7 | HCD letter to the City of Orange, 2026-05-05 (SB 9) | [PDF](https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf) | What the city refused (an application filed 2025-10-08), HCD's finding, and each statute cited. | Sources agent (Giuseppi's session) | 1:15 | done: data/sources/ (see FINDINGS.md) |
-| D8 | SB 9 statutes, confirmed in a browser | leginfo: Gov 65852.21 and 66411.7 | The subsections that HCD's Dana Point and Orange letters rely on. | Ivy | 1:30 | todo |
-| D9 | Habitat for Humanity of Orange County | Their public website, and conversations at the event | What they build (for-sale homes? ADUs? where?), and any permitting pain they state publicly. Also anything Habitat staff tell you today about permits or delays. Write down what was said, never who said it. | Ivy | 1:30 | todo |
-| D10 | "34 cities in Orange County" | A current official source (County of Orange, or OCCOG, the Orange County Council of Governments) | The count and its URL. | Ivy | 1:45 | todo |
+| D8 | SB 9 statutes, confirmed in a browser | leginfo: Gov 65852.21 and 66411.7 | The subsections that HCD's Dana Point and Orange letters rely on. | Ivy | 1:30 | partial: `data/sources/california-sb9-statutes-2026.md` (Ivy), short excerpts from FindLaw and Justia mirrors. Not on leginfo, so no rule uses it yet |
+| D9 | Habitat for Humanity of Orange County | Their public website, and conversations at the event | What they build (for-sale homes? ADUs? where?), and any permitting pain they state publicly. Also anything Habitat staff tell you today about permits or delays. Write down what was said, never who said it. | Ivy | 1:30 | done: `data/sources/habitat-oc-2026.md` (Ivy), public pages only. No event conversations recorded |
+| D10 | "34 cities in Orange County" | A current official source (County of Orange, or OCCOG, the Orange County Council of Governments) | The count and its URL. | Ivy | 1:45 | done: `data/sources/orange-county-34-cities.md` (Ivy): County of Orange homepage and FY 2025-26 budget, and OCCOG |
 
 ### Nice to have (the scale story and the pitch)
 
 | ID | What | Where | Capture exactly | Owner | Needed by | Status |
 |---|---|---|---|---|---|---|
 | D11 | Competitor re-check | [Symbium Build](https://symbium.com/build), [SoCal ADU Tracker](https://socaladutracker.com/adu-permits/huntington-beach) | Anything new or different from our notes in `project-docs/problem-statement.md`. | Johnny or Ivy | 2:00 | todo |
-| D12 | Other HCD ADU letters to OC cities | HCD's online dashboard, browsed by hand (no scraping) | For each: city, date, URL, and a one-line finding. Just a list, no excerpts needed. | Ivy | 2:00 | todo |
+| D12 | Other HCD ADU letters to OC cities | HCD's online dashboard, browsed by hand (no scraping) | For each: city, date, URL, and a one-line finding. Just a list, no excerpts needed. | Ivy | 2:00 | done: `data/sources/hcd-other-oc-adu-letters.md` (Ivy): Aliso Viejo (2024-06-25) and San Juan Capistrano (2024-12-06), leads only |
 
 ## Known facts and corrections
 
