@@ -47,8 +47,7 @@ version: `project-docs/problem-statement.md`.
 ## 4. Who it is for (research, 2026-11-07)
 
 Four made-up personas were researched from public sources. Two pains hit all four: **trusting the rules** (city
-rules drift from state law) and **predicting the time**. The full research page is a private artifact the user owns:
-https://claude.ai/artifact/BaLMvQ3JMbZC2yQvW717vE
+rules drift from state law) and **predicting the time**. The full research page is private; its findings are summarized below.
 
 | Persona | What they want | Pain the checker solves | Other big pains (not the checker's job) |
 |---|---|---|---|
