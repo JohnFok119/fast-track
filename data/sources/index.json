@@ -65,8 +65,8 @@
     "file": null
   },
   {
-    "captured_by": "Giuseppi session (metadata only)",
-    "how": "metadata only; excerpt pending",
+    "captured_by": "Ivy",
+    "how": "original one-page PDF, quoted word for word (contact details removed)",
     "pii_removed": "yes",
     "id": "anaheim-adu-checklist-2025-11",
     "title": "Anaheim ADU Submittal Requirements Checklist (November 2025)",
@@ -75,7 +75,7 @@
     "published": "2025-11",
     "checked": "2026-11-07",
     "mirror": false,
-    "file": null
+    "file": "data/sources/anaheim-adu-checklist-2025-11.md"
   },
   {
     "id": "hcd-dana-point-2023-04-17",

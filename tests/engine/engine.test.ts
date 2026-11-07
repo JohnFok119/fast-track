@@ -27,15 +27,14 @@ describe('acceptance 1: Irvine deed restriction', () => {
 });
 
 describe('acceptance 2: outdated citations', () => {
-  it('maps ana-01 to 65852.22 with no exact section', () => {
-    const [flag] = flagsOf('anaheim', 'ana-01').filter((f) => f.status === 'OUTDATED_CITATION');
-    expect(flag?.mapping?.old).toBe('65852.22');
+  // ana-04 is the real Anaheim checklist (form Z412, NOV 2025): its JADU covenant cites both old sections.
+  it('maps ana-04 to 65852.22 with no exact section', () => {
+    const flag = flagsOf('anaheim', 'ana-04').find((f) => f.ruleId === 'cite-65852-22');
+    expect(flag?.status).toBe('OUTDATED_CITATION');
     expect(flag?.mapping?.exactSection).toBeNull();
   });
-  it('maps ana-02 to 65852.2', () => {
-    const [flag] = flagsOf('anaheim', 'ana-02');
-    expect(flag?.status).toBe('OUTDATED_CITATION');
-    expect(flag?.mapping?.old).toBe('65852.2');
+  it('maps ana-04 to 65852.2 as well, and to nothing else', () => {
+    expect(flagsOf('anaheim', 'ana-04').map((f) => f.ruleId)).toEqual(['cite-65852-2', 'cite-65852-22']);
   });
   it('does not fire the 65852.2 rule on 65852.22 alone', () => {
     const ids = flagsFor('See Gov Code 65852.22.').map((f) => f.ruleId);

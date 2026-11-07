@@ -103,7 +103,7 @@ All dates checked: 2026-11-07. The source list lives in `data/sources/index.json
 | Gov Code 66315 (no extra standards on ADUs) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66315 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Gov Code 66317 (review clocks) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Gov Code 66333 (JADU rules) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333 (read on a mirror site, leginfo check pending) | 2026-11-07 |
-| Anaheim ADU checklist, November 2025 | https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist (wording is a placeholder, see below) | 2026-11-07 |
+| Anaheim ADU checklist, November 2025 | https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist (form Z412, quoted word for word) | 2026-11-07 |
 | HCD letter to the City of Dana Point (2023-04-17, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf | 2026-11-07 |
 | HCD letter to the City of Orange (2026-05-05, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf | 2026-11-07 |
 | City of Irvine ADU page (submittal list, paraphrased) | https://cityofirvine.gov/node/69676 | 2026-11-07 |
@@ -119,7 +119,7 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 | HCD letter to Irvine and the HCD ADU Handbook (excerpts, names and addresses removed) | Real, working |
 | Irvine's requirements, as quoted in HCD's letter | Real, working |
 | Rule engine, flags, citations, CLI | Working. Deterministic, covered by automated tests that run on every push |
-| Anaheim's requirement wording | Placeholder: paraphrased from our notes until the checklist is saved from a browser. The source line on the Anaheim tab says so |
+| Anaheim's requirement wording | Real, working: the city's November 2025 checklist, word for word. Its JADU covenant still cites Gov Code 65852.2 and 65852.22, both renumbered |
 | Gov Code text for 66315, 66317 and 66333 | Read on a mirror site. Not yet checked on leginfo, and labelled so in the output |
 | "Deemed approved" if a city misses the 60 days | Unconfirmed: the Handbook disagrees with itself (p. 21 and p. 51). Shown as UNCONFIRMED, never as fact |
 | Draft response letter | Draft text only. There is no send path |
@@ -140,7 +140,7 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 
 **Next month, for a nonprofit or city:**
 - Add SB 9 checks that apply in every city, once the SB 9 statutes (Gov Code 65852.21 and 66411.7) are checked on leginfo.
-- Check the statute text on leginfo and save the real Anaheim checklist.
+- Check the statute text on leginfo.
 - Test with a permit tech and a project manager.
 
 **With one more week:**

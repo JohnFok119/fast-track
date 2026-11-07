@@ -23,6 +23,20 @@ Kept by Giuseppi's session.
   pathway, which or-02 carries.
 - **Not yet read:** the text of Gov 65852.21 and 66411.7 (D8). No statewide SB 9 rule until it is.
 
+### Verified (D3: Anaheim ADU checklist, form Z412, NOV 2025, `data/sources/anaheim-adu-checklist-2025-11.md`, Ivy)
+
+- One page, quoted word for word, contact details removed. It replaces the placeholder wording in
+  `data/cities/anaheim.json` (now ana-01 to ana-06).
+- The JADU owner occupancy covenant (ana-04) is "authorized by the California Government Code Sections 65852.2 and
+  65852.22". Both were renumbered (Handbook p. 49), so ana-04 gets two OUTDATED_CITATION flags.
+- **Open lead: the covenant itself may go too far.** The Handbook allows a JADU deed restriction limited to "only" a
+  ban on separate sale and the unit's size and attributes (p. 21, citing 66333(c)(1) and (c)(2)), and requires JADU
+  owner occupancy only when sanitation is shared (pp. 32-33). Anaheim's covenant requires owner occupancy "within one
+  of the dwelling units" for all JADUs. Not flagged yet: no rule until the 66333 text is read on leginfo (D5). The
+  rules exclude JADUs on purpose, so ana-04 shows only its outdated citations today.
+- Sewer verification, meter spot report, new address, title report and grant deed (ana-01 to 03, 05, 06) stay
+  UNKNOWN: no source we hold speaks to them.
+
 ### Partial (D4: Irvine's current ADU page, `data/sources/irvine-adu-current.md`, Ivy)
 
 - The page's submittal list still includes a "Covenant obtained from Planning, notarized and recorded". The capture

@@ -1,14 +1,39 @@
 {
   "city": "anaheim",
   "name": "Anaheim",
-  "sourceLabel": "Anaheim ADU Submittal Requirements Checklist, November 2025. PLACEHOLDER wording, paraphrased from the starter's notes until the checklist is saved (D3).",
+  "sourceLabel": "Anaheim ADU Submittal Requirements Checklist (form Z412, NOV 2025), p. 1, quoted word for word. Contact details are removed and the form's own typos are kept.",
   "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
   "saved": "2026-11-07",
   "items": [
-    { "itemId": "ana-01", "text": "JADU deed restriction required, citing Gov Code 65852.22." },
-    { "itemId": "ana-02", "text": "ADU standards cited as Gov Code 65852.2." },
-    { "itemId": "ana-03", "text": "Sewer verification for the ADU." },
-    { "itemId": "ana-04", "text": "Water meter location shown on the site plan." },
-    { "itemId": "ana-05", "text": "New address assigned for the ADU." }
+    {
+      "itemId": "ana-01",
+      "text": "SEWER DEFICIENCY VERIFICATION: Provide a copy of written verification from the Public Works Department verifying that there is sewer capacity to add an ADU to the property.",
+      "page": "1"
+    },
+    {
+      "itemId": "ana-02",
+      "text": "METER SPOT REPORT: Complete this step if you are adding a new electric meter, upgrading an existing meter, and/or relocating an existing meter. ... Include the meter spot report on your building plan check submittal.",
+      "page": "1"
+    },
+    {
+      "itemId": "ana-03",
+      "text": "NEW ADDRESS REQUEST: Complete this step prior to plan submittal to avoid any time delays. Submit a completed New Address Request Application and site plan.",
+      "page": "1"
+    },
+    {
+      "itemId": "ana-04",
+      "text": "OWNER OCCUPANCY COVENANT: AMC Section 18.38.015.110 requires the recordation of an owner occupancy covenant for all JADUs, authorized by the California Government Code Sections 65852.2 and 65852.22. The covenant for the JADU will be drafted by the City Attorney's office and must be recorded with the Orange County Clerk-Recorder's office prior to the issuance of a building permit.",
+      "page": "1"
+    },
+    {
+      "itemId": "ana-05",
+      "text": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: TITLE REPORT (Must have been prepared within the last 6 months of submittal date)",
+      "page": "1"
+    },
+    {
+      "itemId": "ana-06",
+      "text": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: GRANT DEED",
+      "page": "1"
+    }
   ]
 }

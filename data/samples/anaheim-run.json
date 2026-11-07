@@ -1,35 +1,35 @@
 {
   "city": "anaheim",
   "name": "Anaheim",
-  "sourceLabel": "SAMPLE. Anaheim ADU Submittal Requirements Checklist, November 2025. PLACEHOLDER wording, paraphrased from the starter's notes until the checklist is saved (D3).",
+  "sourceLabel": "SAMPLE. Anaheim ADU Submittal Requirements Checklist (form Z412, NOV 2025), p. 1, quoted word for word. Contact details are removed and the form's own typos are kept.",
   "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
   "saved": "2026-11-07",
   "sample": true,
   "flags": [
     {
       "itemId": "ana-01",
-      "itemText": "JADU deed restriction required, citing Gov Code 65852.22.",
-      "status": "OUTDATED_CITATION",
-      "ruleId": "cite-65852-22",
-      "why": "SB 477 (2024) renumbered the junior ADU law from Gov Code 65852.22 to sections 66333 through 66339. The Handbook maps it subsection by subsection, so there is no single replacement section.",
-      "citations": [
-        {
-          "sourceId": "adu-handbook-2026-03",
-          "label": "HCD ADU Handbook, March 2026 (renumbering)",
-          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
-          "page": "13, 49",
-          "checked": "2026-11-07"
-        }
-      ],
-      "mapping": {
-        "old": "65852.22",
-        "now": "66333 to 66339",
-        "exactSection": null
-      }
+      "itemText": "SEWER DEFICIENCY VERIFICATION: Provide a copy of written verification from the Public Works Department verifying that there is sewer capacity to add an ADU to the property.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
     },
     {
       "itemId": "ana-02",
-      "itemText": "ADU standards cited as Gov Code 65852.2.",
+      "itemText": "METER SPOT REPORT: Complete this step if you are adding a new electric meter, upgrading an existing meter, and/or relocating an existing meter. ... Include the meter spot report on your building plan check submittal.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "ana-03",
+      "itemText": "NEW ADDRESS REQUEST: Complete this step prior to plan submittal to avoid any time delays. Submit a completed New Address Request Application and site plan.",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "ana-04",
+      "itemText": "OWNER OCCUPANCY COVENANT: AMC Section 18.38.015.110 requires the recordation of an owner occupancy covenant for all JADUs, authorized by the California Government Code Sections 65852.2 and 65852.22. The covenant for the JADU will be drafted by the City Attorney's office and must be recorded with the Orange County Clerk-Recorder's office prior to the issuance of a building permit.",
       "status": "OUTDATED_CITATION",
       "ruleId": "cite-65852-2",
       "why": "SB 477 (2024) renumbered the ADU law from Gov Code 65852.2 to sections 66310 through 66342. The Handbook maps it subsection by subsection, so there is no single replacement section.",
@@ -49,22 +49,36 @@
       }
     },
     {
-      "itemId": "ana-03",
-      "itemText": "Sewer verification for the ADU.",
-      "status": "UNKNOWN",
-      "ruleId": null,
-      "citations": []
-    },
-    {
       "itemId": "ana-04",
-      "itemText": "Water meter location shown on the site plan.",
-      "status": "UNKNOWN",
-      "ruleId": null,
-      "citations": []
+      "itemText": "OWNER OCCUPANCY COVENANT: AMC Section 18.38.015.110 requires the recordation of an owner occupancy covenant for all JADUs, authorized by the California Government Code Sections 65852.2 and 65852.22. The covenant for the JADU will be drafted by the City Attorney's office and must be recorded with the Orange County Clerk-Recorder's office prior to the issuance of a building permit.",
+      "status": "OUTDATED_CITATION",
+      "ruleId": "cite-65852-22",
+      "why": "SB 477 (2024) renumbered the junior ADU law from Gov Code 65852.22 to sections 66333 through 66339. The Handbook maps it subsection by subsection, so there is no single replacement section.",
+      "citations": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "13, 49",
+          "checked": "2026-11-07"
+        }
+      ],
+      "mapping": {
+        "old": "65852.22",
+        "now": "66333 to 66339",
+        "exactSection": null
+      }
     },
     {
       "itemId": "ana-05",
-      "itemText": "New address assigned for the ADU.",
+      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: TITLE REPORT (Must have been prepared within the last 6 months of submittal date)",
+      "status": "UNKNOWN",
+      "ruleId": null,
+      "citations": []
+    },
+    {
+      "itemId": "ana-06",
+      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: GRANT DEED",
       "status": "UNKNOWN",
       "ruleId": null,
       "citations": []
