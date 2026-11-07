@@ -6,7 +6,9 @@ import { countBy, type Item } from '../model';
 import { LineWalk } from './LineWalk';
 import './results.css';
 
-interface Props { run: CityRun; items: Item[]; onLetter: () => void; onNext: () => void; onBack: () => void }
+interface Props { run: CityRun; items: Item[]; onNext: () => void; onBack: () => void }
+// STUB note: the letter is gone from the guided flow; a worker removes these buttons.
+const onLetter = () => undefined;
 
 const ORDER: Status[] = ['CONFLICTS', 'OUTDATED_CITATION', 'UNKNOWN', 'OK'];
 const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -82,7 +84,7 @@ function Summary({ run, items, onWalk, onLetter }: { run: CityRun; items: Item[]
   );
 }
 
-export function Results({ run, items, onLetter, onNext, onBack }: Props) {
+export function Results({ run, items, onNext, onBack }: Props) {
   const n = items.length;
   const [phase, setPhase] = useState<'check' | 'sum' | 'line'>('check');
   const [shown, setShown] = useState(() => (reduced() ? n : 0));

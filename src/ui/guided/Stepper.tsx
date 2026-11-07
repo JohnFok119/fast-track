@@ -1,5 +1,5 @@
 // The step rail: where you are, what you answered, and a way back to any step you have reached.
-export const STEP_LABELS = ['What you build', 'Where', 'What stands in the way', 'Your timeline', 'Who to contact'];
+export const STEP_LABELS = ['What you build', 'Where', 'What stands in the way', 'Time saved', 'Who to contact', 'Summary'];
 
 interface Props {
   step: number;

@@ -30,6 +30,11 @@ export function getTimeline(pathway: Pathway): Phase[] {
   return engine.getTimeline(pathway);
 }
 
+/** The event brief's typical path without a fast track (about four years). Every phase is an ASSUMPTION. */
+export function getBaseline(): Phase[] {
+  return engine.getBaseline();
+}
+
 export function getSteps(pathway: Pathway): Step[] {
   return engine.getSteps(pathway);
 }

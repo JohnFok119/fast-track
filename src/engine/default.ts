@@ -41,6 +41,10 @@ export function getTimeline(pathway: Pathway): Phase[] {
   return PATHS.timeline[pathway];
 }
 
+export function getBaseline(): Phase[] {
+  return PATHS.baseline;
+}
+
 export function getSteps(pathway: Pathway): Step[] {
   return PATHS.steps[pathway];
 }

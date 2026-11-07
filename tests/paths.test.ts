@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getEscalation, getPaths, getSteps, getTimeline, runCheck } from '../src/contract/api';
+import { getBaseline, getEscalation, getPaths, getSteps, getTimeline, runCheck } from '../src/contract/api';
 import { parsePhase } from '../src/contract/parse';
 import { CITIES, PATHWAYS } from '../src/contract/types';
 
@@ -18,6 +18,16 @@ describe('build paths, timeline and steps', () => {
       if (phase.kind === 'LAW' || phase.kind === 'SKIPPED') expect(phase.citation?.url).toMatch(/^https:\/\//);
       if (phase.kind === 'ASSUMPTION') expect(phase.note).toMatch(/estimate, not measured/);
       if (phase.kind === 'UNKNOWN') expect(phase.value).toBe('UNKNOWN');
+    }
+  });
+
+  it('baseline: the event brief\'s four typical phases, every one an ASSUMPTION with a note naming its source', () => {
+    const base = getBaseline();
+    expect(base.map((p) => p.id)).toEqual(['rezoning', 'entitlements', 'plans', 'build']);
+    for (const phase of base) {
+      expect(phase.kind).toBe('ASSUMPTION');
+      expect(phase.note).toMatch(/event brief.*not measured/);
+      expect(phase.drawMonths).toBeGreaterThan(0);
     }
   });
 

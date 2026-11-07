@@ -35,9 +35,9 @@ function Check() {
   );
 }
 
-interface PathProps { paths: BuildPath[]; pathId: string | null; onPick: (id: string) => void; onNext: () => void }
+interface PathProps { paths: BuildPath[]; pathId: string | null; onPick: (id: string) => void }
 
-export function PickPath({ paths, pathId, onPick, onNext }: PathProps) {
+export function PickPath({ paths, pathId, onPick }: PathProps) {
   const sel = paths.find((p) => p.id === pathId);
   return (
     <div>
@@ -63,14 +63,13 @@ export function PickPath({ paths, pathId, onPick, onNext }: PathProps) {
           <a href={sel.citation.url} target="_blank" rel="noopener noreferrer">{sel.citation.label}</a>
         </div>
       ) : null}
-      <div className="gd-nav"><span /><button type="button" className="btn solid" disabled={!pathId} onClick={onNext}>Continue</button></div>
     </div>
   );
 }
 
-interface CityProps { runs: CityRun[]; pathway: Pathway; city: City | null; onPick: (c: City) => void; onNext: () => void; onBack: () => void }
+interface CityProps { runs: CityRun[]; pathway: Pathway; city: City | null; onPick: (c: City) => void }
 
-export function PickCity({ runs, pathway, city, onPick, onNext, onBack }: CityProps) {
+export function PickCity({ runs, pathway, city, onPick }: CityProps) {
   const sel = runs.find((r) => r.city === city && r.pathway === pathway);
   const missing = `No saved ${pathway === 'SB9' ? 'SB 9' : 'ADU'} list yet`;
   return (
@@ -102,10 +101,6 @@ export function PickCity({ runs, pathway, city, onPick, onNext, onBack }: CityPr
           <a href={sel.sourceUrl} target="_blank" rel="noopener noreferrer">Open the source</a>
         </div>
       ) : null}
-      <div className="gd-nav">
-        <button type="button" className="btn" onClick={onBack}>Back</button>
-        <button type="button" className="btn solid" disabled={!sel} onClick={onNext}>{sel ? `Check ${sel.name}` : 'Continue'}</button>
-      </div>
     </div>
   );
 }

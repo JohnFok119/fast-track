@@ -110,7 +110,7 @@
 .tl-notes b { color: var(--ink-2); font-weight: 600; }
 .tl .fill { position: absolute; inset: 0 auto 0 0; }
 .k-LAW { background: var(--ink); }
-.k-ASSUMPTION { background: repeating-linear-gradient(-45deg, var(--paper-alt) 0 6px, #d6d1c2 6px 12px); }
+.k-ASSUMPTION { background: repeating-linear-gradient(-45deg, var(--paper-alt) 0 6px, #d3d8de 6px 12px); }
 .k-SKIPPED { border: 1.5px dashed var(--ok-dot); background: transparent; }
 .k-UNKNOWN { background: var(--unk-bg); }
 .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-muted); margin-top: 10px; }

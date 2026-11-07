@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "about": "What an applicant can choose to build, the idea-to-move-in timeline per pathway, recommended steps, and where to escalate. LAW and SKIPPED entries cite data/sources/index.json. ASSUMPTION entries are the event brief's typical estimates (starter repo, lanes/2-clear-it/data/timeline.json), not measurements. drawMonths is only for drawing bar lengths. Written by Giuseppi's session.",
+  "about": "What an applicant can choose to build, the idea-to-move-in timeline per pathway, recommended steps, and where to escalate. LAW and SKIPPED entries cite data/sources/index.json. ASSUMPTION entries are the event brief's typical estimates (starter repo, lanes/2-clear-it/data/timeline.json), not measurements. drawMonths is only for drawing bar lengths. Written by Giuseppi's session. baseline is the event brief's typical path without a fast track (about four years in total), all ASSUMPTION.",
   "paths": [
     {
       "id": "adu-rent",
@@ -157,5 +157,39 @@
     "handles": "Requests for technical assistance when a city's handling conflicts with state housing law. HCD's 2026 letter to Orange began with such a request from an applicant's consultant.",
     "sourceId": "hcd-orange-2026-05-05",
     "page": "1, 2"
-  }
+  },
+  "baseline": [
+    {
+      "id": "rezoning",
+      "label": "Rezoning",
+      "value": "About 1 year",
+      "kind": "ASSUMPTION",
+      "drawMonths": 12,
+      "note": "The event brief's typical estimate for a new affordable home (starter repo, lanes/2-clear-it/data/timeline.json), not measured."
+    },
+    {
+      "id": "entitlements",
+      "label": "Entitlements and hearings",
+      "value": "About 1 year",
+      "kind": "ASSUMPTION",
+      "drawMonths": 12,
+      "note": "The event brief's typical estimate for a new affordable home (starter repo, lanes/2-clear-it/data/timeline.json), not measured."
+    },
+    {
+      "id": "plans",
+      "label": "Plans",
+      "value": "6 to 12 months",
+      "kind": "ASSUMPTION",
+      "drawMonths": 9,
+      "note": "The event brief's typical estimate for a new affordable home (starter repo, lanes/2-clear-it/data/timeline.json), not measured."
+    },
+    {
+      "id": "build",
+      "label": "Build",
+      "value": "About 1 year",
+      "kind": "ASSUMPTION",
+      "drawMonths": 12,
+      "note": "The event brief's typical estimate for a new affordable home (starter repo, lanes/2-clear-it/data/timeline.json), not measured."
+    }
+  ]
 }

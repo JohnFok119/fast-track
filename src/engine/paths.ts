@@ -10,6 +10,8 @@ type Obj = Record<string, unknown>;
 export interface PathsData {
   paths: BuildPath[];
   timeline: Record<Pathway, Phase[]>;
+  /** The event brief's typical path without a fast track. Every phase is an ASSUMPTION. */
+  baseline: Phase[];
   steps: Record<Pathway, Step[]>;
   escalation: Contact;
 }
@@ -44,6 +46,7 @@ export function loadPaths(raw: unknown, sources: Map<string, Source>): PathsData
   return {
     paths: asList(o.paths, 'path').map((p, i) => parseBuildPath(withCitation(p, sources), `path ${i}`)),
     timeline: perPathway(o.timeline, 'timeline', (e, w) => parsePhase(withCitation(e, sources), w)),
+    baseline: asList(o.baseline, 'baseline').map((e, i) => parsePhase(withCitation(e, sources), `baseline ${i}`)),
     steps: perPathway(o.steps, 'steps', (e, w) => parseStep(withCitation(e, sources), w)),
     escalation: parseContact(withCitation(asObj(o.escalation, 'escalation'), sources), 'escalation'),
   };
