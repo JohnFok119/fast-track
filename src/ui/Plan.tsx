@@ -5,7 +5,7 @@ import { citeMeta } from './model';
 
 const KIND_WORD: Record<Phase['kind'], string> = { LAW: 'Law', ASSUMPTION: 'Assumption', SKIPPED: 'Skipped', UNKNOWN: 'Unknown' };
 
-function PhaseNotes({ phases }: { phases: Phase[] }) {
+export function PhaseNotes({ phases }: { phases: Phase[] }) {
   // Assumption rows are explained once, in the legend.
   const noted = phases.filter((p) => p.kind !== 'ASSUMPTION' && (p.note || p.citation));
   return (
@@ -19,7 +19,7 @@ function PhaseNotes({ phases }: { phases: Phase[] }) {
   );
 }
 
-function Timeline({ phases }: { phases: Phase[] }) {
+export function Timeline({ phases }: { phases: Phase[] }) {
   const longest = Math.max(...phases.map((p) => p.drawMonths ?? 0), 1);
   return (
     <div className="tl">
@@ -42,7 +42,7 @@ function Timeline({ phases }: { phases: Phase[] }) {
   );
 }
 
-function Legend() {
+export function Legend() {
   return (
     <div className="legend">
       <span><i className="k-LAW" />Law: the city's legal deadline</span>
@@ -53,7 +53,7 @@ function Legend() {
   );
 }
 
-function Steps({ steps, pushBack }: { steps: Step[]; pushBack: number }) {
+export function Steps({ steps, pushBack }: { steps: Step[]; pushBack: number }) {
   const all = [...(pushBack ? [{ text: `Clear the ${pushBack} flagged line${pushBack === 1 ? '' : 's'} first: send the letter.`, kind: 'ADVICE' as const }] : []), ...steps];
   return (
     <ol className="steps">
@@ -68,7 +68,7 @@ function Steps({ steps, pushBack }: { steps: Step[]; pushBack: number }) {
   );
 }
 
-function Who({ contacts, escalation }: { contacts: Contact[]; escalation: Contact }) {
+export function Who({ contacts, escalation }: { contacts: Contact[]; escalation: Contact }) {
   const card = (c: Contact, esc: boolean) => (
     <div className={`c ${esc ? 'esc' : ''}`} key={c.office}>
       <span className="ic">{esc ? <StateIcon /> : <BuildingIcon />}</span>

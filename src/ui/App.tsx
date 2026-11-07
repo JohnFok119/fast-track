@@ -1,8 +1,8 @@
 // Fast Track dashboard: what you are building, where, what stands in the way, your timeline, and who to contact.
 import { useCallback, useMemo, useState } from 'react';
-import { getEscalation, getPaths, getSteps, getTimeline, runCheck } from '../contract/api';
-import { CITIES } from '../contract/types';
+import { getSteps, getTimeline } from '../contract/api';
 import type { City, Status } from '../contract/types';
+import { ESCALATION, PATHS, RUNS } from './data';
 import { LetterSheet } from './LetterSheet';
 import { groupItems } from './model';
 import { Overview } from './Overview';
@@ -12,11 +12,7 @@ import { Detail, RequirementList } from './Requirements';
 import { Side } from './Side';
 import './ft.css';
 
-const RUNS = CITIES.map((c) => runCheck(c));
-const PATHS = getPaths();
-const ESCALATION = getEscalation();
-
-export function App() {
+export function App({ onGuided }: { onGuided?: () => void }) {
   const [pathId, setPathId] = useState(PATHS[0]?.id ?? '');
   const [city, setCity] = useState<City | null>('irvine');
   const [filter, setFilter] = useState<Status | null>(null);
@@ -47,6 +43,7 @@ export function App() {
           <span className="mark">FAST TRACK</span>
           <span className="muted" style={{ fontSize: '0.92rem' }}>You own the lot. See what to submit, what to push back on, and your legal clocks.</span>
         </div>
+        {onGuided ? <button type="button" className="btn" onClick={onGuided}>Guided view</button> : null}
       </header>
       <div className="shell">
         <Side paths={PATHS} runs={RUNS} pathId={pathId} city={run ? run.city : null} onPath={choosePath} onCity={chooseCity} />
