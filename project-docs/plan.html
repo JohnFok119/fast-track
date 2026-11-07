@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en" data-theme="apple">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fast Track build plan</title>
+<style>
+/* Personal Lavish look (giuseppi): Apple-like. */
+html[data-theme="apple"] {
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f5f7;
+  --color-base-300: #e8e8ed;
+  --color-base-content: #1d1d1f;
+  --color-primary: #0071e3;
+  --color-primary-content: #ffffff;
+  --color-secondary: #6e6e73;
+  --color-secondary-content: #ffffff;
+  --color-accent: #5e5ce6;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1d1d1f;
+  --color-neutral-content: #f5f5f7;
+  --color-info: #0071e3;
+  --color-info-content: #ffffff;
+  --color-success: #34c759;
+  --color-success-content: #ffffff;
+  --color-warning: #ff9f0a;
+  --color-warning-content: #1d1d1f;
+  --color-error: #ff3b30;
+  --color-error-content: #ffffff;
+  --radius-selector: 9999px;
+  --radius-field: 0.75rem;
+  --radius-box: 1.125rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+@media (prefers-color-scheme: dark) {
+  html[data-theme="apple"] {
+    color-scheme: dark;
+    --color-base-100: #000000;
+    --color-base-200: #1d1d1f;
+    --color-base-300: #2c2c2e;
+    --color-base-content: #f5f5f7;
+    --color-primary: #2997ff;
+    --color-primary-content: #000000;
+    --color-secondary: #a1a1a6;
+    --color-secondary-content: #000000;
+    --color-accent: #7d7aff;
+    --color-accent-content: #000000;
+    --color-neutral: #f5f5f7;
+    --color-neutral-content: #1d1d1f;
+    --color-info: #64d2ff;
+    --color-info-content: #000000;
+    --color-success: #30d158;
+    --color-success-content: #000000;
+    --color-warning: #ffd60a;
+    --color-warning-content: #000000;
+    --color-error: #ff453a;
+    --color-error-content: #000000;
+  }
+}
+html[data-theme="apple"] body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+html[data-theme="apple"] :where(h1, h2, h3, .display) {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+html[data-theme="apple"] .btn { border-radius: 980px; font-weight: 500; }
+html[data-theme="apple"] .badge { font-weight: 500; height: auto !important; min-height: 1.5rem; padding-block: 0.15em; flex-shrink: 0; }
+html[data-theme="apple"] .badge-xs { min-height: 1rem; }
+html[data-theme="apple"] .badge-sm { min-height: 1.25rem; }
+html[data-theme="apple"] .badge-lg { min-height: 1.75rem; }
+html[data-theme="apple"] .badge-xl { min-height: 2rem; }
+html[data-theme="apple"] .table :where(th, td) { border-color: color-mix(in srgb, var(--color-base-content) 10%, transparent); }
+html[data-theme="apple"] .table :where(thead th) { color: var(--color-secondary); font-weight: 600; text-transform: none; letter-spacing: 0; }
+html[data-theme="apple"] .card-border { border-color: color-mix(in srgb, var(--color-base-content) 8%, transparent); }
+html[data-theme="apple"] .card-body :where(p) { flex-grow: 0; }
+html[data-theme="apple"] .label { white-space: normal; align-items: flex-start; }
+html[data-theme="apple"] .mockup-code { background-color: #1d1d1f; color: #f5f5f7; }
+
+/* Readable soft warning alerts (orange text on cream is too faint) */
+html[data-theme="apple"] .alert-soft.alert-warning { color: var(--color-base-content); border: 1px solid color-mix(in srgb, var(--color-warning) 40%, transparent); }
+
+/* Table badges and short ID cells never break mid-word */
+.table .badge { white-space: nowrap; overflow-wrap: normal; }
+#split-table td:first-child { white-space: nowrap; overflow-wrap: normal; }
+
+/* Johnny's lane colour (Apple teal) */
+html[data-theme="apple"] { --jt: #30b0c7; }
+@media (prefers-color-scheme: dark) { html[data-theme="apple"] { --jt: #40c8e0; } }
+.s-johnny { fill: color-mix(in srgb, var(--jt) 18%, var(--color-base-100)); stroke: var(--jt); }
+.jt-chip { background: color-mix(in srgb, var(--jt) 16%, var(--color-base-100)); color: var(--color-base-content); border: 1px solid var(--jt); }
+
+/* Realistic mock */
+#mock .fl { display: none; }
+#mock.show-fl .fl { display: inline-flex; }
+#mock .row-btn { width: 100%; text-align: left; border-radius: 14px; padding: .75rem .9rem; background: var(--color-base-200); border: 1px solid transparent; }
+#mock .row-btn[aria-pressed="true"] { border-color: var(--color-primary); background: color-mix(in srgb, var(--color-primary) 7%, var(--color-base-100)); }
+#mock .pill { display: inline-flex; align-items: center; gap: .3rem; font-size: .68rem; font-weight: 600; letter-spacing: .03em; padding: .1rem .55rem; border-radius: 999px; white-space: nowrap; }
+#mock .pill::before { content: ""; width: .45rem; height: .45rem; border-radius: 999px; background: currentColor; }
+#mock .p-CONFLICTS { color: var(--color-error); background: color-mix(in srgb, var(--color-error) 12%, transparent); }
+#mock .p-OUTDATED_CITATION { color: color-mix(in srgb, var(--color-warning) 75%, var(--color-base-content)); background: color-mix(in srgb, var(--color-warning) 16%, transparent); }
+#mock .p-UNKNOWN { color: var(--color-secondary); background: color-mix(in srgb, var(--color-secondary) 14%, transparent); }
+#mock .p-OK { color: var(--color-success); background: color-mix(in srgb, var(--color-success) 14%, transparent); }
+#mock .letter { font-family: ui-serif, Georgia, serif; white-space: pre-wrap; font-size: .84rem; line-height: 1.55; background: var(--color-base-200); border-radius: 12px; padding: 1rem 1.1rem; max-height: 22rem; overflow: auto; }
+#mock .hair-b { border-bottom: 1px solid color-mix(in srgb, var(--color-base-content) 10%, transparent); }
+#mock a { color: var(--color-primary); }
+
+/* Layout safety */
+*, *::before, *::after { box-sizing: border-box; }
+:where(.grid, .flex) > * { min-width: 0; }
+:where(p, h1, h2, h3, h4, li, dd, td, th, .badge) { overflow-wrap: anywhere; }
+
+/* Page */
+body { background: var(--color-base-100); color: var(--color-base-content); }
+.eyebrow { font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--color-secondary); }
+.lede { font-size: 1.125rem; color: var(--color-secondary); }
+.tile { background: var(--color-base-200); border-radius: var(--radius-box); }
+.hair { border-top: 1px solid color-mix(in srgb, var(--color-base-content) 10%, transparent); }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8125rem; }
+.callout { display: inline-flex; align-items: center; justify-content: center; min-width: 1.6rem; height: 1.6rem; padding: 0 .35rem; border-radius: 999px; background: var(--color-primary); color: var(--color-primary-content); font-size: .7rem; font-weight: 700; }
+.figure-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.figure-scroll > svg { min-width: 860px; width: 100%; height: auto; display: block; }
+pre.tree { background: var(--color-base-200); border-radius: var(--radius-box); padding: 1rem 1.25rem; overflow-x: auto; line-height: 1.6; }
+pre.tree .c { color: var(--color-secondary); }
+
+/* SVG tokens */
+svg text { font-family: inherit; }
+.s-txt { fill: var(--color-base-content); font-size: 11px; }
+.s-txt-md { fill: var(--color-base-content); font-size: 13px; font-weight: 600; }
+.s-txt-lg { fill: var(--color-base-content); font-size: 14px; font-weight: 600; }
+.s-muted { fill: var(--color-secondary); font-size: 11px; }
+.s-head { fill: var(--color-secondary); font-size: 12px; font-weight: 600; letter-spacing: .05em; }
+.s-grid { stroke: color-mix(in srgb, var(--color-base-content) 10%, transparent); stroke-width: 1; }
+.s-phase { fill: var(--color-base-200); stroke: color-mix(in srgb, var(--color-base-content) 12%, transparent); }
+.s-opus { fill: color-mix(in srgb, var(--color-primary) 16%, var(--color-base-100)); stroke: var(--color-primary); }
+.s-sonnet { fill: color-mix(in srgb, var(--color-accent) 16%, var(--color-base-100)); stroke: var(--color-accent); }
+.s-haiku { fill: color-mix(in srgb, var(--color-secondary) 16%, var(--color-base-100)); stroke: var(--color-secondary); }
+.s-human { fill: color-mix(in srgb, var(--color-warning) 22%, var(--color-base-100)); stroke: var(--color-warning); }
+.s-cp { fill: var(--color-success); }
+.s-gate { fill: var(--color-error); }
+.s-gate-line { stroke: var(--color-error); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.s-box { fill: var(--color-base-100); stroke: color-mix(in srgb, var(--color-base-content) 22%, transparent); }
+.s-box-tint { fill: var(--color-base-200); stroke: color-mix(in srgb, var(--color-base-content) 14%, transparent); }
+.s-dash { fill: none; stroke: var(--color-accent); stroke-dasharray: 5 4; }
+.s-dash-box { fill: color-mix(in srgb, var(--color-accent) 8%, var(--color-base-100)); stroke: var(--color-accent); stroke-dasharray: 5 4; }
+.s-arrow { stroke: var(--color-base-content); stroke-width: 1.5; fill: none; }
+.s-arrow-head { fill: var(--color-base-content); }
+.s-stop { stroke: var(--color-error); stroke-width: 3; }
+.s-stop-txt { fill: var(--color-error); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+.s-num { fill: var(--color-primary); }
+.s-num-txt { fill: var(--color-primary-content); font-size: 11px; font-weight: 700; }
+.s-valid { fill: var(--color-success); }
+
+/* What-solves-what map */
+#map .link { fill: none; stroke: color-mix(in srgb, var(--color-base-content) 30%, transparent); stroke-width: 1.5; transition: stroke .15s, opacity .15s; }
+#map .link.partial { stroke-dasharray: 5 4; }
+#map .node rect { transition: stroke .15s, fill .15s; }
+#map .node { cursor: pointer; outline: none; }
+#map.focus .link { opacity: .12; }
+#map.focus .link.on { opacity: 1; stroke: var(--color-primary); stroke-width: 2.25; }
+#map.focus .node { opacity: .35; }
+#map.focus .node.on { opacity: 1; }
+#map .node.on rect { stroke: var(--color-primary); stroke-width: 2; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css" integrity="sha384-/NNZlK8J6WoD6FfmmLzhqE1x/aTnlIJzc75uc+dFz8aI+/sD2ArUirQhs3hbeqBe" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css" integrity="sha384-ai6dM6tUdx0lUGOHd8x3eGevvDdj0p+CPoJp7Ve+h+kRkt08XtqX/g3a+1cPYKCm" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js" integrity="sha384-v5YF9xS+gLRWdvrQ0u/WRbCkjSIH0NjHIPe8tBL1ZRrmI7PiSH6LLdzs0aAIMCuh" crossorigin="anonymous"></script>
+</head>
+<body>
+<main class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10 py-10 lg:py-14 space-y-16">
+
+<!-- ============ HEADER ============ -->
+<header class="space-y-6" id="top">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="badge badge-soft badge-warning">Plan only - no code until you approve</span>
+    <span class="badge badge-soft">Lane 2 "Clear it"</span>
+    <span class="badge badge-soft badge-primary">Sponsor: Habitat for Humanity OC</span>
+    <span class="badge badge-soft">Written 2026-11-07, 11:40 AM · revised 12:00 (Johnny split, realistic mock)</span>
+  </div>
+  <h1 class="text-4xl sm:text-5xl">Fast Track: build plan to 2:30 PM</h1>
+  <p class="lede max-w-3xl">Build a checker that reads a city's real ADU checklist, flags each line against state law and HCD's letters to that city, cites the source with a date, and drafts a reply the applicant can send themselves. Irvine first, then Anaheim. A working demo on real data beats a polished one.</p>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div class="tile p-4"><div class="eyebrow">Time left</div><div class="text-3xl font-semibold tracking-tight">2h 50m</div><div class="text-sm text-secondary">11:40 now, due 2:30</div></div>
+    <div class="tile p-4"><div class="eyebrow">First runnable</div><div class="text-3xl font-semibold tracking-tight">12:45</div><div class="text-sm text-secondary">Noon is no longer reachable</div></div>
+    <div class="tile p-4"><div class="eyebrow">Acceptance tests</div><div class="text-3xl font-semibold tracking-tight">6</div><div class="text-sm text-secondary">From CONTEXT.md section 6</div></div>
+    <div class="tile p-4"><div class="eyebrow">Agents at peak</div><div class="text-3xl font-semibold tracking-tight">3 + Johnny's</div><div class="text-sm text-secondary">Me and two Sonnet workers here. Johnny's run in his own session.</div></div>
+  </div>
+  <div role="alert" class="alert alert-soft alert-warning">
+    <span><strong>The clock moved the noon checkpoint.</strong> It is 11:40 and the repo is empty, with no saved source documents yet. The first runnable version (Irvine end to end) lands at about 12:45. After that, every checkpoint stays runnable.</span>
+  </div>
+</header>
+
+<!-- ============ STATE ============ -->
+<section class="space-y-5" id="state">
+  <div class="eyebrow">Where we are</div>
+  <h2 class="text-3xl">Current state and target</h2>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card card-border bg-base-100"><div class="card-body">
+      <h3 class="card-title text-lg">Today, 11:40</h3>
+      <ul class="list-disc pl-5 space-y-1 text-[15px]">
+        <li>Repo <span class="mono">fast-track</span>: no commits yet. Only <span class="mono">project-docs/CONTEXT.md</span> and <span class="mono">problem-statement.md</span>.</li>
+        <li>Remote is <span class="mono">github.com/JohnFok119/fast-track</span>. Push access is not confirmed.</li>
+        <li>None of the source documents are saved locally: the HCD letter to Irvine, the Handbook and the Anaheim checklist.</li>
+        <li>The starter repo is a read-only reference. We copy from it, with attribution, and never edit it.</li>
+        <li>Node 24.20 and npm 11.19 are installed here.</li>
+      </ul>
+    </div></div>
+    <div class="card card-border bg-base-100"><div class="card-body">
+      <h3 class="card-title text-lg">Done at 2:30</h3>
+      <ul class="list-disc pl-5 space-y-1 text-[15px]">
+        <li>Acceptance tests 1 to 5 pass in <span class="mono">npm test</span>. Test 6 is either encoded or written up in FINDINGS.</li>
+        <li>A fresh clone runs from the README "Try it" commands, with no API key.</li>
+        <li>Sources, rules and findings are in the repo, readable by coworkers without running code.</li>
+        <li>The repo is public on <span class="mono">main</span> and checked signed out. Video and hub form are done.</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="space-y-5" id="timeline">
+  <div class="eyebrow">Phases, tracks, checkpoints</div>
+  <h2 class="text-3xl">Who does what, minute by minute</h2>
+  <p class="text-secondary max-w-3xl">Each row is one agent or you. The colour shows the model. Green diamonds are checkpoints where the app must run and is committed. Red marks a step that needs your explicit yes.</p>
+  <div class="tile p-3 sm:p-5">
+  <div class="figure-scroll">
+  <svg viewBox="0 0 1100 392" role="img" aria-labelledby="tl-t" id="tl">
+    <title id="tl-t">Build timeline from 11:40 AM to 2:30 PM, one lane per agent</title>
+    <defs><style></style></defs>
+    <!-- time ticks -->
+    <g id="tl-ticks">
+      <text class="s-muted" x="140" y="14" text-anchor="middle">11:40</text>
+      <text class="s-muted" x="250" y="14" text-anchor="middle">12:00</text>
+      <text class="s-muted" x="415" y="14" text-anchor="middle">12:30</text>
+      <text class="s-muted" x="580" y="14" text-anchor="middle">1:00</text>
+      <text class="s-muted" x="745" y="14" text-anchor="middle">1:30</text>
+      <text class="s-muted" x="910" y="14" text-anchor="middle">2:00</text>
+      <text class="s-muted" x="1075" y="14" text-anchor="middle">2:30</text>
+      <line class="s-grid" x1="140" y1="20" x2="140" y2="386" />
+      <line class="s-grid" x1="250" y1="20" x2="250" y2="386" />
+      <line class="s-grid" x1="415" y1="20" x2="415" y2="386" />
+      <line class="s-grid" x1="580" y1="20" x2="580" y2="386" />
+      <line class="s-grid" x1="745" y1="20" x2="745" y2="386" />
+      <line class="s-grid" x1="910" y1="20" x2="910" y2="386" />
+      <line class="s-grid" x1="1075" y1="20" x2="1075" y2="386" />
+    </g>
+    <!-- phases -->
+    <g id="tl-phases">
+      <text class="s-head" x="8" y="40">PHASE</text>
+      <g id="ph-p0"><title>P0 Plan, 11:40 to 11:55</title><rect class="s-phase" x="141" y="24" width="80" height="24" rx="6" /><text class="s-txt-md" x="181" y="40" text-anchor="middle">P0 Plan</text></g>
+      <g id="ph-p1"><title>P1 Foundations, 11:55 to 12:20</title><rect class="s-phase" x="223" y="24" width="136" height="24" rx="6" /><text class="s-txt-md" x="291" y="40" text-anchor="middle">P1 Foundations</text></g>
+      <g id="ph-p2"><title>P2 Core build, 12:20 to 1:15</title><rect class="s-phase" x="361" y="24" width="300" height="24" rx="6" /><text class="s-txt-md" x="511" y="40" text-anchor="middle">P2 Core build</text></g>
+      <g id="ph-p3"><title>P3 Iterate, 1:15 to 2:00</title><rect class="s-phase" x="663" y="24" width="246" height="24" rx="6" /><text class="s-txt-md" x="786" y="40" text-anchor="middle">P3 Iterate</text></g>
+      <g id="ph-p4"><title>P4 Freeze and submit, 2:00 to 2:30</title><rect class="s-phase" x="911" y="24" width="163" height="24" rx="6" /><text class="s-txt-md" x="992" y="40" text-anchor="middle">P4 Freeze + submit</text></g>
+    </g>
+    <!-- checkpoints -->
+    <g id="tl-cps">
+      <text class="s-head" x="8" y="82">CHECKPOINT</text>
+      <g id="cp-contract"><title>12:15 contract push: shared types and sample runs go to GitHub so Johnny's agents can start (needs your yes)</title><text class="s-txt" x="332.5" y="66" text-anchor="middle" font-weight="600">Contract</text><rect class="s-gate" x="327.5" y="73" width="10" height="10" transform="rotate(45 332.5 78)" /></g>
+      <g id="cp1"><title>CP1 12:45: runnable v0, Irvine end to end</title><text class="s-txt" x="497.5" y="66" text-anchor="middle" font-weight="600">CP1 runnable</text><rect class="s-cp" x="492.5" y="73" width="10" height="10" transform="rotate(45 497.5 78)" /></g>
+      <g id="cp2"><title>CP2 1:15: all Musts, tests 1 to 5</title><text class="s-txt" x="662.5" y="66" text-anchor="middle" font-weight="600">CP2 musts</text><rect class="s-cp" x="657.5" y="73" width="10" height="10" transform="rotate(45 662.5 78)" /></g>
+      <g id="cp3"><title>CP3 1:45: feature complete</title><text class="s-txt" x="827.5" y="66" text-anchor="middle" font-weight="600">CP3 complete</text><rect class="s-cp" x="822.5" y="73" width="10" height="10" transform="rotate(45 827.5 78)" /></g>
+      <g id="cp-freeze"><title>Freeze 2:00: no new features</title><text class="s-txt" x="910" y="66" text-anchor="middle" font-weight="600">Freeze</text><rect class="s-cp" x="905" y="73" width="10" height="10" transform="rotate(45 910 78)" /></g>
+      <g id="cp-push"><title>Push gate 2:15: needs your explicit yes</title><text class="s-txt" x="992.5" y="66" text-anchor="middle" font-weight="600">Push gate</text><rect class="s-gate" x="987.5" y="73" width="10" height="10" transform="rotate(45 992.5 78)" /><line class="s-gate-line" x1="992.5" y1="88" x2="992.5" y2="386" /></g>
+      <g id="cp-due"><title>Due 2:30: repo public, video, hub form</title><text class="s-txt" x="1075" y="66" text-anchor="middle" font-weight="600">Due</text><rect class="s-gate" x="1070" y="73" width="10" height="10" transform="rotate(45 1075 78)" /></g>
+    </g>
+    <!-- lanes -->
+    <g id="lane-captain">
+      <title>Captain lane, Opus 5.5</title>
+      <text class="s-txt-md" x="8" y="112">Captain</text><text class="s-muted" x="8" y="125">Opus 5.5</text>
+      <rect class="s-opus" x="141" y="101" width="80" height="26" rx="6" /><text class="s-txt" x="181" y="118" text-anchor="middle">Plan</text>
+      <rect class="s-opus" x="223" y="101" width="136" height="26" rx="6" /><text class="s-txt" x="291" y="118" text-anchor="middle">Schema + contract</text>
+      <rect class="s-opus" x="361" y="101" width="300" height="26" rx="6" /><text class="s-txt" x="511" y="118" text-anchor="middle">Write rules from saved sources · review diffs</text>
+      <rect class="s-opus" x="663" y="101" width="246" height="26" rx="6" /><text class="s-txt" x="786" y="118" text-anchor="middle">Review · merge · gates</text>
+      <rect class="s-opus" x="911" y="101" width="163" height="26" rx="6" /><text class="s-txt" x="992" y="118" text-anchor="middle">Final checks</text>
+    </g>
+    <g id="lane-engine">
+      <title>Engine worker lane (this session), Sonnet 5.5</title>
+      <text class="s-txt-md" x="8" y="148">Engine</text><text class="s-muted" x="8" y="161">Sonnet 5.5</text>
+      <rect class="s-sonnet" x="361" y="137" width="218" height="26" rx="6" /><text class="s-txt" x="470" y="154" text-anchor="middle">Engine + tests 1-3</text>
+      <rect class="s-sonnet" x="581" y="137" width="246" height="26" rx="6" /><text class="s-txt" x="704" y="154" text-anchor="middle">Anaheim · scan() · guard · samples</text>
+    </g>
+    <g id="lane-sources">
+      <title>Sources and findings worker lane (this session), Sonnet 5.5</title>
+      <text class="s-txt-md" x="8" y="184">Sources</text><text class="s-muted" x="8" y="197">Sonnet 5.5</text>
+      <rect class="s-sonnet" x="223" y="173" width="246" height="26" rx="6" /><text class="s-txt" x="346" y="190" text-anchor="middle">Save sources · excerpts · strip PII</text>
+      <rect class="s-sonnet" x="471" y="173" width="273" height="26" rx="6" /><text class="s-txt" x="607" y="190" text-anchor="middle">FINDINGS · Habitat OC · test 6</text>
+      <rect class="s-sonnet" x="911" y="173" width="80" height="26" rx="6" /><text class="s-txt" x="951" y="190" text-anchor="middle">README</text>
+    </g>
+    <g id="lane-haiku">
+      <title>Mechanical lane (this session), Haiku 5.5</title>
+      <text class="s-txt-md" x="8" y="220">Mechanical</text><text class="s-muted" x="8" y="233">Haiku 5.5</text>
+      <rect class="s-haiku" x="223" y="209" width="109" height="26" rx="6" /><text class="s-txt" x="277" y="226" text-anchor="middle">Scaffold</text>
+      <rect class="s-haiku" x="334" y="209" width="163" height="26" rx="6" /><text class="s-txt" x="415" y="226" text-anchor="middle">Checklists to JSON</text>
+      <rect class="s-haiku" x="911" y="209" width="54" height="26" rx="6" /><text class="s-txt" x="938" y="226" text-anchor="middle">Lint</text>
+    </g>
+    <g id="lane-johnny-screen">
+      <title>Johnny's agents: main screen, scanner and clocks UI</title>
+      <text class="s-txt-md" x="8" y="256">Johnny · screen</text><text class="s-muted" x="8" y="269">his agents</text>
+      <rect class="s-johnny" x="334" y="245" width="245" height="26" rx="6" /><text class="s-txt" x="456" y="262" text-anchor="middle">Main screen on sample runs</text>
+      <rect class="s-johnny" x="581" y="245" width="80" height="26" rx="6" /><text class="s-txt" x="621" y="262" text-anchor="middle">Wire up</text>
+      <rect class="s-johnny" x="663" y="245" width="164" height="26" rx="6" /><text class="s-txt" x="745" y="262" text-anchor="middle">Scanner + clocks UI</text>
+      <rect class="s-johnny" x="829" y="245" width="80" height="26" rx="6" /><text class="s-txt" x="869" y="262" text-anchor="middle">Polish</text>
+    </g>
+    <g id="lane-johnny-letter">
+      <title>Johnny's agents: draft letter function and panel</title>
+      <text class="s-txt-md" x="8" y="292">Johnny · letter</text><text class="s-muted" x="8" y="305">his agents</text>
+      <rect class="s-johnny" x="334" y="281" width="163" height="26" rx="6" /><text class="s-txt" x="415" y="298" text-anchor="middle">Letter fn + tests</text>
+      <rect class="s-johnny" x="499" y="281" width="162" height="26" rx="6" /><text class="s-txt" x="580" y="298" text-anchor="middle">Letter panel + copy</text>
+      <rect class="s-johnny" x="663" y="281" width="164" height="26" rx="6" /><text class="s-txt" x="745" y="298" text-anchor="middle">Review fixes</text>
+    </g>
+    <g id="lane-reviewer">
+      <title>Fresh-eyes reviewer lane, Opus 5.5 (reviews both sides)</title>
+      <text class="s-txt-md" x="8" y="328">Reviewer</text><text class="s-muted" x="8" y="341">Opus 5.5</text>
+      <rect class="s-opus" x="746" y="317" width="108" height="26" rx="6" /><text class="s-txt" x="800" y="334" text-anchor="middle">Review</text>
+      <rect class="s-opus" x="938" y="317" width="54" height="26" rx="6" /><text class="s-txt" x="965" y="334" text-anchor="middle">Final</text>
+    </g>
+    <g id="lane-you">
+      <title>Your lane: steps only a human can do</title>
+      <text class="s-txt-md" x="8" y="364">You</text><text class="s-muted" x="8" y="377">human steps</text>
+      <rect class="s-human" x="141" y="353" width="80" height="26" rx="6" /><text class="s-txt" x="181" y="370" text-anchor="middle">Review plan</text>
+      <rect class="s-human" x="251" y="353" width="80" height="26" rx="6" /><text class="s-txt" x="291" y="370" text-anchor="middle">Brief Johnny</text>
+      <rect class="s-human" x="938" y="353" width="54" height="26" rx="6" /><text class="s-txt" x="965" y="370" text-anchor="middle">Video</text>
+      <rect class="s-human" x="994" y="353" width="80" height="26" rx="6" /><text class="s-txt" x="1034" y="370" text-anchor="middle">Public + form</text>
+    </g>
+  </svg>
+  </div>
+  <div class="flex flex-wrap gap-4 pt-3 text-sm text-secondary">
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:var(--color-primary)"></span>Opus 5.5</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:var(--color-accent)"></span>Sonnet 5.5</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:var(--color-secondary)"></span>Haiku 5.5</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:var(--jt)"></span>Johnny's agents</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rounded" style="background:var(--color-warning)"></span>You</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rotate-45" style="background:var(--color-success)"></span>Checkpoint</span>
+    <span class="inline-flex items-center gap-2"><span class="inline-block w-3 h-3 rotate-45" style="background:var(--color-error)"></span>Needs your yes</span>
+  </div>
+  </div>
+
+  <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+  <table class="table" id="phase-table">
+    <thead><tr><th>Phase</th><th>Window</th><th>What happens</th><th>Exit check (verify)</th></tr></thead>
+    <tbody>
+      <tr id="row-p0"><td class="font-semibold whitespace-nowrap">P0 Plan</td><td class="whitespace-nowrap">11:40 to 11:55</td><td>You review this page. I answer the open questions.</td><td>Your approval</td></tr>
+      <tr id="row-p1"><td class="font-semibold whitespace-nowrap">P1 Foundations</td><td class="whitespace-nowrap">11:55 to 12:20</td><td>Haiku scaffolds the app and required files. I write the shared contract: the types plus two sample runs. The sources worker saves the Irvine letter and Handbook pages with URL and date. <strong>12:15: the contract is pushed</strong> (with your yes), so Johnny's agents start against it.</td><td><span class="mono">npm test</span> and <span class="mono">npm run dev</span> run. Johnny can clone, run, and see both sample runs typecheck. The sources index lists the Irvine letter and the Handbook.</td></tr>
+      <tr id="row-p2"><td class="font-semibold whitespace-nowrap">P2 Core build</td><td class="whitespace-nowrap">12:20 to 1:15</td><td>Here: the engine is built test first from the acceptance tests, and I write each rule from a saved source, Irvine first, then Anaheim. Johnny's agents build the main screen and the letter against the sample runs.</td><td><strong>CP1 12:45 (first merge of both sides):</strong> the app shows the Irvine deed restriction as <span class="mono">CONFLICTS</span> with Gov 66315 and the HCD letter, URL and date on screen, from the real engine. Tests 1 and 3 pass.<br><strong>CP2 1:15:</strong> Anaheim shows <span class="mono">OUTDATED_CITATION</span> (test 2). The draft letter has no send path (test 4). A fresh clone runs with no key (test 5).</td></tr>
+      <tr id="row-p3"><td class="font-semibold whitespace-nowrap">P3 Iterate</td><td class="whitespace-nowrap">1:15 to 2:00</td><td>The Shoulds: the citation scanner and the clocks panel. Test 6 gets decided. The Opus reviewer runs, then fixes. The Claude assist is built only if you say yes (question 4).</td><td><strong>CP3 1:45:</strong> tests, lint and type-check are green, and the reviewer's findings are closed.</td></tr>
+      <tr id="row-p4"><td class="font-semibold whitespace-nowrap">P4 Freeze + submit</td><td class="whitespace-nowrap">2:00 to 2:30</td><td>No new features. README from the template, CLAUDE.md with the event rules, FINDINGS final. Fresh-clone run, and a secrets and PII scan of the full history. You record the video. Push gate, then make the repo public.</td><td>A signed-out browser shows the repo, and the hub form is submitted before 2:30.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ SPLIT WITH JOHNNY ============ -->
+<section class="space-y-5" id="split">
+  <div class="eyebrow">Parallel split (your request, 12:00)</div>
+  <h2 class="text-3xl">Two teams, one contract</h2>
+  <p class="text-secondary max-w-3xl">Johnny's agents take the screen and the letter. This session keeps the parts where a wrong legal answer would come from: sources, rules and the engine. A small shared contract lands first, at 12:15, so both sides build against the same shapes from the start. Nobody waits on anybody until the merge at 12:45.</p>
+
+  <div class="grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,1fr)] gap-4 items-stretch">
+    <div class="card card-border bg-base-100" id="split-us"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><span class="badge badge-sm badge-soft badge-primary">This session</span><h3 class="font-semibold">You + me</h3></div>
+      <p class="text-sm">This is the side where a wrong answer would come from. Every rule goes through me.</p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Sources and FINDINGS</li>
+        <li>Rules and clocks data</li>
+        <li>Engine, CLI and <span class="mono">scan()</span></li>
+        <li>Acceptance tests 1 to 3, plus the covenant guard</li>
+        <li>Reviewing and merging both sides</li>
+      </ul>
+    </div></div>
+    <div class="card bg-base-200 ring-1 ring-primary/40" id="split-contract"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><span class="badge badge-sm badge-primary">Shared</span><h3 class="font-semibold">The contract</h3></div>
+      <p class="text-sm">Pushed at 12:15. It changes only through me, and Johnny's agents ask instead of editing it.</p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li><span class="mono">src/contract/types.ts</span>: Source, Rule, Item, Flag, Status, Clock</li>
+        <li><span class="mono">data/samples/irvine-run.json</span> and <span class="mono">anaheim-run.json</span>, labelled SAMPLE</li>
+        <li><span class="mono">runCheck(city)</span> and <span class="mono">scan(text)</span> signatures. They return the samples until the engine lands.</li>
+      </ul>
+    </div></div>
+    <div class="card card-border bg-base-100" id="split-johnny"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><span class="badge badge-sm jt-chip">Johnny's session</span><h3 class="font-semibold">Johnny + his agents</h3></div>
+      <p class="text-sm">This is what users see. It renders flags but never decides them.</p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Main screen: city tabs, list, detail, citations, notice</li>
+        <li>Draft letter function and panel</li>
+        <li>Paste-text scanner screen</li>
+        <li>Clocks panel</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+  <table class="table" id="split-table">
+    <thead><tr><th>ID</th><th>Feature</th><th>Owner</th><th>Owns (paths)</th><th>Needs</th><th>Done when (verify)</th></tr></thead>
+    <tbody>
+      <tr id="t-G1"><td class="font-semibold">G1</td><td>Scaffold and contract</td><td><span class="badge badge-sm badge-soft badge-primary">Me + Haiku</span></td><td class="mono text-xs">src/contract/** data/samples/** package.json configs</td><td>-</td><td>Pushed by 12:15. <span class="mono">npm test</span>, <span class="mono">npm run typecheck</span> and <span class="mono">npm run dev</span> are green on a fresh clone.</td></tr>
+      <tr id="t-G2"><td class="font-semibold">G2</td><td>Sources, FINDINGS, Habitat OC pages</td><td><span class="badge badge-sm badge-soft badge-accent">Sonnet here</span></td><td class="mono text-xs">data/sources/** data/cities/** project-docs/FINDINGS.md</td><td>-</td><td>Every source has a URL, date and page, and names and addresses are removed.</td></tr>
+      <tr id="t-G3"><td class="font-semibold">G3</td><td>Rules and clocks data</td><td><span class="badge badge-sm badge-soft badge-primary">Me</span></td><td class="mono text-xs">data/rules/**</td><td>G2</td><td>The loader accepts every rule. Each rule cites a saved source.</td></tr>
+      <tr id="t-G4"><td class="font-semibold">G4</td><td>Engine, CLI, <span class="mono">scan()</span>, tests 1-3 and the guard</td><td><span class="badge badge-sm badge-soft badge-accent">Sonnet here</span></td><td class="mono text-xs">src/engine/** tests/engine/** scripts/check.ts</td><td>G1, G3</td><td><span class="mono">npm run check irvine</span> prints CONFLICTS with 66315 and the HCD letter. An affordability covenant is not CONFLICTS.</td></tr>
+      <tr id="t-J1"><td class="font-semibold">J1</td><td>Main screen: city tabs, requirement list, flag detail with citations, prototype notice</td><td><span class="badge badge-sm jt-chip">Johnny</span></td><td class="mono text-xs">src/ui/** index.html</td><td>G1</td><td>Both sample runs render, with every citation and date shown. No network calls.</td></tr>
+      <tr id="t-J2"><td class="font-semibold">J2</td><td>Draft letter: a function from flags to text, a panel and a copy button</td><td><span class="badge badge-sm jt-chip">Johnny</span></td><td class="mono text-xs">src/letter/** tests/letter/**</td><td>G1</td><td>Every citation in the flags appears in the letter. A test finds no send path in <span class="mono">src/</span> (test 4).</td></tr>
+      <tr id="t-J3"><td class="font-semibold">J3</td><td>Paste-text scanner screen</td><td><span class="badge badge-sm jt-chip">Johnny</span></td><td class="mono text-xs">src/ui/scan/**</td><td>G4 <span class="mono">scan()</span> at 1:00 (stub before)</td><td>Pasting "65852.2" shows OUTDATED_CITATION with the Handbook source.</td></tr>
+      <tr id="t-J4"><td class="font-semibold">J4</td><td>Legal clocks panel</td><td><span class="badge badge-sm jt-chip">Johnny</span></td><td class="mono text-xs">src/ui/clocks/**</td><td>G3 clocks data</td><td>Each clock shows its section and checked date. "Deemed approved" shows UNCONFIRMED.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4 text-sm">
+    <div class="tile p-4"><div class="font-semibold">How the work merges</div><p class="mt-1">Johnny's agents push <span class="mono">feat/ui</span> and <span class="mono">feat/letter</span>. I read each diff, then merge into <span class="mono">main</span> at CP1 (12:45), CP2 (1:15) and CP3 (1:45). The Opus reviewer checks both sides.</p></div>
+    <div class="tile p-4"><div class="font-semibold">Same rules on both sides</div><p class="mt-1">No invented law, every claim sourced, no personal info, no keys, no em dashes, no AI attribution, nothing sends. These are copied into the repo's <span class="mono">CLAUDE.md</span>, so his agents load them too.</p></div>
+    <div class="tile p-4"><div class="font-semibold">Johnny's brief</div><p class="mt-1">After you approve, I write <span class="mono">project-docs/HANDOFF-johnny.md</span>: his tasks, owned paths, the contract, verify commands and the rules. He pastes it into his session at 12:15.</p></div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="space-y-5" id="features">
+  <div class="eyebrow">Features</div>
+  <h2 class="text-3xl">What the judges will see</h2>
+  <p class="text-secondary max-w-3xl">A realistic mock of the main screen. Switch city, or click a requirement to see why it was flagged. It is illustrative: in the real app, flags come only from the rule set. The Irvine items follow the HCD letter's findings, and the Anaheim wording is paraphrased from the starter's notes until the checklist is saved. Turn on feature labels to match the cards below.</p>
+  <label class="inline-flex items-center gap-2 text-sm"><input type="checkbox" class="toggle toggle-sm toggle-primary" id="fl-toggle" onchange="document.getElementById('mock').classList.toggle('show-fl', this.checked)"> Show feature labels</label>
+
+  <div class="space-y-6">
+    <!-- realistic mock -->
+    <div class="mockup-browser border border-base-content/10 bg-base-200" id="mock">
+      <div class="mockup-browser-toolbar"><div class="input text-sm" id="m-url">localhost:5173/check/irvine</div></div>
+      <div class="bg-base-100">
+        <!-- app bar -->
+        <div class="hair-b flex flex-wrap items-center justify-between gap-3 px-5 py-3">
+          <div class="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" style="fill:var(--color-primary)" /><path d="M7 15 L11 8 L13 12 L17 7" style="fill:none;stroke:var(--color-primary-content);stroke-width:2;stroke-linecap:round;stroke-linejoin:round" /></svg>
+            <span class="font-semibold tracking-tight">Fast Track</span>
+            <span class="text-sm text-secondary hidden sm:inline">ADU requirement check · Orange County</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs text-secondary hidden md:inline">Rules v0.1 · checked 2026-11-07</span>
+            <span class="badge badge-sm badge-soft badge-warning">Prototype</span>
+          </div>
+        </div>
+        <!-- notice -->
+        <div class="px-5 pt-4">
+          <div role="alert" class="alert alert-soft alert-warning text-sm py-2.5 items-start"><span class="fl callout">F7</span><span><strong>Prototype, not legal advice.</strong> Fast Track compares a city's saved requirements with state law and HCD's letters to that city. Talk to a professional before you act. Nothing is sent from this page.</span></div>
+        </div>
+        <!-- city row -->
+        <div class="px-5 pt-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div class="eyebrow">City</div>
+            <div role="tablist" class="tabs tabs-box tabs-sm mt-1" id="m-tabs">
+              <button role="tab" class="tab tab-active" data-city="irvine" aria-selected="true">Irvine</button>
+              <button role="tab" class="tab" data-city="anaheim" aria-selected="false">Anaheim</button>
+              <button role="tab" class="tab" data-city="paste" aria-selected="false">Paste text</button>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2" id="m-counts"></div>
+        </div>
+        <div class="px-5 pt-2 text-xs text-secondary" id="m-source"></div>
+        <div class="px-5 pt-3 hidden" id="m-paste">
+          <textarea class="textarea w-full text-sm" rows="3" readonly>Accessory dwelling units shall comply with Government Code Section 65852.2 and all applicable City standards. Junior ADUs are subject to Section 65852.22.</textarea>
+          <div class="text-xs text-secondary mt-1">Example text. Pasted text is never saved or sent.</div>
+        </div>
+        <!-- main -->
+        <div class="p-5 grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-4 items-start">
+          <div>
+            <div class="flex items-center gap-2 mb-2"><span class="text-sm font-semibold" id="m-list-title">Requirements</span><span class="fl callout">F1</span></div>
+            <ul class="space-y-2" id="m-list"></ul>
+          </div>
+          <div class="card card-border bg-base-100" id="m-detail"></div>
+        </div>
+        <!-- bottom -->
+        <div class="px-5 pb-5 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-4 items-start">
+          <div class="card card-border bg-base-100"><div class="card-body p-4 gap-2">
+            <div class="flex items-center gap-2"><span class="fl callout">F6</span><h4 class="font-semibold">Legal clocks for ADU review</h4></div>
+            <div class="text-sm space-y-2">
+              <div class="flex justify-between gap-3"><span>Completeness check</span><span class="font-semibold text-right">15 business days</span></div>
+              <div class="text-xs text-secondary -mt-1">Gov Code 66317(a)(2)(A)</div>
+              <div class="flex justify-between gap-3"><span>Decision after a complete application</span><span class="font-semibold text-right">60 days</span></div>
+              <div class="text-xs text-secondary -mt-1">Gov Code 66317(a)(3)</div>
+              <div class="flex justify-between gap-3 items-center"><span>"Deemed approved" if the city misses it</span><span class="badge badge-sm badge-soft badge-warning">UNCONFIRMED</span></div>
+              <div class="text-xs text-secondary -mt-1">Sources disagree: the starter says it applies, while the Handbook p.21 states it only for coastal permits.</div>
+            </div>
+            <p class="text-xs text-secondary hair pt-2">Read on the california.public.law mirror and to be confirmed on leginfo · checked 2026-11-07</p>
+          </div></div>
+          <div class="card card-border bg-base-100"><div class="card-body p-4 gap-2">
+            <div class="flex flex-wrap items-center gap-2"><span class="fl callout">F5</span><h4 class="font-semibold">Draft response</h4><span class="badge badge-sm badge-soft">Draft only · Fast Track never sends anything</span></div>
+            <div class="letter" id="m-letter"></div>
+            <div class="flex flex-wrap items-center gap-3"><button class="btn btn-sm btn-primary" type="button" onclick="this.nextElementSibling.textContent='Copied (mock)'">Copy text</button><span class="text-xs text-secondary">Edit it, then send it yourself.</span></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <!-- feature cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3" id="feature-cards">
+      <div class="tile p-4" id="f1"><div class="flex items-center gap-2"><span class="callout">F1</span><h3 class="font-semibold">Line-by-line checker</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must</span></div><p class="text-sm mt-1">Every item in the saved checklist gets one of four statuses. Tests 1 and 2.</p></div>
+      <div class="tile p-4" id="f2"><div class="flex items-center gap-2"><span class="callout">F2</span><h3 class="font-semibold">Source and date on every flag</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must</span></div><p class="text-sm mt-1">Each flag shows the statute section, the HCD letter, the URL and the date checked. Test 3.</p></div>
+      <div class="tile p-4" id="f3"><div class="flex items-center gap-2"><span class="callout">F3</span><h3 class="font-semibold">UNKNOWN, never a guess</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must</span></div><p class="text-sm mt-1">An item that matches no rule says UNKNOWN. A rule with no source can't load. Test 3.</p></div>
+      <div class="tile p-4" id="f4"><div class="flex items-center gap-2"><span class="callout">F4</span><h3 class="font-semibold">Old-citation flags and scanner</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must + Should</span></div><p class="text-sm mt-1">Flags 65852.2 and .22, showing the old and new numbers from the Handbook, or UNKNOWN when the Handbook gives no exact number. The scanner (a Should) checks any pasted text. Test 2.</p></div>
+      <div class="tile p-4" id="f5"><div class="flex items-center gap-2"><span class="callout">F5</span><h3 class="font-semibold">Draft response letter</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must</span></div><p class="text-sm mt-1">Built only from the flags, with a copy button and nothing else. Test 4.</p></div>
+      <div class="tile p-4" id="f6"><div class="flex items-center gap-2"><span class="callout">F6</span><h3 class="font-semibold">Legal clocks panel</h3><span class="badge badge-sm badge-soft ml-auto">Should</span></div><p class="text-sm mt-1">The legal deadlines, with sources. Each clock is checked against the Handbook before it is shown. "Deemed approved" is marked unconfirmed.</p></div>
+      <div class="tile p-4" id="f7"><div class="flex items-center gap-2"><span class="callout">F7</span><h3 class="font-semibold">Prototype notice and sample runs</h3><span class="badge badge-sm badge-soft badge-primary ml-auto">Must</span></div><p class="text-sm mt-1">A notice on every screen. Cached, labelled sample runs for Irvine and Anaheim, so it runs with no key. Test 5.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT SOLVES WHAT ============ -->
+<section class="space-y-5" id="solves">
+  <div class="eyebrow">What solves what</div>
+  <h2 class="text-3xl">Feature to pain to persona</h2>
+  <p class="text-secondary max-w-3xl">Hover over or focus any box to trace its chain. Solid lines are a direct fix. Dashed lines are a partial one: the clocks panel shows legal deadlines, not observed review times, and the nonprofit PM's drift pain is medium. All four personas are made up from public research.</p>
+  <div class="tile p-3 sm:p-5">
+  <div class="figure-scroll">
+  <svg viewBox="0 0 1100 412" role="img" aria-labelledby="map-t" id="map">
+    <title id="map-t">Map from each feature to the pain it fixes and the persona it serves</title>
+    <text class="s-head" x="20" y="22">FEATURE</text>
+    <text class="s-head" x="400" y="22">PAIN IT FIXES</text>
+    <text class="s-head" x="800" y="22">PERSONA IT SERVES</text>
+    <g id="links">
+      <path class="link" data-a="F1" data-b="P1" d="M300,59 C350,59 350,61 400,61" />
+      <path class="link" data-a="F2" data-b="P1" d="M300,121 C350,121 350,61 400,61" />
+      <path class="link" data-a="F2" data-b="P3" d="M300,121 C350,121 350,216 400,216" />
+      <path class="link" data-a="F3" data-b="P1" d="M300,183 C350,183 350,61 400,61" />
+      <path class="link" data-a="F4" data-b="P2" d="M300,245 C350,245 350,138.5 400,138.5" />
+      <path class="link" data-a="F4" data-b="P3" d="M300,245 C350,245 350,216 400,216" />
+      <path class="link" data-a="F5" data-b="P4" d="M300,307 C350,307 350,293.5 400,293.5" />
+      <path class="link partial" data-a="F6" data-b="P5" d="M300,369 C350,369 350,371 400,371" />
+
+      <path class="link" data-a="P1" data-b="R1" d="M700,61 C750,61 750,64 800,64" />
+      <path class="link" data-a="P1" data-b="R2" d="M700,61 C750,61 750,167 800,167" />
+      <path class="link" data-a="P1" data-b="R3" d="M700,61 C750,61 750,270 800,270" />
+      <path class="link partial" data-a="P1" data-b="R4" d="M700,61 C750,61 750,373 800,373" />
+      <path class="link" data-a="P2" data-b="R1" d="M700,138.5 C750,138.5 750,64 800,64" />
+      <path class="link" data-a="P3" data-b="R1" d="M700,216 C750,216 750,64 800,64" />
+      <path class="link" data-a="P4" data-b="R2" d="M700,293.5 C750,293.5 750,167 800,167" />
+      <path class="link" data-a="P4" data-b="R3" d="M700,293.5 C750,293.5 750,270 800,270" />
+      <path class="link partial" data-a="P4" data-b="R4" d="M700,293.5 C750,293.5 750,373 800,373" />
+      <path class="link partial" data-a="P5" data-b="R1" d="M700,371 C750,371 750,64 800,64" />
+      <path class="link partial" data-a="P5" data-b="R2" d="M700,371 C750,371 750,167 800,167" />
+      <path class="link partial" data-a="P5" data-b="R3" d="M700,371 C750,371 750,270 800,270" />
+      <path class="link partial" data-a="P5" data-b="R4" d="M700,371 C750,371 750,373 800,373" />
+    </g>
+    <g id="features-col">
+      <g class="node" data-id="F1" tabindex="0" id="n-F1"><title>F1 Line-by-line checker</title><rect class="s-box" x="20" y="36" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="59" r="11" /><text class="s-num-txt" x="42" y="63" text-anchor="middle">F1</text><text class="s-txt-md" x="62" y="64">Line-by-line checker</text></g>
+      <g class="node" data-id="F2" tabindex="0" id="n-F2"><title>F2 Source and date on every flag</title><rect class="s-box" x="20" y="98" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="121" r="11" /><text class="s-num-txt" x="42" y="125" text-anchor="middle">F2</text><text class="s-txt-md" x="62" y="126">Source + date on every flag</text></g>
+      <g class="node" data-id="F3" tabindex="0" id="n-F3"><title>F3 UNKNOWN, never a guess</title><rect class="s-box" x="20" y="160" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="183" r="11" /><text class="s-num-txt" x="42" y="187" text-anchor="middle">F3</text><text class="s-txt-md" x="62" y="188">UNKNOWN, never a guess</text></g>
+      <g class="node" data-id="F4" tabindex="0" id="n-F4"><title>F4 Old-citation flags and scanner</title><rect class="s-box" x="20" y="222" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="245" r="11" /><text class="s-num-txt" x="42" y="249" text-anchor="middle">F4</text><text class="s-txt-md" x="62" y="250">Old-citation flags + scanner</text></g>
+      <g class="node" data-id="F5" tabindex="0" id="n-F5"><title>F5 Draft response letter</title><rect class="s-box" x="20" y="284" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="307" r="11" /><text class="s-num-txt" x="42" y="311" text-anchor="middle">F5</text><text class="s-txt-md" x="62" y="312">Draft response letter</text></g>
+      <g class="node" data-id="F6" tabindex="0" id="n-F6"><title>F6 Legal clocks panel</title><rect class="s-box" x="20" y="346" width="280" height="46" rx="10" /><circle class="s-num" cx="42" cy="369" r="11" /><text class="s-num-txt" x="42" y="373" text-anchor="middle">F6</text><text class="s-txt-md" x="62" y="374">Legal clocks panel</text></g>
+    </g>
+    <g id="pains-col">
+      <g class="node" data-id="P1" tabindex="0" id="n-P1"><title>P1 Can't tell if a city rule is lawful (trusting the rules)</title><rect class="s-box-tint" x="400" y="36" width="300" height="50" rx="10" /><text class="s-txt-md" x="416" y="57">Can't tell if a city rule is lawful</text><text class="s-muted" x="416" y="74">trusting the rules · all four</text></g>
+      <g class="node" data-id="P2" tabindex="0" id="n-P2"><title>P2 Forms cite old section numbers</title><rect class="s-box-tint" x="400" y="113.5" width="300" height="50" rx="10" /><text class="s-txt-md" x="416" y="134.5">Forms cite old section numbers</text><text class="s-muted" x="416" y="151.5">e.g. Anaheim, Nov 2025</text></g>
+      <g class="node" data-id="P3" tabindex="0" id="n-P3"><title>P3 Too many new laws to track</title><rect class="s-box-tint" x="400" y="191" width="300" height="50" rx="10" /><text class="s-txt-md" x="416" y="212">Too many new laws to track</text><text class="s-muted" x="416" y="229">SB 477 renumbering, 2025 changes</text></g>
+      <g class="node" data-id="P4" tabindex="0" id="n-P4"><title>P4 Applications refused or stalled</title><rect class="s-box-tint" x="400" y="268.5" width="300" height="50" rx="10" /><text class="s-txt-md" x="416" y="289.5">Applications refused or stalled</text><text class="s-muted" x="416" y="306.5">an applicant needs words to push back</text></g>
+      <g class="node" data-id="P5" tabindex="0" id="n-P5"><title>P5 Can't predict the time (partial fix)</title><rect class="s-box-tint" x="400" y="346" width="300" height="50" rx="10" /><text class="s-txt-md" x="416" y="367">Can't predict the time</text><text class="s-muted" x="416" y="384">predicting the time · partial</text></g>
+    </g>
+    <g id="personas-col">
+      <g class="node" data-id="R1" tabindex="0" id="n-R1"><title>City permit tech</title><rect class="s-box" x="800" y="36" width="280" height="56" rx="10" /><text class="s-txt-md" x="816" y="60">City permit tech</text><text class="s-muted" x="816" y="78">right answer the first time</text></g>
+      <g class="node" data-id="R2" tabindex="0" id="n-R2"><title>Small builder, 2 to 10 homes</title><rect class="s-box" x="800" y="139" width="280" height="56" rx="10" /><text class="s-txt-md" x="816" y="163">Small builder (2-10 homes)</text><text class="s-muted" x="816" y="181">SB 9 / SB 684 across cities</text></g>
+      <g class="node" data-id="R3" tabindex="0" id="n-R3"><title>ADU homeowner</title><rect class="s-box" x="800" y="242" width="280" height="56" rx="10" /><text class="s-txt-md" x="816" y="266">ADU homeowner</text><text class="s-muted" x="816" y="284">which forms, what order, how long</text></g>
+      <g class="node" data-id="R4" tabindex="0" id="n-R4"><title>Nonprofit project manager, the sponsor's world (Habitat OC style)</title><rect class="s-box" x="800" y="345" width="280" height="56" rx="10" /><text class="s-txt-md" x="816" y="369">Nonprofit PM (Habitat OC style)</text><text class="s-muted" x="816" y="387">for-sale homes · drift is medium</text></g>
+    </g>
+  </svg>
+  </div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card card-border bg-base-100"><div class="card-body p-5">
+      <h3 class="font-semibold">Who benefits in the end</h3>
+      <p class="text-sm">Local workers who move in sooner. They are the reason in the pitch, not users of the tool.</p>
+    </div></div>
+    <div class="card card-border bg-base-100"><div class="card-body p-5">
+      <h3 class="font-semibold">Pains this does not solve (and the pitch won't claim)</h3>
+      <p class="text-sm">Fee totals, funding rounds, observed review times (a Stretch, from APR data), and 34 different rulebooks. The last one is the scale story: a new city is a new data file, not new code.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ SPONSOR LENS ============ -->
+<section class="space-y-5" id="sponsor">
+  <div class="eyebrow">Sponsor lens (new, 11:50)</div>
+  <h2 class="text-3xl">Habitat for Humanity of Orange County is the sponsor</h2>
+  <p class="text-secondary max-w-3xl">The Impact question is "would a nonprofit or city use it next month?" A Habitat OC style project manager is that nonprofit, so that persona moves from last to first in the pitch. The plan stays honest about what the checker fixes for them and what it doesn't.</p>
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="card card-border bg-base-100" id="sp-know"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">What our research says (public sources, not interviews)</h3>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>They deliver 4 to 12 for-sale homes per project and want the fewest months of carrying cost.</li>
+        <li>Their biggest pains are timelines (10 to 42 months from approval to permit) and funding rounds.</li>
+        <li>City rules drifting from state law is a medium pain for them.</li>
+      </ul>
+      <p class="text-xs text-secondary">Nothing about Habitat OC itself is claimed until it is sourced. In P1, the sources worker spends 10 minutes on Habitat OC's public pages and logs what it finds in FINDINGS.md.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="sp-pitch"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">What it changes in the pitch</h3>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Lead with the nonprofit PM and the city permit tech, the two people who would use it next month.</li>
+        <li>The honest claim: it catches a city requirement that state law doesn't allow before submittal, instead of after a refusal. That removes one cause of delay. It does not shorten funding rounds.</li>
+        <li>The next step is the for-sale paths (SB 9 lot splits, SB 684 small lots): same engine, new rules.</li>
+      </ul>
+    </div></div>
+    <div class="card card-border bg-base-100 border-warning/40" id="sp-guard"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">New guard: lawful covenants</h3>
+      <p class="text-sm">Affordable for-sale homes often carry lawful resale or affordability covenants. A rule that flags every "deed restriction" would tell Habitat's own staff their covenants are unlawful, which is the worst kind of confident wrong answer.</p>
+      <p class="text-sm"><strong>So:</strong> the CONFLICTS rule matches only a covenant the city requires as a condition of an ADU permit, as in HCD's Irvine finding. Any other covenant is UNKNOWN. A new test asserts that an affordability covenant is not flagged CONFLICTS.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ DATA FLOW ============ -->
+<section class="space-y-5" id="flow">
+  <div class="eyebrow">Data flow</div>
+  <h2 class="text-3xl">From a saved checklist to a draft reply</h2>
+  <p class="text-secondary max-w-3xl">Everything in the solid boxes is deterministic: the same input always gives the same flags. Claude is optional (the dashed boxes). It can suggest a rule ID or reword the letter, but it never writes a citation, and its output passes an ID check before it is used.</p>
+  <div class="tile p-3 sm:p-5">
+  <div class="figure-scroll">
+  <svg viewBox="0 0 1100 352" role="img" aria-labelledby="flow-t" id="flowsvg">
+    <title id="flow-t">Data flow: saved checklist, items, rule match, flags with citations, draft response, never sent</title>
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="s-arrow-head" d="M0,0 L10,5 L0,10 z" /></marker>
+      <marker id="ahd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path style="fill:var(--color-accent)" d="M0,0 L10,5 L0,10 z" /></marker>
+    </defs>
+
+    <g id="claude-assist"><title>Optional Claude assist: suggests rule IDs for items; output validated</title>
+      <rect class="s-dash-box" x="230" y="28" width="170" height="64" rx="10" />
+      <text class="s-txt-md" x="246" y="50">Claude assist</text>
+      <text class="s-muted" x="246" y="67">optional · needs a key</text>
+      <text class="s-muted" x="246" y="83">suggests rule IDs only</text>
+      <line class="s-dash" x1="315" y1="92" x2="315" y2="128" marker-end="url(#ahd)" />
+    </g>
+    <g id="claude-polish"><title>Optional Claude polish: rewords the letter; flags and citations fixed</title>
+      <rect class="s-dash-box" x="875" y="28" width="170" height="64" rx="10" />
+      <text class="s-txt-md" x="891" y="50">Claude polish</text>
+      <text class="s-muted" x="891" y="67">optional · needs a key</text>
+      <text class="s-muted" x="891" y="83">wording only</text>
+      <line class="s-dash" x1="960" y1="92" x2="960" y2="128" marker-end="url(#ahd)" />
+    </g>
+
+    <text class="s-muted" x="100" y="120" text-anchor="middle">saved by hand, no scraping</text>
+
+    <g id="st1"><title>Stage 1: saved city checklist</title>
+      <rect class="s-box" x="15" y="130" width="170" height="100" rx="12" />
+      <circle class="s-num" cx="33" cy="150" r="10" /><text class="s-num-txt" x="33" y="154" text-anchor="middle">1</text>
+      <text class="s-txt-lg" x="50" y="155">Saved checklist</text>
+      <text class="s-txt" x="27" y="180">cities/irvine.json</text>
+      <text class="s-muted" x="27" y="198">each item: text, page,</text>
+      <text class="s-muted" x="27" y="214">source ID, saved date</text>
+    </g>
+    <line class="s-arrow" x1="185" y1="180" x2="228" y2="180" marker-end="url(#ah)" />
+
+    <g id="st2"><title>Stage 2: one requirement per item</title>
+      <rect class="s-box" x="230" y="130" width="170" height="100" rx="12" />
+      <circle class="s-num" cx="248" cy="150" r="10" /><text class="s-num-txt" x="248" y="154" text-anchor="middle">2</text>
+      <text class="s-txt-lg" x="265" y="155">Items</text>
+      <text class="s-txt" x="242" y="180">one requirement each</text>
+      <text class="s-muted" x="242" y="198">split by code, not</text>
+      <text class="s-muted" x="242" y="214">by a model</text>
+    </g>
+    <line class="s-arrow" x1="400" y1="180" x2="443" y2="180" marker-end="url(#ah)" />
+    <g id="idcheck"><title>ID check: any rule ID not in the rule set becomes UNKNOWN</title>
+      <text class="s-txt" x="422.5" y="122" text-anchor="middle" font-weight="600">ID check</text>
+      <polygon class="s-valid" points="422.5,170 432.5,180 422.5,190 412.5,180" />
+    </g>
+
+    <g id="st3"><title>Stage 3: rule match against the versioned rule set</title>
+      <rect class="s-box" x="445" y="130" width="170" height="100" rx="12" />
+      <circle class="s-num" cx="463" cy="150" r="10" /><text class="s-num-txt" x="463" y="154" text-anchor="middle">3</text>
+      <text class="s-txt-lg" x="480" y="155">Rule match</text>
+      <text class="s-txt" x="457" y="180">rules/adu.json</text>
+      <text class="s-muted" x="457" y="198">item text to rule ID</text>
+      <text class="s-muted" x="457" y="214">no source, no rule</text>
+    </g>
+    <line class="s-arrow" x1="615" y1="180" x2="658" y2="180" marker-end="url(#ah)" />
+
+    <g id="st4"><title>Stage 4: flags with citations</title>
+      <rect class="s-box" x="660" y="130" width="170" height="100" rx="12" />
+      <circle class="s-num" cx="678" cy="150" r="10" /><text class="s-num-txt" x="678" y="154" text-anchor="middle">4</text>
+      <text class="s-txt-lg" x="695" y="155">Flags</text>
+      <text class="s-txt" x="672" y="180">OK · CONFLICTS</text>
+      <text class="s-txt" x="672" y="198">OUTDATED_CITATION</text>
+      <text class="s-txt" x="672" y="216">UNKNOWN · URL · date</text>
+    </g>
+    <line class="s-arrow" x1="830" y1="180" x2="873" y2="180" marker-end="url(#ah)" />
+
+    <g id="st5"><title>Stage 5: draft response, built only from flags</title>
+      <rect class="s-box" x="875" y="130" width="170" height="100" rx="12" />
+      <circle class="s-num" cx="893" cy="150" r="10" /><text class="s-num-txt" x="893" y="154" text-anchor="middle">5</text>
+      <text class="s-txt-lg" x="910" y="155">Draft response</text>
+      <text class="s-txt" x="887" y="180">built only from flags</text>
+      <text class="s-muted" x="887" y="198">copy to clipboard</text>
+      <text class="s-muted" x="887" y="214">you send it yourself</text>
+    </g>
+    <g id="nosend"><title>No send path: no email, form or network call submits anything</title>
+      <line class="s-arrow" x1="1045" y1="180" x2="1066" y2="180" />
+      <line class="s-stop" x1="1070" y1="150" x2="1070" y2="210" />
+      <text class="s-stop-txt" transform="translate(1088 180) rotate(-90)" text-anchor="middle">NEVER SENT</text>
+    </g>
+
+    <g id="sources"><title>Sources: statute text, Handbook pages, HCD letters, city checklists, each with URL and checked date, PII stripped</title>
+      <rect class="s-box-tint" x="445" y="270" width="385" height="72" rx="12" />
+      <text class="s-txt-lg" x="463" y="294">Sources · data/sources/</text>
+      <text class="s-txt" x="463" y="314">statute text, Handbook pages, HCD letters</text>
+      <text class="s-muted" x="463" y="332">URL, section, checked date · names and addresses removed</text>
+      <line class="s-arrow" x1="530" y1="270" x2="530" y2="232" marker-end="url(#ah)" />
+      <line class="s-arrow" x1="745" y1="270" x2="745" y2="232" marker-end="url(#ah)" />
+    </g>
+  </svg>
+  </div>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4 text-sm">
+    <div class="tile p-4"><div class="font-semibold">Why the ID check</div><p class="mt-1">If the assist (or anything else) names a rule ID that isn't in the rule set, the item becomes UNKNOWN. The model can't add law.</p></div>
+    <div class="tile p-4"><div class="font-semibold">Why "no source, no rule"</div><p class="mt-1">The rule loader refuses a rule whose source ID is missing from the sources index. Test 3 holds by construction, and a test checks it.</p></div>
+    <div class="tile p-4"><div class="font-semibold">Why nothing sends</div><p class="mt-1">The app has no mail, form or network code. A test scans <span class="mono">src/</span> for one (test 4).</p></div>
+  </div>
+</section>
+
+<!-- ============ SHARED DATA ============ -->
+<section class="space-y-5" id="shared">
+  <div class="eyebrow">Shared data and findings (your addition)</div>
+  <h2 class="text-3xl">So coworkers can see what we have</h2>
+  <p class="text-secondary max-w-3xl">The repo is the single source of truth. Every source, rule and finding is a plain file with its URL and date, readable on GitHub without running the app. Changes show up as small, reviewable diffs.</p>
+  <div class="grid lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] gap-6 items-start">
+<pre class="tree mono" id="tree">data/
+  sources/
+    index.json            <span class="c"># one entry per source: id, title, url,</span>
+                          <span class="c"># published, checked, how captured, PII stripped</span>
+    hcd-irvine-2025-03-27.md     <span class="c"># exact quotes + page numbers</span>
+    adu-handbook-2026-03.md      <span class="c"># renumbering table, cited pages</span>
+    gov-66315.md  gov-66317.md   <span class="c"># section text, URL, date, mirror?</span>
+    anaheim-adu-checklist-2025-11.md
+  cities/
+    irvine.json  anaheim.json    <span class="c"># saved items, each with source id</span>
+  rules/
+    adu.json                     <span class="c"># every rule cites source ids</span>
+  samples/
+    irvine-run.json  anaheim-run.json   <span class="c"># cached runs, labelled SAMPLE</span>
+  raw/                           <span class="c"># original PDFs, gitignored (PII, size)</span>
+project-docs/
+  FINDINGS.md     <span class="c"># dated log: verified, unconfirmed, dead ends</span>
+  DECISIONS.md    <span class="c"># numbered decisions and why</span>
+  STATUS.md       <span class="c"># per checkpoint: what works, what is next</span>
+  plan.html       <span class="c"># export of this page</span>
+CLAUDE.md         <span class="c"># event rules + Issue Log</span></pre>
+    <div class="space-y-3">
+      <div class="card card-border bg-base-100"><div class="card-body p-5 gap-2">
+        <h3 class="font-semibold">What goes where</h3>
+        <ul class="list-disc pl-5 text-sm space-y-1">
+          <li><strong>FINDINGS.md</strong> is the shared notebook: what we verified, what is still unconfirmed (for example "deemed approved"), and dead ends (for example leginfo blocking scripts). Each entry is dated.</li>
+          <li><strong>STATUS.md</strong> is updated at each checkpoint: what runs, which tests pass, and what is next.</li>
+          <li><strong>Raw PDFs stay out of git.</strong> HCD letters name city staff and give street addresses, so only excerpts with those removed are committed. Anyone can download the original from the URL in <span class="mono">index.json</span>.</li>
+        </ul>
+      </div></div>
+      <div class="card card-border bg-base-100"><div class="card-body p-5 gap-2">
+        <h3 class="font-semibold">Rule entry shape (illustrative)</h3>
+<pre class="mono text-xs overflow-x-auto bg-base-200 rounded-box p-3">{
+  "id": "adu-deed-restriction",
+  "status": "CONFLICTS",
+  "match": ["deed restriction", "covenant"],
+  "cites": [
+    { "source": "gov-66315", "section": "66315" },
+    { "source": "hcd-irvine-2025-03-27" }
+  ]
+}</pre>
+        <p class="text-xs text-secondary">The final wording and the match terms come from the saved source, and I write and check each rule myself.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH CHOICES ============ -->
+<section class="space-y-5" id="tech">
+  <div class="eyebrow">Technical choices</div>
+  <h2 class="text-3xl">What we build with, and why</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="card card-border bg-base-100" id="tc-engine"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Deterministic rule engine</h3>
+      <p class="text-sm">Flags come only from curated rules in versioned JSON. Same input, same flags.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> "a confident wrong answer is the worst outcome". Tests can assert exact flags.<br><strong>Rejected:</strong> letting a model judge conflicts, because it can invent citations.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-sourced"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">No source, no rule</h3>
+      <p class="text-sm">The loader rejects any rule whose source ID isn't in <span class="mono">sources/index.json</span>.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> test 3 holds by construction instead of by care.<br><strong>Cost:</strong> slower rule writing, which is fine for two cities.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-stack"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Vite + React + TypeScript (strict)</h3>
+      <p class="text-sm">One <span class="mono">npm install && npm run dev</span>. Versions pinned in <span class="mono">package-lock.json</span>, Node pinned with <span class="mono">.nvmrc</span>.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> fastest path to a UI judges can run on a fresh laptop.<br><strong>Rejected:</strong> Next.js (we don't need its server), and plain HTML (UI state gets messy).</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-shared"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Engine is a pure TS module</h3>
+      <p class="text-sm">The same code runs in the UI, in Vitest and in a CLI (<span class="mono">npm run check irvine</span>).</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> acceptance tests run without a browser, and coworkers can check a city from the terminal.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-nodb"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">No database: JSON in <span class="mono">data/</span></h3>
+      <p class="text-sm">Sources, cities, rules and sample runs are files in git.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> the data is small, diffable and reviewable in a PR, and coworkers read it on GitHub. If a database is ever needed, it is StrictDB.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-claude"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Claude in the app is optional</h3>
+      <p class="text-sm">One server-side route (a Vite middleware, so still one command), with the key from <span class="mono">.env</span>. Without a key, the UI uses the cached sample runs.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> test 5 (fresh laptop, no key). The runtime model is picked at the paid-run gate with the claude-api skill, cheapest first.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-letter"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Letter from a template</h3>
+      <p class="text-sm">The draft is filled in from the flags and their citations. Copy is the only action.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> the letter can only say what the flags say, and there is no send path (test 4).</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-noscrape"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Sources saved by hand, once</h3>
+      <p class="text-sm">Each document is saved once, with its URL and checked date. No crawling, ever.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> event rules, and Anaheim and leginfo return 403 to scripts. Statute text read on the california.public.law mirror is marked "mirror" until someone confirms it in a browser.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="tc-git"><div class="card-body p-5 gap-2">
+      <h3 class="font-semibold">Worktrees with separate paths</h3>
+      <p class="text-sm">Each parallel worker gets its own git worktree and owns separate folders, so their work never collides. I merge into local <span class="mono">main</span> after I review each diff.</p>
+      <p class="text-xs text-secondary"><strong>Why:</strong> merges without conflicts at speed. <strong>Cost:</strong> I am the review bottleneck, which is deliberate.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ ROUTING ============ -->
+<section class="space-y-5" id="routing">
+  <div class="eyebrow">Model routing</div>
+  <h2 class="text-3xl">Which model runs which task</h2>
+  <p class="text-secondary max-w-3xl">Judgment stays with the strongest model. Bounded slices go to Sonnet, and mechanical steps go to Haiku. At most three agents run here at once, and Johnny's run in his own session. That is under the large fan-out threshold, but here is the tradeoff anyway: more speed, while every diff from both sides still goes through me before it is merged.</p>
+  <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+  <table class="table">
+    <thead><tr><th>Task</th><th>Who</th><th>Owns (paths)</th><th>Why this model</th></tr></thead>
+    <tbody>
+      <tr><td>Plan, rule schema, writing every rule from sources, reviewing diffs, merging, gates</td><td><span class="badge badge-sm badge-soft badge-primary">Opus 5.5 · captain</span></td><td class="mono">data/rules/**</td><td>"No invented law" is the core risk. It needs judgment.</td></tr>
+      <tr><td>Save sources, exact quotes with page numbers, strip PII, keep FINDINGS</td><td><span class="badge badge-sm badge-soft badge-accent">Sonnet 5.5 · worker</span></td><td class="mono">data/sources/** data/cities/** project-docs/FINDINGS.md</td><td>Many PDF reads. I spot-check every quote before a rule uses it.</td></tr>
+      <tr><td>Engine and tests, written test first from acceptance tests 1 to 5, plus the CLI</td><td><span class="badge badge-sm badge-soft badge-accent">Sonnet 5.5 · worker</span></td><td class="mono">src/engine/** tests/** scripts/check.ts</td><td>A bounded slice with a clear verify step.</td></tr>
+      <tr><td>Main screen, draft letter, scanner screen, clocks panel (J1 to J4)</td><td><span class="badge badge-sm jt-chip">Johnny's agents</span></td><td class="mono">src/ui/** src/letter/** tests/letter/** index.html</td><td>He runs these in his own session, against the shared contract. I review his diffs before they merge.</td></tr>
+      <tr><td>Scaffold, config files, entering checklists into JSON, lint fixes</td><td><span class="badge badge-sm badge-soft">Haiku 5.5</span></td><td class="mono">package.json tsconfig.json vite.config.ts .gitignore .env.example .dockerignore</td><td>Mechanical.</td></tr>
+      <tr><td>Fresh-eyes review at 1:30 and before the push</td><td><span class="badge badge-sm badge-soft badge-primary">Opus 5.5 · reviewer</span></td><td>reads only</td><td>A risky review: law claims, PII, secrets, attribution, em dashes.</td></tr>
+      <tr><td>README draft and video script</td><td><span class="badge badge-sm badge-soft badge-accent">Sonnet 5.5</span>, edited by me</td><td class="mono">README.md project-docs/video-script.md</td><td>Follows the starter's TEAM-README template.</td></tr>
+      <tr><td>Save the Anaheim PDF (if needed), record the video, make the repo public, submit the hub form</td><td><span class="badge badge-sm badge-soft badge-warning">You</span></td><td>-</td><td>These need a human, or your accounts.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ GATES ============ -->
+<section class="space-y-5" id="gates">
+  <div class="eyebrow">Gates</div>
+  <h2 class="text-3xl">Nothing irreversible without your yes</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="tile p-5" id="g-paid"><div class="flex items-center gap-2"><span class="badge badge-error badge-sm">Gate</span><h3 class="font-semibold">Paid model run</h3></div><p class="text-sm mt-2">Before any live Claude call, a cost table: what runs, how many calls, tokens, cost, spend so far. One yes covers one run. Workers never start one.</p></div>
+    <div class="tile p-5" id="g-push"><div class="flex items-center gap-2"><span class="badge badge-error badge-sm">Gate</span><h3 class="font-semibold">Push to GitHub</h3></div><p class="text-sm mt-2">Each push needs a yes, unless you give a standing yes for the checkpoint pushes (question 3). The 2:15 final push always asks. Before any push: no keys, no PII, no AI attribution, no em dashes, and the branch is up to date.</p></div>
+    <div class="tile p-5" id="g-public"><div class="flex items-center gap-2"><span class="badge badge-error badge-sm">Gate</span><h3 class="font-semibold">Make the repo public</h3></div><p class="text-sm mt-2">Your yes, after a scan of the full history for secrets and personal information. Then a signed-out check.</p></div>
+    <div class="tile p-5" id="g-deploy"><div class="flex items-center gap-2"><span class="badge badge-error badge-sm">Gate</span><h3 class="font-semibold">Deploy</h3></div><p class="text-sm mt-2">None planned. A live URL is optional and happens only after "yes, deploy".</p></div>
+    <div class="tile p-5" id="g-fanout"><div class="flex items-center gap-2"><span class="badge badge-error badge-sm">Gate</span><h3 class="font-semibold">More agents</h3></div><p class="text-sm mt-2">This session uses at most three at once. Anything larger, or a multi-agent workflow, gets a tradeoff note and your yes first. Johnny's session follows his own approvals.</p></div>
+    <div class="tile p-5" id="g-never"><div class="flex items-center gap-2"><span class="badge badge-neutral badge-sm">Never</span><h3 class="font-semibold">Send to a city or person</h3></div><p class="text-sm mt-2">No filing, emailing or submitting, ever. The hub form and video upload are yours to do.</p></div>
+  </div>
+</section>
+
+<!-- ============ SCOPE ============ -->
+<section class="space-y-5" id="scope">
+  <div class="eyebrow">Scope</div>
+  <h2 class="text-3xl">In scope and out of scope</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="card card-border bg-base-100" id="sc-must"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><h3 class="font-semibold">Must</h3><span class="badge badge-sm badge-soft badge-primary">by CP2, 1:15</span></div>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>ADU checker for Irvine and Anaheim</li>
+        <li>Four statuses, each with a source and date</li>
+        <li>Draft response that is never sent</li>
+        <li>Prototype notice</li>
+        <li>Cached sample runs, so no key is needed</li>
+        <li>Shared sources, rules and FINDINGS in the repo</li>
+      </ul>
+    </div></div>
+    <div class="card card-border bg-base-100" id="sc-should"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><h3 class="font-semibold">Should</h3><span class="badge badge-sm badge-soft">by CP3, 1:45</span></div>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Citation scanner for any pasted text</li>
+        <li>Legal clocks panel, checked against the Handbook</li>
+        <li>Test 6 candidates, encoded only if HCD's analysis and the statute support them</li>
+        <li>CLI: <span class="mono">npm run check</span></li>
+      </ul>
+    </div></div>
+    <div class="card card-border bg-base-100" id="sc-stretch"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><h3 class="font-semibold">Stretch</h3><span class="badge badge-sm badge-soft badge-warning">likely cut</span></div>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Live Claude assist (question 4, paid gate)</li>
+        <li>SB 9 rules (HCD letters to Orange and Dana Point). Question 6 may move this up to a Should.</li>
+        <li>Observed timelines from APR Table A2</li>
+        <li>"Which fast path fits this lot" (Lane 1 data)</li>
+      </ul>
+      <p class="text-xs text-secondary">These stay in the pitch as next steps: same engine, new rules.</p>
+    </div></div>
+    <div class="card card-border bg-base-100" id="sc-out"><div class="card-body p-5 gap-2">
+      <div class="flex items-center gap-2"><h3 class="font-semibold">Out</h3><span class="badge badge-sm badge-soft badge-error">not today</span></div>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Filing, emailing or submitting anything</li>
+        <li>Scraping city sites or the HCD dashboard</li>
+        <li>Legal advice</li>
+        <li>"Time saved versus the four-year baseline"</li>
+        <li>Real applicant details</li>
+        <li>Deploying without your yes</li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ RISKS ============ -->
+<section class="space-y-5" id="risks">
+  <div class="eyebrow">Risks</div>
+  <h2 class="text-3xl">What could go wrong</h2>
+  <div class="overflow-x-auto rounded-box border border-base-content/10 bg-base-100">
+  <table class="table">
+    <thead><tr><th>Risk</th><th>Effect</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td class="font-medium">The Anaheim checklist returns 403 to scripts</td><td>Test 2 is blocked</td><td>You save it by hand, or I open it once in your Chrome (question 2). Fallback: the scanner runs on the 65852.2 citations quoted in the starter's notes.</td></tr>
+      <tr><td class="font-medium">The Irvine evidence dates from Feb 2025</td><td>We might overclaim that Irvine still requires the covenant</td><td>The input is labelled "as quoted by HCD, city email of 2025-02-18". We never say it is current.</td></tr>
+      <tr><td class="font-medium">Statute text came from a mirror</td><td>A wording or section error</td><td>Marked "mirror" in the sources index until someone confirms it in a browser. Section numbers are checked against the Handbook.</td></tr>
+      <tr><td class="font-medium">The renumbering is not one to one</td><td>We might show a wrong new section number</td><td>Only exact mappings from the Handbook are shown. Otherwise the mapping is UNKNOWN (test 2).</td></tr>
+      <tr><td class="font-medium">Flagging lawful affordability covenants (sponsor's own model)</td><td>A confident wrong answer in front of Habitat OC</td><td>The CONFLICTS rule is limited to ADU-permit covenants, as in HCD's Irvine finding. Other covenants are UNKNOWN, and a guard test checks it.</td></tr>
+      <tr><td class="font-medium">PII in the HCD letters</td><td>Personal data in public git history</td><td>Raw PDFs are gitignored. Excerpts have names and addresses removed. The reviewer and the pre-push scan check it.</td></tr>
+      <tr><td class="font-medium">The two sides drift apart</td><td>The merge at 12:45 breaks</td><td>The contract comes first, and both sample runs share its types. The contract changes only through me. We merge at every checkpoint, not once at the end.</td></tr>
+      <tr><td class="font-medium">The remote is under another account</td><td>The push fails at 2:15</td><td>Confirm access now (question 1). Do a test push of the scaffold at CP1, if you approve it.</td></tr>
+      <tr><td class="font-medium">It doesn't run on a fresh laptop</td><td>"Works" score</td><td>Pinned Node and lockfile. A fresh-clone run at CP2 and again at 2:05.</td></tr>
+      <tr><td class="font-medium">Time</td><td>A half-built feature at 2:00</td><td>Irvine first, then Anaheim. Each checkpoint is runnable and committed. Freeze at 2:00 means no new features.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- ============ QUESTIONS ============ -->
+<section class="space-y-5" id="questions">
+  <div class="eyebrow">Needs from you</div>
+  <h2 class="text-3xl">Six questions, then approval</h2>
+  <p class="text-secondary max-w-3xl">These are about things you may know that I don't. Pick an answer and press Queue for each one, then press Send in the Lavish bar. You can also annotate anything on the page.</p>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <form class="card card-border bg-base-100" data-lavish-question="remote-access" onsubmit="event.preventDefault(); queueAnswer(this, 'remote-access', 'Q1 Remote access')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">1. The remote is Johnny's (<span class="mono">JohnFok119/fast-track</span>). Can you push to it?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="I am a collaborator and can push; Johnny makes it public">Yes, I'm a collaborator. Johnny makes it public at 2:15.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Not yet; I will ask Johnny to add me now">Not yet. I'll ask Johnny to add me now.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Something else (see note)">Something else (add a note)</label>
+        <input class="input input-sm w-full" name="note" placeholder="Optional note">
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+
+    <form class="card card-border bg-base-100" data-lavish-question="anaheim-pdf" onsubmit="event.preventDefault(); queueAnswer(this, 'anaheim-pdf', 'Q2 Anaheim checklist')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">2. Anaheim's site blocks scripts. How do we save its checklist?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Claude opens it once in my Chrome and saves the text (recommended)">I open it once in a new tab in your Chrome and save the text (recommended)</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="I will save the PDF by hand into data/raw/">You save the PDF into <span class="mono">data/raw/</span> by hand</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Skip Anaheim; Irvine plus the scanner only">Skip Anaheim. Irvine plus the scanner only.</label>
+        <input class="input input-sm w-full" name="note" placeholder="Optional note">
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+
+    <form class="card card-border bg-base-100" data-lavish-question="coworker-visibility" onsubmit="event.preventDefault(); queueAnswer(this, 'coworker-visibility', 'Q3 How coworkers follow progress')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">3. Johnny and your coworkers need pushes during the day. How do you want to approve them?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Standing yes until 2:15 for the contract push (12:15) and reviewed merges to main at CP1, CP2, CP3; the final 2:15 push still asks (recommended)">Standing yes until 2:15 for the contract push (12:15) and reviewed merges to <span class="mono">main</span> at CP1, CP2 and CP3. The final 2:15 push still asks (recommended)</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Ask me before every push">Ask me before every push. This is slower, because Johnny waits on each one.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Something else (see note)">Something else (add a note)</label>
+        <input class="input input-sm w-full" name="note" placeholder="Is the repo private until 2:15? Who else should be able to read it?">
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+
+    <form class="card card-border bg-base-100" data-lavish-question="claude-assist" onsubmit="event.preventDefault(); queueAnswer(this, 'claude-assist', 'Q4 Live Claude assist in the app')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">4. Should the app make a live Claude call?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Deterministic first; add assist after CP3 only if time (recommended)">Deterministic first. Add the assist after CP3, only if there is time (recommended)</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Build the assist now; I have a key">Build it now. I have an <span class="mono">ANTHROPIC_API_KEY</span>.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="No Claude in the app at all">No Claude in the app at all</label>
+        <input class="input input-sm w-full" name="note" placeholder="Optional note">
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+
+    <form class="card card-border bg-base-100 md:col-span-2" data-lavish-question="johnny-split" onsubmit="event.preventDefault(); queueAnswer(this, 'johnny-split', 'Q5 Johnny split')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">5. Does the J1 to J4 split work for Johnny? Is anyone else writing code or data today?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Split as proposed: Johnny takes J1 to J4 (recommended)">As proposed: Johnny takes J1 to J4, the screen and the letter (recommended)</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Johnny takes only J1 and J2; we keep scanner and clocks UI">Johnny takes only J1 and J2. We keep the scanner and clocks screens.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Different split (see note)">A different split (add a note)</label>
+        <textarea class="textarea w-full" name="note" rows="2" placeholder="Does Johnny's session have the same plugins (seven, superpowers)? Anything he has already started?"></textarea>
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+
+    <form class="card card-border bg-base-100 md:col-span-2" data-lavish-question="habitat-scope" onsubmit="event.preventDefault(); queueAnswer(this, 'habitat-scope', 'Q6 Habitat OC scope tilt')">
+      <div class="card-body p-5 gap-3">
+        <h3 class="font-semibold">6. Habitat OC lens: should SB 9 (the for-sale lot-split path) move up?</h3>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Promote SB 9 (Dana Point, Orange letters) to first Should, only if CP2 lands on time (recommended)">Make SB 9 rules from the Dana Point and Orange letters the first Should, built only if CP2 lands on time (recommended). Closer to Habitat's for-sale work, and the evidence is HCD letters, like Irvine.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Keep ADU only; pitch SB 9 and SB 684 as next steps">Keep ADU only, and pitch SB 9 and SB 684 as next steps. Least risk to the 2:00 freeze.</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Something else (see note)">Something else (add a note)</label>
+        <input class="input input-sm w-full" name="note" placeholder="Anything you know about Habitat OC's projects or what they told the room?">
+        <div class="flex items-center gap-3"><button class="btn btn-sm btn-primary" type="submit">Queue answer</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+      </div>
+    </form>
+  </div>
+
+  <form class="card bg-base-200" data-lavish-question="plan-approval" onsubmit="event.preventDefault(); queueAnswer(this, 'plan-approval', 'Plan approval')" id="approve">
+    <div class="card-body p-6 gap-3">
+      <h3 class="text-xl">Approve the plan</h3>
+      <p class="text-sm text-secondary">After you approve, I post a short summary in the terminal and wait for you to say "proceed". Then P1 starts.</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Approved as is">Approved as is</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Approved with my annotations">Approved, with my annotations</label>
+        <label class="flex gap-2 text-sm"><input type="radio" class="radio radio-sm radio-primary" name="choice" value="Revise first">Revise first</label>
+      </div>
+      <textarea class="textarea w-full" name="note" rows="2" placeholder="Anything to change"></textarea>
+      <div class="flex items-center gap-3"><button class="btn btn-primary" type="submit">Queue approval</button><span class="text-xs text-secondary" data-status>Not queued</span></div>
+    </div>
+  </form>
+</section>
+
+<footer class="hair pt-6 text-xs text-secondary space-y-1">
+  <p>Sources for this plan: <span class="mono">project-docs/CONTEXT.md</span>, <span class="mono">project-docs/problem-statement.md</span>, and the starter's <span class="mono">docs/submission.md</span>, <span class="mono">lanes/2-clear-it/scenarios.json</span> and <span class="mono">lanes/2-clear-it/data/DATA-SOURCES.md</span>. Checked 2026-11-07.</p>
+  <p>Prototype planning page. Not legal advice.</p>
+</footer>
+</main>
+
+<script>
+function queueAnswer(form, key, question) {
+  const fd = new FormData(form);
+  const choice = (fd.get('choice') || '').toString();
+  const note = (fd.get('note') || '').toString().trim();
+  const status = form.querySelector('[data-status]');
+  if (!choice && !note) { status.textContent = 'Pick an answer first'; return; }
+  const text = question + ': ' + (choice || '(no option)') + (note ? ' | note: ' + note : '');
+  if (window.lavish && typeof window.lavish.queuePrompt === 'function') {
+    window.lavish.queuePrompt(text, { tag: 'choice', text, element: form, queueKey: key, data: { question: key, answer: choice, note } });
+    status.textContent = 'Queued. Press Send in the Lavish bar.';
+  } else {
+    status.textContent = 'Open in Lavish to queue: ' + text;
+  }
+}
+document.querySelectorAll('form[data-lavish-question]').forEach((f) => {
+  f.addEventListener('input', () => {
+    const s = f.querySelector('[data-status]');
+    if (s && s.textContent.startsWith('Queued')) s.textContent = 'Changed. Queue again to update.';
+  });
+});
+
+// Realistic mock of the main screen (illustrative data, sourced where shown)
+(function () {
+  const CHECKED = '2026-11-07';
+  const SRC = {
+    hcdIrvine: { label: 'HCD letter to the City of Irvine, 2025-03-27', url: 'https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf', note: 'technical assistance letter' },
+    g66315: { label: 'Gov Code 66315', url: 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66315', note: 'read on mirror, confirm on leginfo' },
+    g66317: { label: 'Gov Code 66317(c)', url: 'https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317', note: 'read on mirror, confirm on leginfo' },
+    handbook: { label: 'HCD ADU Handbook, March 2026, p.13', url: 'https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf', note: 'renumbering table' },
+    anaheim: { label: 'Anaheim ADU Submittal Requirements Checklist, Nov 2025', url: 'https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist', note: 'saved by hand' }
+  };
+  const CITIES = {
+    irvine: {
+      url: 'localhost:5173/check/irvine',
+      source: 'Requirements as quoted in the <a href="' + SRC.hcdIrvine.url + '" target="_blank" rel="noopener">HCD letter to the City of Irvine</a> (2025-03-27), from a city email of 2025-02-18. This is not the city\'s current form. Saved ' + CHECKED + '.',
+      items: [
+        { id: 'irv-01', status: 'CONFLICTS', rule: 'adu-deed-restriction', text: 'Record a deed restriction (covenant) on the property before the ADU permit is issued.', short: 'Gov 66315 · HCD letter 2025-03-27',
+          quote: 'HCD: the City "misapplied State ADU Law in the processing of ADU applications by requiring deed restrictions and disallowing JADUs in townhomes".',
+          why: 'HCD called the deed restriction "an additional standard" that "cannot be imposed" under Gov Code 66315. Treating an application as incomplete without it conflicts with Gov Code 66317(c).',
+          note: 'HCD sent its findings on 2025-01-07, and a city email of 2025-02-18 still required the covenant. Whether it is still required today is unconfirmed.',
+          cites: ['g66315', 'g66317', 'hcdIrvine'] },
+        { id: 'irv-02', status: 'OUTDATED_CITATION', rule: 'cite-65852-2', text: 'City email cites Government Code section 65852.2 as its authority.', short: '65852.2 → 66310-66342 (SB 477)',
+          map: { old: '65852.2', now: '66310 to 66342 (renumbered by SB 477, 2024)', exact: 'UNKNOWN: there is no single replacement, so the right section depends on the subject' },
+          cites: ['handbook'] },
+        { id: 'irv-03', status: 'UNKNOWN', text: 'JADU not allowed in a detached townhome on its own lot (treated as multifamily).', short: 'No rule yet · candidate for test 6',
+          why: 'No rule covers this yet. HCD discusses it in the same letter. It becomes a rule only after HCD\'s analysis and Gov 66333 are read (acceptance test 6).', cites: [] },
+        { id: 'irv-04', status: 'UNKNOWN', text: 'The 60-day review clock stops when the City sends plan check comments.', short: 'No rule yet · candidate for test 6',
+          why: 'No rule covers this yet. It is checked against Gov 66317 and HCD\'s analysis before it is encoded (acceptance test 6).', cites: [] }
+      ],
+      letter: '[Date]\n\nCity of Irvine\nRe: ADU application at [project address]\n\nTo the plan check team,\n\nThe requirements for my ADU application ask me to record a deed restriction before the permit is issued.\n\nIn its letter to the City dated March 27, 2025, the California Department of Housing and Community Development (HCD) found that requiring a deed restriction is "an additional standard" that "cannot be imposed" under Government Code section 66315. HCD also found that treating an application as incomplete for this reason conflicts with Government Code section 66317(c).\n\nI ask that this requirement be removed and that my application be reviewed within the time Government Code section 66317 allows.\n\nSincerely,\n[Your name]\n\nSources: HCD letter to the City of Irvine, 2025-03-27 · Gov Code 66315, 66317(c) · checked ' + CHECKED
+    },
+    anaheim: {
+      url: 'localhost:5173/check/anaheim',
+      source: '<a href="' + SRC.anaheim.url + '" target="_blank" rel="noopener">Anaheim ADU Submittal Requirements Checklist</a>, November 2025 · saved by hand ' + CHECKED + ' · item wording is paraphrased in this mock',
+      items: [
+        { id: 'ana-01', status: 'OUTDATED_CITATION', rule: 'cite-65852-22', text: 'JADU deed restriction required, citing Gov Code 65852.22.', short: '65852.22 → 66333',
+          map: { old: '65852.22', now: '66333 (junior ADUs)', exact: 'Exact, per the Handbook' },
+          note: 'Only the citation is flagged. Whether the covenant itself is allowed is a separate rule that is not yet encoded, so nothing here says it is unlawful.', cites: ['handbook'] },
+        { id: 'ana-02', status: 'OUTDATED_CITATION', rule: 'cite-65852-2', text: 'ADU standards cited as Gov Code 65852.2.', short: '65852.2 → 66310-66342',
+          map: { old: '65852.2', now: '66310 to 66342 (renumbered by SB 477, 2024)', exact: 'UNKNOWN: there is no single replacement section' }, cites: ['handbook'] },
+        { id: 'ana-03', status: 'UNKNOWN', text: 'Sewer verification for the ADU.', short: 'No rule in the rule set', why: 'No rule in the rule set covers this item, so Fast Track does not guess.', cites: [] },
+        { id: 'ana-04', status: 'UNKNOWN', text: 'Water meter location shown on the site plan.', short: 'No rule in the rule set', why: 'No rule in the rule set covers this item, so Fast Track does not guess.', cites: [] },
+        { id: 'ana-05', status: 'UNKNOWN', text: 'New address assigned for the ADU.', short: 'No rule in the rule set', why: 'No rule in the rule set covers this item, so Fast Track does not guess.', cites: [] }
+      ],
+      letter: '[Date]\n\nCity of Anaheim\nRe: ADU application at [project address]\n\nTo the plan check team,\n\nThe ADU Submittal Requirements Checklist (November 2025) cites Government Code sections 65852.2 and 65852.22. SB 477 (2024) moved these provisions to sections 66310 through 66342, and the junior ADU provisions are now in section 66333.\n\nI ask that my application be reviewed under the current sections.\n\nSincerely,\n[Your name]\n\nSources: HCD ADU Handbook, March 2026, p.13 · checked ' + CHECKED
+    },
+    paste: {
+      url: 'localhost:5173/scan',
+      source: 'Text you pasted · scanned for old ADU section numbers only · not saved',
+      items: [
+        { id: 'scan-01', status: 'OUTDATED_CITATION', rule: 'cite-65852-2', text: '"...shall comply with Government Code Section 65852.2..."', short: '65852.2 → 66310-66342',
+          map: { old: '65852.2', now: '66310 to 66342 (renumbered by SB 477, 2024)', exact: 'UNKNOWN: there is no single replacement section' }, cites: ['handbook'] },
+        { id: 'scan-02', status: 'OUTDATED_CITATION', rule: 'cite-65852-22', text: '"...Junior ADUs are subject to Section 65852.22."', short: '65852.22 → 66333',
+          map: { old: '65852.22', now: '66333 (junior ADUs)', exact: 'Exact, per the Handbook' }, cites: ['handbook'] }
+      ],
+      letter: 'No letter for pasted text. Open a city to draft a response.'
+    }
+  };
+  const STATUSES = ['CONFLICTS', 'OUTDATED_CITATION', 'UNKNOWN', 'OK'];
+  const $ = (id) => document.getElementById(id);
+  const pill = (s) => '<span class="pill p-' + s + '">' + s + '</span>';
+  const flFor = (s) => s === 'UNKNOWN' ? '<span class="fl callout">F3</span>' : s === 'OUTDATED_CITATION' ? '<span class="fl callout">F4</span>' : '';
+  let city = 'irvine';
+  let selected = 'irv-01';
+
+  function renderDetail(item) {
+    const cites = item.cites.length
+      ? '<ul class="text-sm space-y-1">' + item.cites.map((k) => '<li><a href="' + SRC[k].url + '" target="_blank" rel="noopener">' + SRC[k].label + '</a> <span class="text-xs text-secondary">· ' + SRC[k].note + ' · checked ' + CHECKED + '</span></li>').join('') + '</ul>'
+      : '<p class="text-sm text-secondary">None. No rule matched, so there is nothing to cite and nothing is guessed.</p>';
+    const map = item.map
+      ? '<div class="rounded-box bg-base-200 p-3 text-sm grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-1"><span class="text-secondary">Cited</span><span class="font-semibold">Gov Code ' + item.map.old + '</span><span class="text-secondary">Now</span><span class="font-semibold">Gov Code ' + item.map.now + '</span><span class="text-secondary">Exact</span><span>' + item.map.exact + '</span></div>'
+      : '';
+    $('m-detail').innerHTML = '<div class="card-body p-4 gap-3">'
+      + '<div class="flex flex-wrap items-center gap-2">' + pill(item.status) + '<span class="text-xs text-secondary">Item ' + item.id + '</span></div>'
+      + '<p class="font-semibold leading-snug">' + item.text + '</p>'
+      + (item.quote ? '<blockquote class="text-sm pl-3" style="border-left:2px solid var(--color-primary)">' + item.quote + '</blockquote>' : '')
+      + (item.why ? '<p class="text-sm">' + item.why + '</p>' : '')
+      + map
+      + (item.note ? '<p class="text-xs text-secondary">' + item.note + '</p>' : '')
+      + '<div><div class="flex items-center gap-2 mb-1"><span class="eyebrow">Sources</span><span class="fl callout">F2</span></div>' + cites + '</div>'
+      + '<div class="text-xs text-secondary hair pt-2">Rule: ' + (item.rule || 'none matched') + ' · rules v0.1</div>'
+      + '</div>';
+  }
+
+  function render() {
+    const c = CITIES[city];
+    $('m-url').textContent = c.url;
+    $('m-source').innerHTML = c.source;
+    $('m-paste').classList.toggle('hidden', city !== 'paste');
+    $('m-list-title').textContent = (city === 'paste' ? 'Findings in your text' : 'Requirements') + ' (' + c.items.length + ')';
+    const counts = Object.fromEntries(STATUSES.map((s) => [s, c.items.filter((i) => i.status === s).length]));
+    $('m-counts').innerHTML = STATUSES.map((s) => '<span class="pill p-' + s + '">' + counts[s] + ' ' + (s === 'OUTDATED_CITATION' ? 'OUTDATED' : s) + '</span>').join('');
+    if (!c.items.some((i) => i.id === selected)) selected = c.items[0].id;
+    $('m-list').innerHTML = c.items.map((i) => '<li><button type="button" class="row-btn" data-id="' + i.id + '" aria-pressed="' + (i.id === selected) + '">'
+      + '<div class="flex flex-wrap items-center gap-2">' + pill(i.status) + flFor(i.status) + '</div>'
+      + '<div class="text-sm mt-1.5">' + i.text + '</div>'
+      + '<div class="text-xs text-secondary mt-1">' + i.short + '</div></button></li>').join('');
+    renderDetail(c.items.find((i) => i.id === selected));
+    $('m-letter').textContent = c.letter;
+  }
+
+  $('m-tabs').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-city]');
+    if (!b) return;
+    city = b.dataset.city;
+    $('m-tabs').querySelectorAll('[data-city]').forEach((t) => { const on = t === b; t.classList.toggle('tab-active', on); t.setAttribute('aria-selected', String(on)); });
+    render();
+  });
+  $('m-list').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-id]');
+    if (!b) return;
+    selected = b.dataset.id;
+    render();
+  });
+  render();
+})();
+
+// What-solves-what map: trace a node's chain on hover or focus
+(function () {
+  const svg = document.getElementById('map');
+  if (!svg) return;
+  const links = [...svg.querySelectorAll('.link')].map((el) => ({ el, a: el.dataset.a, b: el.dataset.b }));
+  const nodes = [...svg.querySelectorAll('.node')];
+  function trace(id) {
+    const fwd = new Set([id]), back = new Set([id]);
+    let grew = true;
+    while (grew) { grew = false; for (const l of links) { if (fwd.has(l.a) && !fwd.has(l.b)) { fwd.add(l.b); grew = true; } } }
+    grew = true;
+    while (grew) { grew = false; for (const l of links) { if (back.has(l.b) && !back.has(l.a)) { back.add(l.a); grew = true; } } }
+    const on = new Set([...fwd, ...back]);
+    svg.classList.add('focus');
+    for (const l of links) l.el.classList.toggle('on', (fwd.has(l.a) && fwd.has(l.b)) || (back.has(l.a) && back.has(l.b)));
+    for (const n of nodes) n.classList.toggle('on', on.has(n.dataset.id));
+  }
+  function clear() {
+    svg.classList.remove('focus');
+    links.forEach((l) => l.el.classList.remove('on'));
+    nodes.forEach((n) => n.classList.remove('on'));
+  }
+  nodes.forEach((n) => {
+    n.addEventListener('pointerenter', () => trace(n.dataset.id));
+    n.addEventListener('focus', () => trace(n.dataset.id));
+    n.addEventListener('pointerleave', clear);
+    n.addEventListener('blur', clear);
+  });
+})();
+</script>
+</body>
+</html>

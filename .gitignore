@@ -1,0 +1,18 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies and builds
+node_modules/
+dist/
+coverage/
+
+# Local only
+CLAUDE.local.md
+.DS_Store
+.lavish/
+.playwright-mcp/
+
+# Raw source PDFs: may contain personal information, never committed (excerpts live in data/sources/)
+data/raw/
