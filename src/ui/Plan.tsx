@@ -85,7 +85,8 @@ export function Plan({ phases, steps, pushBack, contacts, escalation }: Props) {
   return (
     <>
       <section className="card" aria-labelledby="s4">
-        <h2 className="h" id="s4"><span className="stepno">4</span>Your timeline, idea to move-in</h2>
+        <h2 className="h" id="s4"><span className="stepno">4</span>Your timeline, plans to move-in</h2>
+        <p className="muted" style={{ fontSize: '0.85rem', margin: '-4px 0 12px' }}>Starts once you own the lot. Finding land and funding are not included.</p>
         <Timeline phases={phases} />
         <Legend />
         <PhaseNotes phases={phases} />

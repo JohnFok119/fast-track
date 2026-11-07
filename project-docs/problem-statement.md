@@ -30,7 +30,7 @@ First: an applicant blocked by a requirement the state says a city can't impose.
 
 ## What we're building
 
-A free tool that compares an OC city's actual permit requirements with state law and HCD's letters to that city. Version 1 checks ADU requirements for Irvine and Anaheim, where the evidence is strongest: the HCD Irvine letter, and Anaheim's November 2025 ADU checklist, which still cites Gov Code 65852.2 and 65852.22 (renumbered to 66310 to 66342 by SB 477 in 2024). SB 9 comes next. A "which path fits this lot" view is a later step.
+A free tool that compares an OC city's actual permit requirements with state law and HCD's letters to that city. Version 1 checks ADU requirements for Irvine and Anaheim, where the evidence is strongest: the HCD Irvine letter, and Anaheim's November 2025 ADU checklist, which still cites Gov Code 65852.2 and 65852.22 (renumbered to 66310 to 66342 by SB 477 in 2024). SB 9 checks now cover Dana Point and Orange, each from HCD's letter to that city. Picking what to build (rent, sell, or SB 9) is the first step on screen; a full "which path fits this lot" analysis is a later step.
 
 Each item is flagged OK, conflicts with state law (with statute and letter), outdated citation, or unknown. The tool drafts a response the applicant can send. It never sends anything. It also shows the legal deadlines that apply (for example the 60-day ADU decision clock) next to the city's requirements.
 
@@ -55,7 +55,7 @@ Each item is flagged OK, conflicts with state law (with statute and letter), out
 ## Claims to confirm before the pitch
 
 - Whether any OC city has a published SB 684 application process. We could not verify this, so it is not claimed.
-- The 60-day ADU decision clock: confirm the exact period and the Gov Code section against the HCD ADU Handbook before showing it.
+- The 60-day ADU decision clock: done. Sourced to HCD ADU Handbook p. 11 (and p. 34 for the 15-business-day completeness check), Gov Code 66317(a). It applies when a home already exists on the lot. "Deemed approved" stays UNCONFIRMED until read on leginfo.
 - The "34 cities" count for Orange County: confirm against a current source.
 - Whether the Irvine deed restriction is still being required today. Our evidence is the Feb 18, 2025 city email, so it may have changed.
 - Competitor features may have changed since 2026-11-07. Re-check the public pages before the pitch.

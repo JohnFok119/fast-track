@@ -62,9 +62,15 @@ function itemList(items: AttentionItem[]): string[] {
   return items.flatMap((item, i) => [`${i + 1}. ${quote(item.text)}`, ...item.flags.flatMap(flagLines), '']);
 }
 
-function noItemsDraft(header: string[]): string {
-  const body = 'Fast Track found no line in these requirements that needs a response.';
+function noItemsDraft(header: string[], body = 'Fast Track found no line in these requirements that needs a response.'): string {
   return [...header, '', DRAFT_LINE, '', body, '', ...SIGNATURE].join('\n');
+}
+
+/** Items with a CONFLICTS flag, keeping only those flags. An old law number alone is not a matter for HCD. */
+export function conflictItems(run: CityRun): AttentionItem[] {
+  return itemsNeedingAttention(run)
+    .map((item) => ({ ...item, flags: item.flags.filter((f) => f.status === 'CONFLICTS') }))
+    .filter((item) => item.flags.length > 0);
 }
 
 /** A reply to the city asking it to remove or update the requirements that need attention. */
@@ -90,8 +96,10 @@ export function draftCityReply(run: CityRun): string {
 /** A request to HCD for technical assistance on the requirements that need attention. */
 export function draftHcdRequest(run: CityRun, escalation: Contact): string {
   const header = [`To: ${escalation.office}`, `Re: Request for technical assistance, City of ${run.name}`];
-  const items = itemsNeedingAttention(run);
-  if (items.length === 0) return noItemsDraft(header);
+  const items = conflictItems(run);
+  if (items.length === 0) {
+    return noItemsDraft(header, 'Fast Track found no line in these requirements that the state says a city cannot require, so there is no line to raise with HCD.');
+  }
   return [
     ...header,
     '',

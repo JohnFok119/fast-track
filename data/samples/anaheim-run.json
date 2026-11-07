@@ -107,14 +107,14 @@
     },
     {
       "itemId": "ana-05",
-      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: TITLE REPORT (Must have been prepared within the last 6 months of submittal date)",
+      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property. ... TITLE REPORT (Must have been prepared within the last 6 months of submittal date)",
       "status": "UNKNOWN",
       "ruleId": null,
       "citations": []
     },
     {
       "itemId": "ana-06",
-      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property: GRANT DEED",
+      "itemText": "Email the following documents to your assigned project Planner as soon as possible for the City to verify current ownership of the property. ... GRANT DEED",
       "status": "UNKNOWN",
       "ruleId": null,
       "citations": []

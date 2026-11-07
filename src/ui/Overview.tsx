@@ -22,14 +22,17 @@ interface Props {
 
 export function Overview({ run, items, filter, selected, onFilter, onSelect, onLetter }: Props) {
   const attention = items.filter((it) => it.needsAttention).length;
+  const conflicts = countBy(items, 'CONFLICTS');
+  const outdated = countBy(items, 'OUTDATED_CITATION');
   return (
     <section className="card" aria-labelledby="s3">
       <div className="hero">
         <div>
           <div className="lbl"><span className="stepno on">3</span>What stands in the way · {run.name}</div>
           <h1 className="disp rise" key={run.city} id="s3">
-            {attention} of {items.length} lines to push back on
+            {conflicts ? `${conflicts} of ${items.length} lines the state says no to` : 'No line the state says no to'}
           </h1>
+          {outdated ? <div style={{ fontSize: '0.95rem', marginTop: 4 }}>Plus {outdated} with an old law number to update.</div> : null}
           <div className="muted" style={{ fontSize: '0.85rem', marginTop: 6 }}>
             From: {run.sourceLabel} Saved {day(run.saved)}.{' '}
             <a href={run.sourceUrl} target="_blank" rel="noopener noreferrer">Open the source</a>

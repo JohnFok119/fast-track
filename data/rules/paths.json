@@ -6,7 +6,7 @@
       "id": "adu-rent",
       "label": "Backyard home to rent",
       "pathway": "ADU",
-      "fact": "No owner-occupant requirement. The city may only require rentals of 30 days or longer.",
+      "fact": "For an ADU you rent out, the city cannot require the owner to live on the lot. It may require rentals of 30 days or longer.",
       "sourceId": "gov-66315",
       "section": "66315"
     },

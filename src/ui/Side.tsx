@@ -1,7 +1,7 @@
 // Steps 1 and 2: what you are building, and where. Cities without saved requirements for that path are disabled.
 import type { BuildPath, City, CityRun } from '../contract/types';
 import { PATH_ICONS } from './icons';
-import { groupItems } from './model';
+import { countBy, groupItems } from './model';
 
 interface Props {
   paths: BuildPath[];
@@ -41,10 +41,10 @@ export function Side({ paths, runs, pathId, city, onPath, onCity }: Props) {
         <div className="tiles">
           {runs.map((run) => {
             const fits = run.pathway === path?.pathway;
-            const n = groupItems(run).filter((it) => it.needsAttention).length;
+            const n = countBy(groupItems(run), 'CONFLICTS');
             return (
               <button key={run.city} type="button" className="tile" disabled={!fits} aria-pressed={run.city === city} onClick={() => onCity(run.city)}>
-                <span><span className="t">{run.name}</span><br /><span className="s">{fits ? `${n} to push back on` : `No saved ${path?.pathway === 'SB9' ? 'SB 9' : 'ADU'} list yet`}</span></span>
+                <span><span className="t">{run.name}</span><br /><span className="s">{fits ? (n ? `${n} line${n === 1 ? '' : 's'} the state says no to` : 'No line the state says no to') : `No saved ${path?.pathway === 'SB9' ? 'SB 9' : 'ADU'} list yet`}</span></span>
                 {fits ? <span className={`cnt ${n ? '' : 'zero'}`}>{n}</span> : null}
               </button>
             );
