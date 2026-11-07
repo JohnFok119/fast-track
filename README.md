@@ -33,13 +33,16 @@
 
 ## What we built
 
-A one-page dashboard in five steps:
+A guided flow, one card at a time, in Habitat for Humanity of Orange County's colors:
 
-1. **What are you building?** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Each choice shows one sourced fact.
+1. **What are you building?** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Pick a card and the next one slides in.
 2. **Where?** Irvine, Anaheim, Dana Point or Orange. A city with no saved list for that choice is greyed out, and so is unincorporated county land (not covered yet).
-3. **What stands in the way.** The city's requirements, each checked against state law and HCD's letters to that city. One count, four filters, and a colored strip with one cell per line. Click a line for the verdict, what the city wrote, why, and the sources.
-4. **Your timeline and next steps.** The review deadlines the law sets, next to typical estimates for plans and building. Every bar says whether it is law (with its source), an estimate (ASSUMPTION), skipped, or unknown.
-5. **Who to contact and what to say.** The city office that handles each issue, by role and with its source. A draft letter to the city, and a draft request to HCD for technical assistance if the city will not fix it.
+3. **What stands in the way.** Fast Track walks through the city's requirements one line at a time, then shows a two-column table: what the city asks, and what state law says (State says no, Old law number, Not checked, Allowed). Click a row for the reason and the dated sources.
+4. **Time saved.** Two bars on one scale: the event brief's typical path (rezoning, entitlements, plans, build; about 45 months, all ASSUMPTION) and the fast track (no rezoning or hearings, the legal review deadlines with their sources, plans and build). The difference is labelled an estimate.
+5. **Who to contact.** The city office for each issue, and HCD's Housing Accountability Unit if the city will not fix it, each with its source.
+6. **Summary.** Lines checked, lines the state says no to, months saved (estimate), your legal clocks and who to contact.
+
+"See everything on one page" opens the full dashboard, which also drafts a letter to the city and a request to HCD, and has a box that checks any city's wording you paste in.
 
 Each line gets one of four flags. The screen uses plain words:
 
@@ -50,7 +53,7 @@ Each line gets one of four flags. The screen uses plain words:
 | OUTDATED_CITATION | Old law number | The city cites an old law section. The renumbering is shown |
 | UNKNOWN | Not checked | Our rules do not cover it. We say so and do not guess |
 
-Every flag shows its source, a section number and the date we checked it. The applicant reads the draft letters, edits them and sends them themselves. A box at the bottom checks any city's wording you paste in.
+Every flag shows its source, a section number and the date we checked it. The applicant reads any draft letter, edits it and sends it themselves.
 
 **Example (real).** Irvine told an applicant it could require a deed-restriction covenant on an ADU. In its letter to Irvine of 2025-03-27, HCD found this is "an additional standard" that state law bars (Gov Code 66315). Fast Track flags that line CONFLICTS and cites the statute and the letter.
 
