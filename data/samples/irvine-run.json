@@ -1,16 +1,16 @@
 {
   "city": "irvine",
-  "sourceLabel": "SAMPLE. Requirements as quoted in HCD's letter to the City of Irvine (2025-03-27), from a city email of 2025-02-18. Not the city's current form.",
+  "sourceLabel": "SAMPLE. Requirements quoted in HCD's letter to the City of Irvine (2025-03-27): a city email of 2025-02-18 (p. 2) and HCD's description of the City's position (pp. 1, 3). Not the city's current form.",
   "sourceUrl": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf",
   "saved": "2026-11-07",
   "sample": true,
   "flags": [
     {
       "itemId": "irv-01",
-      "itemText": "Record a deed restriction (covenant) on the property before the ADU permit is issued.",
+      "itemText": "\"Pursuant to state ADU laws, the City is within our rights to restrict the separate sale of ADUs ... requests that you provide the required covenant to continue with your plan check review.\"",
       "status": "CONFLICTS",
       "ruleId": "adu-deed-restriction",
-      "why": "HCD found the City \"misapplied State ADU Law in the processing of ADU applications by requiring deed restrictions and disallowing JADUs in townhomes\". HCD called the deed restriction \"an additional standard\" that \"cannot be imposed\" under Gov Code 66315, and found that treating an application as incomplete without it conflicts with Gov Code 66317(c).",
+      "why": "HCD found the City of Irvine \"misapplied State ADU Law in the processing of ADU applications by requiring deed restrictions\". Gov Code 66315 says \"No additional standards, other than those provided in Section 66314, shall be used or imposed\", and HCD found that \"a deed restriction is an additional standard\". Using it to call an application incomplete is \"inconsistent with section 66317, subdivision (c)\".",
       "citations": [
         {
           "sourceId": "gov-66315",
@@ -30,43 +30,77 @@
           "sourceId": "hcd-irvine-2025-03-27",
           "label": "HCD letter to the City of Irvine, 2025-03-27",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf",
+          "page": "1, 3",
           "checked": "2026-11-07"
-        }
-      ],
-      "note": "HCD sent its findings on 2025-01-07, and a city email of 2025-02-18 still required the covenant. Whether it is still required today is unconfirmed."
-    },
-    {
-      "itemId": "irv-02",
-      "itemText": "City email cites Government Code section 65852.2 as its authority.",
-      "status": "OUTDATED_CITATION",
-      "ruleId": "cite-65852-2",
-      "why": "SB 477 (2024) renumbered the ADU law from 65852.2 to sections 66310 through 66342.",
-      "citations": [
+        },
         {
           "sourceId": "adu-handbook-2026-03",
           "label": "HCD ADU Handbook, March 2026",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "21",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "Covers a deed restriction or covenant a city requires as a condition of an ADU permit. Affordability, resale and junior ADU covenants are excluded and stay UNKNOWN: state law requires a deed restriction for a JADU (Handbook p. 21)."
+    },
+    {
+      "itemId": "irv-02",
+      "itemText": "\"Pursuant to Section 65852.2(a)(10), the City has not adopted a separate ordinance to allow the separate conveyance of the primary dwelling unit and ADU.\"",
+      "status": "OUTDATED_CITATION",
+      "ruleId": "cite-65852-2",
+      "why": "SB 477 (2024) renumbered the ADU law from Gov Code 65852.2 to sections 66310 through 66342. The Handbook maps it subsection by subsection, so there is no single replacement section.",
+      "citations": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
           "page": "13, 49",
           "checked": "2026-11-07"
         }
       ],
-      "mapping": { "old": "65852.2", "now": "66310 to 66342", "exactSection": null }
+      "mapping": {
+        "old": "65852.2",
+        "now": "66310 to 66342",
+        "exactSection": null
+      }
     },
     {
       "itemId": "irv-03",
-      "itemText": "JADU not allowed in a detached townhome on its own lot (treated as multifamily).",
-      "status": "UNKNOWN",
-      "ruleId": null,
-      "citations": [],
-      "note": "No rule yet. Candidate for acceptance test 6, encoded only after HCD's analysis and Gov 66333 are read."
+      "itemText": "JADUs are not allowed in townhomes: the City treats a detached townhouse on its own lot as ineligible (as described by HCD).",
+      "status": "CONFLICTS",
+      "ruleId": "jadu-detached-townhouse",
+      "why": "Gov Code 66333(a) limits JADUs to one \"per residential lot zoned for single-family residences with a single-family residence built, or proposed to be built, on the lot\". HCD found \"a detached townhouse on its own lot is a single-family primary dwelling and would therefore be eligible for a JADU\".",
+      "citations": [
+        {
+          "sourceId": "gov-66333",
+          "label": "Gov Code 66333(a)",
+          "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333",
+          "section": "66333(a)",
+          "checked": "2026-11-07"
+        },
+        {
+          "sourceId": "hcd-irvine-2025-03-27",
+          "label": "HCD letter to the City of Irvine, 2025-03-27",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf",
+          "page": "3",
+          "checked": "2026-11-07"
+        },
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "label": "HCD ADU Handbook, March 2026 (definition of single-family dwelling)",
+          "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+          "page": "9",
+          "checked": "2026-11-07"
+        }
+      ],
+      "note": "Only a detached townhouse on its own lot. HCD says an HOA or other elements might make a home part of a planned community or \"townhouse complex\"; this tool does not decide that."
     },
     {
       "itemId": "irv-04",
-      "itemText": "The 60-day review clock stops when the City sends plan check comments.",
+      "itemText": "\"While State law provides for a 60-day shot clock for processing ADUs, that clock stops when the City provides plan check comments and restarts when the applicant resubmits.\"",
       "status": "UNKNOWN",
       "ruleId": null,
-      "citations": [],
-      "note": "No rule yet. Candidate for acceptance test 6, checked against Gov 66317 and HCD's analysis before encoding."
+      "citations": []
     }
   ]
 }

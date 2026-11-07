@@ -1,6 +1,6 @@
 {
   "city": "anaheim",
-  "sourceLabel": "SAMPLE. Anaheim ADU Submittal Requirements Checklist, November 2025. Item wording is paraphrased until the checklist is saved (D3).",
+  "sourceLabel": "SAMPLE. Anaheim ADU Submittal Requirements Checklist, November 2025. PLACEHOLDER wording, paraphrased from the starter's notes until the checklist is saved (D3).",
   "sourceUrl": "https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist",
   "saved": "2026-11-07",
   "sample": true,
@@ -10,35 +10,42 @@
       "itemText": "JADU deed restriction required, citing Gov Code 65852.22.",
       "status": "OUTDATED_CITATION",
       "ruleId": "cite-65852-22",
-      "why": "SB 477 (2024) renumbered the junior ADU law from 65852.22 to sections 66333 through 66339, subsection by subsection.",
+      "why": "SB 477 (2024) renumbered the junior ADU law from Gov Code 65852.22 to sections 66333 through 66339. The Handbook maps it subsection by subsection, so there is no single replacement section.",
       "citations": [
         {
           "sourceId": "adu-handbook-2026-03",
-          "label": "HCD ADU Handbook, March 2026",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
           "page": "13, 49",
           "checked": "2026-11-07"
         }
       ],
-      "mapping": { "old": "65852.22", "now": "66333 to 66339", "exactSection": null },
-      "note": "Only the citation is flagged. Whether the covenant itself is allowed is a separate rule that is not yet encoded."
+      "mapping": {
+        "old": "65852.22",
+        "now": "66333 to 66339",
+        "exactSection": null
+      }
     },
     {
       "itemId": "ana-02",
       "itemText": "ADU standards cited as Gov Code 65852.2.",
       "status": "OUTDATED_CITATION",
       "ruleId": "cite-65852-2",
-      "why": "SB 477 (2024) renumbered the ADU law from 65852.2 to sections 66310 through 66342.",
+      "why": "SB 477 (2024) renumbered the ADU law from Gov Code 65852.2 to sections 66310 through 66342. The Handbook maps it subsection by subsection, so there is no single replacement section.",
       "citations": [
         {
           "sourceId": "adu-handbook-2026-03",
-          "label": "HCD ADU Handbook, March 2026",
+          "label": "HCD ADU Handbook, March 2026 (renumbering)",
           "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
           "page": "13, 49",
           "checked": "2026-11-07"
         }
       ],
-      "mapping": { "old": "65852.2", "now": "66310 to 66342", "exactSection": null }
+      "mapping": {
+        "old": "65852.2",
+        "now": "66310 to 66342",
+        "exactSection": null
+      }
     },
     {
       "itemId": "ana-03",
