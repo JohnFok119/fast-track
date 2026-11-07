@@ -1,0 +1,28 @@
+[
+  {
+    "id": "hcd-irvine-2025-03-27",
+    "title": "HCD letter to the City of Irvine (ADU technical assistance)",
+    "publisher": "California Department of Housing and Community Development (HCD)",
+    "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/ordinance-review-letters/irvine-adu-ta-032725.pdf",
+    "published": "2025-03-27",
+    "checked": "2026-11-07",
+    "captured_by": "sources agent",
+    "how": "curl download + pdftotext",
+    "pii_removed": "yes",
+    "mirror": false,
+    "file": "data/sources/hcd-irvine-2025-03-27.md"
+  },
+  {
+    "id": "adu-handbook-2026-03",
+    "title": "California ADU Handbook, March 2026 (HCD)",
+    "publisher": "California Department of Housing and Community Development (HCD)",
+    "url": "https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf",
+    "published": "2026-03",
+    "checked": "2026-11-07",
+    "captured_by": "sources agent",
+    "how": "curl download + pdftotext",
+    "pii_removed": "yes",
+    "mirror": false,
+    "file": "data/sources/adu-handbook-2026-03.md"
+  }
+]
