@@ -32,7 +32,7 @@ opens in a browser), and your lane's brief: `project-docs/HANDOFF-johnny.md` or 
 | Engine, CLI, sample runs | Giuseppi's session | `src/engine/**`, `scripts/**`, `data/samples/**` |
 | Rules and clocks data | Giuseppi's session | `data/rules/**` |
 | Sources, cities, findings | Ivy hands in, Giuseppi's session checks | `data/sources/**`, `data/cities/**`, `project-docs/FINDINGS.md` |
-| Screen, letter, scanner screen, clocks panel | Johnny | `src/ui/**`, `src/letter/**`, `tests/letter/**`, `index.html`, `src/main.tsx` |
+| Screen (dashboard), letter drafts, scanner, timeline | Giuseppi's session since 13:20 (Giuseppi's call); ask before editing | `src/ui/**`, `src/letter/**`, `tests/letter/**`, `index.html`, `src/main.tsx` |
 
 Don't edit another lane's paths. Ask the owner instead. The contract changes only through Giuseppi's session.
 

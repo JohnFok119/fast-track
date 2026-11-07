@@ -1,1 +1,46 @@
 @import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* Temporary look borrowed from Clutch web (paper, ink, one orange accent). Every color the app uses is a token
+   here, so a rebrand is this one block. ink-muted is darkened from Clutch's #7E7972 to pass WCAG AA on paper. */
+:root {
+  --paper: #f0eee5;
+  --paper-alt: #e9e5d8;
+  --card: #ffffff;
+  --ink: #1a1a1a;
+  --ink-2: #3a3732;
+  --ink-muted: #66625b;
+  --brand: #ff6a00;
+  --line: rgba(26, 26, 26, 0.12);
+  --line-strong: rgba(26, 26, 26, 0.3);
+  --conf-fg: #a1261a;
+  --conf-bg: #fbe3df;
+  --conf-dot: #d93a26;
+  --out-fg: #6e4500;
+  --out-bg: #f6e7c8;
+  --out-dot: #b57f00;
+  --unk-fg: #4a4640;
+  --unk-bg: #ece8de;
+  --unk-dot: #7e7972;
+  --ok-fg: #1e6a3a;
+  --ok-bg: #dceedf;
+  --ok-dot: #2e9b57;
+  --font-sans: "Geist Variable", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15.5px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}

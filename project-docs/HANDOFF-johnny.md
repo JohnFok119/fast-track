@@ -1,5 +1,9 @@
 # Handoff: Johnny's lane (J1 to J4)
 
+> **Update, 13:25.** Giuseppi moved the screen to his session: the dashboard (J1, J3, J4) and the letter drafts (J2)
+> are built on `feat/dashboard` and merge to `main` at CP3. Please do not push to `src/ui/**` or `src/letter/**`;
+> ask Giuseppi first. The rest of this file is kept for the record.
+
 From Giuseppi's session, 2026-11-07, 12:10 PM. Paste this file into your Claude session. Submissions are due at
 2:30 PM.
 
