@@ -27,7 +27,7 @@
   },
   {
     "captured_by": "Giuseppi session (metadata only)",
-    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "how": "read on the california.public.law and gocodebook.com mirrors; leginfo confirmation pending (D5)",
     "pii_removed": "yes",
     "id": "gov-66315",
     "title": "California Government Code section 66315",
@@ -36,11 +36,11 @@
     "published": null,
     "checked": "2026-11-07",
     "mirror": true,
-    "file": null
+    "file": "data/sources/D5-california-gov-adu-statutes-2026.md"
   },
   {
     "captured_by": "Giuseppi session (metadata only)",
-    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "how": "read on the california.public.law and gocodebook.com mirrors; leginfo confirmation pending (D5)",
     "pii_removed": "yes",
     "id": "gov-66317",
     "title": "California Government Code section 66317",
@@ -49,11 +49,11 @@
     "published": null,
     "checked": "2026-11-07",
     "mirror": true,
-    "file": null
+    "file": "data/sources/D5-california-gov-adu-statutes-2026.md"
   },
   {
     "captured_by": "Giuseppi session (metadata only)",
-    "how": "read on the california.public.law mirror; leginfo confirmation pending (D5)",
+    "how": "read on the california.public.law and gocodebook.com mirrors; leginfo confirmation pending (D5)",
     "pii_removed": "yes",
     "id": "gov-66333",
     "title": "California Government Code section 66333",
@@ -62,7 +62,7 @@
     "published": null,
     "checked": "2026-11-07",
     "mirror": true,
-    "file": null
+    "file": "data/sources/D5-california-gov-adu-statutes-2026.md"
   },
   {
     "captured_by": "Ivy",

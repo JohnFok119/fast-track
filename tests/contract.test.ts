@@ -82,9 +82,11 @@ describe('scan', () => {
 });
 
 describe('clocks', () => {
-  it('keeps "deemed approved" UNCONFIRMED with an UNKNOWN value', () => {
+  // Statute text is from mirror sites only (D5), so the clock stays UNCONFIRMED until read on leginfo.
+  it('keeps "deemed approved" UNCONFIRMED and tied to 66317(a)(3)', () => {
     const clock = getClocks().find((c) => c.id === 'adu-deemed-approved');
     expect(clock?.status).toBe('UNCONFIRMED');
-    expect(clock?.value).toBe('UNKNOWN');
+    expect(clock?.section).toBe('66317(a)(3)');
+    expect(clock?.note).toMatch(/not yet on leginfo/);
   });
 });

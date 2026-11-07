@@ -82,7 +82,8 @@ Kept by Giuseppi's session.
   samples (commit 8f167b8).
 - CONTEXT said "deemed approved" appears only for coastal permits. **The Handbook disagrees with itself:** p. 21
   says coastal only (66329(b)(5)), while p. 51 (the AB 3182 summary) says an application is deemed approved after
-  60 days, citing 66317(a). It is shown as UNCONFIRMED until the statute text is read (D5).
+  60 days, citing 66317(a). **Update (D5):** the statute text of 66317(a)(3), read on a mirror, says the application
+  "shall be deemed approved" after 60 days, so p. 51 is right. Still UNCONFIRMED until read on leginfo.
 - The Handbook gives two effective dates for SB 477: p. 13 says March 27, 2024 and January 1, 2025, while p. 48
   says March 25, 2024. Recorded as is; neither is used.
 

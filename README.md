@@ -120,8 +120,8 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 | Irvine's requirements, as quoted in HCD's letter | Real, working |
 | Rule engine, flags, citations, CLI | Working. Deterministic, covered by automated tests that run on every push |
 | Anaheim's requirement wording | Real, working: the city's November 2025 checklist, word for word. Its JADU covenant still cites Gov Code 65852.2 and 65852.22, both renumbered |
-| Gov Code text for 66315, 66317 and 66333 | Read on a mirror site. Not yet checked on leginfo, and labelled so in the output |
-| "Deemed approved" if a city misses the 60 days | Unconfirmed: the Handbook disagrees with itself (p. 21 and p. 51). Shown as UNCONFIRMED, never as fact |
+| Gov Code text for 66315, 66317 and 66333 | Read on two mirror sites. Not yet checked on leginfo, and labelled so in the output |
+| "Deemed approved" if a city misses the 60 days | The statute text (Gov Code 66317(a)(3), read on a mirror site) says so, and Handbook p. 51 agrees. Shown as UNCONFIRMED until checked on leginfo |
 | Draft response letter | Draft text only. There is no send path |
 | Paste-text scanner and clocks panel | TODO(freeze): set to working, partly working or not built |
 | SB 9 checks (Dana Point, Orange) | Working. Each check is a finding from HCD's letter to that city, so it applies only to that city. Requirements are as HCD quoted or described them |
