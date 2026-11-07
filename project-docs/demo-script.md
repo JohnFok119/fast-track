@@ -49,7 +49,7 @@ Before going on stage: `npm run dev` is running at http://localhost:5173 with th
 
 ## Likely questions
 
-- **"Does it use AI?"** Claude helped us research, plan and write the code, tests and docs. The app itself is deterministic today, so it cannot invent a law.
+- **"Does it use AI?"** Claude helped us research, plan and write the code, tests and docs. The app itself is deterministic today, so it cannot invent a law. There is also an optional Claude route, off by default, that explains a flagged line in plain words. Claude never decides a flag or writes a citation, and anything that fails our checks falls back to the engine's text.
 - **"How much time does it save?"** We do not claim a number. The timeline shows the legal deadlines with sources, and the plans and build times are the event brief's estimates, labelled ASSUMPTION.
 - **"Is Irvine still doing this?"** Our evidence is from early 2025. Irvine's current ADU page still lists a covenant, but we have not seen its text, so we do not claim it is the same requirement.
 - **"Is the law text verified?"** Statute text was read on a mirror site. The screen labels it "not yet checked on leginfo".
