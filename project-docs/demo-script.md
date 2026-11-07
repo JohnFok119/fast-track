@@ -16,6 +16,31 @@ Before going on stage: `npm run dev` is running at http://localhost:5173 with th
 | 2:20-2:45 | Close the letter. Step 1: click "Duplex or lot split (SB 9)". Dana Point opens. Click the 800 square foot line. | "For a builder like Habitat, SB 9 lets one single-family lot hold two homes. In 2023, HCD told Dana Point it must remove its 800 square foot cap and revise its one-bedroom limit. Adding a city is a data file, not new code." |
 | 2:45-3:00 | Scroll to "Check any city's text" at the bottom. | "And you can paste any city's wording to check it. Fast Track: the state's letters, next to the city's checklist, for the people who have to fill it out." |
 
+## End-to-end walkthrough: one made-up demo project
+
+**MADE-UP DEMO PROJECT. Not a real person, lot or application.** Only the project is made up. The city requirements, rules, clocks and sources it runs through are the real ones in the app. No address, parcel number or names, even made-up ones. Say this out loud before you start.
+
+- **Who:** a small nonprofit's project manager (made up, based on the event starter's scenarios C01 and C02).
+- **The lot now:** a single-family home is already on it (made up). That matters: the 60-day decision clock applies "if there is an existing single-family or multifamily dwelling on the lot" (HCD ADU Handbook p. 11).
+- **What they will build:** a backyard home to rent, in Irvine.
+- **Submit date:** Monday 2026-11-09. ASSUMPTION: a made-up date for the demo.
+
+| Beat | On screen | Say |
+|---|---|---|
+| 1. What you are building | Step 1: "Backyard home to rent". | "A home is already on the lot, and they want to add a backyard home to rent." |
+| 2. Where | Step 2: Irvine. | "Irvine." |
+| 3. What stands in the way | Headline "2 of 4 lines the state says no to", the count cards, the deed-restriction line. | "Two lines the state says no to, one old law number, one we could not check, each with its source." |
+| 4. Letters | "Write the letter": "To the city", then "If the city won't fix it: to HCD" (conflict lines only). | "A draft to the city, and if needed a request to HCD. Nothing is sent." |
+| 5. Before you submit | Not on screen yet (it is in Next steps). | "Irvine's ADU page lists 11 things to submit, among them a Covenant and a Hold Harmless Affidavit. Whether today's Covenant is the one HCD objected to is UNKNOWN, so we say ask the city, not 'illegal'." (Source: `data/sources/irvine-adu-current.md`, paraphrased, checked 2026-11-07.) |
+| 6. Your dates | Step 4 timeline, the two Law bars. Dates below are computed by hand, not on screen. | See the dates below. |
+| 7. Who to contact | Step 5: Irvine's Planning Team, then HCD's Housing Accountability Unit. | "Who handles it, by office, with the source." |
+
+**The dates for this made-up project (computed by hand):**
+
+- **City says complete or not: by Monday 2026-11-30.** That is 15 business days after the 2026-11-09 submit date (Gov Code 66317(a)(2)(A), Handbook p. 34). Weekdays only: holidays not counted (ASSUMPTION). Nov 11 and Nov 26-27 fall in this window and are counted as normal weekdays, so the real deadline may be later. Irvine's own page says it checks completeness in about two business days. If the city misses the deadline, the application is "deemed complete" (Handbook p. 35).
+- **City approves or denies: by Friday 2027-01-08,** if the application was complete as first submitted. That is 60 days from receipt of a completed application (Gov Code 66317(a)(3), Handbook p. 11), counted as calendar days (ASSUMPTION: the source says "60 days", not business days). If the city says the application is incomplete, the 60 days start when it receives the completed application. Do not add the two clocks together.
+- **Plans and build:** the event brief's estimates only (6 to 12 months, about 1 year; ASSUMPTION). We do not predict an approval or move-in date beyond the legal clocks.
+
 ## The 3 strongest points, by judging criterion
 
 - **Works (live, on real data, sources on screen).** The Irvine flags come from a real HCD letter, Anaheim's from the city's real November 2025 checklist. Every verdict shows its URL, page or section, and date. Unknown stays unknown. It runs from a clean clone with `npm install` and no API key.
