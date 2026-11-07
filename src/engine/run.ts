@@ -10,7 +10,9 @@ function buildCitations(rule: Rule, sources: Map<string, Source>): Citation[] {
   return rule.cites.map((cite) => {
     const source = sources.get(cite.sourceId);
     if (!source) throw new Error(`no source, no rule: rule "${rule.id}" cites missing source "${cite.sourceId}"`);
-    return { sourceId: cite.sourceId, label: cite.label, url: source.url, section: cite.section, page: cite.page, checked: source.checked };
+    // Honest labelling: statute text read only through a mirror or HCD's quotes says so until checked on leginfo.
+    const label = source.mirror ? `${cite.label} (not yet checked on leginfo)` : cite.label;
+    return { sourceId: cite.sourceId, label, url: source.url, section: cite.section, page: cite.page, checked: source.checked };
   });
 }
 

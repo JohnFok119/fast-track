@@ -14,14 +14,14 @@
       "citations": [
         {
           "sourceId": "gov-66315",
-          "label": "Gov Code 66315",
+          "label": "Gov Code 66315 (not yet checked on leginfo)",
           "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66315",
           "section": "66315",
           "checked": "2026-11-07"
         },
         {
           "sourceId": "gov-66317",
-          "label": "Gov Code 66317(c)",
+          "label": "Gov Code 66317(c) (not yet checked on leginfo)",
           "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317",
           "section": "66317(c)",
           "checked": "2026-11-07"
@@ -73,7 +73,7 @@
       "citations": [
         {
           "sourceId": "gov-66333",
-          "label": "Gov Code 66333(a)",
+          "label": "Gov Code 66333(a) (not yet checked on leginfo)",
           "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333",
           "section": "66333(a)",
           "checked": "2026-11-07"

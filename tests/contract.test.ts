@@ -1,12 +1,24 @@
 import { describe, expect, it } from 'vitest';
+import anaheimSample from '../data/samples/anaheim-run.json';
+import irvineSample from '../data/samples/irvine-run.json';
 import { getClocks, runCheck, scan } from '../src/contract/api';
-import { parseFlag } from '../src/contract/parse';
+import { parseCityRun, parseFlag } from '../src/contract/parse';
 import { CITIES } from '../src/contract/types';
 
-describe('sample runs', () => {
+describe('sample files', () => {
+  it('both parse and are labelled as samples', () => {
+    for (const raw of [irvineSample, anaheimSample]) {
+      const run = parseCityRun(raw);
+      expect(run.sample).toBe(true);
+      expect(run.sourceLabel.startsWith('SAMPLE.')).toBe(true);
+    }
+  });
+});
+
+describe('city runs from the engine', () => {
   it.each(CITIES)('%s: flagged items cite a dated https source, UNKNOWN items cite nothing', (city) => {
     const run = runCheck(city);
-    expect(run.sample).toBe(true);
+    expect(run.sample).toBe(false);
     expect(run.flags.length).toBeGreaterThan(0);
     for (const flag of run.flags) {
       if (flag.status === 'UNKNOWN') {
