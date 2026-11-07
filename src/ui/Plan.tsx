@@ -3,7 +3,21 @@ import type { Contact, Phase, Step } from '../contract/types';
 import { BuildingIcon, StateIcon } from './icons';
 import { citeMeta } from './model';
 
-const KIND_WORD: Record<Phase['kind'], string> = { LAW: 'Law', ASSUMPTION: 'Estimate', SKIPPED: 'Skipped', UNKNOWN: 'Unknown' };
+const KIND_WORD: Record<Phase['kind'], string> = { LAW: 'Law', ASSUMPTION: 'Assumption', SKIPPED: 'Skipped', UNKNOWN: 'Unknown' };
+
+function PhaseNotes({ phases }: { phases: Phase[] }) {
+  // Assumption rows are explained once, in the legend.
+  const noted = phases.filter((p) => p.kind !== 'ASSUMPTION' && (p.note || p.citation));
+  return (
+    <ul className="tl-notes">
+      {noted.map((p) => (
+        <li key={p.id}><b>{p.label}.</b> {p.note}{' '}
+          {p.citation ? <a href={p.citation.url} target="_blank" rel="noopener noreferrer">{p.citation.label} · {citeMeta(p.citation)}</a> : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function Timeline({ phases }: { phases: Phase[] }) {
   const longest = Math.max(...phases.map((p) => p.drawMonths ?? 0), 1);
@@ -32,7 +46,7 @@ function Legend() {
   return (
     <div className="legend">
       <span><i className="k-LAW" />Law: the city's legal deadline</span>
-      <span><i className="k-ASSUMPTION" />Estimate: ASSUMPTION from the event brief</span>
+      <span><i className="k-ASSUMPTION" />Assumption: the event brief's estimate, not measured</span>
       <span><i className="k-SKIPPED" />Skipped on this path</span>
       <span><i className="k-UNKNOWN" />Unknown</span>
     </div>
@@ -74,6 +88,7 @@ export function Plan({ phases, steps, pushBack, contacts, escalation }: Props) {
         <h2 className="h" id="s4"><span className="stepno">4</span>Your timeline, idea to move-in</h2>
         <Timeline phases={phases} />
         <Legend />
+        <PhaseNotes phases={phases} />
       </section>
       <div className="duo">
         <section className="card" aria-labelledby="s4b"><h2 className="h" id="s4b">Next steps</h2><Steps steps={steps} pushBack={pushBack} /></section>

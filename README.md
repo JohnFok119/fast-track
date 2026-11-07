@@ -1,6 +1,6 @@
 # Fast Track
 
-> Fast Track checks a California city's backyard-home (ADU) requirements against state law, line by line, so an applicant blocked by a rule the city cannot impose can see it, with the source, and send a response.
+> You own the lot and want to build a backyard home (ADU) or split the lot (SB 9). Fast Track checks the city's requirements against state law, line by line, shows what stands in the way with the source, lays out your legal clocks and next steps, and drafts the reply you send yourself.
 
 **Team:** Fast Track
 **Members:** Giuseppi, Johnny, Ivy, Joy
@@ -11,12 +11,12 @@
 
 ## The real user
 
-**Who it is for.** First, an applicant who is blocked by a requirement the state says a city cannot impose. That can be a homeowner, a small builder, or a nonprofit project manager (for example at Habitat for Humanity of Orange County, the event's sponsor). Second, the city permit tech who wants to answer correctly. The people who benefit in the end are local workers (teachers, nurses, firefighters) who can move in sooner.
+**Who it is for.** First, the owner of a lot who wants to add homes on it and is blocked by a requirement the state says a city cannot impose. That can be a homeowner, a small builder, or a nonprofit that already owns the land (for example Habitat for Humanity of Orange County, the event's sponsor). Second, the city permit tech who wants to answer correctly. The people who benefit in the end are local workers (teachers, nurses, firefighters) who can move in sooner.
 
 **The problem.** Workers cannot afford to live in Orange County. The event brief says a new affordable home takes about four years. California has fast paths where a city must say yes if the project meets the written rules, with no hearing. But each Orange County city writes its own checklist, and some checklists do not match state law. The state housing department sends cities letters about this, but those letters sit in a separate state dashboard, away from the forms applicants fill out.
 
 **Before:** the applicant gets a city checklist or email, cannot tell which lines are lawful, and has no easy way to find the state's letter on the same point.
-**After:** Fast Track marks each line, shows the state source and date, and drafts a response the applicant can send themselves.
+**After:** Fast Track marks each line, shows the state source and date, shows the review deadlines the law sets, names which office handles each issue, and drafts a response the applicant can send themselves.
 
 **The people described here are made up.** Our personas (city permit tech, small builder, ADU homeowner, nonprofit project manager) come from public research, not interviews. We have not tested the tool with real users.
 
@@ -33,16 +33,24 @@
 
 ## What we built
 
-Fast Track compares a city's actual ADU requirements with state law and with HCD's letters to that city. For each line it shows one of four flags:
+A one-page dashboard in five steps:
 
-| Flag | Meaning |
-|---|---|
-| OK | State law allows the city to require this. The source is cited |
-| CONFLICTS | The state says the city cannot require this. The statute and letter are cited |
-| OUTDATED_CITATION | The city cites an old law section. The renumbering is shown |
-| UNKNOWN | Our rules do not cover it. We say so and do not guess |
+1. **What are you building?** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Each choice shows one sourced fact.
+2. **Where?** Irvine, Anaheim, Dana Point or Orange. A city with no saved list for that choice is greyed out, and so is unincorporated county land (not covered yet).
+3. **What stands in the way.** The city's requirements, each checked against state law and HCD's letters to that city. One count, four filters, and a colored strip with one cell per line. Click a line for the verdict, what the city wrote, why, and the sources.
+4. **Your timeline and next steps.** The review deadlines the law sets, next to typical estimates for plans and building. Every bar says whether it is law (with its source), an estimate (ASSUMPTION), skipped, or unknown.
+5. **Who to contact and what to say.** The city office that handles each issue, by role and with its source. A draft letter to the city, and a draft request to HCD for technical assistance if the city will not fix it.
 
-Every flag shows its source, a section number and the date we checked it. Then Fast Track drafts a response letter. The applicant reads it, edits it and sends it themselves.
+Each line gets one of four flags. The screen uses plain words:
+
+| Flag | On screen | Meaning |
+|---|---|---|
+| OK | Allowed by state law | State law allows the city to require this. The source is cited |
+| CONFLICTS | State says no | State law, or HCD in its letter to that city, says the city cannot require this. The statute or letter is cited, with any limits HCD noted |
+| OUTDATED_CITATION | Old law number | The city cites an old law section. The renumbering is shown |
+| UNKNOWN | Not checked | Our rules do not cover it. We say so and do not guess |
+
+Every flag shows its source, a section number and the date we checked it. The applicant reads the draft letters, edits them and sends them themselves. A box at the bottom checks any city's wording you paste in.
 
 **Example (real).** Irvine told an applicant it could require a deed-restriction covenant on an ADU. In its letter to Irvine of 2025-03-27, HCD found this is "an additional standard" that state law bars (Gov Code 66315). Fast Track flags that line CONFLICTS and cites the statute and the letter.
 
@@ -102,15 +110,17 @@ All dates checked: 2026-11-07. The source list lives in `data/sources/index.json
 | California ADU Handbook, HCD, March 2026 | https://www.hcd.ca.gov/sites/default/files/docs/policy-and-research/adu-handbook-update.pdf | 2026-11-07 |
 | Gov Code 66315 (no extra standards on ADUs) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66315 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Gov Code 66317 (review clocks) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66317 (read on a mirror site, leginfo check pending) | 2026-11-07 |
-| Gov Code 66333 (JADU rules) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333 (read on a mirror site, leginfo check pending) | 2026-11-07 |
+| Gov Code 66333(c) (JADU deed restriction) | https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=GOV&sectionNum=66333 (read on a mirror site, leginfo check pending) | 2026-11-07 |
 | Anaheim ADU checklist, November 2025 | https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist (form Z412, quoted word for word) | 2026-11-07 |
 | HCD letter to the City of Dana Point (2023-04-17, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf | 2026-11-07 |
 | HCD letter to the City of Orange (2026-05-05, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf | 2026-11-07 |
 | City of Irvine ADU page (submittal list, paraphrased) | https://cityofirvine.gov/node/69676 | 2026-11-07 |
 | "A new affordable home takes about four years" | ASSUMPTION: the event brief's baseline. We did not measure it | n/a |
+| Plans take 6 to 12 months; building takes about 1 year | ASSUMPTION: the event brief's typical estimates (starter repo, `lanes/2-clear-it/data/timeline.json`). We did not measure them. Shown as "Estimate" on the timeline | n/a |
 | Review clocks: 15 business days to check completeness, 60 days to decide | HCD ADU Handbook p. 34 and p. 11, citing Gov Code 66317(a) | 2026-11-07 |
+| City contacts (office and role, no names) | Irvine's ADU page and Anaheim's checklist; for Dana Point and Orange, the office HCD's letter was addressed to. Listed in `data/cities/` | 2026-11-07 |
 
-Every number we made up is labelled ASSUMPTION here and in the tool. The four-year figure is the only one, and Fast Track does not claim time saved against it. A whole project is not the same as an ADU on land the owner already has.
+Every number we did not take from a source is labelled ASSUMPTION here and in the tool: the four-year baseline and the plans and build estimates. Fast Track does not claim time saved against them. A whole project is not the same as an ADU on land the owner already has. We have no sourced review deadline for an SB 9 lot split, so the timeline shows it as UNKNOWN.
 
 ## What is real and what is mocked
 
@@ -120,10 +130,12 @@ Every number we made up is labelled ASSUMPTION here and in the tool. The four-ye
 | Irvine's requirements, as quoted in HCD's letter | Real, working |
 | Rule engine, flags, citations, CLI | Working. Deterministic, covered by automated tests that run on every push |
 | Anaheim's requirement wording | Real, working: the city's November 2025 checklist, word for word. Its JADU covenant still cites Gov Code 65852.2 and 65852.22, both renumbered |
-| Gov Code text for 66315, 66317 and 66333 | Read on two mirror sites. Not yet checked on leginfo, and labelled so in the output |
+| Gov Code text for 66315, 66317 and 66333(c) | Read on a mirror site (gocodebook.com). Not yet checked on leginfo, and labelled so in the output |
 | "Deemed approved" if a city misses the 60 days | The statute text (Gov Code 66317(a)(3), read on a mirror site) says so, and Handbook p. 51 agrees. Shown as UNCONFIRMED until checked on leginfo |
-| Draft response letter | Draft text only. There is no send path |
-| Paste-text scanner and clocks panel | TODO(freeze): set to working, partly working or not built |
+| Draft letters (to the city, and a technical-assistance request to HCD) | Draft text only, with a Copy button. There is no send path, and a test checks the code for one |
+| Paste-text scanner | Working. Uses the statewide rules only; rules found in a letter to one city never apply to pasted text |
+| Timeline and next steps | Working. Law deadlines are sourced; plans and build times are the event brief's estimates, labelled ASSUMPTION |
+| Who to contact | Offices and roles, each with its source (a city page or checklist, or the HCD letter to that city). No personal names |
 | SB 9 checks (Dana Point, Orange) | Working. Each check is a finding from HCD's letter to that city, so it applies only to that city. Requirements are as HCD quoted or described them |
 
 ## Where it gets things wrong

@@ -29,7 +29,7 @@ function FlagBody({ flag, multi }: { flag: Flag; multi: boolean }) {
       <div className="blk"><div className="lbl">Sources ({flag.citations.length})</div>
         <div className="cites">{flag.citations.map((c) => <Cite key={`${c.sourceId}-${c.section ?? ''}-${c.page ?? ''}`} c={c} />)}</div>
       </div>
-      {flag.note ? <details><summary>More detail</summary><p>{flag.note}</p></details> : null}
+      {flag.note ? <div className="blk"><div className="lbl">Limits</div><p>{flag.note}</p></div> : null}
     </div>
   );
 }

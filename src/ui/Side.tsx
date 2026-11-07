@@ -32,7 +32,7 @@ export function Side({ paths, runs, pathId, city, onPath, onCity }: Props) {
         {path ? (
           <p className="fact">
             {path.fact}{' '}
-            <a href={path.citation.url} target="_blank" rel="noopener noreferrer" className="muted">Source</a>
+            <a href={path.citation.url} target="_blank" rel="noopener noreferrer" className="muted">{path.citation.label}</a>
           </p>
         ) : null}
       </section>

@@ -30,8 +30,14 @@ export function itemsNeedingAttention(run: CityRun): AttentionItem[] {
 }
 
 function quote(raw: string): string {
-  // Some saved city text already carries its own quotes; strip them so the draft does not double them.
-  const text = raw.trim().replace(/^"+|"+$/g, '');
+  // Saved city text that opens with its own quote (sometimes followed by a section reference) keeps its quote marks.
+  const text = raw.trim();
+  if (text.startsWith('"')) {
+    if (text.length <= MAX_QUOTE) return text;
+    // End at the closing quote when the quote fits; otherwise cut inside it and close it.
+    const close = text.indexOf('"', 1);
+    return close !== -1 && close < MAX_QUOTE ? text.slice(0, close + 1) : `${text.slice(0, MAX_QUOTE)}..."`;
+  }
   const short = text.length > MAX_QUOTE ? `${text.slice(0, MAX_QUOTE)}...` : text;
   return `"${short}"`;
 }
@@ -43,7 +49,7 @@ function sourceLine(c: Citation): string {
 }
 
 function flagLines(flag: Flag): string[] {
-  const lines = [`   ${VERDICT[flag.status].label}.`, ...flag.citations.map(sourceLine)];
+  const lines = [`   ${VERDICT[flag.status].letter}.`, ...flag.citations.map(sourceLine)];
   const m = flag.mapping;
   if (m) {
     const exact = m.exactSection ? ` (exact: ${m.exactSection})` : ' (no single replacement section)';

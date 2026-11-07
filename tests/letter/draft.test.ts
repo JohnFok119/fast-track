@@ -44,6 +44,12 @@ describe.each(CITIES)('letter drafts for %s', (city) => {
     expect(text).toContain('[Your name]');
     expect(text).not.toContain(EM_DASH);
   });
+
+  it.each(drafts)('%s quotes each city line with balanced quote marks', (_name, text) => {
+    const quoted = text.split('\n').filter((line) => /^\d+\. "/.test(line));
+    expect(quoted.length).toBe(itemsNeedingAttention(run).length);
+    for (const line of quoted) expect((line.match(/"/g) ?? []).length % 2, line).toBe(0);
+  });
 });
 
 describe('letter drafts with nothing to answer', () => {
