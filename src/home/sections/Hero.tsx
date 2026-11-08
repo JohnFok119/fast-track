@@ -58,7 +58,7 @@ export function Hero() {
               Built at<span className="claude-type">Claude Impact Lab</span>
             </span>
           </div>
-          <h1 className="disp">Get homes built on the fast track.</h1>
+          <h1 className="disp">Get homes built on the Fast Track.</h1>
           <p className="lede">
             Fast Track checks a city&apos;s backyard-home and duplex rules <strong>against state law</strong>, line by line. Every clash
             comes with <strong>its source</strong> and a draft you send yourself.

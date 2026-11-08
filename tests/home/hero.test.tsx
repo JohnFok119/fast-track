@@ -17,7 +17,7 @@ describe('Hero', () => {
 
   it('says what Fast Track is, flags it as a prototype, and sends "Check your lot" to the app', () => {
     render(<Hero />);
-    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Get homes built on the fast track.');
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Get homes built on the Fast Track.');
     expect(screen.getByText('Not legal advice. Talk to a professional.', { exact: false })).toBeTruthy();
     expect(screen.getByRole('link', { name: 'Check your lot' }).getAttribute('href')).toBe(APP_URL);
   });
