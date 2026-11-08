@@ -1,11 +1,85 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/source-serif-4/opsz.css";
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
-/* Colors follow Habitat for Humanity of Orange County's site theme (habitatoc.org, checked 2026-11-07): primary blue
-   #1DABD5, near-black #151B21, light grey #F4F4F4. Every color the app uses is a token here, so a rebrand is this one
-   block. ink-muted is chosen to pass WCAG AA on the grey background. */
+/* Design tokens for the homepage and the app. Every color the product uses is a token here.
+   Default look: espresso, latte, cream and bronze with a sprout green (approved 2026-11-07, inspired by bondapp.io).
+   The earlier white and blue look is kept below as the "classic" theme: add ?theme=classic to the app's URL. */
 :root {
+  /* Brand palette */
+  --esp: #281e15;
+  --esp-2: #33271c;
+  --brown: #52402f;
+  --tan: #a8917a;
+  --taupe: #c4b5a3;
+  --sand: #f0ebe5;
+  --cream: #faf8f6;
+  --bronze: #9e542f;
+  --copper: #c9773f;
+  --glow: 214, 128, 78;
+  --sprout: #6e9f4f;
+  --sprout-deep: #4c7a32;
+  --brick: #b8432c;
+  --law-bg: #e7eddd;
+
+  /* Page tone: latte. Cards stay a light foam color so text reads easily. */
+  --page: #d8c1a5;
+  --text: #3d2c1f;
+  --muted: #5f4837;
+  --faint: #a88c70;
+  --accent: #7a3d20;
+  --rule: rgba(40, 30, 21, 0.18);
+  --fade-mid: #6f4f38;
+  --surface: #f1e8dc;
+  --surface-2: #e2d1bc;
+  --card-ink: #281e15;
+  --card-text: #3d2c1f;
+  --card-muted: #7a6350;
+
+  /* App tokens (the names the app's styles already use), mapped onto the palette. */
+  --paper: var(--page);
+  --paper-alt: var(--surface-2);
+  --card: #f6efe6;
+  --ink: #281e15;
+  --ink-2: #3d2c1f;
+  --ink-muted: #5f4837;
+  --brand: var(--bronze);
+  --brand-deep: var(--esp);
+  --line: rgba(40, 30, 21, 0.13);
+  --line-strong: rgba(40, 30, 21, 0.32);
+  --conf-fg: #9a2f1c;
+  --conf-bg: #f5e1d9;
+  --conf-dot: #b8432c;
+  --out-fg: #6e4500;
+  --out-bg: #f3e3c3;
+  --out-dot: #b57f00;
+  --unk-fg: #5a4a3c;
+  --unk-bg: #ebe4da;
+  --unk-dot: #8d7863;
+  --ok-fg: #3f6b2a;
+  --ok-bg: #e7eddd;
+  --ok-dot: #4c7a32;
+
+  /* Type. Fraunces stands in for Bond's paid Season Mix; Source Serif 4 stands in for Claude's paid Tiempos. */
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-brand: "Geist Variable", "Inter Variable", sans-serif;
+  --font-claude: "Source Serif 4 Variable", Georgia, serif;
+  --dw: 360;
+  --dvar: "opsz" 72;
+  /* Short aliases used by the homepage styles. */
+  --sans: var(--font-sans);
+  --mono: var(--font-mono);
+  --display: var(--font-display);
+  color-scheme: light;
+}
+
+/* The earlier white and blue look, kept as a fallback (main @ 3db50c6). Colors followed habitatoc.org (checked 2026-11-07). */
+:root[data-theme="classic"] {
   --paper: #f4f4f4;
   --paper-alt: #e8eaed;
   --card: #ffffff;
@@ -29,8 +103,9 @@
   --ok-bg: #dceedf;
   --ok-dot: #2e9b57;
   --font-sans: "Geist Variable", system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
-  color-scheme: light;
+  --font-display: var(--font-sans);
+  --dw: 600;
+  --dvar: normal;
 }
 
 html,

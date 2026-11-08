@@ -1,7 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Root } from './ui/Root';
-import './index.css';
+import { Home } from './Home';
+import '../index.css';
+import './home.css';
+
+window.addEventListener('unhandledrejection', (e) => console.error('[home] unhandled promise rejection', e.reason));
 
 const container = document.getElementById('root');
 if (!container) {
@@ -10,6 +13,6 @@ if (!container) {
 
 createRoot(container).render(
   <StrictMode>
-    <Root />
+    <Home />
   </StrictMode>,
 );
