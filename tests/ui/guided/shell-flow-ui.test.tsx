@@ -53,6 +53,20 @@ describe('guided shell', () => {
     expect(screen.getByText(NOTICE)).toBeTruthy();
   });
 
+  it('opens the letter draft from the contact step, and closes it again', async () => {
+    setup();
+    await pickBuild();
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(run.name) }));
+    await screen.findByText(/Step 3 of 6/, { selector: '.gd-bar *' }, SLOW);
+    const rail = screen.getByRole('navigation', { name: 'Steps' });
+    fireEvent.click(within(rail).getAllByRole('button')[4]!);
+    fireEvent.click(await screen.findByRole('button', { name: 'Write the letter' }));
+    const sheet = screen.getByRole('dialog', { name: 'Letter drafts' });
+    expect(within(sheet).getByRole('heading', { name: `Letter, ${run.name}` })).toBeTruthy();
+    fireEvent.click(within(sheet).getByRole('button', { name: 'Close' }));
+    expect(screen.queryByRole('dialog', { name: 'Letter drafts' })).toBeNull();
+  });
+
   it('lets the rail jump back only to steps already reached', async () => {
     setup();
     await pickBuild();

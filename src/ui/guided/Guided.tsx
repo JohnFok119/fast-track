@@ -1,12 +1,13 @@
 // The guided flow: one question or one result per card, in the locked order, ending with a summary.
 // Same engine data as the full page; nothing is sent anywhere.
-import { useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { getBaseline, getTimeline } from '../../contract/api';
 import type { City } from '../../contract/types';
 import { ESCALATION, PATHS, RUNS } from '../data';
 import { groupItems } from '../model';
 import { AppBrand } from '../Brand';
 import type { BuildChoice } from '../choice';
+import { LetterSheet } from '../LetterSheet';
 import { PickCity, PickPath, Welcome } from './Choose';
 import { GuidedFlow } from './GuidedFlow';
 import { ContactStep, TimelineStep } from './PlanSteps';
@@ -41,6 +42,8 @@ interface Props {
 export function Guided({ from, onSeeAll }: Props) {
   const [flow, setFlow] = useState(() => (from ? GuidedFlow.resume({ paths: PATHS, runs: RUNS }, from) : GuidedFlow.start({ paths: PATHS, runs: RUNS })));
   const timer = useRef<number | undefined>(undefined);
+  const [letterOpen, setLetterOpen] = useState(false);
+  const closeLetter = useCallback(() => setLetterOpen(false), []);
 
   const { step, pathId, city, run } = flow;
   const path = PATHS.find((p) => p.id === pathId);
@@ -62,7 +65,7 @@ export function Guided({ from, onSeeAll }: Props) {
   else if (step === 2 || !run || !path) body = <PickCity runs={RUNS} pathway={path?.pathway ?? 'ADU'} city={city} onPick={pickCity} />;
   else if (step === 3) body = <Results key={run.city} run={run} items={items} onNext={() => go(4)} onBack={() => go(2)} />;
   else if (step === 4) body = <TimelineStep pathway={path.pathway} phases={getTimeline(path.pathway)} baseline={BASELINE} onNext={() => go(5)} onBack={() => go(3)} />;
-  else if (step === 5) body = <ContactStep run={run} escalation={ESCALATION} onNext={() => go(6)} onBack={() => go(4)} />;
+  else if (step === 5) body = <ContactStep run={run} escalation={ESCALATION} onLetter={() => setLetterOpen(true)} onNext={() => go(6)} onBack={() => go(4)} />;
   else {
     body = <Summary path={path} run={run} items={items} phases={getTimeline(path.pathway)} baseline={BASELINE} escalation={ESCALATION} onBack={() => go(5)} onRestart={restart} />;
   }
@@ -85,6 +88,7 @@ export function Guided({ from, onSeeAll }: Props) {
           <div className="gd-body">{body}</div>
         </main>
       </div>
+      {letterOpen && run ? <LetterSheet run={run} escalation={ESCALATION} onClose={closeLetter} /> : null}
     </div>
   );
 }

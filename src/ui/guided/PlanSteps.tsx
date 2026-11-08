@@ -106,9 +106,9 @@ function ContactItem({ contact, escalation }: { contact: Contact; escalation?: b
   );
 }
 
-interface ContactProps { run: CityRun; escalation: Contact; onNext: () => void; onBack: () => void }
+interface ContactProps { run: CityRun; escalation: Contact; onLetter: () => void; onNext: () => void; onBack: () => void }
 
-export function ContactStep({ run, escalation, onNext, onBack }: ContactProps) {
+export function ContactStep({ run, escalation, onLetter, onNext, onBack }: ContactProps) {
   return (
     <div>
       <h1 className="gd-q">Who to contact</h1>
@@ -116,6 +116,10 @@ export function ContactStep({ run, escalation, onNext, onBack }: ContactProps) {
         {run.contacts.map((c) => <ContactItem key={c.office} contact={c} />)}
         <ContactItem contact={escalation} escalation />
       </ul>
+      <div className="ct-letter">
+        <p>A draft for each office, every line with its source. You send it yourself. Fast Track sends nothing.</p>
+        <button type="button" className="btn" onClick={onLetter}>Write the letter</button>
+      </div>
       <div className="gd-nav">
         <button type="button" className="btn" onClick={onBack}>Back</button>
         <button type="button" className="btn solid" onClick={onNext}>Next: summary</button>

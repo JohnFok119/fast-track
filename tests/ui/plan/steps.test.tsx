@@ -63,9 +63,17 @@ describe('TimelineStep, ADU', () => {
 
 describe('ContactStep', () => {
   it('has no repeated step number', () => {
-    const { container } = render(<ContactStep run={run0()} escalation={ESCALATION} onNext={noop} onBack={noop} />);
+    const { container } = render(<ContactStep run={run0()} escalation={ESCALATION} onLetter={noop} onNext={noop} onBack={noop} />);
     expect(container.textContent).not.toMatch(/Step \d of 6/);
     expect(screen.getByText('Who to contact')).toBeTruthy();
+  });
+
+  it('offers the letter draft, which the owner sends themselves', () => {
+    const onLetter = vi.fn();
+    render(<ContactStep run={run0()} escalation={ESCALATION} onLetter={onLetter} onNext={noop} onBack={noop} />);
+    fireEvent.click(screen.getByRole('button', { name: 'Write the letter' }));
+    expect(onLetter).toHaveBeenCalledOnce();
+    expect(screen.getByText(/You send it yourself/)).toBeTruthy();
   });
 });
 

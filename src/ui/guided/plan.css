@@ -29,6 +29,8 @@
 .ct-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
 .ct-office { font: 600 1.1rem/1.25 var(--font-display); font-variation-settings: var(--dvar); color: var(--card-ink); overflow-wrap: anywhere; }
 .ct-handles { margin-top: 4px; font-size: 1rem; line-height: 1.45; color: var(--ink-2); }
+.ct-letter { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 16px; margin-top: 14px; padding: 16px 18px; border-radius: 12px; border: 1px dashed var(--line-strong); }
+.ct-letter p { flex: 1 1 220px; margin: 0; font-size: 0.9rem; line-height: 1.5; color: var(--card-text); }
 .ct-link { display: inline-block; margin-top: 10px; font: 400 0.78rem/1.4 var(--font-mono); color: var(--sprout-deep); text-decoration: underline; text-underline-offset: 3px; }
 
 @keyframes tg-grow { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); } }
