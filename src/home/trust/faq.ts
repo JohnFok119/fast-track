@@ -85,6 +85,12 @@ export function buildFaq(facts: HomeFacts): Faq {
         question: "Does AI decide what's a clash?",
         answer: ['No. A fixed rule set does. Claude wrote the plain-words summaries once, and a person checks them before they ship.'],
       },
+      {
+        question: 'How do you estimate the time a clash costs?',
+        answer: [
+          "Claude estimates it from the city's line, the state's answer and the review deadlines in state law, and every number is labeled an estimate. The more real permit timelines we gather, the closer the estimates get.",
+        ],
+      },
       { question: 'Which cities?', answer: [`${facts.cityNames.length} Orange County cities so far: ${list(facts.cityNames)}.`] },
       { question: 'Will it contact the city for me?', answer: ['No. It drafts a response. You review it and send it yourself.'] },
       { question: 'What does "unknown" mean?', answer: ['No rule covers that line yet, so Fast Track says so instead of guessing.'] },

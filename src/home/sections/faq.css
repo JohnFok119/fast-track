@@ -1,26 +1,42 @@
-/* FAQ */
+/* FAQ. One system: 44rem reading measure, 17px/1.55 text, 12px card radius, 24px item rhythm, 300ms ease-out. */
+.faq-sec { --faq-measure: 44rem; --faq-ease: cubic-bezier(0.22, 1, 0.36, 1); --faq-time: 300ms; }
 .faq-sec .faq { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 48px; }
 .faq-sec .faq > .disp { font-size: 64px; color: var(--accent); }
-.faq-sec details { border-top: 1px solid var(--rule); padding: 24px 0; }
-.faq-sec details:last-child { border-bottom: 1px solid var(--rule); }
-.faq-sec summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
-.faq-sec summary::-webkit-details-marker { display: none; }
-.faq-sec summary .disp { font-size: 32px; }
-.faq-sec summary::after { content: "+"; font: 300 28px/1 var(--sans); color: var(--muted); transition: transform 0.3s; }
-.faq-sec details[open] summary::after { transform: rotate(45deg); }
-.faq-sec details p { margin: 14px 0 0; max-width: 42rem; font-size: 17px; }
-.faq-sec .proto { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; margin-bottom: 28px; border-radius: 12px; background: var(--surface); color: var(--card-text); box-shadow: inset 0 0 0 1px var(--line), inset 4px 0 0 var(--copper); }
+
+.faq-sec .proto { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; margin-bottom: 28px; max-width: var(--faq-measure); border-radius: 12px; background: var(--surface); color: var(--card-text); box-shadow: inset 0 0 0 1px var(--line), inset 4px 0 0 var(--copper); }
 .faq-sec .proto .pt { flex: none; margin-top: 3px; padding: 6px 8px; border-radius: 99px; background: var(--esp); color: var(--cream); font: 600 10px/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; }
-.faq-sec .proto p { margin: 0; font-size: 17px; }
-.faq-sec .proto u, .faq-sec details u { text-decoration: underline; text-decoration-color: var(--copper); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-.faq-sec .next { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 46rem; }
-.faq-sec .next li { display: flex; flex-direction: column; gap: 5px; padding: 14px 16px; border-radius: 10px; background: var(--surface); color: var(--card-text); box-shadow: inset 0 0 0 1px var(--line); }
+.faq-sec .proto p { margin: 0; font-size: 17px; line-height: 1.55; }
+.faq-sec u { text-decoration: underline; text-decoration-color: var(--copper); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+.faq-sec .faq-item { border-top: 1px solid var(--rule); }
+.faq-sec .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+.faq-sec .faq-h { margin: 0; font: inherit; }
+.faq-sec .faq-q { all: unset; box-sizing: border-box; width: 100%; padding: 24px 0; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+.faq-sec .faq-q:focus-visible { outline: 2px solid var(--copper); outline-offset: 4px; border-radius: 4px; }
+.faq-sec .faq-q .disp { font-size: 32px; line-height: 1.2; }
+.faq-sec .faq-ic { flex: none; width: 28px; height: 28px; display: grid; place-items: center; font: 300 28px/1 var(--sans); color: var(--muted); transition: transform var(--faq-time) var(--faq-ease); }
+.faq-sec .faq-item[data-open="true"] .faq-ic { transform: rotate(45deg); }
+
+.faq-sec .faq-a { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows var(--faq-time) var(--faq-ease), opacity var(--faq-time) var(--faq-ease), visibility 0s linear var(--faq-time); }
+.faq-sec .faq-item[data-open="true"] .faq-a { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
+.faq-sec .faq-a-in { min-height: 0; overflow: hidden; max-width: var(--faq-measure); }
+.faq-sec .faq-a-in > :last-child { margin-bottom: 24px; }
+.faq-sec .faq-a-in p { margin: 0 0 14px; font-size: 17px; line-height: 1.55; }
+.faq-sec .faq-a-in .note { font-size: 13px; line-height: 1.5; color: var(--muted); }
+
+.faq-sec .next { list-style: none; margin: 4px 0 14px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.faq-sec .next li { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 12px; background: var(--surface); color: var(--card-text); box-shadow: inset 0 0 0 1px var(--line); }
 .faq-sec .next b { font: var(--dw) 22px/1.2 var(--display); font-variation-settings: var(--dvar); letter-spacing: -0.01em; color: var(--card-ink); }
-.faq-sec .next span { font-size: 15px; }
+.faq-sec .next span { font-size: 15px; line-height: 1.5; }
 .faq-sec .next cite { margin-top: auto; padding-top: 4px; font: 400 11px/1.4 var(--mono); font-style: normal; color: var(--card-muted); }
-.faq-sec details .note { font-size: 13px; color: var(--muted); }
 
 @media (max-width: 960px) {
-  .faq-sec .faq { grid-template-columns: minmax(0, 1fr); }
+  .faq-sec .faq { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .faq-sec .faq > .disp { font-size: 48px; }
+  .faq-sec .faq-q .disp { font-size: 24px; }
   .faq-sec .next { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-sec .faq-a, .faq-sec .faq-ic { transition: none; }
 }

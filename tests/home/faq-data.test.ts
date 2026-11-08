@@ -27,6 +27,13 @@ describe('FAQ data', () => {
     expect(finished).toContain('13 rules');
   });
 
+  it('explains how the time a clash costs is estimated, right after the AI question', () => {
+    const questions = faq.items.map((i) => i.question);
+    const at = questions.indexOf('How do you estimate the time a clash costs?');
+    expect(at).toBe(questions.indexOf("Does AI decide what's a clash?") + 1);
+    expect(flatten(faq.items[at]!.answer!)).toMatch(/estimate/i);
+  });
+
   it('keeps every answer short, plain, and free of the em dash', () => {
     for (const item of faq.items) {
       const texts = [item.answer ? flatten(item.answer) : '', ...(item.next ?? []).map((n) => n.text)];

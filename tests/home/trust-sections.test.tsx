@@ -10,19 +10,19 @@ import { APP_URL } from '../../src/home/links';
 describe('Faq', () => {
   it('opens and closes an item when its question is clicked', () => {
     render(<Faq />);
-    const item = screen.getByText('Is this legal advice?').closest('details')!;
-    expect(item.open).toBe(false);
-    fireEvent.click(screen.getByText('Is this legal advice?'));
-    expect(item.open).toBe(true);
-    fireEvent.click(screen.getByText('Is this legal advice?'));
-    expect(item.open).toBe(false);
+    const q = screen.getByRole('button', { name: 'Is this legal advice?' });
+    expect(q.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(q);
+    expect(q.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(q);
+    expect(q.getAttribute('aria-expanded')).toBe('false');
   });
 
   it('shows the prototype banner and the first answer open with the data counts', () => {
     render(<Faq />);
     expect(screen.getByText('Prototype')).toBeTruthy();
-    const first = screen.getByText('Is this the finished product?').closest('details')!;
-    expect(first.open).toBe(true);
+    const first = screen.getByText('Is this the finished product?').closest('.faq-item')!;
+    expect(first.getAttribute('data-open')).toBe('true');
     expect(first.textContent).toContain('4 cities');
     expect(first.textContent).toContain('13 rules');
   });
@@ -34,7 +34,7 @@ describe('Faq', () => {
 
   it('lists what is next', () => {
     render(<Faq />);
-    const next = screen.getByText("What's next?").closest('details')!;
+    const next = screen.getByText("What's next?").closest<HTMLElement>('.faq-item')!;
     expect(within(next).getAllByRole('listitem')).toHaveLength(6);
   });
 });
