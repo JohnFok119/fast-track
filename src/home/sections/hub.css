@@ -8,9 +8,10 @@
 
 .hub-sec .hub { position: relative; text-align: left; display: grid; grid-template-columns: minmax(0, 1.5fr) 120px minmax(0, 1fr); gap: 48px; align-items: center; margin-top: 72px; padding: 32px 0; }
 .hub-sec .hub::before { content: ""; position: absolute; inset: -20px -40px; pointer-events: none; background-image: linear-gradient(var(--gridline, rgba(40, 30, 21, 0.07)) 1px, transparent 1px), linear-gradient(90deg, var(--gridline, rgba(40, 30, 21, 0.07)) 1px, transparent 1px); background-size: 44px 44px; -webkit-mask-image: radial-gradient(60% 70% at 50% 50%, #000 30%, transparent 80%); mask-image: radial-gradient(60% 70% at 50% 50%, #000 30%, transparent 80%); }
-.hub-sec .hub-feeds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.hub-sec .hub-feeds { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: center; }
+/* The city's documents on the left, the state's on the right, each column centred on the hub. */
+.hub-sec .hub-col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .hub-sec .hub-feed { position: relative; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: var(--surface); box-shadow: 0 0 0 1px var(--line), 0 8px 18px -14px rgba(40, 30, 21, 0.4); font: 500 13px/1.25 var(--sans); color: var(--card-ink); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-.hub-sec .hub-feed:nth-child(2n) { transform: translateY(18px); }
 .hub-sec .hub-feed .ic { flex: none; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; background: var(--surface-2); font: 400 15px/1 var(--display); color: var(--bronze); }
 .hub-sec .hub-core { position: relative; z-index: 1; width: 120px; height: 120px; border-radius: 26px; display: grid; place-items: center; background: var(--esp); box-shadow: 0 20px 40px -18px rgba(40, 30, 21, 0.7); }
 .hub-sec .hub-core svg { width: 64px; height: 64px; }
@@ -33,7 +34,7 @@
 /* Two columns cannot fit a one-line label on a phone: stack the feeds. */
 @media (max-width: 560px) {
   .hub-sec .hub-feeds { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .hub-sec .hub-feed:nth-child(2n) { transform: none; }
+  .hub-sec .hub-col { gap: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hub-sec .hub-item, .hub-sec .land { opacity: 1 !important; transform: none !important; }

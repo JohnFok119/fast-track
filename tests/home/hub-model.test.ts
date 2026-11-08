@@ -8,21 +8,24 @@ const run = runCheck('dana-point');
 const hub = new HubModel(run, sources);
 
 describe('HubModel', () => {
-  it("names six one-line sources in the prototype order: the run's ordinance first, then five from the index", () => {
-    expect(hub.feeds.map((f) => f.label)).toEqual([
-      'Dana Point Ordinance 22-01',
-      'HCD letter, Dana Point',
-      'ADU Handbook, 2026',
-      'Gov. Code § 66317',
-      'HCD letter, Irvine',
-      'Anaheim checklist',
-    ]);
-    const ids = new Set(sources.map((s) => s.id));
-    for (const feed of hub.feeds.slice(1)) expect(ids.has(feed.id)).toBe(true);
+  it("names only the documents behind this run: the city's ordinance, then each source its results cite", () => {
+    expect(hub.feeds.map((f) => f.label)).toEqual(['Dana Point Ordinance 22-01', 'HCD letter, Dana Point', 'ADU Handbook, 2026']);
+    const cited = new Set(run.flags.flatMap((f) => f.citations.map((c) => c.sourceId)));
+    for (const feed of hub.feeds.slice(1)) expect(cited.has(feed.id)).toBe(true);
+    expect(hub.feeds.map((f) => f.label).join(' ')).not.toMatch(/Irvine|Anaheim|Orange/);
+  });
+
+  it("splits the documents into the city's side and the state's side", () => {
+    expect(hub.sides.city.map((f) => f.label)).toEqual(['Dana Point Ordinance 22-01']);
+    expect(hub.sides.state.map((f) => f.label)).toEqual(['HCD letter, Dana Point', 'ADU Handbook, 2026']);
   });
 
   it('picks an icon by kind of source', () => {
-    expect(hub.feeds.map((f) => f.kind)).toEqual(['city', 'letter', 'book', 'law', 'letter', 'city']);
+    expect(hub.feeds.map((f) => f.kind)).toEqual(['city', 'letter', 'book']);
+  });
+
+  it('throws when the run cites a source the index does not list', () => {
+    expect(() => new HubModel(run, sources.filter((s) => s.id !== 'adu-handbook-2026-03'))).toThrow(/adu-handbook-2026-03/);
   });
 
   it('throws on a source kind it cannot label, and on a run that names no ordinance', () => {

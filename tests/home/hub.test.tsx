@@ -10,12 +10,10 @@ describe('Hub', () => {
     expect(screen.getByText('Cleared to build.')).toBeTruthy();
   });
 
-  it('shows the sources that flow in, named from data/sources/index.json', () => {
-    render(<Hub />);
-    expect(screen.getByText('Dana Point Ordinance 22-01')).toBeTruthy();
-    expect(screen.getByText('HCD letter, Dana Point')).toBeTruthy();
-    expect(screen.getByText('ADU Handbook, 2026')).toBeTruthy();
-    expect(screen.getByText('Gov. Code § 66317')).toBeTruthy();
+  it("shows only the documents behind Dana Point's results flowing in", () => {
+    const { container } = render(<Hub />);
+    const cols = [...container.querySelectorAll('.hub-col')].map((col) => [...col.querySelectorAll('.hub-feed')].map((el) => el.textContent));
+    expect(cols).toEqual([['Dana Point Ordinance 22-01'], ['HCD letter, Dana Point', 'ADU Handbook, 2026']]);
   });
 
   it('shows the list that comes out, with a status on every line', () => {

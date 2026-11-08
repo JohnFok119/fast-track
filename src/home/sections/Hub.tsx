@@ -64,10 +64,14 @@ export function Hub() {
         </p>
         <div className="hub" id="hub" ref={hub} data-rv>
           <div className="hub-feeds">
-            {model.feeds.map((feed) => (
-              <div className="hub-feed" key={feed.id}>
-                <span className="ic"><FeedIcon kind={feed.kind} /></span>
-                {feed.label}
+            {[model.sides.city, model.sides.state].map((side, k) => (
+              <div className="hub-col" key={k}>
+                {side.map((feed) => (
+                  <div className="hub-feed" key={feed.id}>
+                    <span className="ic"><FeedIcon kind={feed.kind} /></span>
+                    {feed.label}
+                  </div>
+                ))}
               </div>
             ))}
           </div>

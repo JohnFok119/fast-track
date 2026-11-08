@@ -23,15 +23,6 @@ export interface HubOutput {
   status: 'CONFLICTS' | 'UNKNOWN';
 }
 
-/** Which sources the hub draws after the run's own ordinance, by id in data/sources/index.json. */
-export const HUB_SOURCE_IDS = [
-  'hcd-dana-point-2023-04-17',
-  'adu-handbook-2026-03',
-  'gov-66317',
-  'hcd-irvine-2025-03-27',
-  'anaheim-adu-checklist-2025-11',
-] as const;
-
 const ORDINANCE_IN_LABEL = /((?:[A-Z][a-z]+ )+Ordinance [\d-]+)/;
 
 function titleCase(slug: string): string {
@@ -71,14 +62,21 @@ export class HubModel {
   readonly outputs: HubOutput[];
 
   constructor(run: CityRun, sources: readonly SourceEntry[]) {
+    // One worked example: only the documents behind this run's results, never another city's.
     const byId = new Map(sources.map((s) => [s.id, s]));
-    const listed = HUB_SOURCE_IDS.map((id) => {
+    const cited = [...new Set(run.flags.flatMap((f) => f.citations.map((c) => c.sourceId)))];
+    const listed = cited.map((id) => {
       const source = byId.get(id);
       if (!source) throw new Error(`[hub] source "${id}" is not in data/sources/index.json`);
       return labelSource(source);
     });
     this.feeds = [ordinanceFeed(run), ...listed];
     this.outputs = HubModel.outputsOf(run);
+  }
+
+  /** The city's own documents on one side, the state's on the other, so the hub reads as one against the other. */
+  get sides(): { city: Feed[]; state: Feed[] } {
+    return { city: this.feeds.filter((f) => f.kind === 'city'), state: this.feeds.filter((f) => f.kind !== 'city') };
   }
 
   private static outputsOf(run: CityRun): HubOutput[] {
