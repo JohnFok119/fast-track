@@ -1,5 +1,8 @@
 import type { CSSProperties } from 'react';
-import type { CityRun, Contact, Phase } from '../../contract/types';
+import { getTimeline } from '../../contract/api';
+import { PATHWAYS, type CityRun, type Contact, type Pathway, type Phase } from '../../contract/types';
+import { FasterPaths, ReviewDeadline } from '../faster/FasterPaths';
+import { unknownPhrase } from '../faster/reviewWording';
 import { BuildingIcon, StateIcon } from '../icons';
 import { totalMonths } from '../model';
 import './plan.css';
@@ -9,6 +12,8 @@ interface TimelineProps {
   phases: Phase[];
   /** The event brief's typical path without a fast track: every phase is an ASSUMPTION. */
   baseline: Phase[];
+  /** Which pathway the phases are for. When left out it is found by matching the phases to the timeline data. */
+  pathway?: Pathway;
   onNext: () => void;
   onBack: () => void;
 }
@@ -65,18 +70,23 @@ function Graph({ title, phases, scale, start, saved }: GraphProps) {
   );
 }
 
-export function TimelineStep({ phases, baseline, onNext, onBack }: TimelineProps) {
+function pathwayOf(phases: Phase[]): Pathway | undefined {
+  return PATHWAYS.find((w) => getTimeline(w) === phases);
+}
+
+export function TimelineStep({ phases, baseline, pathway, onNext, onBack }: TimelineProps) {
+  const which = pathway ?? pathwayOf(phases);
   const baseTotal = totalMonths(baseline);
   const scale = Math.max(baseTotal, totalMonths(phases)) || 1;
-  const unknown = phases.some((p) => p.kind === 'UNKNOWN');
   const months = Math.round(baseTotal - totalMonths(phases));
-  const saved = `About ${months} months shorter (estimate)${unknown ? ' plus an unknown review time' : ''}`;
+  const saved = `About ${months} months shorter (estimate)${unknownPhrase(phases)}`;
   return (
     <div>
-      <div className="gd-kicker">Step 4 of 6</div>
       <h1 className="gd-q">Time saved</h1>
       <Graph title="Typical path" phases={baseline} scale={scale} start={100} />
       <Graph title="Fast track" phases={phases} scale={scale} start={100 + baseline.length * UNIT + 200} saved={saved} />
+      <ReviewDeadline phases={phases} />
+      {which ? <FasterPaths pathway={which} /> : null}
       <p className="tg-note">Estimates are the event brief&apos;s typical times, not measured. Bars marked Law are legal deadlines.</p>
       <div className="gd-nav">
         <button type="button" className="btn" onClick={onBack}>Back</button>
@@ -106,7 +116,6 @@ interface ContactProps { run: CityRun; escalation: Contact; onNext: () => void; 
 export function ContactStep({ run, escalation, onNext, onBack }: ContactProps) {
   return (
     <div>
-      <div className="gd-kicker">Step 5 of 6 · {run.name}</div>
       <h1 className="gd-q">Who to contact</h1>
       <ul className="ct-list">
         {run.contacts.map((c) => <ContactItem key={c.office} contact={c} />)}

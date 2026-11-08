@@ -30,8 +30,8 @@ export function LetterSheet({ run, escalation, onClose }: { run: CityRun; escala
   return (
     <div className="sheet" role="dialog" aria-modal="true" aria-label="Letter drafts" onClick={onClose}>
       <div className="panel pop" onClick={(e) => e.stopPropagation()}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', gap: 10, alignItems: 'center' }}>
-          <div><div className="lbl">Step 5 · Draft only</div><div className="disp" style={{ fontSize: '1.5rem', marginTop: 4 }}>Letter, {run.name}</div></div>
+        <div className="sheet-head">
+          <div><span className="stamp">Draft only</span><h2 className="sheet-title">Letter, {run.name}</h2></div>
           <button type="button" className="btn" onClick={onClose}>Close</button>
         </div>
         <div className="tabs" role="tablist" aria-label="Who the letter is for">
@@ -39,9 +39,9 @@ export function LetterSheet({ run, escalation, onClose }: { run: CityRun; escala
           <button type="button" role="tab" aria-selected={tab === 'hcd'} onClick={() => { setTab('hcd'); setCopied('idle'); }}>If the city won't fix it: to HCD</button>
         </div>
         <pre>{text}</pre>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+        <div className="sheet-acts">
           <button type="button" className="btn solid" onClick={() => void copy()}>{copied === 'done' ? 'Copied' : 'Copy the text'}</button>
-          <span className="muted" style={{ fontSize: '0.85rem' }}>{copied === 'blocked' ? 'Copy was blocked: select the text instead.' : 'You review it and send it yourself. Fast Track sends nothing.'}</span>
+          <span className="sheet-note">{copied === 'blocked' ? 'Copy was blocked: select the text instead.' : 'You review it and send it yourself. Fast Track sends nothing.'}</span>
         </div>
       </div>
     </div>
