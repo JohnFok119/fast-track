@@ -1,6 +1,7 @@
 // What the all-on-one-page view remembers: the picked path, city, status filter and line, and whether the letter
 // sheet is open. Immutable: each change returns a new PageState, so React can hold it in one useState.
 import type { BuildPath, City, CityRun, Pathway, Status } from '../../contract/types';
+import type { BuildChoice } from '../choice';
 import { groupItems, type Item } from '../model';
 
 interface Choice {
@@ -24,8 +25,13 @@ export class PageState {
     this.items = this.run ? groupItems(this.run) : [];
   }
 
-  static initial(runs: CityRun[], paths: BuildPath[], city: City | null = 'irvine'): PageState {
-    return new PageState(runs, paths, { pathId: paths[0]?.id ?? '', city, filter: null, selected: null, letterOpen: false });
+  /** The first build in Irvine, or the build and city chosen in the guided view where each has a saved check. */
+  static initial(runs: CityRun[], paths: BuildPath[], from?: BuildChoice): PageState {
+    let state = new PageState(runs, paths, { pathId: paths[0]?.id ?? '', city: 'irvine', filter: null, selected: null, letterOpen: false });
+    if (from?.pathId && paths.some((p) => p.id === from.pathId)) state = state.choosePath(from.pathId);
+    const city = from?.city;
+    if (city && runs.some((r) => r.city === city && r.pathway === state.pathway)) state = state.chooseCity(city);
+    return state;
   }
 
   get pathId(): string { return this.pick.pathId; }

@@ -3,6 +3,7 @@
 import { useCallback, useState } from 'react';
 import { getSteps, getTimeline } from '../contract/api';
 import { AppBrand } from './Brand';
+import type { BuildChoice } from './choice';
 import { ESCALATION, PATHS, RUNS } from './data';
 import { LetterSheet } from './LetterSheet';
 import { Overview } from './Overview';
@@ -14,8 +15,14 @@ import { Side } from './Side';
 import './ft.css';
 import './page.css';
 
-export function App({ onGuided }: { onGuided?: () => void }) {
-  const [state, setState] = useState(() => PageState.initial(RUNS, PATHS));
+interface Props {
+  /** The build and city chosen in the guided view, to open on. */
+  from?: BuildChoice;
+  onGuided?: (choice: BuildChoice) => void;
+}
+
+export function App({ from, onGuided }: Props) {
+  const [state, setState] = useState(() => PageState.initial(RUNS, PATHS, from));
   const closeLetter = useCallback(() => setState((s) => s.closeLetter()), []);
   const { run, items, shown, current } = state;
   const openLetter = () => setState((s) => s.openLetter());
@@ -29,7 +36,7 @@ export function App({ onGuided }: { onGuided?: () => void }) {
           <AppBrand />
           <span className="muted top-line">You own the lot. See what to submit, what to push back on, and your legal clocks.</span>
         </div>
-        {onGuided ? <button type="button" className="btn" onClick={onGuided}>Guided view</button> : null}
+        {onGuided ? <button type="button" className="btn" onClick={() => onGuided({ pathId: state.pathId, city: state.city })}>Guided view</button> : null}
       </header>
       <div className="shell">
         <Side paths={PATHS} runs={RUNS} pathId={state.pathId} city={run ? run.city : null}

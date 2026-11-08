@@ -68,3 +68,20 @@ describe('GuidedFlow', () => {
     expect(f.step).toBe(0);
   });
 });
+
+describe('GuidedFlow.resume', () => {
+  it('opens on the clash step when the build and city have a saved check', () => {
+    const f = GuidedFlow.resume(data, { pathId: 'sb9', city: 'dana-point' });
+    expect([f.step, f.pathId, f.city]).toEqual([3, 'sb9', 'dana-point']);
+  });
+
+  it('opens on the where card when only the build is known, dropping a city with no saved check', () => {
+    const f = GuidedFlow.resume(data, { pathId: 'sb9', city: 'irvine' });
+    expect([f.step, f.pathId, f.city]).toEqual([2, 'sb9', null]);
+  });
+
+  it('opens on the welcome card when nothing is picked', () => {
+    const f = GuidedFlow.resume(data, { pathId: null, city: null });
+    expect([f.step, f.pathId, f.city]).toEqual([0, null, null]);
+  });
+});

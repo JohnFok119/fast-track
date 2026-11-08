@@ -6,6 +6,7 @@ import type { City } from '../../contract/types';
 import { ESCALATION, PATHS, RUNS } from '../data';
 import { groupItems } from '../model';
 import { AppBrand } from '../Brand';
+import type { BuildChoice } from '../choice';
 import { PickCity, PickPath, Welcome } from './Choose';
 import { GuidedFlow } from './GuidedFlow';
 import { ContactStep, TimelineStep } from './PlanSteps';
@@ -31,8 +32,14 @@ function CardBar({ step, lot }: { step: number; lot: string }) {
   );
 }
 
-export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
-  const [flow, setFlow] = useState(() => GuidedFlow.start({ paths: PATHS, runs: RUNS }));
+interface Props {
+  /** The build and city chosen in the one-page view, to pick up where it left off. */
+  from?: BuildChoice;
+  onSeeAll: (choice: BuildChoice) => void;
+}
+
+export function Guided({ from, onSeeAll }: Props) {
+  const [flow, setFlow] = useState(() => (from ? GuidedFlow.resume({ paths: PATHS, runs: RUNS }, from) : GuidedFlow.start({ paths: PATHS, runs: RUNS })));
   const timer = useRef<number | undefined>(undefined);
 
   const { step, pathId, city, run } = flow;
@@ -68,7 +75,7 @@ export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
         <AppBrand />
         <div className="gd-acts">
           <button type="button" className="gd-link" onClick={restart}>Start over</button>
-          <button type="button" className="btn" onClick={onSeeAll}>See everything on one page</button>
+          <button type="button" className="btn" onClick={() => onSeeAll({ pathId, city })}>See everything on one page</button>
         </div>
       </header>
       <div className="gd-wrap">

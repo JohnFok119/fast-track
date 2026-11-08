@@ -1,6 +1,7 @@
 // The guided flow's state: which card you are on, what you picked, and which steps you can jump to.
 // Immutable: every move returns a new flow, so the component only holds one value.
 import type { City, Pathway } from '../../contract/types';
+import type { BuildChoice } from '../choice';
 
 interface FlowRun { city: City; pathway: Pathway }
 
@@ -22,6 +23,14 @@ export class GuidedFlow<R extends FlowRun = FlowRun> {
 
   static start<R extends FlowRun>(data: FlowData<R>): GuidedFlow<R> {
     return new GuidedFlow<R>(data, 0, 'fwd', null, null);
+  }
+
+  /** Picks up a choice made in the one-page view: on the clash step when it has a saved check, else as far as it goes. */
+  static resume<R extends FlowRun>(data: FlowData<R>, from: BuildChoice): GuidedFlow<R> {
+    let flow = GuidedFlow.start(data);
+    if (from.pathId) flow = flow.pickPath(from.pathId);
+    if (from.city) flow = flow.pickCity(from.city);
+    return flow.go(flow.run ? 3 : flow.pathId ? 2 : 0);
   }
 
   get pathway(): Pathway | undefined {

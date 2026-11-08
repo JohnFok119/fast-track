@@ -75,3 +75,24 @@ describe('PageState', () => {
     expect(s.selected).toBeNull();
   });
 });
+
+describe('PageState.initial from the other view', () => {
+  it('opens on the build and city picked there', () => {
+    const sb9 = PATHS.find((p) => p.pathway === 'SB9');
+    if (!sb9) throw new Error('need an SB 9 build');
+    const s = PageState.initial(RUNS, PATHS, { pathId: sb9.id, city: 'dana-point' });
+    expect([s.pathId, s.city, s.run?.pathway]).toEqual([sb9.id, 'dana-point', 'SB9']);
+  });
+
+  it('keeps the defaults for any part of the choice that has no saved check', () => {
+    const first = PATHS[0];
+    if (!first || runs(first.pathway).includes('dana-point')) throw new Error('test needs a first build Dana Point has no check for');
+    expect(PageState.initial(RUNS, PATHS, { pathId: first.id, city: 'dana-point' }).city).toBe(fresh().city);
+    const none = PageState.initial(RUNS, PATHS, { pathId: null, city: null });
+    expect([none.pathId, none.city]).toEqual([fresh().pathId, fresh().city]);
+  });
+});
+
+function runs(pathway: string) {
+  return RUNS.filter((r) => r.pathway === pathway).map((r) => r.city);
+}
