@@ -1,0 +1,6 @@
+{
+  "about": "Plain-words summaries of each clash the rule set finds, and an estimate of the time saved if it is cleared. Written by Claude with scripts/write-clash-summaries.ts and checked before saving: no citation, and no number the sources do not give, except the time estimate, which is an ASSUMPTION. The rule set, not Claude, decides what is a clash.",
+  "model": "",
+  "written": "",
+  "clashes": []
+}
