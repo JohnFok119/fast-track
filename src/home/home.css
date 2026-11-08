@@ -1,7 +1,7 @@
 /* Shared homepage styles: layout, type, buttons, dark sections and reveal on scroll.
    Each section keeps its own styles in its own file next to its component. Colors come only from src/index.css. */
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body.home { margin: 0; background: var(--page); color: var(--text); font: 400 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
 :where(.home) a { color: inherit; }
 .home main { overflow-x: clip; }

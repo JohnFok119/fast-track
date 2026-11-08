@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { getBaseline, getTimeline } from '../../contract/api';
 import type { City } from '../../contract/types';
+import { prefersReducedMotion } from '../../theme';
 import { ESCALATION, PATHS, RUNS } from '../data';
 import { groupItems } from '../model';
 import { AppBrand } from '../Brand';
@@ -21,6 +22,11 @@ const BASELINE = getBaseline();
 /** How long a picked card stays highlighted before the next card slides in. */
 const PICK_DELAY_MS = 380;
 const NOTICE = 'Prototype. Not legal advice. Nothing is sent from this page. Talk to a professional before you act.';
+
+/** Back to the top for the next card: a glide, or a jump when the visitor asked for less motion. */
+function toTop(): void {
+  window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+}
 
 /** The strip on top of the card: the lot and the build, where you are, and the prototype note. */
 function CardBar({ step, lot }: { step: number; lot: string }) {
@@ -52,12 +58,12 @@ export function Guided({ from, onSeeAll }: Props) {
   const go = (n: number) => {
     window.clearTimeout(timer.current);
     setFlow((f) => f.go(n));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toTop();
   };
   const later = (n: number) => { window.clearTimeout(timer.current); timer.current = window.setTimeout(() => go(n), PICK_DELAY_MS); };
   const pickPath = (id: string) => { setFlow((f) => f.pickPath(id)); later(2); };
   const pickCity = (c: City) => { setFlow((f) => f.pickCity(c)); later(3); };
-  const restart = () => { window.clearTimeout(timer.current); setFlow((f) => f.restart()); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const restart = () => { window.clearTimeout(timer.current); setFlow((f) => f.restart()); toTop(); };
 
   let body;
   if (step === 0) body = <Welcome onStart={() => go(1)} />;

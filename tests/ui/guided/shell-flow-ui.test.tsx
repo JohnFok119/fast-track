@@ -3,6 +3,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { PATHS, RUNS } from '../../../src/ui/data';
 import { Guided } from '../../../src/ui/guided/Guided';
+import { matchingQueries } from '../../browser-fakes';
 
 const NOTICE = /Not legal advice/;
 const SLOW = { timeout: 2000 };
@@ -65,6 +66,19 @@ describe('guided shell', () => {
     expect(within(sheet).getByRole('heading', { name: `Letter, ${run.name}` })).toBeTruthy();
     fireEvent.click(within(sheet).getByRole('button', { name: 'Close' }));
     expect(screen.queryByRole('dialog', { name: 'Letter drafts' })).toBeNull();
+  });
+
+  it('jumps to the top of the next card without gliding when the visitor asks for less motion', () => {
+    const scrollTo = vi.spyOn(window, 'scrollTo');
+    matchingQueries.add('(prefers-reduced-motion: reduce)');
+    try {
+      setup();
+      fireEvent.click(screen.getByRole('button', { name: 'Start' }));
+      expect(scrollTo).toHaveBeenLastCalledWith({ top: 0, behavior: 'auto' });
+    } finally {
+      matchingQueries.clear();
+      scrollTo.mockRestore();
+    }
   });
 
   it('lets the rail jump back only to steps already reached', async () => {
