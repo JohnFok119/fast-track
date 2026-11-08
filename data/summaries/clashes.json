@@ -1,6 +1,128 @@
 {
   "about": "Plain-words summaries of each clash the rule set finds, and an estimate of the time saved if it is cleared. Written by Claude with scripts/write-clash-summaries.ts and checked before saving: no citation, and no number the sources do not give, except the time estimate, which is an ASSUMPTION. The rule set, not Claude, decides what is a clash.",
-  "model": "",
-  "written": "",
-  "clashes": []
+  "model": "claude sonnet",
+  "written": "2026-11-08",
+  "clashes": [
+    {
+      "city": "irvine",
+      "ruleId": "adu-deed-restriction",
+      "itemIds": [
+        "irv-01"
+      ],
+      "title": "Deed restriction demand",
+      "citySays": "Irvine says it can bar the separate sale of an ADU and asks the owner to sign a covenant before it will continue reviewing the plans.",
+      "stateSays": "State law says a city cannot add extra rules beyond the ones the state allows for ADUs. The state housing department said a deed restriction is an extra rule, so a city cannot use it to call an application incomplete or to hold it up.",
+      "clash": "Irvine's covenant demand adds a rule the state does not allow, so the owner should not have to sign it, but the city may stall the application as incomplete until the issue is settled.",
+      "time": {
+        "low": 3,
+        "high": 8,
+        "unit": "weeks",
+        "basis": "This rests on the 15 business day completeness check and the 60 day approve or deny deadline, since a city holding the file as incomplete over the covenant can add about one review round."
+      }
+    },
+    {
+      "city": "irvine",
+      "ruleId": "jadu-detached-townhouse",
+      "itemIds": [
+        "irv-03"
+      ],
+      "title": "No JADUs in townhomes",
+      "citySays": "Irvine says a detached townhouse on its own lot cannot have a junior accessory dwelling unit (JADU).",
+      "stateSays": "The state housing department says a detached townhouse on its own lot counts as a single-family home, so it can have one JADU. A homeowners association or other features might make it part of a planned community or townhouse complex, and this tool does not decide that.",
+      "clash": "The city turns away these homes because of the townhouse style, but the state says a detached townhouse on its own lot is eligible, so if that is your home, clear this up before you apply or your application may be refused or stalled.",
+      "time": {
+        "low": 2,
+        "high": 3,
+        "unit": "months",
+        "basis": "This rests on the 60 day window for the city to approve or deny and the 15 business day completeness check, which a dispute over eligibility could stall or force you to repeat."
+      }
+    },
+    {
+      "city": "dana-point",
+      "ruleId": "sb9-dana-point-two-unit-cap",
+      "itemIds": [
+        "dp-01"
+      ],
+      "title": "Two unit cap",
+      "citySays": "Dana Point says no more than two homes of any kind, main home, ADU, or duplex, are allowed on one lot.",
+      "stateSays": "The state housing agency says a duplex on a lot that has not been split can still get an ADU or a junior ADU. Only a lot that was split and has a duplex on a resulting lot loses that right.",
+      "clash": "The city cap would block an ADU or junior ADU on an unsplit duplex lot, which the state says you are allowed to build, so you could be turned down or have to fight the city after you apply.",
+      "time": {
+        "low": 2,
+        "high": 4,
+        "unit": "months",
+        "basis": "This rests on the 60 day city review period, since a clash cleared before applying could save one or two review rounds of about 60 days each."
+      }
+    },
+    {
+      "city": "dana-point",
+      "ruleId": "sb9-dana-point-one-story",
+      "itemIds": [
+        "dp-04"
+      ],
+      "title": "One story height cap",
+      "citySays": "Dana Point limits these duplex and lot split homes to one story and to 12, 14, or 16 feet tall, depending on the roof pitch.",
+      "stateSays": "State housing law says a city cannot cut the height a home could be built to, because that lowers how much housing a lot can hold. HCD says these homes may be as tall as the zone allows for single-family homes.",
+      "clash": "Regular single-family homes in Dana Point can be 28 feet and two stories, so this cap shrinks what you can build, and the state says the city must remove or change it.",
+      "time": {
+        "low": 2,
+        "high": 6,
+        "unit": "months",
+        "basis": "Clearing this first avoids one 60-day city review round and some of the redrawing of plans, which typically take 6 to 12 months."
+      }
+    },
+    {
+      "city": "dana-point",
+      "ruleId": "sb9-dana-point-floor-area-cap",
+      "itemIds": [
+        "dp-05",
+        "dp-06"
+      ],
+      "title": "Floor area caps",
+      "citySays": "Dana Point limits each home on a duplex lot or a split lot to 800 square feet, and the two homes on one duplex lot to 1,600 square feet together.",
+      "stateSays": "The state housing department says these caps cut what you could build compared with the city's normal rules, most of all on large lots. It says the caps also reach an existing house on the lot, and that the city must remove them.",
+      "clash": "The state says these size caps take away building room you would normally have, so you may be able to build bigger, but this is from a 2023 letter and the city's rule may still be on the books, so confirm before you apply.",
+      "time": {
+        "low": 2,
+        "high": 6,
+        "unit": "months",
+        "basis": "The low end is one 60-day city review round you avoid repeating, and the high end is redrawing plans, which typically take 6 to 12 months, at the short end of that range."
+      }
+    },
+    {
+      "city": "dana-point",
+      "ruleId": "sb9-dana-point-one-bedroom",
+      "itemIds": [
+        "dp-07",
+        "dp-08"
+      ],
+      "title": "One bedroom limit",
+      "citySays": "Each unit in a duplex, and each home on a lot made by an urban lot split, can have no more than one bedroom.",
+      "stateSays": "The state housing agency says limiting bedrooms can hurt families with children, people with disabilities, and other protected groups. It also says that limiting how many people can live in a home cuts the intensity of land use, which the Housing Crisis Act does not allow.",
+      "clash": "The state says the city must change this rule, so an owner who plans a home with more than one bedroom could be blocked or slowed unless the clash is cleared first.",
+      "time": {
+        "low": 2,
+        "high": 4,
+        "unit": "months",
+        "basis": "This rests on the 60 day city review period, since a fight over the bedroom limit could add one or two review rounds of about 60 days each."
+      }
+    },
+    {
+      "city": "orange",
+      "ruleId": "sb9-orange-conversion-pathway",
+      "itemIds": [
+        "or-02"
+      ],
+      "title": "ADU conversion ban",
+      "citySays": "Orange says an ADU cannot be turned into a primary home because its code has no process for approving that, so it would not take the lot split application.",
+      "stateSays": "The state housing department says an existing ADU is not a reason to deny a lot split, and the city must give the owner a way to convert the ADU to a primary home so the application can move forward. This works as long as the project meets local and state requirements.",
+      "clash": "The city is blocking a lot split that the state says it must process, so an owner who applies now could be stuck in a fight instead of getting a review.",
+      "time": {
+        "low": 2,
+        "high": 2,
+        "unit": "months",
+        "basis": "State law gives the city 60 days to review, and clearing this clash first avoids losing that review period to a refusal and a dispute."
+      }
+    }
+  ]
 }
