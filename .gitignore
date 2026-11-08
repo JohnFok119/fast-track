@@ -19,3 +19,6 @@ data/raw/
 
 # Agent worktrees
 .claude/worktrees/
+
+# Vercel CLI link (project and team IDs for this machine)
+.vercel/

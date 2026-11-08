@@ -1,0 +1,13 @@
+# A deploy from this machine uploads only what the build needs. Never upload secrets, raw source PDFs (they may hold
+# personal information), agent worktrees, browser screenshots or design prototypes.
+.env
+.env.*
+data/raw/
+.claude/
+.lavish/
+.playwright-mcp/
+node_modules/
+dist/
+coverage/
+CLAUDE.local.md
+.DS_Store

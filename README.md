@@ -109,6 +109,10 @@ npm test                 # runs the test suite
 - `npm run verify` runs the type-check, lint and tests together.
 - `npm run summaries` has Claude rewrite the clash summaries (needs a machine logged in to Claude Code; `-- --dry-run` calls no model).
 
+### Deploy
+
+The site is static: `npm run build` writes the homepage to `dist/index.html` and the tool to `dist/app/index.html`, and nothing runs on a server. `vercel.json` holds the Vercel settings (Vite, `npm ci`, `npm run build`, output `dist`, `/app` redirects to `/app/`). `.vercelignore` keeps secrets, raw source PDFs, agent worktrees and screenshots out of a deploy from a laptop. With the Vercel CLI, `vercel` makes a preview deploy and `vercel --prod` a production one. No environment variables are needed.
+
 ## Sources and assumptions
 
 All dates checked: 2026-11-07. The source list lives in `data/sources/index.json`.
