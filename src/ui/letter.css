@@ -1,0 +1,7 @@
+/* The letter sheet: the side panel with the drafts and its tabs. Colors come only from src/index.css. */
+.sheet { position: fixed; inset: 0; background: rgba(26, 26, 26, 0.35); display: flex; justify-content: flex-end; z-index: 50; }
+.sheet .panel { width: min(640px, 100%); height: 100%; background: var(--card); padding: 22px; overflow: auto; display: flex; flex-direction: column; gap: 12px; }
+.sheet pre { white-space: pre-wrap; font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.6; background: var(--paper); border: 1px solid var(--line); padding: 14px; margin: 0; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tabs button { padding: 7px 12px; border: 1px solid var(--line) !important; }
+.tabs button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink) !important; }

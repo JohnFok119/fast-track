@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import type { CityRun, Contact } from '../contract/types';
 import { draftCityReply, draftHcdRequest } from '../letter/draft';
+import './letter.css';
 
 type Tab = 'city' | 'hcd';
 

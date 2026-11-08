@@ -11,6 +11,7 @@ import { Plan } from './Plan';
 import { Detail, RequirementList } from './Requirements';
 import { Side } from './Side';
 import './ft.css';
+import './page.css';
 
 export function App({ onGuided }: { onGuided?: () => void }) {
   const [pathId, setPathId] = useState(PATHS[0]?.id ?? '');
