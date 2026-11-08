@@ -41,6 +41,12 @@ export function day(iso: string): string {
   return `${MONTHS[(m ?? 1) - 1]} ${d}, ${y}`;
 }
 
+/** A month a source gives without a day, YYYY-MM, as "Mar 2026". */
+export function month(isoMonth: string): string {
+  const [y, m] = isoMonth.split('-').map(Number);
+  return `${MONTHS[(m ?? 1) - 1]} ${y}`;
+}
+
 export function citeMeta(c: Citation): string {
   return [c.page ? `Page ${c.page}` : null, c.section ? `Section ${c.section}` : null, `Checked ${day(c.checked)}`]
     .filter(Boolean)
