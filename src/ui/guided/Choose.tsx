@@ -39,7 +39,6 @@ interface PathProps { paths: BuildPath[]; pathId: string | null; onPick: (id: st
 export function PickPath({ paths, pathId, onPick }: PathProps) {
   return (
     <div>
-      <div className="gd-kicker">Step 1 of 6</div>
       <h1 className="gd-q">What do you want to build?</h1>
       <div className="ch-grid">
         {paths.map((p, i) => {
@@ -65,7 +64,6 @@ export function PickCity({ runs, pathway, city, onPick }: CityProps) {
   const missing = `No saved ${pathway === 'SB9' ? 'SB 9' : 'ADU'} list yet`;
   return (
     <div>
-      <div className="gd-kicker">Step 2 of 6</div>
       <h1 className="gd-q">Where is the lot?</h1>
       <div className="ch-grid">
         {runs.map((r, i) => {

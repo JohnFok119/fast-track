@@ -5,10 +5,12 @@ import { getBaseline, getTimeline } from '../../contract/api';
 import type { City } from '../../contract/types';
 import { ESCALATION, PATHS, RUNS } from '../data';
 import { groupItems } from '../model';
+import { AppBrand } from '../Brand';
 import { PickCity, PickPath, Welcome } from './Choose';
+import { GuidedFlow } from './GuidedFlow';
 import { ContactStep, TimelineStep } from './PlanSteps';
 import { Results } from './Results';
-import { Stepper } from './Stepper';
+import { STEP_LABELS, Stepper } from './Stepper';
 import { Summary } from './Summary';
 import '../ft.css';
 import './guided.css';
@@ -16,34 +18,36 @@ import './guided.css';
 const BASELINE = getBaseline();
 /** How long a picked card stays highlighted before the next card slides in. */
 const PICK_DELAY_MS = 380;
+const NOTICE = 'Prototype. Not legal advice. Nothing is sent from this page. Talk to a professional before you act.';
+
+/** The strip on top of the card: the lot and the build, where you are, and the prototype note. */
+function CardBar({ step, lot }: { step: number; lot: string }) {
+  return (
+    <div className="gd-bar">
+      <b>{lot}</b>
+      <span>{step > 0 ? `Step ${step} of ${STEP_LABELS.length} \u00b7 ${STEP_LABELS[step - 1]}` : 'Welcome'}</span>
+      <span className="pv">Prototype, not legal advice. Talk to a professional.</span>
+    </div>
+  );
+}
 
 export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
-  const [step, setStep] = useState(0);
-  const [dir, setDir] = useState<'fwd' | 'back'>('fwd');
-  const [pathId, setPathId] = useState<string | null>(null);
-  const [city, setCity] = useState<City | null>(null);
+  const [flow, setFlow] = useState(() => GuidedFlow.start({ paths: PATHS, runs: RUNS }));
   const timer = useRef<number | undefined>(undefined);
 
+  const { step, pathId, city, run } = flow;
   const path = PATHS.find((p) => p.id === pathId);
-  const run = RUNS.find((r) => r.city === city && r.pathway === path?.pathway);
   const items = useMemo(() => (run ? groupItems(run) : []), [run]);
-  const reachable = run ? 6 : path ? 2 : 1;
 
   const go = (n: number) => {
     window.clearTimeout(timer.current);
-    setDir(n >= step ? 'fwd' : 'back');
-    setStep(n);
+    setFlow((f) => f.go(n));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const later = (n: number) => { window.clearTimeout(timer.current); timer.current = window.setTimeout(() => go(n), PICK_DELAY_MS); };
-  const pickPath = (id: string) => {
-    setPathId(id);
-    const next = PATHS.find((p) => p.id === id)?.pathway;
-    if (city && !RUNS.some((r) => r.city === city && r.pathway === next)) setCity(null);
-    later(2);
-  };
-  const pickCity = (c: City) => { setCity(c); later(3); };
-  const restart = () => { setPathId(null); setCity(null); go(0); };
+  const pickPath = (id: string) => { setFlow((f) => f.pickPath(id)); later(2); };
+  const pickCity = (c: City) => { setFlow((f) => f.pickCity(c)); later(3); };
+  const restart = () => { window.clearTimeout(timer.current); setFlow((f) => f.restart()); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   let body;
   if (step === 0) body = <Welcome onStart={() => go(1)} />;
@@ -56,16 +60,23 @@ export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
     body = <Summary path={path} run={run} items={items} phases={getTimeline(path.pathway)} baseline={BASELINE} escalation={ESCALATION} onBack={() => go(5)} onRestart={restart} />;
   }
 
+  const lot = [run?.name, path?.label].filter(Boolean).join(' \u00b7 ') || 'Fast Track';
   return (
     <div className="ft gd">
-      <div className="ribbon"><i aria-hidden="true" /><span>Prototype. Not legal advice. Nothing is sent from this page. Talk to a professional before you act.</span></div>
+      <div className="ribbon"><i aria-hidden="true" /><span>{NOTICE}</span></div>
       <header className="gd-top">
-        <button type="button" className="mark" onClick={restart}>FAST TRACK</button>
-        <button type="button" className="btn" onClick={onSeeAll}>See everything on one page</button>
+        <AppBrand />
+        <div className="gd-acts">
+          <button type="button" className="gd-link" onClick={restart}>Start over</button>
+          <button type="button" className="btn" onClick={onSeeAll}>See everything on one page</button>
+        </div>
       </header>
       <div className="gd-wrap">
-        {step > 0 ? <Stepper step={step} reachable={reachable} answers={[path?.label ?? null, run?.name ?? null]} onGo={go} /> : null}
-        <main className={`gd-card enter-${dir}`} key={step}>{body}</main>
+        {step > 0 ? <Stepper step={step} reachable={flow.reachable} answers={[path?.label ?? null, run?.name ?? null]} onGo={go} /> : null}
+        <main className={`gd-card enter-${flow.dir}`} key={step}>
+          <CardBar step={step} lot={lot} />
+          <div className="gd-body">{body}</div>
+        </main>
       </div>
     </div>
   );

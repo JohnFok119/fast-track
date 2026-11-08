@@ -1,5 +1,6 @@
 // The step rail: where you are, what you answered, and a way back to any step you have reached.
-export const STEP_LABELS = ['What you build', 'Where', 'In the way', 'Time saved', 'Who to contact', 'Summary'];
+// Build, Lot and Clash are the prototype's names for what steps 1 to 3 really show; the last three keep the app's own words.
+export const STEP_LABELS = ['Build', 'Lot', 'Clash', 'Time saved', 'Contact', 'Summary'];
 
 interface Props {
   step: number;

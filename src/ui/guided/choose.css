@@ -7,24 +7,22 @@
 .ch-hero { font-size: clamp(2.2rem, 6.5vw, 4rem); max-width: 20ch; margin-top: 14px; }
 .ch-welcome .gd-sub { font-size: 1.1rem; margin-top: 18px; }
 .ch-chips { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.ch-chip { padding: 7px 14px; border: 1px solid var(--line-strong); border-radius: 99px; background: var(--paper-alt); color: var(--ink-2); font-size: 0.88rem; }
+.ch-chip { padding: 7px 14px; border-radius: 99px; background: #fbf7f1; box-shadow: 0 0 0 1px var(--line); color: var(--card-text, var(--ink-2)); font-size: 0.88rem; }
 .ch-start { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 18px; margin-top: 36px; }
 .btn.ch-big { padding: 16px 44px !important; font-size: 1.1rem; }
 .ch-note { font-size: 0.84rem; }
 
 .ch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 24px; }
-.ch-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px; min-width: 0; text-align: left; font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line-strong); cursor: pointer; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s, background 0.2s, color 0.2s; }
-.ch-card:not(:disabled):hover { transform: translateY(-4px); box-shadow: 0 16px 30px -16px rgba(21, 27, 33, 0.5); border-color: var(--brand-deep); }
-.ch-card:disabled { opacity: 0.6; cursor: not-allowed; background: transparent; border-style: dashed; }
-.ch-card[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.ch-icon { display: inline-flex; margin-bottom: 6px; }
+.ch-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px; min-width: 0; text-align: left; font: inherit; color: var(--card-ink, var(--ink)); background: #fbf7f1; border: 0; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); cursor: pointer; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s; }
+.ch-card:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line-strong), 0 16px 30px -18px rgba(40, 30, 21, 0.55); }
+.ch-card:disabled { opacity: 0.6; cursor: not-allowed; background: transparent; box-shadow: 0 0 0 1px var(--line-strong); }
+.ch-card[aria-pressed="true"], .ch-card[aria-pressed="true"]:not(:disabled):hover { box-shadow: 0 0 0 2px var(--copper), 0 10px 24px -16px rgba(158, 84, 47, 0.6); }
+.ch-icon { display: inline-flex; margin-bottom: 6px; color: var(--bronze, currentColor); }
 .ch-icon svg { width: 32px; height: 32px; }
 .ch-card:disabled .ch-icon { opacity: 0.6; }
-.ch-card[aria-pressed="true"]:not(:disabled):hover { border-color: var(--ink); }
-.ch-label { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; overflow-wrap: anywhere; }
-.ch-sub { font-size: 0.86rem; color: var(--ink-muted); }
-.ch-card[aria-pressed="true"] .ch-sub { color: var(--paper); opacity: 0.75; }
-.ch-check { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 99px; display: grid; place-items: center; background: var(--brand); color: var(--card); animation: ch-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.ch-label { font-family: var(--display); font-variation-settings: var(--dvar); font-size: 1.25rem; font-weight: var(--dw); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.ch-sub { font-size: 0.86rem; color: var(--card-muted, var(--ink-muted)); }
+.ch-check { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 99px; display: grid; place-items: center; background: var(--copper); color: var(--cream); animation: ch-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
 
 @media (prefers-reduced-motion: reduce) {

@@ -8,11 +8,11 @@
 .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .muted { color: var(--ink-muted); }
 .lbl { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-muted); }
-.disp { font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
+.disp { font-family: var(--display); font-weight: var(--dw); font-variation-settings: var(--dvar); letter-spacing: -0.03em; line-height: 1.05; }
 
-.ribbon { background: var(--ink); color: var(--paper); padding: 7px 20px; font-size: 0.85rem; display: flex; gap: 10px; align-items: flex-start; }
+.ribbon { background: var(--ink-2); color: var(--card); padding: 7px 20px; font-size: 0.8rem; line-height: 1.4; display: flex; gap: 10px; align-items: flex-start; }
 .ribbon i { width: 7px; height: 7px; border-radius: 99px; background: var(--brand); flex: none; margin-top: 0.5em; }
-.mark { font-weight: 600; letter-spacing: -0.03em; font-size: 1.25rem; }
+.mark { font-family: var(--display); font-weight: var(--dw); font-variation-settings: var(--dvar); letter-spacing: -0.03em; font-size: 1.25rem; }
 .ft .ft-brand { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 600 19px/1 var(--font-brand); letter-spacing: -0.03em; text-decoration: none; }
 .ft-brand svg { margin: -3px -2px -3px -4px; flex: none; }
 
@@ -27,10 +27,10 @@
 .s-OK { color: var(--ok-fg); background: var(--ok-bg); }
 .s-OK::before { background: var(--ok-dot); }
 
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px !important; border: 1px solid var(--line-strong) !important; font-weight: 500; white-space: nowrap; transition: border-color 0.15s, background 0.15s; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px !important; border: 1px solid var(--line-strong) !important; border-radius: 8px; font-weight: 500; white-space: nowrap; transition: border-color 0.15s, background 0.15s; }
 .btn:hover { border-color: var(--ink) !important; }
 .btn.solid { background: var(--ink) !important; color: var(--paper) !important; border-color: var(--ink) !important; }
-.btn.solid:hover { background: #000 !important; }
+.btn.solid:hover { background: var(--ink-2) !important; border-color: var(--ink-2) !important; }
 
 @keyframes ft-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 .pop { animation: ft-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
