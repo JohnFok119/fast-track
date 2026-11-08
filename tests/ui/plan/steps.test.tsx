@@ -29,6 +29,7 @@ describe('TimelineStep, SB 9', () => {
     expect(ring.textContent).toContain('p. 2');
     expect(link.textContent).toMatch(/Dana Point/);
     expect(ring.textContent).toMatch(/checked \d{4}-\d{2}-\d{2}/);
+    expect(within(ring).getByText(/^checked \d{4}-\d{2}-\d{2}$/).classList.contains('fp-nw')).toBe(true);
     expect(container.textContent).not.toMatch(/unknown review time/i);
   });
 

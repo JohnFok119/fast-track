@@ -1,6 +1,6 @@
 import type { Citation, FasterPath } from '../../contract/types';
 
-export interface SourceRow { label: string; url: string; detail: string }
+export interface SourceRow { label: string; url: string; detail: string[] }
 export interface Warning { label: string; text: string; strong: boolean }
 export interface FasterRow {
   id: string;
@@ -10,10 +10,9 @@ export interface FasterRow {
   sources: SourceRow[];
 }
 
-/** Describes where a source says it, as short parts: section, page, date checked. */
-export function citationDetail(c: Citation): string {
-  const parts = [c.section ? `§ ${c.section}` : '', c.page ? `p. ${c.page}` : '', `checked ${c.checked}`];
-  return parts.filter(Boolean).join(' · ');
+/** Where a source says it, as short parts (section, page, date checked), each meant to stay on one line. */
+export function citationDetail(c: Citation): string[] {
+  return [c.section ? `§ ${c.section}` : '', c.page ? `p. ${c.page}` : '', `checked ${c.checked}`].filter(Boolean);
 }
 
 /** View model for the Faster paths panel: orders the paths and decides which warning each one shows. */

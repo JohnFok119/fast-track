@@ -31,8 +31,12 @@ describe('FasterPathList', () => {
     expect(first([mk({})]).warning).toBeNull();
   });
 
-  it('describes a citation with section, page and date', () => {
-    expect(first([mk({})]).sources[0]?.detail).toBe('§ 1 · p. 2 · checked 2026-01-02');
+  it('describes a citation with section, page and date, as parts that each stay whole', () => {
+    expect(first([mk({})]).sources[0]?.detail).toEqual(['§ 1', 'p. 2', 'checked 2026-01-02']);
+  });
+
+  it('leaves out a section or page the source does not give', () => {
+    expect(first([mk({ citations: [{ ...cite, section: undefined, page: undefined }] })]).sources[0]?.detail).toEqual(['checked 2026-01-02']);
   });
 
   it('wraps the real data for both pathways', () => {

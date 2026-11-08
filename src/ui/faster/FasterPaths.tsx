@@ -1,9 +1,19 @@
-import { useMemo } from 'react';
+import { Fragment, useMemo } from 'react';
 import { getFasterPaths } from '../../contract/api';
 import type { Pathway, Phase } from '../../contract/types';
-import { citationDetail, FasterPathList } from './FasterPathList';
+import { citationDetail, FasterPathList, type SourceRow } from './FasterPathList';
 import { DeadlineRing } from './DeadlineRing';
 import './faster.css';
+
+/** One source: its link, then where it says it. Each part stays on one line, so a date never splits at a hyphen. */
+function SourceLine({ label, url, detail }: SourceRow) {
+  return (
+    <span className="fp-src">
+      <a href={url} target="_blank" rel="noopener noreferrer">{label}</a>
+      {detail.map((part) => <Fragment key={part}> · <span className="fp-nw">{part}</span></Fragment>)}
+    </span>
+  );
+}
 
 /** The big deadline: a ring with the number of days when the review phase is law, plain text otherwise. */
 export function DeadlineRingView({ ring }: { ring: DeadlineRing }) {
@@ -22,11 +32,7 @@ export function DeadlineRingView({ ring }: { ring: DeadlineRing }) {
       <div>
         <b>{ring.hasRing ? `${phase.label}: ${phase.value}` : `${phase.label}: ${ring.text}`}</b>
         {phase.note ? <span>{phase.note}</span> : null}
-        {c ? (
-          <span className="fp-src">
-            <a href={c.url} target="_blank" rel="noopener noreferrer">{c.label}</a> · {citationDetail(c)}
-          </span>
-        ) : null}
+        {c ? <SourceLine label={c.label} url={c.url} detail={citationDetail(c)} /> : null}
       </div>
     </div>
   );
@@ -55,7 +61,7 @@ export function FasterPaths({ pathway }: { pathway: Pathway }) {
               <span className={`fp-warn${r.warning.strong ? ' strong' : ''}`} role="note"><b>{r.warning.label}:</b> {r.warning.text}</span>
             ) : null}
             {r.sources.map((s) => (
-              <span className="fp-src" key={s.url}><a href={s.url} target="_blank" rel="noopener noreferrer">{s.label}</a> · {s.detail}</span>
+              <SourceLine key={s.url} {...s} />
             ))}
           </li>
         ))}
