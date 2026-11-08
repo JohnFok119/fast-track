@@ -15,7 +15,8 @@
     "test": "vitest run --passWithNoTests",
     "verify": "npm run typecheck && npm run lint && npm test",
     "check": "tsx scripts/check.ts",
-    "samples": "tsx scripts/samples.ts"
+    "samples": "tsx scripts/samples.ts",
+    "summaries": "tsx scripts/write-clash-summaries.ts"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "5.3.0",
