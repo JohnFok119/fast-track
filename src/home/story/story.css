@@ -1,0 +1,149 @@
+/* "From soil to keys.": the scroll story, ported from the approved prototype. Every rule is scoped under .story.
+   The flat drawing's colors are not in the shared tokens, so they are set here, on the section, for the latte tone. */
+.story {
+  --h-soil: #b99672; --h-speck: #9c7a56; --h-soilline: #8a6d50; --h-lot: #9e542f; --h-stake: #52402f; --h-flag: #6e9f4f;
+  --h-conc: #bdb7af; --h-conc-top: #a39c93; --h-timber: #c99a62; --h-wall: #fdfbf8; --h-frame: #2a2622; --h-win: #e9e4dc;
+  --h-win-lit: #f6c77a; --h-roof: #2f2a26; --h-door: #9e542f; --h-path: #e3d3bf; --h-trunk: #6b4f36; --h-tree1: #8db86b;
+  --h-tree2: #6e9f4f; --h-speed: #c9773f; --h-ghost: #9e542f;
+}
+.story.pad { padding-top: 40px; }
+.story .st-title { font-size: 72px; }
+
+/* Layout: the house stays pinned beside the steps. */
+.story .st-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; margin-top: 40px; }
+.story .st-stage { position: sticky; top: 90px; height: min(78vh, 600px); display: flex; flex-direction: column; justify-content: center; gap: 22px; }
+.story .house3d { width: 100%; height: min(440px, 54vh); }
+.story .house3d canvas { display: block; width: 100% !important; height: 100% !important; }
+.story .st-house { display: none; width: 100%; height: auto; max-height: 440px; overflow: visible; }
+.story .st-stage[data-house="flat"] .house3d { display: none; }
+.story .st-stage[data-house="flat"] .st-house { display: block; }
+
+/* Steps fade in as they are reached and stay solid. */
+.story .st-step { min-height: 76vh; display: flex; flex-direction: column; justify-content: center; gap: 18px; opacity: 0.3; transition: opacity 0.45s ease; }
+.story .st-step.on { opacity: 1; }
+.story .st-step h3 { font-size: 44px; }
+.story .st-step p { margin: 0; font-size: 17px; }
+.story .pop { opacity: 0; transform: translateY(10px) scale(0.9); transition: opacity 0.3s ease, transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1); transition-delay: calc(var(--d, 0) * 110ms + 80ms); }
+.story .st-step.on .pop { opacity: 1; transform: none; }
+
+/* Step 1: the lot */
+.story .lotcard { align-self: flex-start; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.story .lotcard b { display: block; color: var(--card-ink); font-size: 15px; }
+.story .lotcard span { font-size: 12px; color: var(--card-muted); }
+.story .pin-body { fill: var(--bronze); }
+.story .pin-dot { fill: var(--cream); }
+
+/* Step 2: what you're building */
+.story .pills { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+.story .pl { padding: 8px 14px; border-radius: 99px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); font: 500 14px/1 var(--sans); color: var(--card-ink); }
+.story .pl.sel { background: var(--esp); color: var(--cream); box-shadow: 0 0 0 4px rgba(var(--glow), 0.25); }
+
+/* Step 3: the city's words next to HCD's, joined by a line */
+.story .docs { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 34px; width: 100%; }
+.story .mdoc { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 8px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.story .mdoc b { font: 600 10px/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--card-muted); }
+.story .mdoc i { display: block; height: 6px; border-radius: 99px; background: rgba(40, 30, 21, 0.1); }
+.story .mdoc i:nth-of-type(2n) { width: 70%; }
+.story .q { font: 400 12px/1.35 var(--sans); color: var(--card-ink); padding: 6px 8px; border-radius: 6px; }
+.story .q.c { background: var(--conf-bg); box-shadow: inset 3px 0 0 var(--brick); }
+.story .q.l { background: var(--law-bg); box-shadow: inset 3px 0 0 var(--sprout-deep); }
+.story .wl { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.story .wl path { fill: none; stroke: var(--brick); stroke-width: 2.2; stroke-linecap: round; }
+.story .wl path.draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: st-draw 0.7s ease-out forwards; }
+.story .wl circle { fill: var(--brick); }
+@keyframes st-draw { to { stroke-dashoffset: 0; } }
+
+/* Step 4: the clashes, side by side */
+.story .clash { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.story .crow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; align-items: center; width: 100%; }
+.story .crow > div { font-size: 13px; line-height: 1.35; padding: 9px 10px; border-radius: 8px; color: var(--card-ink); }
+.story .crow .a { background: var(--conf-bg); }
+.story .crow .b { background: var(--law-bg); }
+.story .xx { width: 26px; height: 26px; border-radius: 99px; display: grid; place-items: center; background: var(--brick); color: #fff; font: 700 12px/1 var(--sans); box-shadow: 0 0 0 4px var(--page); }
+
+/* Step 5: the draft letter */
+.story .card { padding: 16px; border-radius: 12px; color: var(--card-text); background: var(--surface); box-shadow: 0 0 0 1px var(--line), 0 14px 30px -22px rgba(40, 30, 21, 0.5); }
+.story .card .src { color: var(--card-muted); }
+.story .card.dk { position: relative; overflow: hidden; background: var(--esp); color: #e4dbcf; box-shadow: 0 20px 40px -22px rgba(40, 30, 21, 0.8); }
+.story .card.dk::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 55%; background: radial-gradient(80% 100% at 50% 120%, rgba(var(--glow), 0.55), rgba(var(--glow), 0) 70%); pointer-events: none; }
+.story .letter { display: flex; flex-direction: column; gap: 10px; position: relative; }
+.story .letter .dr { align-self: flex-start; font: 600 10px/1 var(--sans); letter-spacing: 0.08em; text-transform: uppercase; color: var(--taupe); border: 1px dashed rgba(250, 248, 246, 0.25); border-radius: 99px; padding: 5px 10px; }
+.story .letter i { display: block; height: 6px; border-radius: 99px; background: rgba(250, 248, 246, 0.1); }
+.story .letter i.s { width: 64%; }
+.story .letter .ask { position: relative; z-index: 1; align-self: flex-start; font-size: 15px; color: var(--cream); background: rgba(184, 67, 44, 0.25); box-shadow: inset 3px 0 0 var(--brick); padding: 7px 10px; border-radius: 6px; }
+.story .letter .cite { position: relative; z-index: 1; align-self: flex-end; margin-top: 18px; font: 400 11px/1.3 var(--mono); color: #d9e6cc; background: rgba(110, 159, 79, 0.22); padding: 5px 9px; border-radius: 6px; }
+.story .letter .wl path { stroke: var(--copper); }
+.story .letter .wl circle { fill: var(--copper); }
+.story .cite-link, .story .clock .src { text-decoration: none; }
+.story .cite-link:hover, .story .clock .src:hover { text-decoration: underline; }
+
+/* Step 6: the clock */
+.story .clock { display: flex; align-items: center; gap: 18px; }
+.story .clock svg { flex: none; }
+.story .clock div { display: flex; flex-direction: column; gap: 4px; }
+.story .clock b { color: var(--card-ink); font-size: 16px; line-height: 1.3; }
+.story .clock .track { stroke: var(--unk-bg); }
+.story .clock .num { font: 400 28px var(--display); fill: var(--esp); }
+.story .clock .unit { font: 400 10px var(--sans); fill: var(--tan); }
+.story .ring { stroke: var(--sprout); stroke-dasharray: 239; stroke-dashoffset: 239; transition: stroke-dashoffset 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s; }
+.story .st-step.on .ring { stroke-dashoffset: 0; }
+.story .cta { align-self: flex-start; }
+
+/* Progress rail under the house */
+.story .rail { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); }
+.story .rail::before, .story .rail i { content: ""; position: absolute; top: 5px; left: 8.33%; height: 2px; }
+.story .rail::before { right: 8.33%; background: var(--rule); }
+.story .rail i { width: calc(var(--p, 0) * 83.34%); background: var(--bronze); transition: width 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.story .rail span { position: relative; padding-top: 20px; text-align: center; font: 500 12px/1 var(--sans); color: var(--muted); }
+.story .rail span::before { content: ""; position: absolute; top: 0; left: 50%; width: 12px; height: 12px; margin-left: -6px; border-radius: 99px; background: var(--faint); transition: background 0.3s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s; }
+.story .rail span.done::before { background: var(--bronze); }
+.story .rail span.cur { color: var(--ink); }
+.story .rail span.cur::before { background: var(--copper); transform: scale(1.3); box-shadow: 0 0 0 5px rgba(var(--glow), 0.22); }
+
+/* The flat drawing, used when the 3D view cannot run */
+.story .ghost { fill: none; stroke: var(--h-ghost); stroke-width: 1.6; stroke-dasharray: 5 6; opacity: 0.5; transition: opacity 0.4s; }
+.story .pin { transition: opacity 0.4s; }
+.story .ghost.off, .story .pin.off { opacity: 0; }
+.story .hl { opacity: 0; transform-box: fill-box; transition: opacity 0.35s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.story .hl.in { opacity: 1; transform: none; }
+.story .hl-found { transform: translateY(18px); }
+.story .hl-roof { transform: translateY(-46px); }
+.story .hl-wall { transform-origin: 50% 100%; transform: scaleY(0.05); }
+.story .hl-done { transform: scale(0.96); transform-origin: 50% 100%; }
+.story .stud { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0); transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--i) * 45ms); }
+.story .hl-frame.in .stud { transform: none; }
+.story .h-soil { fill: var(--h-soil); } .story .h-speck { fill: var(--h-speck); } .story .h-soilline { stroke: var(--h-soilline); }
+.story .h-lot { stroke: var(--h-lot); opacity: 0.75; } .story .h-stake { stroke: var(--h-stake); } .story .h-flag { fill: var(--h-flag); }
+.story .h-conc { fill: var(--h-conc); } .story .h-conc-top { fill: var(--h-conc-top); } .story .h-timber { stroke: var(--h-timber); }
+.story .h-wall { fill: var(--h-wall); stroke: var(--h-frame); } .story .h-roof { fill: var(--h-roof); }
+.story .h-door { fill: var(--h-door); stroke: var(--h-frame); } .story .h-knob { fill: var(--h-frame); } .story .h-path { fill: var(--h-path); }
+.story .h-trunk { fill: var(--h-trunk); } .story .h-tree1 { fill: var(--h-tree1); } .story .h-tree2 { fill: var(--h-tree2); } .story .h-speed { stroke: var(--h-speed); }
+.story .win { fill: var(--h-win); stroke: var(--h-frame); transition: fill 0.6s ease 0.2s; }
+.story .lit .win { fill: var(--h-win-lit); }
+.story .mk { transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); transition-delay: calc(var(--i) * 140ms + 250ms); }
+.story .hl-marks.in .mk { transform: none; }
+.story .mk circle { fill: var(--brick); stroke: var(--h-wall); stroke-width: 3; transition: fill 0.4s; }
+.story .mk text { fill: #fff; font: 700 12px var(--sans); text-anchor: middle; transition: opacity 0.3s; }
+.story .mk .ok { opacity: 0; }
+.story .fixed .mk circle { fill: var(--sprout-deep); }
+.story .fixed .mk .x { opacity: 0; }
+.story .fixed .mk .ok { opacity: 1; }
+.story .lg-speed line { animation: st-zip 1.6s ease-in-out infinite; }
+.story .lg-speed line:nth-child(2) { animation-delay: 0.15s; }
+.story .lg-speed line:nth-child(3) { animation-delay: 0.3s; }
+@keyframes st-zip { 50% { transform: translateX(-3px); opacity: 0.55; } }
+
+/* Phones: the house sticks at the top, smaller, with a fade below it. */
+@media (max-width: 960px) {
+  .story .st-grid { grid-template-columns: minmax(0, 1fr); }
+  .story .st-stage { top: 70px; z-index: 2; height: auto; padding: 8px 0 10px; gap: 12px; background: var(--page); }
+  .story .st-stage::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 28px; background: linear-gradient(var(--page), transparent); pointer-events: none; }
+  .story .st-house { max-height: 190px; }
+  .story .house3d { height: 190px; }
+  .story .st-step { min-height: 60vh; }
+  .story .st-step h3 { font-size: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story .pop { opacity: 1 !important; transform: none !important; }
+}
