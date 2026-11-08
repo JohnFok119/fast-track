@@ -2,7 +2,7 @@
 import { cleanup, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { CityRun } from '../../../src/contract/types';
-import { getBaseline, getTimeline } from '../../../src/contract/api';
+import { getBaseline, getFasterPaths, getTimeline } from '../../../src/contract/api';
 import { ESCALATION, PATHS, RUNS } from '../../../src/ui/data';
 import { ContactStep, TimelineStep } from '../../../src/ui/guided/PlanSteps';
 import { Summary } from '../../../src/ui/guided/Summary';
@@ -18,7 +18,7 @@ const run0 = (): CityRun => {
 const noop = () => undefined;
 
 describe('TimelineStep, SB 9', () => {
-  const view = () => render(<TimelineStep phases={getTimeline('SB9')} baseline={getBaseline()} onNext={noop} onBack={noop} />);
+  const view = () => render(<TimelineStep pathway="SB9" phases={getTimeline('SB9')} baseline={getBaseline()} onNext={noop} onBack={noop} />);
 
   it('shows the 60 day review with its HCD citation and date, never an unknown review time', () => {
     const { container } = view();
@@ -42,11 +42,18 @@ describe('TimelineStep, SB 9', () => {
     const panel = screen.getByRole('region', { name: 'Faster paths' });
     expect(within(panel).getAllByRole('link').length).toBeGreaterThan(0);
   });
+
+  it('lists the faster paths of the pathway it is given, not one guessed from the phases', () => {
+    render(<TimelineStep pathway="SB9" phases={[...getTimeline('SB9')]} baseline={getBaseline()} onNext={noop} onBack={noop} />);
+    const panel = screen.getByRole('region', { name: 'Faster paths' });
+    const titles = within(panel).getAllByRole('listitem').map((li) => li.querySelector('strong')?.textContent);
+    expect(titles.sort()).toEqual(getFasterPaths('SB9').map((p) => p.title).sort());
+  });
 });
 
 describe('TimelineStep, ADU', () => {
   it('lists the ADU faster paths with sources, and the unconfirmed one shows its caveat', () => {
-    render(<TimelineStep phases={getTimeline('ADU')} baseline={getBaseline()} onNext={noop} onBack={noop} />);
+    render(<TimelineStep pathway="ADU" phases={getTimeline('ADU')} baseline={getBaseline()} onNext={noop} onBack={noop} />);
     const panel = screen.getByRole('region', { name: 'Faster paths' });
     for (const li of within(panel).getAllByRole('listitem')) expect(within(li).getAllByRole('link').length).toBeGreaterThan(0);
     const note = within(panel).getByText(/Not confirmed yet:/).closest('[role="note"]') as HTMLElement;
@@ -63,15 +70,17 @@ describe('ContactStep', () => {
 });
 
 describe('Summary', () => {
-  it('shows the SB 9 deadline and faster paths, with no repeated step number', () => {
+  it('lists the SB 9 review clock once and leaves the faster paths to the time saved step', () => {
     const path = PATHS.find((p) => p.pathway === 'SB9');
     const run = RUNS.find((r) => r.pathway === 'SB9');
     if (!path || !run) throw new Error('need an SB 9 path and run');
     const { container } = render(<Summary path={path} run={run} items={groupItems(run)} phases={getTimeline('SB9')} baseline={getBaseline()} escalation={ESCALATION} onBack={noop} onRestart={noop} />);
     expect(container.textContent).not.toMatch(/Step \d of 6/);
-    expect(container.textContent).not.toMatch(/unknown review time/i);
-    expect(container.querySelector('.fp-ring')?.textContent).toContain('60 days');
-    expect(screen.getByRole('region', { name: 'Faster paths' })).toBeTruthy();
+    expect(container.textContent).not.toMatch(/unknown/i);
+    const clocks = screen.getByRole('heading', { name: 'Your legal clocks' }).closest('section') as HTMLElement;
+    expect(clocks.textContent).toContain('60 days');
+    expect(container.querySelector('.fp-ring')).toBeNull();
+    expect(screen.queryByRole('region', { name: 'Faster paths' })).toBeNull();
   });
 });
 

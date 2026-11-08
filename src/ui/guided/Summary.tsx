@@ -1,7 +1,6 @@
 // Step 6: a one-card summary of what the owner now knows. Every number comes from props; the months saved is an estimate.
 import { useEffect, useState, type JSX, type ReactNode } from 'react';
 import type { BuildPath, CityRun, Contact, Phase } from '../../contract/types';
-import { FasterPaths, ReviewDeadline } from '../faster/FasterPaths';
 import { unknownPhrase } from '../faster/reviewWording';
 import { countBy, totalMonths, type Item } from '../model';
 import './summary.css';
@@ -68,6 +67,7 @@ export function Summary({ path, run, items, phases, baseline, escalation, onBack
   const conflicts = countBy(items, 'CONFLICTS');
   const outdated = countBy(items, 'OUTDATED_CITATION');
   const saved = Math.round(totalMonths(baseline) - totalMonths(phases));
+  const unknown = unknownPhrase(phases);
   const clocks = phases.filter((p) => p.kind === 'LAW');
   const first = run.contacts[0];
 
@@ -75,7 +75,7 @@ export function Summary({ path, run, items, phases, baseline, escalation, onBack
     { icon: <ListIcon />, value: items.length, label: 'Lines checked against state law', tone: 'sm-brand' },
     { icon: <StopIcon />, value: conflicts, label: 'The state says no to', sub: 'you can push back', tone: 'sm-conf' },
     ...(outdated > 0 ? [{ icon: <OldIcon />, value: outdated, label: 'Old law numbers', tone: 'sm-out' }] : []),
-    { icon: <ClockIcon />, value: saved, label: 'Months saved', sub: `estimate, vs the typical path${unknownPhrase(phases).replace(' plus', ', plus')}`, tone: 'sm-ok' },
+    { icon: <ClockIcon />, value: saved, label: 'Months saved', sub: `estimate, vs the typical path${unknown ? `, plus ${unknown}` : ''}`, tone: 'sm-ok' },
     { icon: <OfficeIcon />, value: run.contacts.length + 1, label: 'Offices to contact', sub: 'the city, plus HCD if the city will not fix it', tone: 'sm-brand' },
   ];
 
@@ -100,8 +100,6 @@ export function Summary({ path, run, items, phases, baseline, escalation, onBack
           </ul>
         </section>
       ) : null}
-      <ReviewDeadline phases={phases} />
-      <FasterPaths pathway={path.pathway} />
       <p className="sm-who gd-reveal">
         <span className="sm-h">Who to contact</span>
         {first ? <Law url={first.citation.url}>{first.office}</Law> : null}

@@ -109,6 +109,9 @@
 .ft-page .badge { font-size: 0.72rem; font-weight: 600; padding: 1px 7px; border-radius: 99px; background: var(--surface-2); color: var(--card-text); white-space: nowrap; }
 .ft-page .badge.law { background: var(--esp); color: var(--cream); }
 
+/* The faster paths panel sits in the column like any card: the column gap spaces it, and it takes the card's lift. */
+.ft-page .fp { margin-top: 0; box-shadow: var(--ring), var(--lift); }
+.ft-page .fp-h { font: var(--dw) 1.15rem/1.3 var(--display); font-variation-settings: var(--dvar); letter-spacing: normal; text-transform: none; color: var(--card-ink); }
 .ft-page .duo { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
 @media (min-width: 900px) { .ft-page .duo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .ft-page .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }

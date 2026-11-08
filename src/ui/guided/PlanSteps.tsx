@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
-import { getTimeline } from '../../contract/api';
-import { PATHWAYS, type CityRun, type Contact, type Pathway, type Phase } from '../../contract/types';
+import type { CityRun, Contact, Pathway, Phase } from '../../contract/types';
 import { FasterPaths, ReviewDeadline } from '../faster/FasterPaths';
 import { unknownPhrase } from '../faster/reviewWording';
 import { BuildingIcon, StateIcon } from '../icons';
@@ -12,8 +11,8 @@ interface TimelineProps {
   phases: Phase[];
   /** The event brief's typical path without a fast track: every phase is an ASSUMPTION. */
   baseline: Phase[];
-  /** Which pathway the phases are for. When left out it is found by matching the phases to the timeline data. */
-  pathway?: Pathway;
+  /** Which pathway the phases are for: picks the faster paths shown under the graphs. */
+  pathway: Pathway;
   onNext: () => void;
   onBack: () => void;
 }
@@ -70,23 +69,19 @@ function Graph({ title, phases, scale, start, saved }: GraphProps) {
   );
 }
 
-function pathwayOf(phases: Phase[]): Pathway | undefined {
-  return PATHWAYS.find((w) => getTimeline(w) === phases);
-}
-
 export function TimelineStep({ phases, baseline, pathway, onNext, onBack }: TimelineProps) {
-  const which = pathway ?? pathwayOf(phases);
   const baseTotal = totalMonths(baseline);
   const scale = Math.max(baseTotal, totalMonths(phases)) || 1;
   const months = Math.round(baseTotal - totalMonths(phases));
-  const saved = `About ${months} months shorter (estimate)${unknownPhrase(phases)}`;
+  const unknown = unknownPhrase(phases);
+  const saved = `About ${months} months shorter (estimate)${unknown ? ` plus ${unknown}` : ''}`;
   return (
     <div>
       <h1 className="gd-q">Time saved</h1>
       <Graph title="Typical path" phases={baseline} scale={scale} start={100} />
       <Graph title="Fast track" phases={phases} scale={scale} start={100 + baseline.length * UNIT + 200} saved={saved} />
       <ReviewDeadline phases={phases} />
-      {which ? <FasterPaths pathway={which} /> : null}
+      <FasterPaths pathway={pathway} />
       <p className="tg-note">Estimates are the event brief&apos;s typical times, not measured. Bars marked Law are legal deadlines.</p>
       <div className="gd-nav">
         <button type="button" className="btn" onClick={onBack}>Back</button>

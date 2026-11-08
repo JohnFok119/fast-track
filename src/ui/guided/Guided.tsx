@@ -54,7 +54,7 @@ export function Guided({ onSeeAll }: { onSeeAll: () => void }) {
   else if (step === 1) body = <PickPath paths={PATHS} pathId={pathId} onPick={pickPath} />;
   else if (step === 2 || !run || !path) body = <PickCity runs={RUNS} pathway={path?.pathway ?? 'ADU'} city={city} onPick={pickCity} />;
   else if (step === 3) body = <Results key={run.city} run={run} items={items} onNext={() => go(4)} onBack={() => go(2)} />;
-  else if (step === 4) body = <TimelineStep phases={getTimeline(path.pathway)} baseline={BASELINE} onNext={() => go(5)} onBack={() => go(3)} />;
+  else if (step === 4) body = <TimelineStep pathway={path.pathway} phases={getTimeline(path.pathway)} baseline={BASELINE} onNext={() => go(5)} onBack={() => go(3)} />;
   else if (step === 5) body = <ContactStep run={run} escalation={ESCALATION} onNext={() => go(6)} onBack={() => go(4)} />;
   else {
     body = <Summary path={path} run={run} items={items} phases={getTimeline(path.pathway)} baseline={BASELINE} escalation={ESCALATION} onBack={() => go(5)} onRestart={restart} />;

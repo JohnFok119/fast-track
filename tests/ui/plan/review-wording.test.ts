@@ -10,6 +10,6 @@ describe('unknownPhrase', () => {
 
   it('names whichever phase is unknown, by its own label', () => {
     const p: Phase = { id: 'review', label: 'City review', value: 'UNKNOWN', kind: 'UNKNOWN', drawMonths: null };
-    expect(unknownPhrase([p])).toBe(' plus an unknown city review');
+    expect(unknownPhrase([p])).toBe('an unknown city review');
   });
 });

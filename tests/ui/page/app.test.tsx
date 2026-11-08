@@ -2,7 +2,8 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { App } from '../../../src/ui/App';
-import { RUNS } from '../../../src/ui/data';
+import { getFasterPaths } from '../../../src/contract/api';
+import { PATHS, RUNS } from '../../../src/ui/data';
 import { citeMeta, countBy, groupItems } from '../../../src/ui/model';
 import { VERDICT } from '../../../src/letter/verdict';
 
@@ -22,6 +23,22 @@ describe('the all-on-one-page view', () => {
     expect(screen.getByRole('link', { name: 'Fast Track home' }).getAttribute('href')).toBe('/');
     fireEvent.click(screen.getByRole('button', { name: 'Guided view' }));
     expect(onGuided).toHaveBeenCalledOnce();
+  });
+
+  it('lists the faster paths of the chosen build right after the timeline, and switches with it', () => {
+    const titles = () =>
+      within(screen.getByRole('region', { name: 'Faster paths' })).getAllByRole('listitem').map((li) => li.querySelector('strong')?.textContent).sort();
+    render(<App />);
+    const timeline = screen.getByRole('heading', { name: /Your timeline/ }).closest('section') as HTMLElement;
+    const panel = screen.getByRole('region', { name: 'Faster paths' });
+    const next = screen.getByRole('heading', { name: 'Next steps' });
+    expect(timeline.compareDocumentPosition(panel) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(panel.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(titles()).toEqual(getFasterPaths('ADU').map((p) => p.title).sort());
+    const sb9 = PATHS.find((p) => p.pathway === 'SB9');
+    if (!sb9) throw new Error('need an SB 9 build');
+    fireEvent.click(screen.getByRole('button', { name: (n) => n.includes(sb9.label) }));
+    expect(titles()).toEqual(getFasterPaths('SB9').map((p) => p.title).sort());
   });
 
   it('headlines the conflict count from the run', () => {

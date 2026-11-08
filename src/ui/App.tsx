@@ -43,7 +43,7 @@ export function App({ onGuided }: { onGuided?: () => void }) {
                 <RequirementList items={shown} selected={currentId} onSelect={(id) => setState((s) => s.select(id))} />
                 <Detail item={current} onLetter={openLetter} />
               </section>
-              <Plan phases={getTimeline(state.pathway)} steps={getSteps(state.pathway)} pushBack={state.attention} contacts={run.contacts} escalation={ESCALATION} />
+              <Plan pathway={state.pathway} phases={getTimeline(state.pathway)} steps={getSteps(state.pathway)} pushBack={state.attention} contacts={run.contacts} escalation={ESCALATION} />
             </>
           ) : (
             <section className="card">No saved requirements for this choice yet. Pick another city.</section>

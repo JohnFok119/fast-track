@@ -1,5 +1,7 @@
-// Step 4: the idea-to-move-in timeline, the next steps, and who handles what. Everything shown comes from the contract.
-import type { Contact, Phase, Step } from '../contract/types';
+// Step 4: the idea-to-move-in timeline, the ways to go faster, the next steps, and who handles what. Everything shown
+// comes from the contract.
+import type { Contact, Pathway, Phase, Step } from '../contract/types';
+import { FasterPaths } from './faster/FasterPaths';
 import { BuildingIcon, StateIcon } from './icons';
 import { citeMeta } from './model';
 
@@ -79,9 +81,9 @@ export function Who({ contacts, escalation }: { contacts: Contact[]; escalation:
   return <div className="who">{contacts.map((c) => card(c, false))}{card(escalation, true)}</div>;
 }
 
-interface Props { phases: Phase[]; steps: Step[]; pushBack: number; contacts: Contact[]; escalation: Contact }
+interface Props { pathway: Pathway; phases: Phase[]; steps: Step[]; pushBack: number; contacts: Contact[]; escalation: Contact }
 
-export function Plan({ phases, steps, pushBack, contacts, escalation }: Props) {
+export function Plan({ pathway, phases, steps, pushBack, contacts, escalation }: Props) {
   return (
     <>
       <section className="card" aria-labelledby="s4">
@@ -91,6 +93,7 @@ export function Plan({ phases, steps, pushBack, contacts, escalation }: Props) {
         <Legend />
         <PhaseNotes phases={phases} />
       </section>
+      <FasterPaths pathway={pathway} />
       <div className="duo">
         <section className="card" aria-labelledby="s4b"><h2 className="h" id="s4b">Next steps</h2><Steps steps={steps} pushBack={pushBack} /></section>
         <section className="card" aria-labelledby="s5"><h2 className="h" id="s5"><span className="stepno">5</span>Who to contact</h2><Who contacts={contacts} escalation={escalation} /></section>
