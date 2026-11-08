@@ -1,0 +1,36 @@
+/* Three steps. Every rule sits under .steps-sec. */
+.steps-sec.pad { padding-top: 40px; }
+.steps-sec .steps-h { font-size: 44px; }
+.steps-sec .steps3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 72px; text-align: left; }
+.steps-sec .s3 { padding: 0 40px; display: flex; flex-direction: column; gap: 14px; }
+.steps-sec .s3:first-child { padding-left: 0; }
+.steps-sec .s3:last-child { padding-right: 0; }
+.steps-sec .s3 + .s3 { border-left: 1px solid var(--rule); }
+.steps-sec .viz { height: 220px; border-radius: 10px; background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center; padding: 18px; overflow: hidden; margin-bottom: 18px; }
+.steps-sec .s3 h3 { font-size: 26px; }
+.steps-sec .s3 p { margin: 0; font-size: 16px; }
+.steps-sec .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.steps-sec .pl { padding: 8px 14px; border-radius: 99px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); font: 500 14px/1 var(--sans); color: var(--card-ink); }
+.steps-sec .pl.sel { background: var(--esp); color: var(--cream); box-shadow: 0 0 0 4px rgba(var(--glow), 0.25); }
+.steps-sec .lotcard { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); margin-top: 14px; }
+.steps-sec .lotcard b { display: block; color: var(--card-ink); font-size: 15px; }
+.steps-sec .lotcard span { font-size: 12px; color: var(--card-muted); }
+.steps-sec .docs { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 34px; width: 100%; }
+.steps-sec .mdoc { display: flex; flex-direction: column; gap: 8px; padding: 10px; border-radius: 8px; background: var(--surface); box-shadow: 0 0 0 1px var(--line); }
+.steps-sec .mdoc b { font: 600 10px/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--card-muted); }
+.steps-sec .mdoc i { display: block; height: 6px; border-radius: 99px; background: rgba(40, 30, 21, 0.1); }
+.steps-sec .mdoc i:nth-of-type(2n) { width: 70%; }
+.steps-sec .q { font: 400 12px/1.35 var(--sans); color: var(--card-ink); padding: 6px 8px; border-radius: 6px; }
+.steps-sec .q.c { background: var(--conf-bg); box-shadow: inset 3px 0 0 var(--brick); }
+.steps-sec .q.l { background: var(--law-bg); box-shadow: inset 3px 0 0 var(--sprout-deep); }
+.steps-sec .crow { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px; align-items: center; width: 100%; }
+.steps-sec .crow > div { font-size: 13px; line-height: 1.35; padding: 9px 10px; border-radius: 8px; color: var(--card-ink); }
+.steps-sec .crow .a { background: var(--conf-bg); }
+.steps-sec .crow .b { background: var(--law-bg); }
+.steps-sec .xx { width: 26px; height: 26px; border-radius: 99px; display: grid; place-items: center; background: var(--brick); color: #fff; font: 700 12px/1 var(--sans); box-shadow: 0 0 0 4px var(--surface-2); }
+
+@media (max-width: 960px) {
+  .steps-sec .steps3 { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .steps-sec .s3, .steps-sec .s3:first-child, .steps-sec .s3:last-child { padding: 0; }
+  .steps-sec .s3 + .s3 { border-left: 0; }
+}
