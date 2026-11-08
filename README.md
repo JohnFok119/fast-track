@@ -11,7 +11,7 @@
 
 ## The real user
 
-**Who it is for.** First, the owner of a lot who wants to add homes on it and is blocked by a requirement the state says a city cannot impose. That can be a homeowner, a small builder, or a nonprofit that already owns the land (for example Habitat for Humanity of Orange County, the event's sponsor). Second, the city permit tech who wants to answer correctly. The people who benefit in the end are local workers (teachers, nurses, firefighters) who can move in sooner.
+**Who it is for.** First, the owner of a lot who wants to add homes on it and is blocked by a requirement the state says a city cannot impose. That can be a homeowner, a small builder, or a nonprofit housing builder that already owns the land. Second, the city permit tech who wants to answer correctly. The people who benefit in the end are local workers (teachers, nurses, firefighters) who can move in sooner.
 
 **The problem.** Workers cannot afford to live in Orange County. The event brief says a new affordable home takes about four years. California has fast paths where a city must say yes if the project meets the written rules, with no hearing. But each Orange County city writes its own checklist, and some checklists do not match state law. The state housing department sends cities letters about this, but those letters sit in a separate state dashboard, away from the forms applicants fill out.
 
@@ -33,7 +33,7 @@
 
 ## What we built
 
-A guided flow, one card at a time, in Habitat for Humanity of Orange County's colors:
+Two pages: a homepage at `/` that explains Fast Track, and the tool itself at `/app/`. The tool is a guided flow, one card at a time:
 
 1. **What are you building?** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Pick a card and the next one slides in.
 2. **Where?** Irvine, Anaheim, Dana Point or Orange. A city with no saved list for that choice is greyed out, and so is unincorporated county land (not covered yet).
@@ -94,7 +94,7 @@ You need Node 24 (see `.nvmrc`) and git. No API key and no account are needed.
 git clone https://github.com/JohnFok119/fast-track.git
 cd fast-track
 npm install              # versions are pinned in package.json
-npm run dev              # opens at http://localhost:5173
+npm run dev              # homepage at http://localhost:5173, the tool at http://localhost:5173/app/
 npm run check irvine     # same check in the terminal, with sources
 npm run check anaheim
 npm test                 # runs the test suite
@@ -118,15 +118,17 @@ All dates checked: 2026-11-07. The source list lives in `data/sources/index.json
 | Anaheim ADU checklist, November 2025 | https://www.anaheim.net/DocumentCenter/View/35053/Accessory-Dwelling-Unit-Submittal-Requirements-Checklist (form Z412, quoted word for word) | 2026-11-07 |
 | HCD letter to the City of Dana Point (2023-04-17, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/Dana-Point-TA-041723.pdf | 2026-11-07 |
 | HCD letter to the City of Orange (2026-05-05, SB 9) | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/orange-ta-050526.pdf | 2026-11-07 |
+| HCD letter to the City of Dana Point (2025-09-15, SB 9 review deadline). Page 2 quotes Gov Code 65852.21(h)(1): 60 days to decide a complete SB 9 duplex application, or it is deemed approved. No excerpt committed, because the letter names city staff | https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/dana-point-hau-1995-sb9-ta-091525.pdf | 2026-11-07 |
+| Health and Safety Code 17960.3 (AB 253, third-party plan check), as quoted in a City of Dixon handout (rev. 2025-11-17). Read in the handout, not yet checked on leginfo, so the tool marks it UNCONFIRMED | https://www.cityofdixonca.gov/media/Permits/Forms/Legislative%20Policies/Third%20Party%20Plan%20Review%20AB%20253.pdf | 2026-11-07 |
 | City of Irvine ADU page (submittal list, paraphrased) | https://cityofirvine.gov/node/69676 | 2026-11-07 |
 | "A new affordable home takes about four years" | ASSUMPTION: the event brief's baseline. We did not measure it | n/a |
 | Typical path phases: rezoning about 1 year, entitlements and hearings about 1 year | ASSUMPTION: the event brief's typical estimates (starter repo, `lanes/2-clear-it/data/timeline.json`). We did not measure them | n/a |
 | Plans take 6 to 12 months; building takes about 1 year | ASSUMPTION: the event brief's typical estimates (starter repo, `lanes/2-clear-it/data/timeline.json`). We did not measure them. Shown as "Estimate" on the timeline | n/a |
 | Review clocks: 15 business days to check completeness, 60 days to decide | HCD ADU Handbook p. 34 and p. 11, citing Gov Code 66317(a) | 2026-11-07 |
-| "About 21 months shorter (estimate)" for an ADU; "About 24 months shorter (estimate) plus an unknown review time" for SB 9 | ASSUMPTION, computed: the typical path (about 45 months) minus the fast track (plans 9 months, the middle of 6 to 12; build 12 months; for an ADU, plus the two legal clocks, about 2.7 months). Every input except the legal clocks is an event brief estimate | n/a |
+| "About 21 months shorter (estimate)" for an ADU; "About 22 months shorter (estimate)" for SB 9 | ASSUMPTION, computed: the typical path (about 45 months) minus the fast track (plans 9 months, the middle of 6 to 12; build 12 months; plus the legal clocks: for an ADU 15 business days and 60 days, about 2.7 months; for an SB 9 duplex 60 days, about 2 months). Every input except the legal clocks is an event brief estimate | n/a |
 | City contacts (office and role, no names) | Irvine's ADU page and Anaheim's checklist; for Dana Point and Orange, the office HCD's letter was addressed to. Listed in `data/cities/` | 2026-11-07 |
 
-Every number we did not take from a source is labelled ASSUMPTION here and in the tool: the four-year baseline, its phases, and the plans and build estimates. The months saved in step 4 and the summary are computed from those estimates, so the screen labels them "estimate" and says they are not measured. A whole project is not the same as an ADU on land the owner already has. We have no sourced review deadline for an SB 9 lot split, so the timeline shows it as UNKNOWN.
+Every number we did not take from a source is labelled ASSUMPTION here and in the tool: the four-year baseline, its phases, and the plans and build estimates. The months saved in step 4 and the summary are computed from those estimates, so the screen labels them "estimate" and says they are not measured. A whole project is not the same as an ADU on land the owner already has. For an SB 9 duplex the review deadline is 60 days (Gov Code 65852.21(h)(1), as quoted in HCD's 2025-09-15 letter to Dana Point, p. 2). We have not checked a lot split's deadline yet, and the timeline says so.
 
 ## What is real and what is mocked
 
@@ -156,7 +158,7 @@ Every number we did not take from a source is labelled ASSUMPTION here and in th
 
 ## Next steps
 
-None of this is built yet. It is written for the user we would build toward next: a Habitat for Humanity of Orange County project manager who reports to leadership.
+None of this is built yet. It is written for the user we would build toward next: a project manager at a nonprofit housing builder who reports to leadership.
 
 **With one more week:**
 - A "Before you submit" list per city, from the submittal lists already saved (Irvine's ADU page, Anaheim's form Z412).
