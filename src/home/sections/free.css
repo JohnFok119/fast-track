@@ -1,0 +1,12 @@
+/* Free */
+.free-sec .free-h { font-size: 64px; }
+.free-sec .free { max-width: 720px; margin: 56px auto 0; padding: 40px; border-radius: 12px; background: rgba(250, 248, 246, 0.04); box-shadow: inset 0 0 0 1px rgba(250, 248, 246, 0.1); text-align: left; position: relative; overflow: hidden; }
+.free-sec .free::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 60%; background: radial-gradient(70% 100% at 50% 130%, rgba(var(--glow), 0.45), rgba(var(--glow), 0) 70%); pointer-events: none; }
+.free-sec .free .disp { font-size: 72px; }
+.free-sec .free ul { position: relative; margin: 24px 0 30px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; color: #f0ebe5; }
+.free-sec .free li::before { content: "\2713"; color: var(--sprout); margin-right: 8px; font-weight: 700; }
+.free-sec .ctas { position: relative; display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 960px) {
+  .free-sec .free ul { grid-template-columns: minmax(0, 1fr); }
+}

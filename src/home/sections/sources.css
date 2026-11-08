@@ -1,0 +1,26 @@
+/* Sources: each card is a picture of the documents, no list. */
+.sources .sources-h { font-size: 64px; }
+.sources .srcgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 64px; }
+.sources .sc { padding: 14px 14px 22px; border-radius: 12px; color: var(--card-text); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--line); }
+.sources .sc h3 { margin-top: 14px; font-size: 26px; text-align: center; }
+.sources .sv { position: relative; height: 168px; display: grid; place-items: center; border-radius: 9px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); overflow: hidden; }
+.sources .md { position: absolute; width: 70px; height: 100px; padding: 8px 7px; border-radius: 6px; background: #faf7f2; color: var(--esp); box-shadow: 0 14px 26px -16px rgba(40, 30, 21, 0.6), 0 0 0 1px rgba(40, 30, 21, 0.07); display: flex; flex-direction: column; gap: 4px; font: 600 11px/1.15 var(--sans); text-align: left; transform: rotate(calc(var(--o) * 3deg)); transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.sources .md::after { content: ""; margin-top: auto; height: 22px; background: repeating-linear-gradient(180deg, rgba(40, 30, 21, 0.11) 0 4px, transparent 4px 10px); }
+.sources .md em { align-self: flex-start; padding: 3px 5px; border-radius: 3px; background: var(--sprout-deep); color: #fff; font: 700 8.5px/1 var(--sans); letter-spacing: 0.06em; font-style: normal; }
+.sources .md.law em { background: var(--bronze); font-size: 11px; }
+.sources .md.web em { background: var(--esp); }
+.sources .md small { font: 400 8.5px/1.2 var(--mono); color: #8d7863; }
+.sources .md.web { width: 84px; }
+.sources .in .md { transform: translateX(calc(var(--o) * 76px)) rotate(calc(var(--o) * 5deg)); }
+.sources .sc:hover .md { transform: translateX(calc(var(--o) * 78px)) translateY(-6px) rotate(calc(var(--o) * 7deg)); }
+.sources .bk { display: flex; flex-direction: column; justify-content: space-between; width: 104px; height: 134px; padding: 10px 10px 10px 14px; border-radius: 3px 8px 8px 3px; background: linear-gradient(160deg, #f1e8db, #d8c5ab); color: var(--esp); font: var(--dw) 17px/1.05 var(--display); font-variation-settings: var(--dvar); text-align: left; box-shadow: inset 5px 0 0 rgba(40, 30, 21, 0.13), 0 14px 26px -16px rgba(40, 30, 21, 0.6); transform: rotate(-4deg); transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.sources .bk small { font: 700 8px/1 var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: #8d7863; }
+.sources .sc:hover .bk { transform: rotate(0deg) translateY(-4px) scale(1.04); }
+.sources .checked { margin-top: 22px; }
+
+@media (max-width: 960px) {
+  .sources .srcgrid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sources .md { transform: translateX(calc(var(--o) * 76px)) rotate(calc(var(--o) * 5deg)) !important; }
+}
