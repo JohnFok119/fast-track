@@ -15,9 +15,6 @@ import { Ticker } from './sections/Ticker';
 import { Trust } from './sections/Trust';
 import { Story } from './story/Story';
 
-/** Where every "Check your lot" button goes. */
-export const APP_URL = '/app/';
-
 export function Home() {
   useRevealAll();
   return (
