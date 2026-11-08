@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [react(), tailwindcss(), claudeRoute()],
   // Two pages: the homepage at / and the working app at /app/.
   build: {
+    // three.js's renderer (about 570 kB) loads only when a 3D scene nears the screen, never on first paint.
+    chunkSizeWarningLimit: 600,
     rollupOptions: {
       input: {
         home: fileURLToPath(new URL('./index.html', import.meta.url)),

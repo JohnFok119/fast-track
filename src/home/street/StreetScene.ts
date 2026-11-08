@@ -1,7 +1,7 @@
 // The 3D street: an orthographic camera looking slightly down at two rows of houses along the bottom of the closing
 // section. Throws if WebGL is missing; the caller logs it and leaves the space empty.
-import type * as T from 'three';
-import { HouseBuilder, type ThreeModule } from './HouseBuilder';
+import * as THREE from 'three';
+import { HouseBuilder } from './HouseBuilder';
 import { PopTimeline } from './PopTimeline';
 import { StreetLayout } from './StreetLayout';
 import { ViewFit } from './ViewFit';
@@ -10,14 +10,14 @@ const REACH = 60;
 const PITCH = (17 * Math.PI) / 180;
 
 export class StreetScene {
-  private readonly renderer: T.WebGLRenderer;
-  private readonly scene: T.Scene;
-  private readonly camera: T.OrthographicCamera;
+  private readonly renderer: THREE.WebGLRenderer;
+  private readonly scene: THREE.Scene;
+  private readonly camera: THREE.OrthographicCamera;
   private readonly builder: HouseBuilder;
   private readonly timeline: PopTimeline;
-  private readonly objects: T.Group[];
-  private readonly dir: T.Vector3;
-  private readonly up: T.Vector3;
+  private readonly objects: THREE.Group[];
+  private readonly dir: THREE.Vector3;
+  private readonly up: THREE.Vector3;
   private readonly fitter = new ViewFit();
   private clock = 0;
   private last = 0;
@@ -25,20 +25,20 @@ export class StreetScene {
   private frameId = 0;
   private disposed = false;
 
-  constructor(private readonly three: ThreeModule, private readonly host: HTMLElement, reduce: boolean) {
-    this.renderer = new three.WebGLRenderer({ antialias: true, alpha: true });
+  constructor(private readonly host: HTMLElement, reduce: boolean) {
+    this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    this.renderer.outputColorSpace = three.SRGBColorSpace;
-    this.renderer.toneMapping = three.ACESFilmicToneMapping;
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.05;
     this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = three.PCFSoftShadowMap;
-    this.scene = new three.Scene();
-    this.camera = new three.OrthographicCamera(-1, 1, 1, -1, 0.1, 200);
-    this.dir = new three.Vector3(0, -Math.sin(PITCH), -Math.cos(PITCH));
-    this.up = new three.Vector3(0, Math.cos(PITCH), -Math.sin(PITCH));
+    this.renderer.shadowMap.type = THREE.PCFShadowMap;
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 200);
+    this.dir = new THREE.Vector3(0, -Math.sin(PITCH), -Math.cos(PITCH));
+    this.up = new THREE.Vector3(0, Math.cos(PITCH), -Math.sin(PITCH));
     this.addLights();
-    this.builder = new HouseBuilder(three);
+    this.builder = new HouseBuilder();
     const pieces = new StreetLayout(REACH).plan();
     this.timeline = new PopTimeline(pieces.map((p) => p.delay), reduce);
     this.objects = pieces.map((p) => this.builder.build(p));
@@ -77,7 +77,7 @@ export class StreetScene {
     this.disposed = true;
     cancelAnimationFrame(this.frameId);
     this.scene.traverse((o) => {
-      if ((o as T.Mesh).isMesh) (o as T.Mesh).geometry.dispose();
+      if ((o as THREE.Mesh).isMesh) (o as THREE.Mesh).geometry.dispose();
     });
     this.builder.dispose();
     this.renderer.dispose();
@@ -103,9 +103,8 @@ export class StreetScene {
   }
 
   private addLights(): void {
-    const t = this.three;
-    this.scene.add(new t.HemisphereLight(0xfff1df, 0x8a6849, 1.25));
-    const sun = new t.DirectionalLight(0xffe2bd, 2.5);
+        this.scene.add(new THREE.HemisphereLight(0xfff1df, 0x8a6849, 1.25));
+    const sun = new THREE.DirectionalLight(0xffe2bd, 2.5);
     sun.position.set(-9, 15, 11);
     sun.castShadow = true;
     sun.shadow.mapSize.set(4096, 1024);
@@ -115,7 +114,7 @@ export class StreetScene {
     sun.shadow.normalBias = 0.03;
     this.scene.add(sun);
     // Only the shadows show on the ground, so the street sits right on the page color.
-    const ground = new t.Mesh(new t.PlaneGeometry(160, 40), new t.ShadowMaterial({ color: 0x281e15, opacity: 0.22 }));
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(160, 40), new THREE.ShadowMaterial({ color: 0x281e15, opacity: 0.22 }));
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     this.scene.add(ground);

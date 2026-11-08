@@ -1,4 +1,4 @@
-// Loads three.js (its own chunk) when the closing section nears the screen, builds the street, and pops it up when
+// Loads the street scene (with three.js, in its own chunk) when the closing section nears the screen, builds the street, and pops it up when
 // it is mostly in view. Without WebGL it logs the failure and leaves the space empty: the street is decoration.
 import { useEffect, type RefObject } from 'react';
 import { prefersReducedMotion } from '../../theme';
@@ -20,9 +20,9 @@ export function useStreet(host: RefObject<HTMLElement | null>): void {
       if (loading) return;
       loading = true;
       try {
-        const [three, { StreetScene: Scene }] = await Promise.all([import('three'), import('./StreetScene')]);
+        const { StreetScene: Scene } = await import('./StreetScene');
         if (cancelled) return;
-        scene = new Scene(three, el, prefersReducedMotion());
+        scene = new Scene(el, prefersReducedMotion());
         play();
       } catch (error) {
         console.error('[street] could not build the houses for the closing section', error);
