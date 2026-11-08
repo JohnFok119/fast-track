@@ -35,11 +35,11 @@ function FlagBody({ flag, multi }: { flag: Flag; multi: boolean }) {
 }
 
 export function Detail({ item, onLetter }: { item: Item | undefined; onLetter: () => void }) {
-  if (!item) return <aside className="card detail muted">Pick a line to see why, with every source.</aside>;
+  if (!item) return <aside className="detail muted">Pick a line to see why, with every source.</aside>;
   const multi = item.flags.filter((f) => f.status !== 'UNKNOWN').length > 1;
   return (
-    <aside className="card detail pop" key={item.itemId} aria-live="polite">
-      <div className="lbl">Line {item.itemId}</div>
+    <aside className="detail pop" key={item.itemId} aria-live="polite">
+      <div className="lbl">The source, open · line {item.itemId}</div>
       {item.statuses.map((s) => (
         <div key={s} className={`verdict v-${s}`}><div className="t">{VERDICT[s].label}</div><p>{VERDICT[s].explain}</p></div>
       ))}
@@ -56,18 +56,21 @@ interface ListProps { items: Item[]; selected: string | null; onSelect: (id: str
 
 export function RequirementList({ items, selected, onSelect }: ListProps) {
   return (
-    <ol className="rows" aria-label="Requirements">
-      {items.map((it, i) => (
-        <li key={it.itemId}>
-          <button type="button" className={`row ${i < 8 ? 'rise' : ''}`} style={{ ['--i' as string]: i }} aria-pressed={it.itemId === selected} onClick={() => onSelect(it.itemId)}>
-            <span className="r1">
-              <span style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>{it.statuses.map((s) => <span key={s} className={`pill s-${s}`}>{VERDICT[s].label}</span>)}</span>
-              <span className="mono muted" style={{ fontSize: '0.75rem' }}>{it.itemId}</span>
-            </span>
-            <span className="q">{it.text}</span>
-          </button>
-        </li>
-      ))}
-    </ol>
+    <div className="pane">
+      <h2 className="disp pane-h">Pick a line to read its source</h2>
+      <ol className="rows" aria-label="Requirements">
+        {items.map((it, i) => (
+          <li key={it.itemId}>
+            <button type="button" className={`row ${i < 8 ? 'rise' : ''}`} style={{ ['--i' as string]: i }} aria-pressed={it.itemId === selected} onClick={() => onSelect(it.itemId)}>
+              <span className="r1">
+                <span style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>{it.statuses.map((s) => <span key={s} className={`pill s-${s}`}>{VERDICT[s].label}</span>)}</span>
+                <span className="mono muted" style={{ fontSize: '0.75rem' }}>{it.itemId}</span>
+              </span>
+              <span className="q">{it.text}</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
