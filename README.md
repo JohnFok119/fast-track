@@ -33,16 +33,18 @@
 
 ## What we built
 
-Two pages: a homepage at `/` that explains Fast Track, and the tool itself at `/app/`. The tool is a guided flow, one card at a time:
+Two pages: a homepage at `/` that explains Fast Track, and the tool itself at `/app/`. The tool is a guided flow, one card at a time. The rail on top names the six steps:
 
-1. **What are you building?** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Pick a card and the next one slides in.
-2. **Where?** Irvine, Anaheim, Dana Point or Orange. A city with no saved list for that choice is greyed out, and so is unincorporated county land (not covered yet).
-3. **What stands in the way.** Fast Track walks through the city's requirements one line at a time, then shows a two-column table: what the city asks, and what state law says (State says no, Old law number, Not checked, Allowed). Click a row for the reason and the dated sources.
-4. **Time saved.** Two bars on one scale: the event brief's typical path (rezoning, entitlements, plans, build; about 45 months, all ASSUMPTION) and the fast track (no rezoning or hearings, the legal review deadlines with their sources, plans and build). The difference is labelled an estimate.
-5. **Who to contact.** The city office for each issue, and HCD's Housing Accountability Unit if the city will not fix it, each with its source.
+1. **Build.** A backyard home to rent, a backyard home to sell, or a duplex or lot split (SB 9). Pick a card and the next one slides in.
+2. **Lot.** Irvine, Anaheim, Dana Point or Orange. A city with no saved list for that choice is greyed out, and so is unincorporated county land (not covered yet).
+3. **Clash.** Fast Track walks through the city's requirements one line at a time, then lists them with their flag (State says no, Old law number, Not checked, Allowed). Pick a line and its source opens beside it: the city's words, the state's answer, and each source with its page and date. The arrow keys move between lines.
+4. **Time saved.** Two bars on one scale: the event brief's typical path (rezoning, entitlements, plans, build; about 45 months, all ASSUMPTION) and the fast track (no rezoning or hearings, the legal review deadlines with their sources, plans and build). The difference is labelled an estimate. Below them, the city's review deadline in days, and the faster paths for that build, each with its source. A path read only on a mirror site or in a secondary source says "Not confirmed yet".
+5. **Contact.** The city office for each issue, and HCD's Housing Accountability Unit if the city will not fix it, each with its source. "Write the letter" opens the drafts: a reply to the city, and a request to HCD if the city will not fix it. You copy the text and send it yourself.
 6. **Summary.** Lines checked, lines the state says no to, months saved (estimate), your legal clocks and who to contact.
 
-"See everything on one page" opens the full dashboard, which also drafts a letter to the city and a request to HCD, and has a box that checks any city's wording you paste in.
+"See everything on one page" opens the same lot and build as one dashboard, with the letter drafts, the faster paths, and a box that checks any city's wording you paste in. "Guided view" goes back to the cards on that same choice. Add `?theme=classic` to the app's address for the earlier white and blue look.
+
+The homepage tells the story in order: a hero with a looping example check, a ticker of the cities and sources so far, how it works (the sources that feed each check, then three steps), "From soil to keys" (a Dana Point duplex built up in 3D as you scroll, beside its real clash and clocks), a look at the app, why it can be trusted, the sources with their dates, free and open source, questions, and a last call to check your lot. Its cities, counts, quotes and dates come from the same data as the app. The 3D scenes load only when you scroll near them, and with reduced motion on, the page shows still frames.
 
 Each line gets one of four flags. The screen uses plain words:
 
@@ -72,7 +74,7 @@ UNKNOWN
 
 (Output shortened. Run the command to see all items and every link.)
 
-![Step 3 for a backyard home to rent in Irvine: two of the city's four lines are ones the state says no to, one cites an old law number, and one is not checked](project-docs/screenshot-irvine.png)
+![Step 3, Clash, for a backyard home to rent in Irvine: two of the city's four lines are ones the state says no to, one cites an old law number, and one is not checked. The first line is open, with the city's words beside HCD's answer and its sources](project-docs/screenshot-irvine.png)
 
 **Live demo:** none hosted. It runs on a laptop with the steps in [Try it](#try-it).
 
