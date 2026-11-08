@@ -24,7 +24,7 @@ describe('saved clash summaries', () => {
   it('hold no em dash and no section sign, and give each time estimate as a range with its basis', () => {
     for (const s of SUMMARIES.clashes) {
       const words = [s.title, s.citySays, s.stateSays, s.clash, s.time.basis].join(' ');
-      expect(words).not.toMatch(/[—–§]/);
+      expect(words).not.toMatch(/[\u2014\u2013\u00a7]/);
       expect(s.time.low).toBeLessThanOrEqual(s.time.high);
       expect(s.time.basis.length).toBeGreaterThan(20);
     }

@@ -38,7 +38,7 @@ describe('FAQ data', () => {
     for (const item of faq.items) {
       const texts = [item.answer ? flatten(item.answer) : '', ...(item.next ?? []).map((n) => n.text)];
       for (const t of texts.filter(Boolean)) {
-        expect(t).not.toContain('—');
+        expect(t).not.toContain('\u2014');
         expect(t.split(/\s+/).length).toBeLessThanOrEqual(60);
         for (const sentence of t.split(/(?<=[.!?])\s+/)) expect(sentence.split(/\s+/).length).toBeLessThanOrEqual(35);
         expect(t).toMatch(/[.!?]$/);

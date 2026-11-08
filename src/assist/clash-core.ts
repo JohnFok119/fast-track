@@ -130,7 +130,7 @@ function prose(v: unknown, field: string, known: Set<string>): Check {
   if (!t.ok) return t;
   const s = t.value;
   if (s.length > MAX_TEXT) return { ok: false, reason: `${field} is over ${MAX_TEXT} characters` };
-  if (/[–—]/.test(s)) return { ok: false, reason: `${field} has an em dash or en dash` };
+  if (/[\u2013\u2014]/.test(s)) return { ok: false, reason: `${field} has an em dash or en dash` };
   if (containsCitation(s)) return { ok: false, reason: `${field} has a citation` };
   const unknown = numbersIn(s).find((n) => !known.has(n));
   if (unknown !== undefined) return { ok: false, reason: `${field} uses the number ${unknown}, which the sources do not give` };

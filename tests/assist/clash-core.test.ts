@@ -133,7 +133,7 @@ describe('validateClash', () => {
   it('rejects a citation', () => reject({ stateSays: 'See Government Code for 3 units.' }, 'stateSays'));
   it('rejects a number the sources do not give', () => reject({ citySays: 'The city says 7 units.' }, 'citySays'));
   it('rejects an em dash and an en dash', () => {
-    reject({ clash: 'It clashes — badly.' }, 'clash');
+    reject({ clash: 'It clashes \u2014 badly.' }, 'clash');
     reject({ clash: 'It clashes – badly.' }, 'clash');
   });
   it('rejects text over 280 characters', () => reject({ clash: 'a'.repeat(281) }, 'clash'));
