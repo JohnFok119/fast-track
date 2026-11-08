@@ -5,26 +5,26 @@ import { runCheck } from '../../../src/contract/api';
 import type { City } from '../../../src/contract/types';
 import { Results } from '../../../src/ui/guided/Results';
 import { groupItems } from '../../../src/ui/model';
+import { ReadModel } from '../../../src/ui/results/ReadModel';
+import { ReadScan } from '../../../src/ui/results/ReadScan';
+import { summaryOf } from '../../../src/ui/results/summaries';
 import { matchingQueries } from '../../browser-fakes';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
-const NARROW = '(max-width: 960px)';
 
-function show(city: City) {
+function show(city: City, read = false) {
   const run = runCheck(city);
+  const items = groupItems(run);
   const onNext = vi.fn();
   const onBack = vi.fn();
-  const view = render(<Results run={run} items={groupItems(run)} onNext={onNext} onBack={onBack} />);
-  return { run, onNext, onBack, view };
+  const onRead = vi.fn();
+  const view = render(<Results run={run} items={items} read={read} onRead={onRead} onNext={onNext} onBack={onBack} />);
+  return { run, items, onNext, onBack, onRead, view };
 }
 
-const flagOf = (city: City, id: string) => {
-  const flag = runCheck(city).flags.find((f) => f.itemId === id);
-  if (!flag) throw new Error(`no flag ${id}`);
-  return flag;
-};
-const pane = () => screen.getByRole('region', { name: 'The source, open' });
-const picked = () => screen.getByRole('button', { pressed: true });
+const heading = () => screen.getByRole('heading', { level: 1 }).textContent;
+const cards = () => within(screen.getByRole('list', { name: 'Clashes' })).getAllByRole('listitem');
+const dana = (rule: string) => summaryOf('dana-point', rule)!;
 
 beforeEach(() => matchingQueries.add(REDUCED));
 afterEach(() => {
@@ -32,110 +32,122 @@ afterEach(() => {
   vi.useRealTimers();
 });
 
-describe('Results heading', () => {
-  it.each<City>(['dana-point', 'anaheim', 'irvine'])('counts the lines the state says no to in %s, out of all lines read', (city) => {
-    const { run } = show(city);
-    const no = new Set(run.flags.filter((f) => f.status === 'CONFLICTS').map((f) => f.itemId)).size;
-    const all = new Set(run.flags.map((f) => f.itemId)).size;
-    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe(`${no} of ${all} lines the state says no to.`);
+describe('Results reading', () => {
+  beforeEach(() => {
+    matchingQueries.clear();
+    vi.useFakeTimers();
+  });
+
+  it("reads the city's rules beside the state's own words, then lands on the clashes", () => {
+    const { run, items, onRead } = show('dana-point');
+    expect(heading()).toBe("Reading Dana Point's rules against HCD's letter");
+    expect(screen.getByRole('region', { name: "Dana Point's rules" })).toBeTruthy();
+    expect(screen.getByRole('region', { name: /HCD letter to the City of Dana Point/ })).toBeTruthy();
+    expect(screen.getByText('Line 1 of 9')).toBeTruthy();
+    expect(screen.queryByRole('list', { name: 'Clashes' })).toBeNull();
+    const total = new ReadScan(new ReadModel(run, items).lines).total;
+    act(() => vi.advanceTimersByTime(total + 200));
+    expect(heading()).toBe('6 of 9 lines the state says no to.');
+    expect(cards()).toHaveLength(4);
+    expect(onRead).toHaveBeenCalled();
+  });
+
+  it('counts the clashes as it finds them', () => {
+    show('dana-point');
+    act(() => vi.advanceTimersByTime(1100));
+    expect(screen.getByText(/1 clash found/)).toBeTruthy();
+  });
+
+  it('skips to the clashes when asked', () => {
+    show('dana-point');
+    fireEvent.click(screen.getByRole('button', { name: 'Skip to the results' }));
+    expect(heading()).toBe('6 of 9 lines the state says no to.');
+  });
+
+  it('does not read again a city it already read', () => {
+    show('dana-point', true);
+    expect(heading()).toBe('6 of 9 lines the state says no to.');
   });
 });
 
-describe('Results header', () => {
+describe('Results clash cards', () => {
+  it('numbers each clash and names it with its summary title, in the order the city wrote them', () => {
+    show('dana-point');
+    const rules = ['sb9-dana-point-two-unit-cap', 'sb9-dana-point-one-story', 'sb9-dana-point-floor-area-cap', 'sb9-dana-point-one-bedroom'];
+    expect(cards().map((c) => within(c).getByRole('heading', { level: 3 }).textContent)).toEqual(rules.map((r) => dana(r).title));
+    expect(cards().map((c) => c.querySelector('.cc-n')?.textContent)).toEqual(['1', '2', '3', '4']);
+  });
+
+  it('puts what the city says beside what the state says, how they clash, and the time saved as an estimate', () => {
+    show('dana-point');
+    const s = dana('sb9-dana-point-two-unit-cap');
+    const card = cards()[0]!;
+    expect(within(card).getByRole('button', { name: new RegExp(`Dana Point says.*${s.citySays.slice(0, 30)}`) })).toBeTruthy();
+    expect(within(card).getByRole('button', { name: new RegExp(`The state says.*${s.stateSays.slice(0, 30)}`) })).toBeTruthy();
+    expect(card.textContent).toContain(s.clash);
+    expect(card.textContent).toContain(`About ${s.time.low} to ${s.time.high} ${s.time.unit}`);
+    expect(within(card).getByText('Estimate')).toBeTruthy();
+    expect(card.textContent).toContain(s.time.basis);
+  });
+
+  it('says the summaries are written by Claude and that the rule set decides the clashes', () => {
+    show('dana-point');
+    expect(screen.getByText(/Summaries and time estimates by Claude/)).toBeTruthy();
+  });
+
+  it("opens the exact words from either side, with the city's line, HCD's words and each source", () => {
+    const { run } = show('dana-point');
+    const flag = run.flags.find((f) => f.itemId === 'dp-01')!;
+    const card = cards()[0]!;
+    const [city, state] = within(card).getAllByRole('button', { expanded: false });
+    fireEvent.click(city!);
+    const words = within(card).getByRole('region', { name: /Exact words/ });
+    expect(words.textContent).toContain(flag.itemText.slice(1, 60));
+    expect(words.textContent).toContain(flag.why!.slice(0, 60));
+    const cite = flag.citations[0]!;
+    expect(within(words).getByRole('link', { name: cite.label }).getAttribute('href')).toBe(cite.url);
+    expect(state!.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(state!);
+    expect(within(card).queryByRole('region', { name: /Exact words/ })).toBeNull();
+  });
+
+  it("marks each clash's words in the state's text with its number", () => {
+    show('dana-point');
+    const state = screen.getByRole('region', { name: /HCD letter to the City of Dana Point/ });
+    for (const n of ['1', '2', '3', '4']) expect(state.querySelector(`mark[data-n="${n}"]`)).not.toBeNull();
+  });
+
+  it('shows a card for two lines HCD answers the same way once, and says it covers both', () => {
+    show('dana-point');
+    expect(cards()[2]?.textContent).toContain('2 lines');
+  });
+});
+
+describe('Results other lines', () => {
+  it("lists the lines that do not clash, and explains one when it is opened", () => {
+    show('dana-point');
+    const other = screen.getByRole('region', { name: "Also on Dana Point's list" });
+    const rows = within(other).getAllByRole('button');
+    expect(rows).toHaveLength(3);
+    fireEvent.click(rows[0]!);
+    expect(within(other).getByText(/No rule covers this line yet/)).toBeTruthy();
+  });
+
+  it('says plainly when a city has no clash, and still shows its old law numbers', () => {
+    const { view } = show('anaheim');
+    expect(heading()).toBe('0 of 6 lines the state says no to.');
+    expect(screen.queryByRole('list', { name: 'Clashes' })).toBeNull();
+    expect(screen.getByText(/No line here clashes with state law/)).toBeTruthy();
+    const other = screen.getByRole('region', { name: "Also on Anaheim's list" });
+    expect(within(other).getAllByText('Old law number')).toHaveLength(1);
+    expect(view.container.querySelectorAll('mark[data-n="old"]').length).toBeGreaterThan(0);
+  });
+});
+
+describe('Results shell', () => {
   it('leaves the step number to the card bar above it', () => {
     show('dana-point');
     expect(screen.queryByText(/Step 3 of 6/)).toBeNull();
-  });
-});
-
-describe('Results source pane', () => {
-  it('opens the first line the state says no to, with its own quote and HCD letter', () => {
-    show('dana-point');
-    const dp01 = flagOf('dana-point', 'dp-01');
-    expect(within(picked()).getByText('State says no')).toBeTruthy();
-    expect(within(pane()).getByText(dp01.itemText)).toBeTruthy();
-    expect(within(pane()).getByText(dp01.why ?? '')).toBeTruthy();
-  });
-
-  it("shows the picked line's own quote and citation with its page and date", () => {
-    show('dana-point');
-    const dp05 = flagOf('dana-point', 'dp-05');
-    fireEvent.click(screen.getByRole('button', { name: /Total Floor Area shall not exceed 800 square feet\.\.\.\. In no event/ }));
-    expect(picked().textContent).toContain('In no event shall the two Residential Units');
-    expect(within(pane()).getByText(dp05.itemText)).toBeTruthy();
-    expect(within(pane()).queryByText(flagOf('dana-point', 'dp-01').itemText)).toBeNull();
-    const cite = dp05.citations[0];
-    const link = within(pane()).getByRole('link', { name: cite?.label });
-    expect(link.getAttribute('href')).toBe(cite?.url);
-    expect(link.closest('li')?.textContent).toContain('Dated Apr 17, 2023 · Page 4 · Checked Nov 7, 2026');
-  });
-
-  it('opens every source link, the city one too, in a new tab and on the real URL', () => {
-    const { run } = show('irvine');
-    const links = within(pane()).getAllByRole('link');
-    expect(links.map((a) => a.getAttribute('href'))).toEqual([run.sourceUrl, ...(run.flags[0]?.citations.map((c) => c.url) ?? [])]);
-    for (const a of links) {
-      expect(a.getAttribute('target')).toBe('_blank');
-      expect(a.getAttribute('rel')).toContain('noopener');
-    }
-  });
-
-  it('says plainly when no rule covers a line, with no source link for the state', () => {
-    show('dana-point');
-    fireEvent.click(screen.getByRole('button', { name: /must be attached or connected/ }));
-    expect(within(pane()).getByText(/No rule covers this line yet/)).toBeTruthy();
-    expect(within(pane()).getAllByRole('link')).toHaveLength(1);
-  });
-
-  it('marks only the old law numbers in a line that cites a renumbered section', () => {
-    const { view } = show('anaheim');
-    fireEvent.click(screen.getByRole('button', { name: /OWNER OCCUPANCY COVENANT/ }));
-    expect([...view.container.querySelectorAll('mark')].map((m) => m.textContent)).toEqual(['65852.2', '65852.22']);
-    expect(within(pane()).getAllByText('UNKNOWN')).toHaveLength(2);
-  });
-});
-
-describe('Results moving between lines', () => {
-  it('moves with the arrow keys, Home and End, and keeps focus on the picked line', () => {
-    show('dana-point');
-    picked().focus();
-    fireEvent.keyDown(picked(), { key: 'ArrowDown' });
-    expect(picked().textContent).toContain('height limitation of twelve feet');
-    expect(document.activeElement).toBe(picked());
-    fireEvent.keyDown(picked(), { key: 'End' });
-    expect(picked().textContent).toContain('[a]ny person responsible for violating');
-    fireEvent.keyDown(picked(), { key: 'Home' });
-    expect(picked().textContent).toContain('No more than two residential units');
-  });
-
-  it('steps with the Next line and Previous line buttons', () => {
-    show('dana-point');
-    expect((screen.getByRole('button', { name: 'Previous line' }) as HTMLButtonElement).disabled).toBe(true);
-    fireEvent.click(screen.getByRole('button', { name: 'Next line' }));
-    expect(picked().textContent).toContain('height limitation of twelve feet');
-    expect(within(pane()).getByText('2 of 9')).toBeTruthy();
-    fireEvent.click(screen.getByRole('button', { name: 'Previous line' }));
-    expect(picked().textContent).toContain('No more than two residential units');
-  });
-
-  it('on a phone, opens the source right under the picked line', () => {
-    matchingQueries.add(NARROW);
-    show('dana-point');
-    fireEvent.click(screen.getByRole('button', { name: /Total Floor Area shall not exceed 800 square feet\.\.\.\. In no event/ }));
-    expect(screen.getAllByRole('region', { name: 'The source, open' })).toHaveLength(1);
-    expect(picked().closest('li')?.contains(pane())).toBe(true);
-  });
-});
-
-describe('Results flow', () => {
-  it('checks the lines one by one, then shows them all when asked', () => {
-    matchingQueries.clear();
-    vi.useFakeTimers();
-    show('dana-point');
-    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Checking 9 lines against state law');
-    fireEvent.click(screen.getByRole('button', { name: 'Show all now' }));
-    act(() => vi.advanceTimersByTime(2000));
-    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('6 of 9 lines the state says no to.');
   });
 
   it('goes back and on through the shell', () => {

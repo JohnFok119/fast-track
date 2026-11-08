@@ -1,9 +1,9 @@
-// The results step's model: the lines in the order shown, the counts, moving between lines, and what the source pane
-// shows for a line. No law lives here: words come from src/letter/verdict.ts, quotes and sources from the engine's run.
+// Step 3's lines by status: the counts, and the state's answer to each line, as the lines after the clashes show it.
+// No law lives here: words come from src/letter/verdict.ts, answers and sources from the engine's run.
 import type { Citation, Flag, Status } from '../../contract/types';
 import { VERDICT } from '../../letter/verdict';
 import { day, type Item } from '../model';
-import { citySection, markWords, type Segment } from './quote';
+import { citySection } from './quote';
 import { publishedOn } from './sources';
 
 /** What is most in the way comes first. A line not checked may still be in the way, so it sits above an allowed one. */
@@ -44,16 +44,10 @@ export interface Answer {
 
 export interface Pane {
   line: Line;
-  /** 1-based place of the line in the list. */
-  index: number;
-  total: number;
-  prev: string | null;
-  next: string | null;
-  quote: Segment[];
   answers: Answer[];
 }
 
-function citeView(c: Citation): Cite {
+export function citeView(c: Citation): Cite {
   const dated = publishedOn(c.sourceId);
   const pages = c.page && /[,-]/.test(c.page) ? `Pages ${c.page}` : c.page ? `Page ${c.page}` : null;
   const meta = [dated ? `Dated ${dated}` : null, pages, c.section ? `Section ${c.section}` : null, `Checked ${day(c.checked)}`];
@@ -97,57 +91,15 @@ export class ClashList {
       .filter((t) => t.n > 0);
   }
 
-  get heading(): string {
-    const no = this.lines.filter((l) => l.status === 'CONFLICTS').length;
-    return `${no} of ${this.total} line${this.total === 1 ? '' : 's'} the state says no to.`;
-  }
-
-  get first(): string | null {
-    return this.lines[0]?.id ?? null;
-  }
-
-  private at(index: number): string | null {
-    return this.lines[index]?.id ?? null;
-  }
-
   private indexOf(id: string): number {
     return this.lines.findIndex((l) => l.id === id);
   }
 
-  next(id: string): string | null {
-    const i = this.indexOf(id);
-    return i < 0 ? null : this.at(i + 1);
-  }
-
-  prev(id: string): string | null {
-    const i = this.indexOf(id);
-    return i < 0 ? null : this.at(i - 1);
-  }
-
-  /** The line a key moves to from `id`: arrows step and stop at the ends, Home and End jump. Null for other keys. */
-  move(id: string, key: string): string | null {
-    const i = this.indexOf(id);
-    if (i < 0) return null;
-    const last = this.lines.length - 1;
-    const to: Record<string, number> = { ArrowDown: Math.min(i + 1, last), ArrowUp: Math.max(i - 1, 0), Home: 0, End: last };
-    return key in to ? this.at(to[key] ?? i) : null;
-  }
-
-  /** What the source pane shows for a line: the city's words, then the state's answer for each flag. */
+  /** The line and the state's answer for each of its flags, or null for a line not in the list. */
   pane(id: string): Pane | null {
-    const i = this.indexOf(id);
-    const line = this.lines[i];
+    const line = this.lines[this.indexOf(id)];
     const item = this.byId.get(id);
     if (!line || !item) return null;
-    const old = item.flags.flatMap((f) => (f.mapping ? [f.mapping.old] : []));
-    return {
-      line,
-      index: i + 1,
-      total: this.total,
-      prev: this.at(i - 1),
-      next: this.at(i + 1),
-      quote: markWords(item.text, old),
-      answers: item.flags.map(answerView),
-    };
+    return { line, answers: item.flags.map(answerView) };
   }
 }

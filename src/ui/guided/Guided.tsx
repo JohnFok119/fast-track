@@ -50,10 +50,16 @@ export function Guided({ from, onSeeAll }: Props) {
   const timer = useRef<number | undefined>(undefined);
   const [letterOpen, setLetterOpen] = useState(false);
   const closeLetter = useCallback(() => setLetterOpen(false), []);
+  // Cities already read in this visit: going back to step 3 shows the clashes without reading again.
+  const [readCities, setReadCities] = useState<ReadonlySet<City>>(() => new Set());
 
   const { step, pathId, city, run } = flow;
   const path = PATHS.find((p) => p.id === pathId);
   const items = useMemo(() => (run ? groupItems(run) : []), [run]);
+  const runCity = run?.city;
+  const markRead = useCallback(() => {
+    if (runCity) setReadCities((was) => (was.has(runCity) ? was : new Set(was).add(runCity)));
+  }, [runCity]);
 
   const go = (n: number) => {
     window.clearTimeout(timer.current);
@@ -69,7 +75,9 @@ export function Guided({ from, onSeeAll }: Props) {
   if (step === 0) body = <Welcome onStart={() => go(1)} />;
   else if (step === 1) body = <PickPath paths={PATHS} pathId={pathId} onPick={pickPath} />;
   else if (step === 2 || !run || !path) body = <PickCity runs={RUNS} pathway={path?.pathway ?? 'ADU'} city={city} onPick={pickCity} />;
-  else if (step === 3) body = <Results key={run.city} run={run} items={items} onNext={() => go(4)} onBack={() => go(2)} />;
+  else if (step === 3) {
+    body = <Results key={run.city} run={run} items={items} read={readCities.has(run.city)} onRead={markRead} onNext={() => go(4)} onBack={() => go(2)} />;
+  }
   else if (step === 4) body = <TimelineStep pathway={path.pathway} phases={getTimeline(path.pathway)} baseline={BASELINE} onNext={() => go(5)} onBack={() => go(3)} />;
   else if (step === 5) body = <ContactStep run={run} escalation={ESCALATION} onLetter={() => setLetterOpen(true)} onNext={() => go(6)} onBack={() => go(4)} />;
   else {
