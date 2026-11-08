@@ -12,7 +12,6 @@
 
 .ribbon { background: var(--ink-2); color: var(--card); padding: 7px 20px; font-size: 0.8rem; line-height: 1.4; display: flex; gap: 10px; align-items: flex-start; }
 .ribbon i { width: 7px; height: 7px; border-radius: 99px; background: var(--brand); flex: none; margin-top: 0.5em; }
-.mark { font-family: var(--display); font-weight: var(--dw); font-variation-settings: var(--dvar); letter-spacing: -0.03em; font-size: 1.25rem; }
 .ft .ft-brand { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font: 600 19px/1 var(--font-brand); letter-spacing: -0.03em; text-decoration: none; }
 .ft-brand svg { margin: -3px -2px -3px -4px; flex: none; }
 

@@ -3,7 +3,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body.home { margin: 0; background: var(--page); color: var(--text); font: 400 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
-.home a { color: inherit; }
+:where(.home) a { color: inherit; }
 .home main { overflow-x: clip; }
 .home section { position: relative; }
 
