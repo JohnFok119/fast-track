@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getFasterPaths, getTimeline, runCheck } from '../../src/contract/api';
 import type { CityRun } from '../../src/contract/types';
-import { HeroContent, shortExcerpt, tickerItems } from '../../src/home/hero/HeroContent';
+import { HeroContent, shortExcerpt } from '../../src/home/hero/HeroContent';
 
 const run = runCheck('dana-point');
 const content = HeroContent.from(run);
@@ -86,15 +86,5 @@ describe('shortExcerpt', () => {
   });
   it('keeps short text whole', () => {
     expect(shortExcerpt('"One bedroom."', 40)).toBe('One bedroom.');
-  });
-});
-
-describe('tickerItems', () => {
-  it('lists the cities the engine covers, then the sources from the source index', () => {
-    const items = tickerItems();
-    expect(items.slice(0, 4)).toEqual(['Anaheim', 'Dana Point', 'Irvine', 'Orange']);
-    expect(items).toContain('HCD letters');
-    expect(items).toContain('Gov. Code § 66317');
-    expect(items).toContain('ADU Handbook, March 2026');
   });
 });

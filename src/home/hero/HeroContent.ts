@@ -3,7 +3,6 @@
 import sourcesRaw from '../../../data/sources/index.json';
 import { getFasterPaths, getTimeline } from '../../contract/api';
 import type { CityRun, Flag, Pathway } from '../../contract/types';
-import { RUNS } from '../../ui/data';
 
 interface SourceRow {
   id: string;
@@ -130,16 +129,4 @@ function handbookDoc(): { title: string; date: string } {
   const title = SOURCES.find((s) => s.id.includes('handbook'))?.title ?? '';
   const m = /^(?:California )?(.*?), (\w+ \d{4})/.exec(title);
   return { title: m ? `California ${m[1]}` : title, date: m?.[2] ?? '' };
-}
-
-/** The words that slide past in the ticker: the cities checked, then the kinds of source behind them. */
-export function tickerItems(): string[] {
-  const cities = RUNS.map((r) => r.name).sort();
-  const letters = SOURCES.some((s) => s.id.startsWith('hcd-') && /letter/i.test(s.title)) ? ['HCD letters'] : [];
-  const statutes = SOURCES.flatMap((s) => {
-    const m = /^gov-(\d+)$/.exec(s.id);
-    return m ? [`Gov. Code § ${m[1]}`] : [];
-  });
-  const handbooks = SOURCES.filter((s) => s.id.includes('handbook')).map((s) => s.title.replace(/^California /, '').replace(/ \(HCD\)$/, ''));
-  return [...cities, ...letters, ...statutes, ...handbooks];
 }

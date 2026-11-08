@@ -44,7 +44,7 @@ Two pages: a homepage at `/` that explains Fast Track, and the tool itself at `/
 
 "See everything on one page" opens the same lot and build as one dashboard, with the letter drafts, the faster paths, and a box that checks any city's wording you paste in. "Guided view" goes back to the cards on that same choice. Add `?theme=classic` to the app's address for the earlier white and blue look.
 
-The homepage tells the story in order: a hero with a looping example check, a ticker of the cities and sources so far, how it works (the sources that feed each check, then three steps), "From soil to keys" (a Dana Point duplex built up in 3D as you scroll, beside its real clash and clocks), a look at the app, why it can be trusted, the sources with their dates, free and open source, questions, and a last call to check your lot. Its cities, counts, quotes and dates come from the same data as the app. The 3D scenes load only when you scroll near them, and with reduced motion on, the page shows still frames.
+The homepage tells the story in order: a hero with a looping example check that fades into the page, how it works (the sources that feed each check, then three steps), "From soil to keys" (a Dana Point duplex built up in 3D as you scroll, beside its real clash and clocks), a look at the app, why it can be trusted, the sources with their dates, free and open source, questions, and a last call to check your lot. Its cities, counts, quotes and dates come from the same data as the app. The 3D scenes load only when you scroll near them, and with reduced motion on, the page shows still frames.
 
 Each line gets one of four flags. The screen uses plain words:
 

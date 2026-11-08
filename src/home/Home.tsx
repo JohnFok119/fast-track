@@ -11,7 +11,6 @@ import { Showcase } from './sections/Showcase';
 import { Sources } from './sections/Sources';
 import { Steps } from './sections/Steps';
 import { StickyCta } from './sections/StickyCta';
-import { Ticker } from './sections/Ticker';
 import { Trust } from './sections/Trust';
 import { Story } from './story/Story';
 
@@ -22,7 +21,6 @@ export function Home() {
       <Nav />
       <main id="top">
         <Hero />
-        <Ticker />
         <Hub />
         <Steps />
         <Story />
