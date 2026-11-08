@@ -24,7 +24,7 @@
 .rs .rs-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .rs .rs-r { border-radius: 10px; background: var(--cream); box-shadow: 0 0 0 1px var(--line); transition: box-shadow 0.2s; }
 .rs .rs-r:hover { box-shadow: 0 0 0 1px var(--line-strong); }
-.rs .rs-r.sel { box-shadow: 0 0 0 2px var(--copper), 0 10px 24px -16px rgba(158, 84, 47, 0.6); }
+.rs .rs-r.sel { box-shadow: 0 0 0 2px var(--copper), 0 10px 24px -16px color-mix(in srgb, var(--bronze) 60%, transparent); }
 .rs .rs-r > button { box-sizing: border-box; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 11px 12px; border-radius: 10px; }
 .rs .rs-r > button:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
 .rs .rs-t { display: flex; flex-direction: column; min-width: 0; }
@@ -38,7 +38,7 @@
 .rs .rs-wire path { fill: none; stroke: var(--copper); stroke-width: 1.6; stroke-dasharray: 5 5; animation: rs-flow 1.2s linear infinite; }
 .rs .rs-wire circle { fill: var(--copper); }
 .rs .rs-nw { white-space: nowrap; }
-.rs .rs-doc { background: var(--cream); border-radius: 8px; padding: 16px; color: var(--ink); box-shadow: 0 18px 36px -24px rgba(40, 30, 21, 0.55), 0 0 0 1px rgba(40, 30, 21, 0.06); }
+.rs .rs-doc { background: var(--cream); border-radius: 8px; padding: 16px; color: var(--ink); box-shadow: 0 18px 36px -24px color-mix(in srgb, var(--esp) 55%, transparent), 0 0 0 1px color-mix(in srgb, var(--esp) 6%, transparent); }
 .rs .rs-doc + .rs-doc { margin-top: 18px; }
 .rs .rs-dh { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-bottom: 9px; margin-bottom: 10px; border-bottom: 1px solid var(--line); }
 .rs .rs-dh b { font: 600 12px/1.2 var(--sans); }

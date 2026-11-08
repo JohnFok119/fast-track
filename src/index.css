@@ -39,6 +39,8 @@
   --card-ink: #281e15;
   --card-text: #3d2c1f;
   --card-muted: #7a6350;
+  /* Foam: the lightest card, for rows and sheets set on a surface card. */
+  --foam: #fbf7f1;
 
   /* App tokens (the names the app's styles already use), mapped onto the palette. */
   --paper: var(--page);
@@ -91,6 +93,35 @@
   --brand-deep: #2e4273;
   --line: rgba(21, 27, 33, 0.12);
   --line-strong: rgba(21, 27, 33, 0.3);
+  /* The brand palette and the latte layer, mapped onto white and blue, so every app style follows the theme. */
+  --esp: #151b21;
+  --esp-2: #353c44;
+  --brown: #353c44;
+  --tan: #7b848e;
+  --taupe: #c3c8ce;
+  --sand: #e8eaed;
+  --cream: #ffffff;
+  --bronze: #2e4273;
+  --copper: #1dabd5;
+  --glow: 29, 171, 213;
+  --sprout: #2e9b57;
+  --sprout-deep: #1e6a3a;
+  --brick: #d93a26;
+  --law-bg: #dceedf;
+  --page: #f4f4f4;
+  --text: #353c44;
+  --muted: #5d6670;
+  --faint: #7b848e;
+  --accent: #2e4273;
+  --rule: rgba(21, 27, 33, 0.18);
+  --gridline: rgba(21, 27, 33, 0.07);
+  --fade-mid: #5d6670;
+  --surface: #ffffff;
+  --surface-2: #e8eaed;
+  --card-ink: #151b21;
+  --card-text: #353c44;
+  --card-muted: #5d6670;
+  --foam: #f8f9fa;
   --conf-fg: #a1261a;
   --conf-bg: #fbe3df;
   --conf-dot: #d93a26;

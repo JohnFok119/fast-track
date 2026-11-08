@@ -17,7 +17,7 @@
 .gd-rail li { position: relative; z-index: 1; min-width: 0; }
 .gd-rail button { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; width: 100%; border-radius: 6px; }
 .gd-rail button:disabled { cursor: default; }
-.gd-rail .dot { width: 22px; height: 22px; border-radius: 99px; display: grid; place-items: center; font-size: 0.68rem; font-weight: 600; background: #c9b59c; color: var(--esp); box-shadow: 0 0 0 4px var(--paper); transition: background 0.3s, color 0.3s, box-shadow 0.3s; }
+.gd-rail .dot { width: 22px; height: 22px; border-radius: 99px; display: grid; place-items: center; font-size: 0.68rem; font-weight: 600; background: var(--taupe); color: var(--esp); box-shadow: 0 0 0 4px var(--paper); transition: background 0.3s, color 0.3s, box-shadow 0.3s; }
 .gd-rail .done .dot { background: var(--bronze); color: var(--cream); }
 .gd-rail .now .dot { background: var(--copper); color: var(--cream); box-shadow: 0 0 0 4px var(--paper), 0 0 0 8px rgba(var(--glow), 0.28); }
 .gd-rail .tx { display: flex; flex-direction: column; min-width: 0; max-width: 100%; }
@@ -29,7 +29,7 @@
 @media (max-width: 640px) { .gd-rail .tx { display: none; } .gd-rail .now .tx { display: flex; position: absolute; top: 32px; left: 0; width: max-content; max-width: 70vw; } .gd-rail { padding-bottom: 24px; } }
 
 /* The card: foam on the latte page, with a bar on top that says where you are. */
-.gd-card { background: var(--surface, var(--card)); color: var(--card-text, var(--ink)); border-radius: 16px; box-shadow: 0 0 0 1px var(--line), 0 30px 60px -40px rgba(40, 30, 21, 0.6); overflow: hidden; min-width: 0; }
+.gd-card { background: var(--surface, var(--card)); color: var(--card-text, var(--ink)); border-radius: 16px; box-shadow: 0 0 0 1px var(--line), 0 30px 60px -40px color-mix(in srgb, var(--esp) 60%, transparent); overflow: hidden; min-width: 0; }
 .gd-bar { display: flex; align-items: center; gap: 4px 12px; padding: 14px 20px; border-bottom: 1px solid var(--line); font-size: 0.82rem; font-weight: 500; line-height: 1.3; color: var(--card-muted, var(--ink-muted)); flex-wrap: wrap; }
 .gd-bar b { color: var(--card-ink, var(--ink)); font-weight: 600; }
 .gd-bar .pv { margin-left: auto; }

@@ -7,16 +7,16 @@
 .ch-hero { font-size: clamp(2.2rem, 6.5vw, 4rem); max-width: 20ch; margin-top: 14px; }
 .ch-welcome .gd-sub { font-size: 1.1rem; margin-top: 18px; }
 .ch-chips { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.ch-chip { padding: 7px 14px; border-radius: 99px; background: #fbf7f1; box-shadow: 0 0 0 1px var(--line); color: var(--card-text, var(--ink-2)); font-size: 0.88rem; }
+.ch-chip { padding: 7px 14px; border-radius: 99px; background: var(--foam); box-shadow: 0 0 0 1px var(--line); color: var(--card-text, var(--ink-2)); font-size: 0.88rem; }
 .ch-start { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 18px; margin-top: 36px; }
 .btn.ch-big { padding: 16px 44px !important; font-size: 1.1rem; }
 .ch-note { font-size: 0.84rem; }
 
 .ch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 24px; }
-.ch-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px; min-width: 0; text-align: left; font: inherit; color: var(--card-ink, var(--ink)); background: #fbf7f1; border: 0; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); cursor: pointer; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s; }
-.ch-card:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line-strong), 0 16px 30px -18px rgba(40, 30, 21, 0.55); }
+.ch-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 20px; min-width: 0; text-align: left; font: inherit; color: var(--card-ink, var(--ink)); background: var(--foam); border: 0; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); cursor: pointer; transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s; }
+.ch-card:not(:disabled):hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line-strong), 0 16px 30px -18px color-mix(in srgb, var(--esp) 55%, transparent); }
 .ch-card:disabled { opacity: 0.6; cursor: not-allowed; background: transparent; box-shadow: 0 0 0 1px var(--line-strong); }
-.ch-card[aria-pressed="true"], .ch-card[aria-pressed="true"]:not(:disabled):hover { box-shadow: 0 0 0 2px var(--copper), 0 10px 24px -16px rgba(158, 84, 47, 0.6); }
+.ch-card[aria-pressed="true"], .ch-card[aria-pressed="true"]:not(:disabled):hover { box-shadow: 0 0 0 2px var(--copper), 0 10px 24px -16px color-mix(in srgb, var(--bronze) 60%, transparent); }
 .ch-icon { display: inline-flex; margin-bottom: 6px; color: var(--bronze, currentColor); }
 .ch-icon svg { width: 32px; height: 32px; }
 .ch-card:disabled .ch-icon { opacity: 0.6; }

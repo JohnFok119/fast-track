@@ -2,7 +2,7 @@
 .sm-done { display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: 14px; border-radius: 99px; background: var(--ok-bg); color: var(--ok-fg); animation: sm-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
 .sm-tiles { list-style: none; margin: 22px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(136px, 1fr)); gap: 10px; }
 @media (max-width: 480px) { .sm-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.sm-tile { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 14px; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); background: #fbf7f1; animation: sm-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.sm-tile { display: flex; flex-direction: column; gap: 4px; min-width: 0; padding: 14px; border-radius: 12px; box-shadow: 0 0 0 1px var(--line); background: var(--foam); animation: sm-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .sm-ico { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 99px; }
 .sm-num { font-family: var(--font-display); font-variation-settings: var(--dvar); font-size: clamp(2rem, 6vw, 2.6rem); font-weight: var(--dw); letter-spacing: -0.03em; line-height: 1.05; font-variant-numeric: tabular-nums; color: var(--ink); margin-top: 6px; }
 .sm-lab { font-size: 0.88rem; font-weight: 500; color: var(--ink); line-height: 1.25; overflow-wrap: anywhere; }

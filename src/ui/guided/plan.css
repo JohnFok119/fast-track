@@ -23,7 +23,7 @@
 .tg-note { margin: 20px 0 0; font-size: 0.85rem; color: var(--ink-muted); }
 
 .ct-list { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
-.ct-item { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; padding: 18px; background: #fbf7f1; box-shadow: 0 0 0 1px var(--line); border-radius: 12px; }
+.ct-item { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 14px; padding: 18px; background: var(--foam); box-shadow: 0 0 0 1px var(--line); border-radius: 12px; }
 .ct-item.esc { background: var(--surface); box-shadow: 0 0 0 1px var(--line-strong); }
 .ct-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 99px; background: var(--surface-2); color: var(--bronze); }
 .ct-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bronze); margin-bottom: 4px; }
