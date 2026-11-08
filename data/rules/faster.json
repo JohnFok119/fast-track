@@ -1,0 +1,55 @@
+{
+  "about": "Sourced ways to save time, shown on the app's timeline step. Every entry needs a source in data/sources/index.json (no source, no path). UNCONFIRMED entries were read only on a mirror or a secondary source and say so.",
+  "paths": [
+    {
+      "id": "sb9-60-days",
+      "pathways": [
+        "SB9"
+      ],
+      "title": "Hold the city to 60 days",
+      "text": "Once your SB 9 duplex application is complete, the city has 60 days to approve or deny it. If it misses the deadline, the application is deemed approved.",
+      "status": "CONFIRMED",
+      "sources": [
+        {
+          "sourceId": "hcd-dana-point-2025-09-15",
+          "section": "65852.21(h)(1)",
+          "page": "2"
+        }
+      ]
+    },
+    {
+      "id": "adu-60-days",
+      "pathways": [
+        "ADU"
+      ],
+      "title": "Hold the city to 60 days",
+      "text": "Once your ADU application is complete, the city has 60 days to approve or deny it.",
+      "status": "CONFIRMED",
+      "caveat": "The rule that a late ADU decision counts as approved was read only on a mirror site, not yet on leginfo.",
+      "sources": [
+        {
+          "sourceId": "adu-handbook-2026-03",
+          "section": "66317(a)(3)",
+          "page": "11"
+        }
+      ]
+    },
+    {
+      "id": "third-party-plan-check",
+      "pathways": [
+        "ADU",
+        "SB9"
+      ],
+      "title": "Ask for a third-party plan check",
+      "text": "For 1 to 10 units with no floor above 40 feet: if the city expects plan check to take more than 30 days, or hasn't finished in 30 days, you may hire a private professional to check the plans. The city then has 14 days to issue the permit or say in writing what to fix, or the permit is deemed approved.",
+      "status": "UNCONFIRMED",
+      "caveat": "Statute text read in a City of Dixon handout, not yet on leginfo. The date it took effect is not checked.",
+      "sources": [
+        {
+          "sourceId": "hs-17960-3-dixon",
+          "section": "17960.3"
+        }
+      ]
+    }
+  ]
+}

@@ -99,10 +99,13 @@
       {
         "id": "review",
         "label": "City review",
-        "value": "UNKNOWN",
-        "kind": "UNKNOWN",
-        "drawMonths": null,
-        "note": "We have not sourced an SB 9 review deadline."
+        "value": "60 days",
+        "kind": "LAW",
+        "drawMonths": 2,
+        "note": "For an SB 9 duplex: the city must approve or deny within 60 days of a complete application, or it is deemed approved. HCD applied this to Dana Point in 2025. A lot split's deadline is not checked yet.",
+        "sourceId": "hcd-dana-point-2025-09-15",
+        "section": "65852.21(h)(1)",
+        "page": "2"
       },
       {
         "id": "build",
@@ -143,8 +146,11 @@
         "page": "1, 2"
       },
       {
-        "text": "Ask the city for its SB 9 review time in writing. We have not sourced a deadline.",
-        "kind": "ADVICE"
+        "text": "Once your duplex application is complete, the city has 60 days to approve or deny it. If it misses that, the application is deemed approved.",
+        "kind": "LAW",
+        "sourceId": "hcd-dana-point-2025-09-15",
+        "section": "65852.21(h)(1)",
+        "page": "2"
       },
       {
         "text": "Start on land that is already zoned for what you want to build.",

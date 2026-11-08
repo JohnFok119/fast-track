@@ -118,3 +118,17 @@ export interface Clock {
   checked: string;
   note?: string;
 }
+
+/** A sourced way to save time on a pathway: a deadline the city must meet, or a quicker route the law allows. */
+export interface FasterPath {
+  id: string;
+  title: string;
+  /** Plain words: what you can do and what the law says happens. */
+  text: string;
+  /** CONFIRMED when read on an official source; UNCONFIRMED when only read on a mirror or a secondary source. */
+  status: 'CONFIRMED' | 'UNCONFIRMED';
+  /** What is not checked yet. Always present on UNCONFIRMED entries. */
+  caveat?: string;
+  /** At least one, resolved from data/sources/index.json. */
+  citations: Citation[];
+}

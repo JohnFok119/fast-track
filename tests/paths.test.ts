@@ -31,8 +31,10 @@ describe('build paths, timeline and steps', () => {
     }
   });
 
-  it('keeps the SB 9 review deadline UNKNOWN (none sourced)', () => {
-    expect(getTimeline('SB9').find((p) => p.id === 'review')?.kind).toBe('UNKNOWN');
+  it('gives the SB 9 review deadline as 60 days, cited to HCD\'s 2025 letter to Dana Point (p. 2)', () => {
+    const review = getTimeline('SB9').find((p) => p.id === 'review');
+    expect(review).toMatchObject({ kind: 'LAW', value: '60 days' });
+    expect(review?.citation).toMatchObject({ sourceId: 'hcd-dana-point-2025-09-15', page: '2' });
   });
 
   it('rejects a LAW phase with no citation', () => {

@@ -3,7 +3,7 @@
 import clocksRaw from '../../data/rules/clocks.json';
 import * as engine from '../engine/default';
 import { parseClocks } from './parse';
-import type { BuildPath, City, CityRun, Clock, Contact, Flag, Pathway, Phase, Step } from './types';
+import type { BuildPath, City, CityRun, Clock, Contact, FasterPath, Flag, Pathway, Phase, Step } from './types';
 
 const CLOCKS: Clock[] = parseClocks(clocksRaw);
 
@@ -42,4 +42,9 @@ export function getSteps(pathway: Pathway): Step[] {
 /** Where to ask for help when a city will not fix a requirement. */
 export function getEscalation(): Contact {
   return engine.getEscalation();
+}
+
+/** Sourced ways to save time on a pathway, for the timeline step. Each says whether it is confirmed and cites its source. */
+export function getFasterPaths(pathway: Pathway): FasterPath[] {
+  return engine.getFasterPaths(pathway);
 }

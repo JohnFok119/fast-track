@@ -115,5 +115,29 @@
     "pii_removed": "yes",
     "mirror": false,
     "file": "data/sources/irvine-adu-current.md"
+  },
+  {
+    "id": "hcd-dana-point-2025-09-15",
+    "title": "HCD letter to the City of Dana Point (SB 9 technical assistance)",
+    "publisher": "California Department of Housing and Community Development (HCD)",
+    "url": "https://www.hcd.ca.gov/sites/default/files/docs/planning-and-community/HAU/dana-point-hau-1995-sb9-ta-091525.pdf",
+    "published": "2025-09-15",
+    "checked": "2026-11-07",
+    "captured_by": "captain session",
+    "how": "curl download + pdftotext; page 2 quotes Gov. Code 65852.21(h)(1) and finds the application deemed approved",
+    "pii_removed": "no excerpt committed: the letter names city staff, so only the statute quote and page are used",
+    "mirror": false
+  },
+  {
+    "id": "hs-17960-3-dixon",
+    "title": "Health and Safety Code 17960.3 (AB 253, third-party plan check), as quoted by the City of Dixon",
+    "publisher": "City of Dixon Building Division (handout, rev. 11/17/2025)",
+    "url": "https://www.cityofdixonca.gov/media/Permits/Forms/Legislative%20Policies/Third%20Party%20Plan%20Review%20AB%20253.pdf",
+    "published": "2025-11-17",
+    "checked": "2026-11-07",
+    "captured_by": "research agent",
+    "how": "PDF download + pdftotext; statute text read in the city's handout, not on leginfo",
+    "pii_removed": "n/a",
+    "mirror": true
   }
 ]
