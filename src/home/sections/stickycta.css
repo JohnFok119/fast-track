@@ -1,0 +1,2 @@
+.sticky-cta { position: fixed; z-index: 40; left: 50%; bottom: 20px; white-space: nowrap; transform: translate(-50%, 200%); transition: transform .5s cubic-bezier(.2,.8,.2,1); padding: 12px 34px; }
+.sticky-cta.show { transform: translate(-50%, 0); }

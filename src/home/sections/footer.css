@@ -1,0 +1,9 @@
+.site-foot { border-top: 1px solid var(--rule); padding: 40px 0 120px; font-size: 14px; color: var(--muted); }
+.site-foot .wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 48px; align-items: center; }
+.site-foot .wrap > span { line-height: 1.5; }
+.site-foot .foot-brand { grid-row: span 2; display: flex; align-items: center; gap: 10px; color: var(--ink); font: var(--bw, 600) 19px/1 var(--bf, Geist, Inter, sans-serif); letter-spacing: var(--bls, -0.03em); text-decoration: none; }
+.site-foot .foot-brand svg { flex: none; margin: -3px -2px -3px -4px; }
+@media (max-width: 960px) {
+  .site-foot .wrap { grid-template-columns: minmax(0, 1fr); }
+  .site-foot .foot-brand { grid-row: auto; margin-bottom: 8px; }
+}
